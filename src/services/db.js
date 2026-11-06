@@ -1431,6 +1431,45 @@ export async function criarPedido({ codigo, cozinheira, itens }) {
 // ==========================================
 
 /**
+ * Obtém um pedido por ID tanto no cache local quanto no Supabase
+ */
+async function obterPedidoPorIdGeral(pedidoId) {
+  const pedidos = obterPedidosLocais();
+  let idx = pedidos.findIndex((p) => p.id === pedidoId);
+  if (idx !== -1) {
+    return { pedidos, idx, ped: pedidos[idx] };
+  }
+
+  if (isSupabaseConfigured()) {
+    try {
+      const { data, error } = await supabase
+        .from('pedidos')
+        .select(`
+          *,
+          estadia:estadias(id, casa, titular, funcionario, entrada, saida, hospedes, status)
+        `)
+        .eq('id', pedidoId)
+        .maybeSingle();
+
+      if (!error && data) {
+        const pedSupa = {
+          ...data,
+          status: data.status || 'em_aprovacao',
+          anexos: data.anexos || []
+        };
+        pedidos.unshift(pedSupa);
+        salvarPedidosLocais(pedidos);
+        return { pedidos, idx: 0, ped: pedSupa };
+      }
+    } catch (e) {
+      console.warn('Erro ao buscar pedido por ID no Supabase:', e);
+    }
+  }
+
+  return { pedidos, idx: -1, ped: null };
+}
+
+/**
  * Altera o status do pedido na esteira de compras com rastreabilidade completa
  * Status: 'em_aprovacao' | 'enviar_fornecedores' | 'preparacao_entrega' | 'finalizado' | 'rejeitado'
  */
@@ -1440,12 +1479,10 @@ export async function alterarStatusPedido(pedidoId, novoStatus) {
   const autorLogin = sessao?.user?.user_metadata?.login || sessao?.user?.login || 'equipe';
   const agora = new Date().toISOString();
 
-  // 1. Atualizar no LocalStorage
-  const pedidos = obterPedidosLocais();
-  const idx = pedidos.findIndex((p) => p.id === pedidoId);
-  if (idx === -1) throw new Error('Pedido não encontrado.');
+  // 1. Obter pedido (busca tanto no cache local quanto no Supabase)
+  const { pedidos, ped } = await obterPedidoPorIdGeral(pedidoId);
+  if (!ped) throw new Error('Pedido não encontrado.');
 
-  const ped = pedidos[idx];
   const casaNome = ped.estadia?.casa || 'Estadia';
   ped.status = novoStatus;
 
@@ -1678,12 +1715,9 @@ export async function editarItensPedido(pedidoId, novosItens, motivo = '') {
   const autorLogin = sessao?.user?.user_metadata?.login || sessao?.user?.login || 'equipe';
   const agora = new Date().toISOString();
 
-  // 1. Obter pedido atual para comparar itens anteriores
-  const pedidos = obterPedidosLocais();
-  const idx = pedidos.findIndex((p) => p.id === pedidoId);
-  if (idx === -1) throw new Error('Pedido não encontrado.');
-
-  const ped = pedidos[idx];
+  // 1. Obter pedido atual para comparar itens anteriores (busca local ou no Supabase)
+  const { pedidos, ped } = await obterPedidoPorIdGeral(pedidoId);
+  if (!ped) throw new Error('Pedido não encontrado.');
   const casaNome = ped.estadia?.casa || 'Estadia';
   const itensAnteriores = Array.isArray(ped.itens) ? JSON.parse(JSON.stringify(ped.itens)) : [];
   const totalAnterior = itensAnteriores.length;
@@ -1801,11 +1835,9 @@ export async function adicionarAnexosPedido(pedidoId, novosAnexos) {
     }
   }
 
-  const pedidos = obterPedidosLocais();
-  const idx = pedidos.findIndex((p) => p.id === pedidoId);
-  if (idx === -1) throw new Error('Pedido não encontrado.');
+  const { pedidos, ped } = await obterPedidoPorIdGeral(pedidoId);
+  if (!ped) throw new Error('Pedido não encontrado.');
 
-  const ped = pedidos[idx];
   ped.anexos = [...(ped.anexos || []), ...anexosFormatados];
 
   salvarPedidosLocais(pedidos);
@@ -1839,11 +1871,9 @@ export async function atualizarAnexoPedido(pedidoId, anexoId, dadosAtualizados) 
     await salvarMidiaIndexedDB(anexoId, dadosAtualizados.url);
   }
 
-  const pedidos = obterPedidosLocais();
-  const idx = pedidos.findIndex((p) => p.id === pedidoId);
-  if (idx === -1) throw new Error('Pedido não encontrado.');
+  const { pedidos, ped } = await obterPedidoPorIdGeral(pedidoId);
+  if (!ped) throw new Error('Pedido não encontrado.');
 
-  const ped = pedidos[idx];
   ped.anexos = (ped.anexos || []).map((a) => {
     if (a.id !== anexoId) return a;
 
@@ -1885,11 +1915,9 @@ export async function atualizarAnexoPedido(pedidoId, anexoId, dadosAtualizados) 
  * Remove um anexo de um pedido
  */
 export async function removerAnexoPedido(pedidoId, anexoId) {
-  const pedidos = obterPedidosLocais();
-  const idx = pedidos.findIndex((p) => p.id === pedidoId);
-  if (idx === -1) throw new Error('Pedido não encontrado.');
+  const { pedidos, ped } = await obterPedidoPorIdGeral(pedidoId);
+  if (!ped) throw new Error('Pedido não encontrado.');
 
-  const ped = pedidos[idx];
   ped.anexos = (ped.anexos || []).filter((a) => a.id !== anexoId);
   
   await removerMidiaIndexedDB(anexoId);
@@ -1928,11 +1956,9 @@ export async function registrarPagamentoNotaPedido(pedidoId, anexoId, dados) {
     throw new Error('Informe um valor de pagamento válido e positivo.');
   }
 
-  const pedidos = obterPedidosLocais();
-  const idx = pedidos.findIndex((p) => p.id === pedidoId);
-  if (idx === -1) throw new Error('Pedido não encontrado.');
+  const { pedidos, ped } = await obterPedidoPorIdGeral(pedidoId);
+  if (!ped) throw new Error('Pedido não encontrado.');
 
-  const ped = pedidos[idx];
   const anexoIdx = (ped.anexos || []).findIndex((a) => a.id === anexoId);
   if (anexoIdx === -1) throw new Error('Nota fiscal / anexo não encontrado.');
 
@@ -2027,16 +2053,26 @@ export async function listarPedidosPorEstadia(estadiaId) {
   if (isSupabaseConfigured()) {
     const { data, error } = await supabase
       .from('pedidos')
-      .select('*')
+      .select('*, estadia:estadias(id, casa, titular, funcionario, entrada, saida, hospedes, status)')
       .eq('estadia_id', estadiaId)
       .order('numero', { ascending: false });
 
     if (error) throw error;
-    return (data || []).map((p) => ({
+    const pedidos = (data || []).map((p) => ({
       ...p,
       status: p.status || 'em_aprovacao',
       anexos: p.anexos || []
     }));
+
+    const locais = obterPedidosLocais();
+    pedidos.forEach((p) => {
+      const idx = locais.findIndex((l) => l.id === p.id);
+      if (idx !== -1) locais[idx] = p;
+      else locais.unshift(p);
+    });
+    salvarPedidosLocais(locais);
+
+    return pedidos;
   }
 
   // Modo Localhost
@@ -2075,11 +2111,14 @@ export async function listarTodosPedidos() {
       .order('finalizado_em', { ascending: false });
 
     if (error) throw error;
-    return (data || []).map((p) => ({
+    const pedidos = (data || []).map((p) => ({
       ...p,
       status: p.status || 'em_aprovacao',
       anexos: p.anexos || []
     }));
+
+    salvarPedidosLocais(pedidos);
+    return pedidos;
   }
 
   // Modo Localhost

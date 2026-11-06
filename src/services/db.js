@@ -512,46 +512,52 @@ export async function loginEquipe(identificador, password) {
  * Encerra a sessão atual
  */
 export async function logoutEquipe() {
-  if (isSupabaseConfigured()) {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw error;
-    return;
-  }
-
-  // Modo Localhost
   localStorage.removeItem(LOCAL_SESSION_KEY);
   notificarMudancaAuthLocal('SIGNED_OUT', null);
+
+  if (isSupabaseConfigured()) {
+    try {
+      await supabase.auth.signOut();
+    } catch (e) {
+      // Ignora erro
+    }
+  }
 }
 
 /**
- * Obtém a sessão ativa no momento
+ * Obtém a sessão ativa no momento (persistência garantida entre recarregamentos de página)
  */
 export async function getSessaoAtual() {
-  if (isSupabaseConfigured()) {
-    const { data: { session }, error } = await supabase.auth.getSession();
-    if (error) throw error;
-    return session;
-  }
-
-  // Modo Localhost
+  // 1. Sempre verifica a sessão salva no navegador primeiro
   try {
     const raw = localStorage.getItem(LOCAL_SESSION_KEY);
-    return raw ? JSON.parse(raw) : null;
-  } catch {
-    return null;
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && parsed.user) {
+        return parsed;
+      }
+    }
+  } catch (e) {
+    console.warn('Erro ao ler sessao local:', e);
   }
+
+  // 2. Se não houver sessão local e Supabase estiver configurado, checa Supabase Auth
+  if (isSupabaseConfigured()) {
+    try {
+      const { data: { session }, error } = await supabase.auth.getSession();
+      if (!error && session) return session;
+    } catch (e) {
+      console.warn('Erro ao checar sessao Supabase Auth:', e);
+    }
+  }
+
+  return null;
 }
 
 /**
  * Obtém o usuário atual
  */
 export async function getUsuarioAtual() {
-  if (isSupabaseConfigured()) {
-    const { data: { user }, error } = await supabase.auth.getUser();
-    if (error) throw error;
-    return user;
-  }
-
   const sessao = await getSessaoAtual();
   return sessao?.user || null;
 }
@@ -560,18 +566,32 @@ export async function getUsuarioAtual() {
  * Inscreve listener para mudanças de estado de autenticação
  */
 export function onMudancaAuth(callback) {
+  localAuthListeners.add(callback);
+
+  let supabaseSub = null;
   if (isSupabaseConfigured()) {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      callback(event, session);
-    });
-    return subscription;
+    try {
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+        // Se já temos sessão de equipe ativa no localStorage, não permite sobrescrever com null inicial
+        const localRaw = localStorage.getItem(LOCAL_SESSION_KEY);
+        if (localRaw && !session) {
+          try {
+            const parsed = JSON.parse(localRaw);
+            if (parsed && parsed.user) return;
+          } catch (e) {}
+        }
+        callback(event, session);
+      });
+      supabaseSub = subscription;
+    } catch (e) {
+      console.warn('Erro ao assinar onAuthStateChange:', e);
+    }
   }
 
-  // Modo Localhost
-  localAuthListeners.add(callback);
   return {
     unsubscribe: () => {
       localAuthListeners.delete(callback);
+      if (supabaseSub) supabaseSub.unsubscribe();
     }
   };
 }

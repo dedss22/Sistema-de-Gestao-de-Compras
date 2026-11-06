@@ -113,11 +113,34 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   isOpen = true,
   onAbrirCardapio
 }) => {
-  // Autenticação da equipe
-  const [session, setSession] = useState<any>(null);
-  const [loadingAuth, setLoadingAuth] = useState(true);
-  const [loginEmail, setLoginEmail] = useState('alexandre');
-  const [loginPassword, setLoginPassword] = useState('paralelo17');
+  // Autenticação da equipe com persistência imediata (sem flicker ao recarregar com F5)
+  const [session, setSession] = useState<any>(() => {
+    try {
+      const raw = localStorage.getItem('lista_compras_supabase_session');
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed?.user) return parsed;
+      }
+    } catch (e) {}
+    return null;
+  });
+  const [loadingAuth, setLoadingAuth] = useState<boolean>(() => {
+    try {
+      const raw = localStorage.getItem('lista_compras_supabase_session');
+      if (raw) return false;
+    } catch (e) {}
+    return true;
+  });
+  const [lembrarSenha, setLembrarSenha] = useState<boolean>(() => {
+    return localStorage.getItem('admin_lembrar_senha') === 'true';
+  });
+  const [loginEmail, setLoginEmail] = useState<string>(() => {
+    return localStorage.getItem('admin_lembrar_login') || '';
+  });
+  const [loginPassword, setLoginPassword] = useState<string>(() => {
+    const lembrar = localStorage.getItem('admin_lembrar_senha') === 'true';
+    return lembrar ? (localStorage.getItem('admin_senha_salva') || '') : '';
+  });
   const [loginLoading, setLoginLoading] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
 
@@ -553,6 +576,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     try {
       const data = await loginEquipe(loginEmail, loginPassword);
       setSession(data.session);
+
+      // Salvar ou remover senha conforme preferência do usuário
+      if (lembrarSenha) {
+        localStorage.setItem('admin_lembrar_senha', 'true');
+        localStorage.setItem('admin_lembrar_login', loginEmail);
+        localStorage.setItem('admin_senha_salva', loginPassword);
+      } else {
+        localStorage.removeItem('admin_lembrar_senha');
+        localStorage.removeItem('admin_lembrar_login');
+        localStorage.removeItem('admin_senha_salva');
+      }
+
       showToast('Login realizado com sucesso!');
     } catch (err: any) {
       console.error('Erro no login:', err);
@@ -934,7 +969,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       type="button"
                       onClick={() => {
                         setLoginEmail(user.login);
-                        setLoginPassword(user.senha);
+                        const loginSalvo = localStorage.getItem('admin_lembrar_login');
+                        const senhaSalva = localStorage.getItem('admin_senha_salva');
+                        const deveLembrar = localStorage.getItem('admin_lembrar_senha') === 'true';
+                        if (deveLembrar && loginSalvo === user.login && senhaSalva) {
+                          setLoginPassword(senhaSalva);
+                        } else {
+                          setLoginPassword('');
+                        }
                         setLoginError(null);
                       }}
                       className={`p-3 rounded-2xl border text-left flex items-center justify-between transition-all cursor-pointer ${
@@ -1020,6 +1062,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   placeholder="••••••••"
                   className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-hidden focus:border-amber-500 text-sm bg-white"
                 />
+              </div>
+
+              <div className="flex items-center justify-between pt-0.5">
+                <label className="flex items-center gap-2 cursor-pointer select-none text-xs text-stone-600 hover:text-stone-900 transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={lembrarSenha}
+                    onChange={(e) => setLembrarSenha(e.target.checked)}
+                    className="w-4 h-4 rounded border-stone-300 text-amber-600 focus:ring-amber-500 cursor-pointer"
+                  />
+                  <span>Salvar senha neste dispositivo</span>
+                </label>
               </div>
 
               <button

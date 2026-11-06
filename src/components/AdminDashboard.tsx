@@ -106,10 +106,12 @@ interface AdminDashboardProps {
   isOpen?: boolean;
   onClose?: () => void;
   onSelectOrderToView?: (order: any) => void;
+  onAbrirCardapio?: () => void;
 }
 
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({
-  isOpen = true
+  isOpen = true,
+  onAbrirCardapio
 }) => {
   // Autenticação da equipe
   const [session, setSession] = useState<any>(null);
@@ -844,7 +846,19 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            {onAbrirCardapio && (
+              <button
+                type="button"
+                onClick={onAbrirCardapio}
+                className="px-3.5 py-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 active:scale-95 text-stone-950 font-black rounded-xl text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+                title="Abrir Cardápio Digital / Fazer Pedido"
+              >
+                <ChefHat size={14} />
+                <span className="hidden sm:inline">Ver Cardápio Digital</span>
+              </button>
+            )}
+
             {session && (
               <>
                 <div className="flex items-center gap-2.5 text-xs text-stone-200 bg-stone-900 px-3.5 py-1.5 rounded-xl border border-stone-800 shadow-inner">

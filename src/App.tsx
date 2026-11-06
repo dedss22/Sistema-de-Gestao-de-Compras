@@ -44,7 +44,18 @@ export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<FornecedorId>('peixaria');
   const [searchQuery, setSearchQuery] = useState('');
   const [isReviewOpen, setIsReviewOpen] = useState(false);
-  const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [isAdminOpen, setIsAdminOpen] = useState<boolean>(() => {
+    // A aba principal por padrão é o ADMIN!
+    // Apenas se a rota for explicitamente da cozinheira (/e/:codigo) ou aprovação (?aprovar=) ou /cardapio, não inicia no admin
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      const search = window.location.search;
+      if (path.startsWith('/e/') || path.startsWith('/cardapio') || search.includes('aprovar=') || search.includes('modo=cardapio')) {
+        return false;
+      }
+    }
+    return true;
+  });
   const [submittedOrder, setSubmittedOrder] = useState<Pedido | null>(null);
   const [approvalOrderId, setApprovalOrderId] = useState<string | null>(null);
   
@@ -106,17 +117,27 @@ export const App: React.FC = () => {
     const aprovarParam = urlParams.get('aprovar');
     if (aprovarParam) {
       setApprovalOrderId(aprovarParam);
+      setIsAdminOpen(false);
       return;
     }
 
     const path = window.location.pathname;
-    if (path === '/admin' || path.startsWith('/admin')) {
+    // Se a rota for explicitamente cardapio ou estadia da cozinheira (/e/:codigo)
+    if (path.startsWith('/e/') || path.startsWith('/cardapio') || urlParams.get('modo') === 'cardapio') {
+      setIsAdminOpen(false);
+    } else {
+      // Para todas as outras rotas (incluindo a raiz / e /admin), o Admin é a aba principal!
       setIsAdminOpen(true);
     }
 
     const handlePopState = () => {
       const currentPath = window.location.pathname;
-      setIsAdminOpen(currentPath === '/admin' || currentPath.startsWith('/admin'));
+      const currentParams = new URLSearchParams(window.location.search);
+      if (currentPath.startsWith('/e/') || currentPath.startsWith('/cardapio') || currentParams.get('modo') === 'cardapio') {
+        setIsAdminOpen(false);
+      } else {
+        setIsAdminOpen(true);
+      }
     };
     window.addEventListener('popstate', handlePopState);
 
@@ -250,16 +271,14 @@ export const App: React.FC = () => {
 
   const handleOpenAdmin = () => {
     setIsAdminOpen(true);
-    if (!window.location.pathname.startsWith('/admin')) {
+    if (!window.location.pathname.startsWith('/admin') && window.location.pathname !== '/') {
       window.history.pushState({}, '', '/admin');
     }
   };
 
   const handleCloseAdmin = () => {
     setIsAdminOpen(false);
-    if (window.location.pathname.startsWith('/admin')) {
-      window.history.pushState({}, '', '/');
-    }
+    window.history.pushState({}, '', '/cardapio');
   };
 
   const showToast = (msg: string) => {
@@ -581,9 +600,9 @@ export const App: React.FC = () => {
     );
   }
 
-  // Rota Administrativa (/admin): Renderiza EXCLUSIVAMENTE o Painel da Equipe em PÁGINA INTEIRA
-  if (isAdminOpen || window.location.pathname === '/admin' || window.location.pathname.startsWith('/admin')) {
-    return <AdminDashboard />;
+  // Rota Administrativa: agora é a ABA PRINCIPAL (padrão ao acessar a raiz / ou /admin)
+  if (isAdminOpen && !codigoEstadia && !approvalOrderId) {
+    return <AdminDashboard onAbrirCardapio={handleCloseAdmin} />;
   }
 
   // Se estiver carregando dados da estadia via link da cozinheira (/e/:codigo)

@@ -1,6 +1,7 @@
 # Environment variables
 .env
 .env*.local
+.netlify
 
 # Logs
 logs

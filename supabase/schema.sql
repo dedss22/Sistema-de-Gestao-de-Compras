@@ -180,20 +180,16 @@ create trigger trg_before_update_estadias
 alter table estadias enable row level security;
 alter table pedidos enable row level security;
 
--- Revoga acessos públicos e anônimos diretos às tabelas
-revoke all on table estadias from public, anon;
-revoke all on table pedidos from public, anon;
+-- Concede permissões para anon e authenticated (compatível com a chave pública Publishable / Anon)
+grant select, insert, update, delete on table estadias to anon, authenticated;
+grant select, insert, update, delete on table pedidos to anon, authenticated;
 
--- Concede permissões para usuários autenticados (Equipe via Supabase Auth)
-grant select, insert, update, delete on table estadias to authenticated;
-grant select, insert, update on table pedidos to authenticated;
-
--- Políticas para usuários autenticados (Equipe)
+-- Políticas para gerenciamento de estadias e pedidos
 drop policy if exists "Equipe gerencia estadias" on estadias;
 create policy "Equipe gerencia estadias"
   on estadias
   for all
-  to authenticated
+  to anon, authenticated
   using (true)
   with check (true);
 
@@ -202,7 +198,7 @@ drop policy if exists "Equipe gerencia pedidos" on pedidos;
 create policy "Equipe gerencia pedidos"
   on pedidos
   for all
-  to authenticated
+  to anon, authenticated
   using (true)
   with check (true);
 
@@ -376,14 +372,13 @@ create index if not exists idx_historico_usuario on historico_atividades (usuari
 
 -- RLS para tabela de histórico
 alter table historico_atividades enable row level security;
-revoke all on table historico_atividades from public, anon;
-grant select, insert on table historico_atividades to authenticated;
+grant select, insert, update, delete on table historico_atividades to anon, authenticated;
 
 drop policy if exists "Equipe visualiza e grava histórico" on historico_atividades;
 create policy "Equipe visualiza e grava histórico"
   on historico_atividades
   for all
-  to authenticated
+  to anon, authenticated
   using (true)
   with check (true);
 

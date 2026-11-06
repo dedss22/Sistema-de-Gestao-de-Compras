@@ -1,0 +1,17 @@
+{
+  "name": "Lista de Compras da Casa",
+  "short_name": "Lista Casa",
+  "description": "Aplicativo simples para montar a lista de compras da estadia",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf7f2",
+  "theme_color": "#0369a1",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

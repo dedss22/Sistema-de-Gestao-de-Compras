@@ -1,0 +1,2561 @@
+[
+  {
+    "id": "file-mignon",
+    "nome": "Filé-Mignon Limpo Inteiro",
+    "fornecedor": "acougue",
+    "subcategoria": "Cortes Nobres",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.16,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "criancas"
+    ],
+    "descricaoBreve": "Peça limpa sem cordão, maciez absoluta para medalhões e estrogonofe.",
+    "imagem": "/assets/itens/file-mignon.png",
+    "emoji": "🥩"
+  },
+  {
+    "id": "costela-bovina",
+    "nome": "Costela Bovina para Assar",
+    "fornecedor": "acougue",
+    "subcategoria": "Churrasco Especial",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.25,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco"
+    ],
+    "descricaoBreve": "Ripas carnudas com marmoreio ideal para fogo de chão ou assado lento.",
+    "imagem": "/assets/itens/costela-bovina.png",
+    "emoji": "🍖"
+  },
+  {
+    "id": "picanha-prime",
+    "nome": "Picanha Bovina Especial",
+    "fornecedor": "acougue",
+    "subcategoria": "Churrasco Especial",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.2,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco"
+    ],
+    "descricaoBreve": "Capa de gordura uniforme, maciez extrema para a brasa de domingo.",
+    "imagem": "/assets/itens/picanha-prime.png",
+    "emoji": "🥩"
+  },
+  {
+    "id": "fraldinha-red",
+    "nome": "Fraldinha para Churrasco",
+    "fornecedor": "acougue",
+    "subcategoria": "Churrasco Especial",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.18,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco"
+    ],
+    "descricaoBreve": "Fibras longas e suculência incomparável grelhada inteira na brasa.",
+    "imagem": "/assets/itens/fraldinha-red.png",
+    "emoji": "🥩"
+  },
+  {
+    "id": "maminha-grill",
+    "nome": "Maminha para Grelha",
+    "fornecedor": "acougue",
+    "subcategoria": "Churrasco Especial",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco"
+    ],
+    "descricaoBreve": "Peça tenra com gordura leve, ótima assada fatiada.",
+    "imagem": "/assets/itens/maminha-grill.png",
+    "emoji": "🥩"
+  },
+  {
+    "id": "linguica-toscana",
+    "nome": "Linguiça Toscana para Churrasco",
+    "fornecedor": "acougue",
+    "subcategoria": "Churrasco Especial",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco"
+    ],
+    "descricaoBreve": "Gomos artesanais de pernil com tempero equilibrado.",
+    "imagem": "/assets/itens/linguica-toscana.png",
+    "emoji": "🌭"
+  },
+  {
+    "id": "coracao-frango",
+    "nome": "Coração de Frango",
+    "fornecedor": "acougue",
+    "subcategoria": "Churrasco Especial",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.08,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco"
+    ],
+    "descricaoBreve": "Limpos e temperados no ponto para espetinhos de entrada.",
+    "imagem": "/assets/itens/coracao-frango.png",
+    "emoji": "🍢"
+  },
+  {
+    "id": "carne-moida",
+    "nome": "Carne Moída de Patinho",
+    "fornecedor": "acougue",
+    "subcategoria": "Cortes Nobres",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.12,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "criancas"
+    ],
+    "descricaoBreve": "Patinho limpo moído duas vezes na hora, zero gordura excessiva.",
+    "imagem": "/assets/itens/carne-moida.png",
+    "emoji": "🥩"
+  },
+  {
+    "id": "carne-seca-charque",
+    "nome": "Carne-Seca / Charque Especial",
+    "fornecedor": "acougue",
+    "subcategoria": "Feijoada & Tradicionais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "feijoada"
+    ],
+    "descricaoBreve": "Curada no ponto ideal, macia para feijoada, baião e escondidinho.",
+    "imagem": "/assets/itens/carne-seca-charque.png",
+    "emoji": "🥓"
+  },
+  {
+    "id": "carne-do-sol",
+    "nome": "Carne de Sol Artesanal",
+    "fornecedor": "acougue",
+    "subcategoria": "Feijoada & Tradicionais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Manteiga de garrafa e carne de sol tenra típica da Bahia.",
+    "imagem": "/assets/itens/carne-do-sol.png",
+    "emoji": "🥩"
+  },
+  {
+    "id": "file-frango",
+    "nome": "Filé de Peito de Frango",
+    "fornecedor": "acougue",
+    "subcategoria": "Aves",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.14,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "criancas"
+    ],
+    "descricaoBreve": "Bifinhos finos higienizados, corte na medida para grelha e empanados.",
+    "imagem": "/assets/itens/file-frango.png",
+    "emoji": "🍗"
+  },
+  {
+    "id": "sobrecoxa-desossada",
+    "nome": "Sobrecoxa Desossada de Frango",
+    "fornecedor": "acougue",
+    "subcategoria": "Aves",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "churrasco",
+      "criancas"
+    ],
+    "descricaoBreve": "Sobrecoxas desossadas suculentas, perfeitas para churrasco, forno ou grelha.",
+    "imagem": "/assets/itens/sobrecoxa-desossada.png",
+    "emoji": "🍗"
+  },
+  {
+    "id": "calabresa",
+    "nome": "Linguiça Calabresa Defumada (Grossa)",
+    "fornecedor": "acougue",
+    "subcategoria": "Feijoada & Tradicionais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "feijoada"
+    ],
+    "descricaoBreve": "Defumação natural, indispensável na feijoada e aperitivos com cebola.",
+    "imagem": "/assets/itens/calabresa.png",
+    "emoji": "🌭"
+  },
+  {
+    "id": "linguicinha-calabresa-fina",
+    "nome": "Linguicinha Calabresa (Fina)",
+    "fornecedor": "acougue",
+    "subcategoria": "Feijoada & Tradicionais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco",
+      "feijoada"
+    ],
+    "descricaoBreve": "Calabresa fina defumada, ideal para petiscos, aperitivos acebolados e churrasco.",
+    "imagem": "/assets/itens/linguicinha-calabresa-fina.png",
+    "emoji": "🌭"
+  },
+  {
+    "id": "paio",
+    "nome": "Linguiça Paio Defumada",
+    "fornecedor": "acougue",
+    "subcategoria": "Feijoada & Tradicionais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.08,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "feijoada"
+    ],
+    "descricaoBreve": "Paio tradicional nobre com lombo suíno para dar sabor ao feijão.",
+    "imagem": "/assets/itens/paio.png",
+    "emoji": "🌭"
+  },
+  {
+    "id": "costelinha-salgada",
+    "nome": "Costelinha de Porco Salgada",
+    "fornecedor": "acougue",
+    "subcategoria": "Feijoada & Tradicionais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "feijoada"
+    ],
+    "descricaoBreve": "Salgada no ponto para dessalgar e enriquecer o caldo da feijoada.",
+    "imagem": "/assets/itens/costelinha-salgada.png",
+    "emoji": "🍖"
+  },
+  {
+    "id": "costelinha-suina",
+    "nome": "Costelinha Suína para Churrasco",
+    "fornecedor": "acougue",
+    "subcategoria": "Suínos Nobres",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "churrasco"
+    ],
+    "descricaoBreve": "Ripas macias com carne clara para grelha ou molho barbecue.",
+    "imagem": "/assets/itens/costelinha-suina.png",
+    "emoji": "🍖"
+  },
+  {
+    "id": "bacon-manta",
+    "nome": "Bacon Artesanal em Manta",
+    "fornecedor": "acougue",
+    "subcategoria": "Feijoada & Tradicionais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "cafe_manha",
+      "feijoada"
+    ],
+    "descricaoBreve": "Defumado na lenha, excelente crocância para o café da manhã e farofa.",
+    "imagem": "/assets/itens/bacon-manta.png",
+    "emoji": "🥓"
+  },
+  {
+    "id": "presunto-fatiado",
+    "nome": "Presunto Cozido Nobre Fatiado",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Frios Nobres & Fatiados",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.08,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Fatias finas de presunto magro para o café da manhã e misto quente.",
+    "imagem": "/assets/itens/presunto-fatiado.png",
+    "emoji": "🥪"
+  },
+  {
+    "id": "salame-italiano",
+    "nome": "Salame Italiano Fatiado",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Frios Nobres & Fatiados",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "drinks",
+      "churrasco"
+    ],
+    "descricaoBreve": "Fatias finas de salame italiano curado com especiarias nobres para tábua de frios.",
+    "imagem": "/assets/itens/salame-italiano.png",
+    "emoji": "🥩"
+  },
+  {
+    "id": "peito-peru",
+    "nome": "Peito de Peru Defumado Fatiado",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Frios Nobres & Fatiados",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.06,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha",
+      "criancas"
+    ],
+    "descricaoBreve": "Peito de peru defumado magro fatiado fininho, leve e saboroso.",
+    "imagem": "/assets/itens/peito-peru.png",
+    "emoji": "🍗"
+  },
+  {
+    "id": "presunto-parma",
+    "nome": "Presunto Cru Tipo Parma / Jamón Fatiado",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Frios Nobres & Fatiados",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "drinks"
+    ],
+    "descricaoBreve": "Presunto cru curado lentamente, fatiado finíssimo, perfeito para tábuas nobres.",
+    "imagem": "/assets/itens/presunto-parma.png",
+    "emoji": "🥓"
+  },
+  {
+    "id": "copa-fatiada",
+    "nome": "Copa Curada Nobre Fatiada",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Frios Nobres & Fatiados",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "drinks"
+    ],
+    "descricaoBreve": "Copa suína maturada artesanalmente com pimenta e vinho, sabor marcante.",
+    "imagem": "/assets/itens/copa-fatiada.png",
+    "emoji": "🥩"
+  },
+  {
+    "id": "lombo-defumado",
+    "nome": "Lombo Canadense Defumado Fatiado",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Frios Nobres & Fatiados",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "cafe_manha",
+      "drinks"
+    ],
+    "descricaoBreve": "Lombo suíno magro delicadamente defumado e fatiado para lanches e petiscos.",
+    "imagem": "/assets/itens/lombo-defumado.png",
+    "emoji": "🥓"
+  },
+  {
+    "id": "mortadela-defumada",
+    "nome": "Mortadela Defumada Especial Fatiada",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Frios Nobres & Fatiados",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.06,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "cafe_manha",
+      "drinks"
+    ],
+    "descricaoBreve": "Mortadela nobre defumada fatiada fininha no padrão charcutaria italiana.",
+    "imagem": "/assets/itens/mortadela-defumada.png",
+    "emoji": "🥩"
+  },
+  {
+    "id": "ancho-argentino",
+    "nome": "Bife de Ancho Premium",
+    "fornecedor": "acougue",
+    "subcategoria": "Churrasco Especial",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.18,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco"
+    ],
+    "descricaoBreve": "Marmoreio alto, corte nobre que derrete na boca.",
+    "imagem": "/assets/itens/ancho-argentino.png",
+    "emoji": "🥩"
+  },
+  {
+    "id": "queijo-coalho-espeto",
+    "nome": "Queijo Coalho",
+    "fornecedor": "acougue",
+    "subcategoria": "Churrasco Especial",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.2,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco"
+    ],
+    "descricaoBreve": "Pacote com espetos artesanais para dourar na brasa com melaço.",
+    "imagem": "/assets/itens/queijo-coalho-espeto.png",
+    "emoji": "🍢"
+  },
+  {
+    "id": "camarao-vg",
+    "nome": "Camarão Rosa VG Limpo",
+    "fornecedor": "peixaria",
+    "subcategoria": "Crustáceos",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.18,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Camarão VG graúdo, limpo e eviscerado, excelente para grelha e moqueca.",
+    "imagem": "/assets/itens/camarao-vg.png",
+    "emoji": "🦐"
+  },
+  {
+    "id": "peixe-branco-postas",
+    "nome": "Peixe Branco em Postas (Robalo / Badejo / Dourado)",
+    "fornecedor": "peixaria",
+    "subcategoria": "Peixes Nobres",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.18,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Postas altas de peixe fresco da costa, firmes para assar ou moqueca.",
+    "imagem": "/assets/itens/peixe-branco-postas.png",
+    "emoji": "🐟"
+  },
+  {
+    "id": "salmao-file",
+    "nome": "Filé de Salmão Fresco",
+    "fornecedor": "peixaria",
+    "subcategoria": "Peixes Nobres",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Filé sem pele e sem espinhas, ideal para grelha, sashimi ou forno.",
+    "imagem": "/assets/itens/salmao-file.png",
+    "emoji": "🍣"
+  },
+  {
+    "id": "file-tilapia",
+    "nome": "Filé de Tilápia / Saint Peter",
+    "fornecedor": "peixaria",
+    "subcategoria": "Peixes do Dia",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "criancas"
+    ],
+    "descricaoBreve": "Filés limpos e claros, sabor suave que agrada a todas as idades.",
+    "imagem": "/assets/itens/file-tilapia.png",
+    "emoji": "🐟"
+  },
+  {
+    "id": "siri-catado",
+    "nome": "Catado de Siri",
+    "fornecedor": "peixaria",
+    "subcategoria": "Crustáceos",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.08,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Carne 100% pura desfiada artesanalmente para casquinha de siri.",
+    "imagem": "/assets/itens/siri-catado.png",
+    "emoji": "🦀"
+  },
+  {
+    "id": "lula-aneis",
+    "nome": "Lula Limpa em Anéis",
+    "fornecedor": "peixaria",
+    "subcategoria": "Frutos do Mar",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Anéis de lula macia, perfeitos à dorê ou para risoto de frutos do mar.",
+    "imagem": "/assets/itens/lula-aneis.png",
+    "emoji": "🦑"
+  },
+  {
+    "id": "polvo-inteiro",
+    "nome": "Polvo Fresco da Costa",
+    "fornecedor": "peixaria",
+    "subcategoria": "Frutos do Mar",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.12,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Polvo dos arrecifes baianos já amaciado para grelhar com azeite e alho.",
+    "imagem": "/assets/itens/polvo-inteiro.png",
+    "emoji": "🐙"
+  },
+  {
+    "id": "lagosta-cauda",
+    "nome": "Cauda de Lagosta Fresca",
+    "fornecedor": "peixaria",
+    "subcategoria": "Crustáceos",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Caudas selecionadas para grelhar com manteiga de ervas da horta.",
+    "imagem": "/assets/itens/lagosta-cauda.png",
+    "emoji": "🦞"
+  },
+  {
+    "id": "ostra-fresca",
+    "nome": "Ostras Frescas Vivas",
+    "fornecedor": "peixaria",
+    "subcategoria": "Frutos do Mar",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 2,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Ostras depuradas e frescas servidas com limão taiti à beira da piscina.",
+    "imagem": "/assets/itens/ostra-fresca.png",
+    "emoji": "🦪"
+  },
+  {
+    "id": "mamao-formosa",
+    "nome": "Mamão Formosa / Papaia",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Frutas Tropicais",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.25,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Mamão doce e no ponto perfeito de maturação para o café matinal.",
+    "imagem": "/assets/itens/mamao-formosa.png",
+    "emoji": "🍈"
+  },
+  {
+    "id": "banana-prata",
+    "nome": "Banana Prata Selecionada",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Frutas Tropicais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.2,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Dúzia de bananas frescas, polpa doce e sem manchas.",
+    "imagem": "/assets/itens/banana-prata.png",
+    "emoji": "🍌"
+  },
+  {
+    "id": "banana-terra",
+    "nome": "Banana da Terra Madura",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Frutas Tropicais",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.3,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Casca bem pintadinha, essencial para fritar na manteiga, cozinhar ou moqueca.",
+    "imagem": "/assets/itens/banana-terra.png",
+    "emoji": "🍌"
+  },
+  {
+    "id": "laranja-suco",
+    "nome": "Laranja",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Frutas Tropicais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.5,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "feijoada",
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Laranjas doces com muito suco, ideais para jarras matinais e rodela na feijoada.",
+    "imagem": "/assets/itens/laranja-suco.png",
+    "emoji": "🍊"
+  },
+  {
+    "id": "limao-taiti",
+    "nome": "Limão Taiti Selecionado",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Cítricos e Temperos",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.2,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "drinks",
+      "churrasco"
+    ],
+    "descricaoBreve": "Casca fina e muito suco para caipirinhas, temperar peixes e saladas.",
+    "imagem": "/assets/itens/limao-taiti.png",
+    "emoji": "🍋"
+  },
+  {
+    "id": "maracuja",
+    "nome": "Maracujá Fresco Grande",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Frutas Tropicais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "drinks"
+    ],
+    "descricaoBreve": "Fruto pesado com muita polpa para sucos, caipirinhas e sobremesas.",
+    "imagem": "/assets/itens/maracuja.png",
+    "emoji": "🍈"
+  },
+  {
+    "id": "abacate",
+    "nome": "Abacate Manteiga Cremoso",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Frutas Tropicais",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Textura aveludada sem fibras para guacamole ou torradas com ovo.",
+    "imagem": "/assets/itens/abacate.png",
+    "emoji": "🥑"
+  },
+  {
+    "id": "melancia",
+    "nome": "Melancia Doce Grande",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Frutas Tropicais",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.3,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha",
+      "criancas"
+    ],
+    "descricaoBreve": "Vermelha, doce e suculenta, indispensável no pós-praia e café.",
+    "imagem": "/assets/itens/melancia.png",
+    "emoji": "🍉"
+  },
+  {
+    "id": "melao",
+    "nome": "Melão Amarelo Doce",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Frutas Tropicais",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.2,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Melão aromático e refrescante para fatias matinais na mesa externa.",
+    "imagem": "/assets/itens/melao.png",
+    "emoji": "🍈"
+  },
+  {
+    "id": "abacaxi-perola",
+    "nome": "Abacaxi Pérola Doce",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Frutas Tropicais",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.25,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha",
+      "drinks"
+    ],
+    "descricaoBreve": "Fruta madura, sem acidez excessiva, excelente com raspas de limão e hortelã.",
+    "imagem": "/assets/itens/abacaxi-perola.png",
+    "emoji": "🍍"
+  },
+  {
+    "id": "manga-palmer",
+    "nome": "Manga Palmer / Espada Doce",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Frutas Tropicais",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.25,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha",
+      "drinks"
+    ],
+    "descricaoBreve": "Fruta doce e aveludada sem fiapos para drinks tropicais e saladas.",
+    "imagem": "/assets/itens/manga-palmer.png",
+    "emoji": "🥭"
+  },
+  {
+    "id": "maca",
+    "nome": "Maçã Nacional Gala / Fuji",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Frutas Tropicais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "criancas"
+    ],
+    "descricaoBreve": "Maçãs crocantes e suculentas para a fruteira da casa.",
+    "imagem": "/assets/itens/maca.png",
+    "emoji": "🍎"
+  },
+  {
+    "id": "uva-sem-semente",
+    "nome": "Uva sem Semente Selecionada",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Frutas Tropicais",
+    "unidade": "bandeja",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha",
+      "criancas"
+    ],
+    "descricaoBreve": "Bandejas de uvas doces e crocantes para aperitivo e café.",
+    "imagem": "/assets/itens/uva-sem-semente.png",
+    "emoji": "🍇"
+  },
+  {
+    "id": "morango",
+    "nome": "Morango Fresco Selecionado",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Frutas Tropicais",
+    "unidade": "bandeja",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "drinks",
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Morangos vermelhos nobres para caipirinhas, sobremesas e taças.",
+    "imagem": "/assets/itens/morango.png",
+    "emoji": "🍓"
+  },
+  {
+    "id": "kiwi",
+    "nome": "Kiwi Verde Selecionado",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Frutas Tropicais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "drinks"
+    ],
+    "descricaoBreve": "Fruta verde e azedinha na medida para drinks e salada de frutas.",
+    "imagem": "/assets/itens/kiwi.png",
+    "emoji": "🥝"
+  },
+  {
+    "id": "coco-verde",
+    "nome": "Coco Verde Fresco (Água)",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Frutas Tropicais",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 1.5,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha",
+      "drinks"
+    ],
+    "descricaoBreve": "Cocos cheios de água doce e polpa fininha para gelar na casa.",
+    "imagem": "/assets/itens/coco-verde.png",
+    "emoji": "🥥"
+  },
+  {
+    "id": "coco-ralado",
+    "nome": "Coco Ralado Natural",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Frutas Tropicais",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.03,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Flocos frescos de coco natural ralado para tapiocas, doces e receitas.",
+    "imagem": "/assets/itens/coco-ralado.png",
+    "emoji": "🥥"
+  },
+  {
+    "id": "cebola",
+    "nome": "Cebola Branca Selecionada",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Legumes e Raízes",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.12,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Cebolas médias firmes e secas, base dos refogados da casa.",
+    "imagem": "/assets/itens/cebola.png",
+    "emoji": "🧅"
+  },
+  {
+    "id": "alho-descascado",
+    "nome": "Alho Nobre Descascado",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Cítricos e Temperos",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.04,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Dentes graúdos descascados para agilizar o trabalho da cozinha.",
+    "imagem": "/assets/itens/alho-descascado.png",
+    "emoji": "🧄"
+  },
+  {
+    "id": "tomate-comum",
+    "nome": "Tomate Comum Maduro",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Legumes e Raízes",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco",
+      "feijoada"
+    ],
+    "descricaoBreve": "Tomates firmes e vermelhos para vinagrete, molhos e salada.",
+    "imagem": "/assets/itens/tomate-comum.png",
+    "emoji": "🍅"
+  },
+  {
+    "id": "tomate-cereja",
+    "nome": "Tomate Cereja",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Legumes e Raízes",
+    "unidade": "bandeja",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Tomatinhos doces e crocantes para saladas e aperitivos com queijo.",
+    "imagem": "/assets/itens/tomate-cereja.png",
+    "emoji": "🍅"
+  },
+  {
+    "id": "aipim-mandioca",
+    "nome": "Aipim / Mandioca Macia",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Legumes e Raízes",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Aipim manteigueiro descascado que derrete ao cozinhar, ótimo frito ou em purê.",
+    "imagem": "/assets/itens/aipim-mandioca.png",
+    "emoji": "🥔"
+  },
+  {
+    "id": "batata-inglesa",
+    "nome": "Batata Inglesa Lavada",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Legumes e Raízes",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.18,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "criancas"
+    ],
+    "descricaoBreve": "Batatas limpas de casca lisa para assar com alecrim, purê ou fritar.",
+    "imagem": "/assets/itens/batata-inglesa.png",
+    "emoji": "🥔"
+  },
+  {
+    "id": "cenoura",
+    "nome": "Cenoura Selecionada",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Legumes e Raízes",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Cenouras frescas e crocantes para saladas raladas, legumes ao vapor e bolo.",
+    "imagem": "/assets/itens/cenoura.png",
+    "emoji": "🥕"
+  },
+  {
+    "id": "pepino",
+    "nome": "Pepino Japonês Fresco",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Legumes e Raízes",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.08,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Fino e sem sementes, refrescante em fatias finas para saladas.",
+    "imagem": "/assets/itens/pepino.png",
+    "emoji": "🥒"
+  },
+  {
+    "id": "abobrinha",
+    "nome": "Abobrinha Menina / Italiana",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Legumes e Raízes",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Casca brilhante e tenra para grelhar com azeite ou rechear.",
+    "imagem": "/assets/itens/abobrinha.png",
+    "emoji": "🥒"
+  },
+  {
+    "id": "brocolis",
+    "nome": "Brócolis Ninja Fresco",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Legumes e Raízes",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.12,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Buquês verdes firmes e frescos para grelhar com alho ou cozinhar no vapor.",
+    "imagem": "/assets/itens/brocolis.png",
+    "emoji": "🥦"
+  },
+  {
+    "id": "couve-flor",
+    "nome": "Couve-Flor Cabeça Grande",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Legumes e Raízes",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Cabeça branca e compacta para gratinar ou salada morna.",
+    "imagem": "/assets/itens/couve-flor.png",
+    "emoji": "🥦"
+  },
+  {
+    "id": "abobora-moranga",
+    "nome": "Abóbora Moranga (Inteira)",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Legumes e Raízes",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.2,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Moranga grande clássica para servir camarão na moranga requintado.",
+    "imagem": "/assets/itens/abobora-moranga.png",
+    "emoji": "🎃"
+  },
+  {
+    "id": "rabanete",
+    "nome": "Rabanete Fresco",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Legumes e Raízes",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Bulbos crocantes e levemente picantes para finalizar saladas verdes.",
+    "imagem": "/assets/itens/rabanete.png",
+    "emoji": "🌱"
+  },
+  {
+    "id": "champignon-conserva",
+    "nome": "Champignon Cogumelos em Conserva",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Legumes e Conservas",
+    "unidade": "vidro",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Cogumelos fatiados tenros para estrogonofe de filé e saladas nobres.",
+    "imagem": "/assets/itens/champignon-conserva.png",
+    "emoji": "🍄"
+  },
+  {
+    "id": "couve-manteiga",
+    "nome": "Couve Manteiga em Folhas",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Folhas e Ervas",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.2,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "feijoada"
+    ],
+    "descricaoBreve": "Maços frescos para refogar fininha na feijoada com alho crocante.",
+    "imagem": "/assets/itens/couve-manteiga.png",
+    "emoji": "🥬"
+  },
+  {
+    "id": "alface-variada",
+    "nome": "Alface Crespa",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Folhas e Ervas",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.25,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Folhas limpas e higienizadas para saladas frescas do almoço.",
+    "imagem": "/assets/itens/alface-variada.png",
+    "emoji": "🥬"
+  },
+  {
+    "id": "alface-americana",
+    "nome": "Alface Americana",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Folhas e Ervas",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.25,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Folhas crocantes e arredondadas para hambúrgueres e saladas frescas.",
+    "imagem": "/assets/itens/alface-americana.png",
+    "emoji": "🥬"
+  },
+  {
+    "id": "rucula",
+    "nome": "Rúcula Orgânica da Horta",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Folhas e Ervas",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Folhas tenras picantes para acompanhar carpaccios, carnes e saladas.",
+    "imagem": "/assets/itens/rucula.png",
+    "emoji": "🌱"
+  },
+  {
+    "id": "salsinha",
+    "nome": "Salsinha Fresca",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Folhas e Ervas",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Maço aromático para finalização de carnes, risotos e peixes.",
+    "imagem": "/assets/itens/salsinha.png",
+    "emoji": "🌿"
+  },
+  {
+    "id": "hortela",
+    "nome": "Hortelã Fresco",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Folhas e Ervas",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "drinks"
+    ],
+    "descricaoBreve": "Ramos perfumados para suco de abacaxi com hortelã e drinks refrescantes.",
+    "imagem": "/assets/itens/hortela.png",
+    "emoji": "🍃"
+  },
+  {
+    "id": "alecrim",
+    "nome": "Alecrim Fresco em Ramos",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Folhas e Ervas",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Ramos rústicos aromáticos para assar com batatas e carnes no forno.",
+    "imagem": "/assets/itens/alecrim.png",
+    "emoji": "🌿"
+  },
+  {
+    "id": "coentro",
+    "nome": "Coentro Fresco da Roça",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Folhas e Ervas",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.2,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "O tempero indispensável da Bahia para a moqueca, peixes e vinagretes.",
+    "imagem": "/assets/itens/coentro.png",
+    "emoji": "🌿"
+  },
+  {
+    "id": "cebolinha",
+    "nome": "Cebolinha Verde Fresca",
+    "fornecedor": "hortifruti",
+    "subcategoria": "Folhas e Ervas",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Talos verdes crocantes para temperar arroz, feijão e marinadas.",
+    "imagem": "/assets/itens/cebolinha.png",
+    "emoji": "🌿"
+  },
+  {
+    "id": "agua-mineral-sem-gas",
+    "nome": "Água Mineral sem Gás 500ml",
+    "fornecedor": "bebidas",
+    "subcategoria": "Águas e Gelo",
+    "unidade": "unidade",
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco",
+      "cafe_manha",
+      "drinks",
+      "criancas",
+      "feijoada"
+    ],
+    "descricaoBreve": "Garrafa individual 500ml de água mineral sem gás.",
+    "imagem": "/assets/itens/agua-mineral-sem-gas.png",
+    "emoji": "💧"
+  },
+  {
+    "id": "agua-mineral-com-gas",
+    "nome": "Água Mineral com Gás 300ml",
+    "fornecedor": "bebidas",
+    "subcategoria": "Águas e Gelo",
+    "unidade": "unidade",
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "drinks"
+    ],
+    "descricaoBreve": "Garrafa individual 300ml de água mineral gaseificada.",
+    "imagem": "/assets/itens/agua-mineral-com-gas.png",
+    "emoji": "🫧"
+  },
+  {
+    "id": "agua-coco-natural",
+    "nome": "Água de Coco Natural Integral",
+    "fornecedor": "bebidas",
+    "subcategoria": "Sucos e Naturais",
+    "unidade": "litro",
+    "quantidade_por_pessoa_dia": 0.35,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha",
+      "drinks"
+    ],
+    "descricaoBreve": "Garrafas de água de coco natural pura geladinha.",
+    "imagem": "/assets/itens/agua-coco-natural.png",
+    "emoji": "🥥"
+  },
+  {
+    "id": "suco-laranja-natural",
+    "nome": "Suco de Laranja Integral Natural",
+    "fornecedor": "bebidas",
+    "subcategoria": "Sucos e Naturais",
+    "unidade": "litro",
+    "quantidade_por_pessoa_dia": 0.3,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Suco 100% fruta engarrafado pronto para servir no café.",
+    "imagem": "/assets/itens/suco-laranja-natural.png",
+    "emoji": "🍊"
+  },
+  {
+    "id": "suco-uva-integral",
+    "nome": "Suco de Uva Integral Tinto 1.5L",
+    "fornecedor": "bebidas",
+    "subcategoria": "Sucos e Naturais",
+    "unidade": "garrafa",
+    "quantidade_por_pessoa_dia": 0.2,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "criancas"
+    ],
+    "descricaoBreve": "Suco puro sem adição de açúcar e sem conservantes.",
+    "imagem": "/assets/itens/suco-uva-integral.png",
+    "emoji": "🍇"
+  },
+  {
+    "id": "coca-cola-original",
+    "nome": "Coca-Cola Original 350ml",
+    "fornecedor": "bebidas",
+    "subcategoria": "Refrigerantes",
+    "unidade": "unidade",
+    "quantidade_por_pessoa_dia": 1,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco",
+      "feijoada"
+    ],
+    "descricaoBreve": "Lata individual 350ml de Coca-Cola sabor original.",
+    "imagem": "/assets/itens/coca-cola-original.png",
+    "emoji": "🥤"
+  },
+  {
+    "id": "coca-cola-zero",
+    "nome": "Coca-Cola Zero 350ml",
+    "fornecedor": "bebidas",
+    "subcategoria": "Refrigerantes",
+    "unidade": "unidade",
+    "quantidade_por_pessoa_dia": 1,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco",
+      "feijoada"
+    ],
+    "descricaoBreve": "Lata individual 350ml de Coca-Cola Zero açúcar.",
+    "imagem": "/assets/itens/coca-cola-zero.png",
+    "emoji": "🥤"
+  },
+  {
+    "id": "guarana-antarctica",
+    "nome": "Guaraná Antarctica Original 350ml",
+    "fornecedor": "bebidas",
+    "subcategoria": "Refrigerantes",
+    "unidade": "unidade",
+    "quantidade_por_pessoa_dia": 1,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco"
+    ],
+    "descricaoBreve": "Lata individual 350ml de Guaraná Antarctica original.",
+    "imagem": "/assets/itens/guarana-antarctica.png",
+    "emoji": "🥤"
+  },
+  {
+    "id": "guarana-zero",
+    "nome": "Guaraná Antarctica Zero 350ml",
+    "fornecedor": "bebidas",
+    "subcategoria": "Refrigerantes",
+    "unidade": "unidade",
+    "quantidade_por_pessoa_dia": 1,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Lata individual 350ml de Guaraná Antarctica zero açúcar.",
+    "imagem": "/assets/itens/guarana-zero.png",
+    "emoji": "🥤"
+  },
+  {
+    "id": "red-bull-tropical",
+    "nome": "Red Bull Tropical Energy Drink 250ml",
+    "fornecedor": "bebidas",
+    "subcategoria": "Energéticos e Bar",
+    "unidade": "unidade",
+    "quantidade_por_pessoa_dia": 0.5,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "drinks"
+    ],
+    "descricaoBreve": "Lata individual 250ml de Red Bull sabor frutas tropicais.",
+    "imagem": "/assets/itens/red-bull-tropical.png",
+    "emoji": "⚡"
+  },
+  {
+    "id": "agua-tonica",
+    "nome": "Água Tônica Tradicional Lata 350ml",
+    "fornecedor": "bebidas",
+    "subcategoria": "Energéticos e Bar",
+    "unidade": "unidade",
+    "quantidade_por_pessoa_dia": 0.5,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "drinks"
+    ],
+    "descricaoBreve": "Base essencial para gin tônica com especiarias e limão.",
+    "imagem": "/assets/itens/agua-tonica.png",
+    "emoji": "🍸"
+  },
+  {
+    "id": "cerveja-heineken",
+    "nome": "Cerveja Heineken Long Neck",
+    "fornecedor": "bebidas",
+    "subcategoria": "Cervejas",
+    "unidade": "unidade",
+    "quantidade_por_pessoa_dia": 2,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco"
+    ],
+    "descricaoBreve": "Garrafa individual 330ml de cerveja Heineken puro malte long neck.",
+    "imagem": "/assets/itens/cerveja-heineken.png",
+    "emoji": "🍺"
+  },
+  {
+    "id": "cerveja-corona",
+    "nome": "Cerveja Corona Extra Long Neck",
+    "fornecedor": "bebidas",
+    "subcategoria": "Cervejas",
+    "unidade": "unidade",
+    "quantidade_por_pessoa_dia": 1.5,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Perfeita servida geladíssima com uma fatia de limão taiti no gargalo.",
+    "imagem": "/assets/itens/cerveja-corona.png",
+    "emoji": "🍺"
+  },
+  {
+    "id": "cerveja-coronita",
+    "nome": "Cerveja Coronita Extra 210ml",
+    "fornecedor": "bebidas",
+    "subcategoria": "Cervejas",
+    "unidade": "unidade",
+    "quantidade_por_pessoa_dia": 1.5,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Versão mini 210ml da Corona Extra, ideal para tomar sempre trincando de gelada.",
+    "imagem": "/assets/itens/cerveja-coronita.png",
+    "emoji": "🍺"
+  },
+  {
+    "id": "espumante-brut",
+    "nome": "Espumante Brut / Prosecco Chandon",
+    "fornecedor": "bebidas",
+    "subcategoria": "Vinhos e Espumantes",
+    "unidade": "garrafa",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "drinks"
+    ],
+    "descricaoBreve": "Borbulhas finas e refrescantes para brindar o pôr do sol na piscina.",
+    "imagem": "/assets/itens/espumante-brut.png",
+    "emoji": "🍾"
+  },
+  {
+    "id": "vinho-branco-sauvignon",
+    "nome": "Vinho Branco Sauvignon Blanc",
+    "fornecedor": "bebidas",
+    "subcategoria": "Vinhos e Espumantes",
+    "unidade": "garrafa",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Notas cítricas e minerais que harmonizam perfeitamente com peixes e frutos do mar.",
+    "imagem": "/assets/itens/vinho-branco-sauvignon.png",
+    "emoji": "🍷"
+  },
+  {
+    "id": "vinho-rose-provence",
+    "nome": "Vinho Rosé Provence",
+    "fornecedor": "bebidas",
+    "subcategoria": "Vinhos e Espumantes",
+    "unidade": "garrafa",
+    "quantidade_por_pessoa_dia": 0.12,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Leve e aromático, o clássico companheiro dos dias ensolarados na Bahia.",
+    "imagem": "/assets/itens/vinho-rose-provence.png",
+    "emoji": "🍷"
+  },
+  {
+    "id": "gin-tanqueray",
+    "nome": "Gin London Dry Tanqueray 750ml",
+    "fornecedor": "bebidas",
+    "subcategoria": "Destilados e Bar",
+    "unidade": "garrafa",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "drinks"
+    ],
+    "descricaoBreve": "Botânicos puros e clássicos para drinks finos com zimbro e cítricos.",
+    "imagem": "/assets/itens/gin-tanqueray.png",
+    "emoji": "🍸"
+  },
+  {
+    "id": "vodka-absolut",
+    "nome": "Vodka Premium 750ml",
+    "fornecedor": "bebidas",
+    "subcategoria": "Destilados e Bar",
+    "unidade": "garrafa",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "drinks"
+    ],
+    "descricaoBreve": "Vodka suave e pura para caipiroskas de frutas tropicais e moscow mule.",
+    "imagem": "/assets/itens/vodka-absolut.png",
+    "emoji": "🍸"
+  },
+  {
+    "id": "whisky",
+    "nome": "Whisky",
+    "fornecedor": "bebidas",
+    "subcategoria": "Destilados e Bar",
+    "unidade": "garrafa",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "drinks"
+    ],
+    "descricaoBreve": "Blended Scotch Whisky com sabor marcante e vibrante, perfeito para apreciar puro, com gelo ou em drinks.",
+    "imagem": "/assets/itens/whisky.png",
+    "emoji": "🥃"
+  },
+  {
+    "id": "gelo-filtrado-5kg",
+    "nome": "Gelo Filtrado em Cubos 5kg",
+    "fornecedor": "bebidas",
+    "subcategoria": "Águas e Gelo",
+    "unidade": "pacote",
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco",
+      "drinks"
+    ],
+    "descricaoBreve": "Gelo potável puro para caçambas, coolers e taças.",
+    "imagem": "/assets/itens/gelo-filtrado-5kg.png",
+    "emoji": "🧊"
+  },
+  {
+    "id": "carvao-vegetal",
+    "nome": "Carvão Vegetal Graúdo 4kg",
+    "fornecedor": "mercado",
+    "subcategoria": "Churrasco e Brasa",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.35,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco"
+    ],
+    "descricaoBreve": "Pedaços graúdos de alta densidade que produzem brasa duradoura sem fumaça excessiva.",
+    "imagem": "/assets/itens/carvao-vegetal.png",
+    "emoji": "🪵"
+  },
+  {
+    "id": "ovos-frescos",
+    "nome": "Ovos Frescos Grandes (Bandeja 30 un)",
+    "fornecedor": "mercado",
+    "subcategoria": "Ovos e Despensa",
+    "unidade": "bandeja",
+    "quantidade_por_pessoa_dia": 0.4,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Ovos caipiras selecionados para ovos mexidos, omeletes e receitas.",
+    "imagem": "/assets/itens/ovos-frescos.png",
+    "emoji": "🥚"
+  },
+  {
+    "id": "leite-integral",
+    "nome": "Leite Integral Tipo A 1L",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Manteiga & Laticínios",
+    "unidade": "litro",
+    "quantidade_por_pessoa_dia": 0.3,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha",
+      "criancas"
+    ],
+    "descricaoBreve": "Leite fresco cremoso para o café com leite, vitaminas e receitas.",
+    "imagem": "/assets/itens/leite-integral.png",
+    "emoji": "🥛"
+  },
+  {
+    "id": "queijo-mussarela",
+    "nome": "Queijo Mussarela Fatiado",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Queijos Especiais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha",
+      "criancas"
+    ],
+    "descricaoBreve": "Fatias finas para tapiocas, misto quente e lasanhas.",
+    "imagem": "/assets/itens/queijo-mussarela.png",
+    "emoji": "🧀"
+  },
+  {
+    "id": "queijo-prato",
+    "nome": "Queijo Prato Fatiado",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Queijos Especiais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.08,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Queijo prato amarelinho e macio, excelente derretido no pão quente.",
+    "imagem": "/assets/itens/queijo-prato.png",
+    "emoji": "🧀"
+  },
+  {
+    "id": "queijo-coalho",
+    "nome": "Queijo Coalho Tradicional (Barra)",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Queijos Especiais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Barra artesanal para cortar em cubos ou dourar na frigideira com manteiga.",
+    "imagem": "/assets/itens/queijo-coalho.png",
+    "emoji": "🧀"
+  },
+  {
+    "id": "requeijao-cremoso",
+    "nome": "Requeijão Cremoso Tradicional (Copo)",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Manteiga & Laticínios",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Consistência firme e cremosa para passar no pão quente e tapiocas.",
+    "imagem": "/assets/itens/requeijao-cremoso.png",
+    "emoji": "🧈"
+  },
+  {
+    "id": "manteiga-sal",
+    "nome": "Manteiga de Primeira com Sal (500g)",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Manteiga & Laticínios",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Pote de 500g com creme de leite fresco e sal, ponto de pomada perfeito para o café da manhã.",
+    "imagem": "/assets/itens/manteiga-sal.png",
+    "emoji": "🧈"
+  },
+  {
+    "id": "queijo-parmesao-ralado",
+    "nome": "Queijo Parmesão Ralado Fresco 100g",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Queijos Especiais",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.03,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Parmesão curado de verdade para polvilhar nas massas e risotos.",
+    "imagem": "/assets/itens/queijo-parmesao-ralado.png",
+    "emoji": "🧀"
+  },
+  {
+    "id": "queijo-gorgonzola",
+    "nome": "Queijo Gorgonzola Nobre",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Queijos Especiais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "drinks"
+    ],
+    "descricaoBreve": "Queijo azul nobre de textura cremosa e veios azuis de sabor acentuado.",
+    "imagem": "/assets/itens/queijo-gorgonzola.png",
+    "emoji": "🧀"
+  },
+  {
+    "id": "queijo-brie",
+    "nome": "Queijo Brie Cremoso",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Queijos Especiais",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.06,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "drinks"
+    ],
+    "descricaoBreve": "Peça de queijo brie com casca branca aveludada e massa macia e cremosa.",
+    "imagem": "/assets/itens/queijo-brie.png",
+    "emoji": "🧀"
+  },
+  {
+    "id": "queijo-gouda",
+    "nome": "Queijo Gouda Holandês",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Queijos Especiais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.06,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "drinks",
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Queijo gouda suave e amanteigado de consistência macia para tábuas e sanduíches.",
+    "imagem": "/assets/itens/queijo-gouda.png",
+    "emoji": "🧀"
+  },
+  {
+    "id": "queijo-provolone",
+    "nome": "Queijo Provolone Defumado",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Queijos Especiais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.06,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "drinks",
+      "churrasco"
+    ],
+    "descricaoBreve": "Provolone curado e defumado em lascas ou cubos para petisco de boteco chique.",
+    "imagem": "/assets/itens/queijo-provolone.png",
+    "emoji": "🧀"
+  },
+  {
+    "id": "queijo-parmesao-pedaco",
+    "nome": "Queijo Parmesão Tipo Grana (Cunha / Pedaço)",
+    "fornecedor": "frios-laticinios",
+    "subcategoria": "Queijos Especiais",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "drinks"
+    ],
+    "descricaoBreve": "Cunha de parmesão curado cristalino para lascar diretamente na tábua de frios.",
+    "imagem": "/assets/itens/queijo-parmesao-pedaco.png",
+    "emoji": "🧀"
+  },
+  {
+    "id": "sorvete-creme",
+    "nome": "Sorvete de Creme Nobre (Pote)",
+    "fornecedor": "mercado",
+    "subcategoria": "Sobremesas e Doces",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "criancas"
+    ],
+    "descricaoBreve": "Cremoso com baunilha natural para acompanhar petit gâteau e frutas.",
+    "imagem": "/assets/itens/sorvete-creme.png",
+    "emoji": "🍨"
+  },
+  {
+    "id": "arroz-branco",
+    "nome": "Arroz Branco Tipo 1 (1kg)",
+    "fornecedor": "mercado",
+    "subcategoria": "Mercearia e Grãos",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "feijoada"
+    ],
+    "descricaoBreve": "Grãos longos e soltinhos, base do almoço e acompanhamento da feijoada.",
+    "imagem": "/assets/itens/arroz-branco.png",
+    "emoji": "🍚"
+  },
+  {
+    "id": "feijao-preto",
+    "nome": "Feijão Preto Selecionado (1kg)",
+    "fornecedor": "mercado",
+    "subcategoria": "Mercearia e Grãos",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "feijoada"
+    ],
+    "descricaoBreve": "Cozimento macio e caldo espesso escuro para a tradicional feijoada.",
+    "imagem": "/assets/itens/feijao-preto.png",
+    "emoji": "🍲"
+  },
+  {
+    "id": "farinha-mandioca",
+    "nome": "Farinha de Mandioca Artesanal (Bijada)",
+    "fornecedor": "mercado",
+    "subcategoria": "Mercearia e Grãos",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.08,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "feijoada",
+      "churrasco"
+    ],
+    "descricaoBreve": "Crocante e tostada no forno baiano para farofas de bacon e moquecas.",
+    "imagem": "/assets/itens/farinha-mandioca.png",
+    "emoji": "🥣"
+  },
+  {
+    "id": "farinha-trigo",
+    "nome": "Farinha de Trigo Especial sem Fermento",
+    "fornecedor": "mercado",
+    "subcategoria": "Mercearia e Grãos",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Farinha pura e branquinha para tortas, bolos e massas caseiras.",
+    "imagem": "/assets/itens/farinha-trigo.png",
+    "emoji": "🌾"
+  },
+  {
+    "id": "farinha-panko",
+    "nome": "Farinha Panko Crocante",
+    "fornecedor": "mercado",
+    "subcategoria": "Mercearia e Grãos",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.03,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Flocos crocantes japoneses para empanar camarões e peixes.",
+    "imagem": "/assets/itens/farinha-panko.png",
+    "emoji": "🍤"
+  },
+  {
+    "id": "goma-tapioca",
+    "nome": "Goma de Tapioca Fresca Hidratada 1kg",
+    "fornecedor": "mercado",
+    "subcategoria": "Café e Padaria",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Peneirada, macia e sem acidez para tapiocas quentinhas na frigideira.",
+    "imagem": "/assets/itens/goma-tapioca.png",
+    "emoji": "🥞"
+  },
+  {
+    "id": "tapioca-granulada",
+    "nome": "Tapioca Granulada 500g",
+    "fornecedor": "mercado",
+    "subcategoria": "Mercearia e Grãos",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.04,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Grãos firmes para dadinhos de queijo coalho e pudim de tapioca.",
+    "imagem": "/assets/itens/tapioca-granulada.png",
+    "emoji": "🥣"
+  },
+  {
+    "id": "macarrao-espaguete",
+    "nome": "Macarrão Espaguete Grano Duro 500g",
+    "fornecedor": "mercado",
+    "subcategoria": "Mercearia e Grãos",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "criancas"
+    ],
+    "descricaoBreve": "Massa italiana al dente para jantar rápido de frutos do mar ou bolonhesa.",
+    "imagem": "/assets/itens/macarrao-espaguete.png",
+    "emoji": "🍝"
+  },
+  {
+    "id": "massa-pastel",
+    "nome": "Massa para Pastéis Pequena",
+    "fornecedor": "mercado",
+    "subcategoria": "Petiscos e Massas",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.08,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Discos prontos super crocantes para pastel de camarão e queijo.",
+    "imagem": "/assets/itens/massa-pastel.png",
+    "emoji": "🥟"
+  },
+  {
+    "id": "massa-pastel-grande",
+    "nome": "Massa para Pastéis Grande",
+    "fornecedor": "mercado",
+    "subcategoria": "Petiscos e Massas",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.08,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Discos grandes de massa fresca para pastéis generosos de feira.",
+    "imagem": "/assets/itens/massa-pastel-grande.png",
+    "emoji": "🥟"
+  },
+  {
+    "id": "barquinhas-tapioca",
+    "nome": "Barquinhas Crocantes de Tapioca",
+    "fornecedor": "mercado",
+    "subcategoria": "Petiscos e Massas",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Barquinhas leves para servir com tartare de atum, salmão ou siri.",
+    "imagem": "/assets/itens/barquinhas-tapioca.png",
+    "emoji": "🛶"
+  },
+  {
+    "id": "torradinhas",
+    "nome": "Torradinhas Crocantes Finas",
+    "fornecedor": "mercado",
+    "subcategoria": "Café e Padaria",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Pacotes de torradas leves para patês, geleias e manteiga.",
+    "imagem": "/assets/itens/torradinhas.png",
+    "emoji": "🍞"
+  },
+  {
+    "id": "pao-forma",
+    "nome": "Pão de Forma Tradicional / Integral",
+    "fornecedor": "mercado",
+    "subcategoria": "Café e Padaria",
+    "unidade": "pacote",
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Fatias macias para sanduíches de praia e misto quente das manhãs.",
+    "imagem": "/assets/itens/pao-forma.png",
+    "emoji": "🍞"
+  },
+  {
+    "id": "pao-frances",
+    "nome": "Pão Francês Artesanal Fresco",
+    "fornecedor": "mercado",
+    "subcategoria": "Café e Padaria",
+    "unidade": "un",
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha",
+      "churrasco"
+    ],
+    "descricaoBreve": "Crocante por fora e miolo macio entregue cedo na casa.",
+    "imagem": "/assets/itens/pao-frances.png",
+    "emoji": "🥖"
+  },
+  {
+    "id": "pao-queijo-congelado",
+    "nome": "Pão de Queijo Congelado",
+    "fornecedor": "mercado",
+    "subcategoria": "Café e Padaria",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha",
+      "criancas"
+    ],
+    "descricaoBreve": "Recheado de queijo canastra para assar na hora e servir quentinho.",
+    "imagem": "/assets/itens/pao-queijo-congelado.png",
+    "emoji": "🧀"
+  },
+  {
+    "id": "batata-palha",
+    "nome": "Batata Palha Extra Fina Crocante",
+    "fornecedor": "mercado",
+    "subcategoria": "Mercearia e Grãos",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "criancas"
+    ],
+    "descricaoBreve": "Pacote grande sem excesso de gordura para estrogonofe e salpicão.",
+    "imagem": "/assets/itens/batata-palha.png",
+    "emoji": "🍟"
+  },
+  {
+    "id": "batata-pre-frita",
+    "nome": "Batata Pré-Frita Congelada (Palito)",
+    "fornecedor": "mercado",
+    "subcategoria": "Petiscos e Congelados",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "criancas"
+    ],
+    "descricaoBreve": "Batatinhas crocantes por fora e macias por dentro para petisco da piscina.",
+    "imagem": "/assets/itens/batata-pre-frita.png",
+    "emoji": "🍟"
+  },
+  {
+    "id": "grao-de-bico",
+    "nome": "Grão de Bico Selecionado",
+    "fornecedor": "mercado",
+    "subcategoria": "Mercearia e Grãos",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Grãos nobres para saladas mediterrâneas refrescantes ou homus.",
+    "imagem": "/assets/itens/grao-de-bico.png",
+    "emoji": "🥣"
+  },
+  {
+    "id": "massa-bolo",
+    "nome": "Massa Pronta para Bolo",
+    "fornecedor": "mercado",
+    "subcategoria": "Mercearia e Grãos",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.08,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Mistura fofa para bolo no lanche da tarde na varanda.",
+    "imagem": "/assets/itens/massa-bolo.png",
+    "emoji": "🍰"
+  },
+  {
+    "id": "castanha-caju",
+    "nome": "Castanha de Caju Torrada e Salgada",
+    "fornecedor": "mercado",
+    "subcategoria": "Mercearia e Grãos",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.03,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Castanhas selecionadas torradas e salgadas, perfeitas para petiscar com drinks ou finalizar pratos.",
+    "imagem": "/assets/itens/castanha-caju.png",
+    "emoji": "🥜"
+  },
+  {
+    "id": "acucar-refinado",
+    "nome": "Açúcar Refinado Especial 1kg",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha",
+      "drinks"
+    ],
+    "descricaoBreve": "Açúcar soltinho para café, sobremesas e caipirinhas.",
+    "imagem": "/assets/itens/acucar-refinado.png",
+    "emoji": "🍬"
+  },
+  {
+    "id": "adocante",
+    "nome": "Adoçante Dietético Líquido (100ml)",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "frasco",
+    "quantidade_por_pessoa_dia": 0.02,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Adoçante líquido em gotas de alta concentração, ideal para café, chás e sucos.",
+    "imagem": "/assets/itens/adocante.png",
+    "emoji": "☕"
+  },
+  {
+    "id": "cafe-po",
+    "nome": "Café em Pó 500g",
+    "fornecedor": "mercado",
+    "subcategoria": "Café e Padaria",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Café torrado e moído tradicional com aroma marcante e encorpado para o dia a dia.",
+    "imagem": "/assets/itens/cafe-po.png",
+    "emoji": "☕"
+  },
+  {
+    "id": "oleo-soja",
+    "nome": "Óleo de Soja Refinado 900ml",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "garrafa",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Óleo limpo e neutro para frituras e preparo de alimentos.",
+    "imagem": "/assets/itens/oleo-soja.png",
+    "emoji": "🍾"
+  },
+  {
+    "id": "azeite-oliva-extra",
+    "nome": "Azeite de Oliva Extra Virgem 500ml",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "garrafa",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Acidez baixa, sabor frutado nobre para regar saladas e finalizar peixes.",
+    "imagem": "/assets/itens/azeite-oliva-extra.png",
+    "emoji": "🫒"
+  },
+  {
+    "id": "azeite-dende",
+    "nome": "Azeite de Dendê",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "garrafa",
+    "quantidade_por_pessoa_dia": 0.03,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Cor viva e aroma incomparável da Bahia para a moqueca e farofa.",
+    "imagem": "/assets/itens/azeite-dende.png",
+    "emoji": "🫒"
+  },
+  {
+    "id": "leite-coco",
+    "nome": "Leite de Coco Tradicional",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "Litros",
+    "quantidade_por_pessoa_dia": 0.06,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Espesso e puro em vidro para moquecas e doces.",
+    "imagem": "/assets/itens/leite-coco.png",
+    "emoji": "🥥"
+  },
+  {
+    "id": "leite-condensado",
+    "nome": "Leite Condensado (Lata/Caixa)",
+    "fornecedor": "mercado",
+    "subcategoria": "Sobremesas e Doces",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.08,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "drinks",
+      "criancas"
+    ],
+    "descricaoBreve": "Para pudins, brigadeiro dos hóspedes e capetas de praia.",
+    "imagem": "/assets/itens/leite-condensado.png",
+    "emoji": "🥛"
+  },
+  {
+    "id": "creme-leite",
+    "nome": "Creme de Leite",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.06,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Cremoso para molhos, estrogonofe e mousses.",
+    "imagem": "/assets/itens/creme-leite.png",
+    "emoji": "🥛"
+  },
+  {
+    "id": "achocolatado-po",
+    "nome": "Achocolatado em Pó (Lata 400g)",
+    "fornecedor": "mercado",
+    "subcategoria": "Sobremesas e Doces",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "criancas"
+    ],
+    "descricaoBreve": "Para o leite achocolatado das crianças e brigadeiro da tarde.",
+    "imagem": "/assets/itens/achocolatado-po.png",
+    "emoji": "🍫"
+  },
+  {
+    "id": "chocolate-po-100",
+    "nome": "Chocolate em Pó 100% Cacau",
+    "fornecedor": "mercado",
+    "subcategoria": "Sobremesas e Doces",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.03,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Cacau puro intenso para bolos finos e coberturas sofisticadas.",
+    "imagem": "/assets/itens/chocolate-po-100.png",
+    "emoji": "🍫"
+  },
+  {
+    "id": "nutella",
+    "nome": "Creme de Avelã Nutella (Pote Grande)",
+    "fornecedor": "mercado",
+    "subcategoria": "Sobremesas e Doces",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha",
+      "criancas"
+    ],
+    "descricaoBreve": "Para tapiocas doces com morango e banana no café da manhã.",
+    "imagem": "/assets/itens/nutella.png",
+    "emoji": "🌰"
+  },
+  {
+    "id": "granola",
+    "nome": "Granola com Castanhas",
+    "fornecedor": "mercado",
+    "subcategoria": "Café e Padaria",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Crocante com mel e sementes para iogurtes e salada de frutas.",
+    "imagem": "/assets/itens/granola.png",
+    "emoji": "🥣"
+  },
+  {
+    "id": "mel",
+    "nome": "Mel",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "bisnaga",
+    "quantidade_por_pessoa_dia": 0.03,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Mel silvestre puro em bisnaga prática para frutas e queijos.",
+    "imagem": "/assets/itens/mel.png",
+    "emoji": "🍯"
+  },
+  {
+    "id": "melaco-cana",
+    "nome": "Melaço de Cana Puro",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "frasco",
+    "quantidade_por_pessoa_dia": 0.03,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco"
+    ],
+    "descricaoBreve": "Para finalizar o queijo coalho na brasa com toque baiano.",
+    "imagem": "/assets/itens/melaco-cana.png",
+    "emoji": "🍯"
+  },
+  {
+    "id": "geleias-frutas",
+    "nome": "Geleias Nobres de Frutas Variadas",
+    "fornecedor": "mercado",
+    "subcategoria": "Café e Padaria",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.04,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "cafe_manha"
+    ],
+    "descricaoBreve": "Potes de frutas vermelhas e damasco para a mesa de pães.",
+    "imagem": "/assets/itens/geleias-frutas.png",
+    "emoji": "🍓"
+  },
+  {
+    "id": "geleia-pimenta",
+    "nome": "Geleia de Pimenta",
+    "fornecedor": "mercado",
+    "subcategoria": "Café e Padaria",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.03,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Picante e agridoce para acompanhar queijos, carnes e pastéis.",
+    "imagem": "/assets/itens/geleia-pimenta.png",
+    "emoji": "🌶️"
+  },
+  {
+    "id": "molho-tomate",
+    "nome": "Molho de Tomate Tradicional (Sachê)",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "sache",
+    "quantidade_por_pessoa_dia": 0.06,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Polpa de tomate com pedaços para massas e carnes.",
+    "imagem": "/assets/itens/molho-tomate.png",
+    "emoji": "🥫"
+  },
+  {
+    "id": "maionese",
+    "nome": "Maionese Tradicional Hellmann's",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Textura cremosa para saladas de batata e hambúrgueres.",
+    "imagem": "/assets/itens/maionese.png",
+    "emoji": "🍶"
+  },
+  {
+    "id": "ketchup",
+    "nome": "Ketchup Tradicional Heinz",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "frasco",
+    "quantidade_por_pessoa_dia": 0.04,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "criancas"
+    ],
+    "descricaoBreve": "O clássico para petiscos da piscina e lanches das crianças.",
+    "imagem": "/assets/itens/ketchup.png",
+    "emoji": "🍅"
+  },
+  {
+    "id": "mostarda",
+    "nome": "Mostarda Amarela Heinz",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "frasco",
+    "quantidade_por_pessoa_dia": 0.03,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Mostarda suave para sanduíches e molhos de salada.",
+    "imagem": "/assets/itens/mostarda.png",
+    "emoji": "🌭"
+  },
+  {
+    "id": "mostarda-dijon",
+    "nome": "Mostarda Dijon",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "vidro",
+    "quantidade_por_pessoa_dia": 0.02,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Mostarda francesa clássica Maille com acidez e picância refinada para carnes e vinagretes.",
+    "imagem": "/assets/itens/mostarda-dijon.png",
+    "emoji": "🌭"
+  },
+  {
+    "id": "vinagre-branco",
+    "nome": "Vinagre Branco",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "garrafa",
+    "quantidade_por_pessoa_dia": 0.03,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Vinagre de álcool 750ml, ideal para saladas, conservas e higienização de alimentos.",
+    "imagem": "/assets/itens/vinagre-branco.png",
+    "emoji": "🍶"
+  },
+  {
+    "id": "vinagre-maca",
+    "nome": "Vinagre de Maçã",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "garrafa",
+    "quantidade_por_pessoa_dia": 0.03,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Vinagre de maçã 750ml de fermentação natural, sabor suave e frutado.",
+    "imagem": "/assets/itens/vinagre-maca.png",
+    "emoji": "🍎"
+  },
+  {
+    "id": "sal-refinado",
+    "nome": "Sal Refinado Iodado 1kg",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.03,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Sal refinado de cozinha.",
+    "imagem": "/assets/itens/sal-refinado.png",
+    "emoji": "🧂"
+  },
+  {
+    "id": "sal-grosso",
+    "nome": "Sal Grosso Especial para Churrasco",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "kg",
+    "quantidade_por_pessoa_dia": 0.06,
+    "ativo": true,
+    "favorito": true,
+    "kit_tags": [
+      "churrasco"
+    ],
+    "descricaoBreve": "Granulometria perfeita para temperar picanhas e costelas na grelha.",
+    "imagem": "/assets/itens/sal-grosso.png",
+    "emoji": "🧂"
+  },
+  {
+    "id": "tempero-caseiro",
+    "nome": "Tempero Caseiro em Pasta",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "pote",
+    "quantidade_por_pessoa_dia": 0.02,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Pote de 450g de tempero em pasta caseiro com polpa de alho e cebola.",
+    "imagem": "/assets/itens/tempero-caseiro.png",
+    "emoji": "🧄"
+  },
+  {
+    "id": "oregano",
+    "nome": "Orégano Desidratado em Flocos",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.02,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Aromático para queijos derretidos, saladas e molhos.",
+    "imagem": "/assets/itens/oregano.png",
+    "emoji": "🌿"
+  },
+  {
+    "id": "maizena",
+    "nome": "Amido de Milho (Maizena) 200g",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "caixa",
+    "quantidade_por_pessoa_dia": 0.02,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Para mingaus finos, engrossar caldos e bolos fofos.",
+    "imagem": "/assets/itens/maizena.png",
+    "emoji": "🌽"
+  },
+  {
+    "id": "fermento-bolo",
+    "nome": "Fermento Químico em Pó para Bolo 100g",
+    "fornecedor": "mercado",
+    "subcategoria": "Molhos, Temperos e Mantimentos",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.02,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Pó Royal clássico para garantir bolos e tortas aeradas.",
+    "imagem": "/assets/itens/fermento-bolo.png",
+    "emoji": "🧁"
+  },
+  {
+    "id": "azeitonas",
+    "nome": "Azeitonas Verdes sem Caroço",
+    "fornecedor": "mercado",
+    "subcategoria": "Petiscos e Conservas",
+    "unidade": "vidro",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Vidro de 320g com azeitonas verdes carnudas em conserva sem caroço, perfeitas para petiscos e saladas.",
+    "imagem": "/assets/itens/azeitonas.png",
+    "emoji": "🫒"
+  },
+  {
+    "id": "guardanapos-papel-grande",
+    "nome": "Guardanapos de Papel (Grande)",
+    "fornecedor": "mercado",
+    "subcategoria": "Descartáveis e Utensílios",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Pacote com 50 guardanapos sofisticados tamanho G (31,8cm x 32,8cm), maciez superior para a mesa posta.",
+    "imagem": "/assets/itens/guardanapos-papel-grande.png",
+    "emoji": "🍽️"
+  },
+  {
+    "id": "guardanapos-papel-pequeno",
+    "nome": "Guardanapos de Papel (Pequeno)",
+    "fornecedor": "mercado",
+    "subcategoria": "Descartáveis e Utensílios",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.15,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Pacote com 50 guardanapos sofisticados tamanho P (23,8cm x 21,8cm), maciez superior para petiscos e sobremesas.",
+    "imagem": "/assets/itens/guardanapos-papel-pequeno.png",
+    "emoji": "🍽️"
+  },
+  {
+    "id": "papel-aluminio",
+    "nome": "Papel Alumínio",
+    "fornecedor": "mercado",
+    "subcategoria": "Descartáveis e Utensílios",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.08,
+    "ativo": true,
+    "favorito": false,
+    "kit_tags": [
+      "churrasco"
+    ],
+    "descricaoBreve": "Rolo de folha de alumínio resistente (4m x 30cm) para assar, grelhar e proteger travessas.",
+    "imagem": "/assets/itens/papel-aluminio.png",
+    "emoji": "🪙"
+  },
+  {
+    "id": "papel-toalha",
+    "nome": "Papel Toalha Folha Dupla (2 rolos)",
+    "fornecedor": "mercado",
+    "subcategoria": "Descartáveis e Utensílios",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.1,
+    "ativo": true,
+    "favorito": true,
+    "descricaoBreve": "Alta absorção para secar carnes, peixes e bancadas da cozinha.",
+    "imagem": "/assets/itens/papel-toalha.png",
+    "emoji": "🧻"
+  },
+  {
+    "id": "plastico-filme",
+    "nome": "Plástico Filme PVC",
+    "fornecedor": "mercado",
+    "subcategoria": "Descartáveis e Utensílios",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Rolo de 100m x 28cm com caixa dispenser, aderência perfeita para vedar alimentos e travessas.",
+    "imagem": "/assets/itens/plastico-filme.png",
+    "emoji": "📦"
+  },
+  {
+    "id": "saco-lixo-50l",
+    "nome": "Sacos de Lixo Reforçados 50L",
+    "fornecedor": "mercado",
+    "subcategoria": "Limpeza e Descartáveis",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.08,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Rolo com 50 unidades de sacos pretos reforçados 50L, alta resistência que não rasgam com facilidade.",
+    "imagem": "/assets/itens/saco-lixo-50l.png",
+    "emoji": "🗑️"
+  },
+  {
+    "id": "agua-sanitaria",
+    "nome": "Água Sanitária 1L",
+    "fornecedor": "mercado",
+    "subcategoria": "Limpeza e Descartáveis",
+    "unidade": "un",
+    "quantidade_por_pessoa_dia": 0.04,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Água sanitária para desinfecção profunda de bancadas, sanitários e higienização geral.",
+    "imagem": "/assets/itens/agua-sanitaria.png",
+    "emoji": "🧴"
+  },
+  {
+    "id": "detergente-louca",
+    "nome": "Detergente Lava-Louças Neutro 500ml",
+    "fornecedor": "mercado",
+    "subcategoria": "Limpeza e Descartáveis",
+    "unidade": "garrafa",
+    "quantidade_por_pessoa_dia": 0.06,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Desengordurante potente e suave para a pia gourmet.",
+    "imagem": "/assets/itens/detergente-louca.png",
+    "emoji": "🧼"
+  },
+  {
+    "id": "esponja-louca",
+    "nome": "Esponja Dupla Face para Louça (Pacote)",
+    "fornecedor": "mercado",
+    "subcategoria": "Limpeza e Descartáveis",
+    "unidade": "pacote",
+    "quantidade_por_pessoa_dia": 0.05,
+    "ativo": true,
+    "favorito": false,
+    "descricaoBreve": "Esponjas novas higiênicas para a pia da cozinha.",
+    "imagem": "/assets/itens/esponja-louca.png",
+    "emoji": "🧽"
+  }
+]

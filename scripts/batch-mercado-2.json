@@ -1,0 +1,172 @@
+[
+  {
+    "id": "leite-condensado",
+    "nome": "Leite Condensado (Lata/Caixa)",
+    "wikiFile": "Tin of condensed milk.jpg"
+  },
+  {
+    "id": "creme-leite",
+    "nome": "Creme de Leite Nobre",
+    "wikiFile": "Sour Cream.jpg"
+  },
+  {
+    "id": "achocolatado-po",
+    "nome": "Achocolatado em Pó (Lata 400g)",
+    "wikiFile": "Kakaopulver.jpg"
+  },
+  {
+    "id": "chocolate-po-100",
+    "nome": "Chocolate em Pó 100% Cacau",
+    "wikiFile": "Raw cacao powder (3742267632).jpg"
+  },
+  {
+    "id": "nutella",
+    "nome": "Creme de Avelã Nutella (Pote Grande)",
+    "wikiFile": "Nutella ak.jpg"
+  },
+  {
+    "id": "granola",
+    "nome": "Granola Artesanal com Castanhas",
+    "wikiFile": "Granola03242006.JPG"
+  },
+  {
+    "id": "mel",
+    "nome": "Mel Puro de Abelha (Bisnaga)",
+    "wikiFile": "Dipper stick and honey in a jar.jpg"
+  },
+  {
+    "id": "melaco-cana",
+    "nome": "Melaço de Cana Puro",
+    "wikiFile": "Pour Molasses into a Mixing Bowl.JPG"
+  },
+  {
+    "id": "geleia-pimenta",
+    "nome": "Geleia de Pimenta Defumada",
+    "wikiFile": "Red Pepper Jelly (1962318754).jpg"
+  },
+  {
+    "id": "geleias-frutas",
+    "nome": "Geleias Nobres de Frutas Variadas",
+    "wikiFile": "Strawberry jam (home preservation).jpg"
+  },
+  {
+    "id": "molho-tomate",
+    "nome": "Molho de Tomate Tradicional (Sachê)",
+    "wikiFile": "Tomato passata.jpg"
+  },
+  {
+    "id": "maionese",
+    "nome": "Maionese Tradicional Hellmann's",
+    "wikiFile": "Homemade mayonnaise.jpg"
+  },
+  {
+    "id": "ketchup",
+    "nome": "Ketchup Tradicional Heinz",
+    "wikiFile": "Tomato Ketchup.png"
+  },
+  {
+    "id": "mostarda",
+    "nome": "Mostarda Amarela Heinz / Dijon",
+    "wikiFile": "French's classic yellow mustard.jpg"
+  },
+  {
+    "id": "vinagre",
+    "nome": "Vinagre de Maçã / Vinho Branco",
+    "wikiFile": "02023 0257 Apple cider vinegar.jpg"
+  },
+  {
+    "id": "sal-refinado",
+    "nome": "Sal Refinado Iodado 1kg",
+    "wikiFile": "Table salt with salt shaker V1.jpg"
+  },
+  {
+    "id": "sal-grosso",
+    "nome": "Sal Grosso Especial para Churrasco",
+    "wikiFile": "Kosher Salt.JPG"
+  },
+  {
+    "id": "tempero-sazon-arroz",
+    "nome": "Tempero Sazón para Arroz (Caixa)",
+    "wikiFile": "Turmeric Powder on a Spoon - Black Background.jpg"
+  },
+  {
+    "id": "tempero-sazon-feijao",
+    "nome": "Tempero Sazón para Feijão (Caixa)",
+    "wikiFile": "Cumin powder.JPG"
+  },
+  {
+    "id": "tempero-sazon-legumes",
+    "nome": "Tempero Sazón para Legumes (Caixa)",
+    "wikiFile": "Herbes de Provence 01.jpg"
+  },
+  {
+    "id": "tempero-sazon-frango",
+    "nome": "Tempero Sazón para Frango (Caixa)",
+    "wikiFile": "Sppon of Paprika.jpg"
+  },
+  {
+    "id": "tempero-sazon-peixe",
+    "nome": "Tempero Sazón para Camarão e Peixe (Caixa)",
+    "wikiFile": "Lemon pepper - Zitronenpfeffer.jpg"
+  },
+  {
+    "id": "oregano",
+    "nome": "Orégano Desidratado em Flocos",
+    "wikiFile": "Hot and Spicy Oregano.jpg"
+  },
+  {
+    "id": "maizena",
+    "nome": "Amido de Milho (Maizena) 200g",
+    "wikiFile": "Corn Starch.JPG"
+  },
+  {
+    "id": "fermento-bolo",
+    "nome": "Fermento Químico em Pó para Bolo 100g",
+    "wikiFile": "Royal Baking Powder.jpg"
+  },
+  {
+    "id": "azeitonas",
+    "nome": "Azeitonas Verdes Faturadas sem Caroço",
+    "wikiFile": "Green olives (pitted) - Massachusetts.jpg"
+  },
+  {
+    "id": "coco-ralado",
+    "nome": "Coco Ralado Puro sem Açúcar",
+    "wikiFile": "Grated Coconut - Howrah 2013-10-18 3541.JPG"
+  },
+  {
+    "id": "guardanapos-papel",
+    "nome": "Guardanapos de Papel Macios",
+    "wikiFile": "Horizontal napkin holder with napkins.jpg"
+  },
+  {
+    "id": "papel-aluminio",
+    "nome": "Papel Alumínio Grande (45cm x 7.5m)",
+    "wikiFile": "Aluminum foil roll on baking paper.jpg"
+  },
+  {
+    "id": "papel-toalha",
+    "nome": "Papel Toalha Folha Dupla (2 rolos)",
+    "wikiFile": "Roll of Paper Towels.jpg"
+  },
+  {
+    "id": "plastico-filme",
+    "nome": "Plástico Filme PVC Rolo Grande",
+    "wikiFile": "Clingfilm.jpg"
+  },
+  {
+    "id": "saco-lixo-50l",
+    "nome": "Sacos de Lixo Reforçados 50L",
+    "wikiFile": "Black garbage bag.jpg"
+  },
+  {
+    "id": "detergente-louca",
+    "nome": "Detergente Lava-Louças Neutro 500ml",
+    "wikiFile": "Dish-soap.jpg"
+  },
+  {
+    "id": "esponja-louca",
+    "nome": "Esponja Dupla Face para Louça (Pacote)",
+    "wikiFile": "Topfschwamm.JPG"
+  }
+]

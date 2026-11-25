@@ -20,7 +20,6 @@ import {
   CheckCircle2,
   AlertCircle,
   AlertTriangle,
-  Plus,
   Trash2,
   X,
   Printer,
@@ -31,16 +30,15 @@ import {
   Users,
   User,
   Home,
-  Clock,
   ArrowRight,
-  TrendingUp,
   ShieldCheck,
-  Building2,
   Sparkles,
   UploadCloud,
   Check,
   FileCheck
 } from 'lucide-react';
+
+const obterDataHojeIso = (): string => new Date().toISOString().slice(0, 10);
 
 interface NotaComPedido extends AnexoPedido {
   pedido_id: string;
@@ -81,7 +79,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
   // Modal / Formulário de Receber Pagamento Geral (Adiantamento da Estadia)
   const [modalReceberPagamentoAberto, setModalReceberPagamentoAberto] = useState(false);
   const [formValor, setFormValor] = useState('');
-  const [formData, setFormData] = useState(new Date().toISOString().slice(0, 10));
+  const [formData, setFormData] = useState(obterDataHojeIso);
   const [formMetodo, setFormMetodo] = useState('PIX');
   const [formQuemPagou, setFormQuemPagou] = useState<'hospede' | 'outra_pessoa'>('hospede');
   const [formQuemPagouOutro, setFormQuemPagouOutro] = useState('');
@@ -101,7 +99,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
   const [formNotaValor, setFormNotaValor] = useState('');
   const [formNotaQuemPagou, setFormNotaQuemPagou] = useState<'hospede' | 'outra_pessoa'>('hospede');
   const [formNotaQuemPagouOutro, setFormNotaQuemPagouOutro] = useState('');
-  const [formNotaData, setFormNotaData] = useState(new Date().toISOString().slice(0, 10));
+  const [formNotaData, setFormNotaData] = useState(obterDataHojeIso);
   const [formNotaMetodo, setFormNotaMetodo] = useState('PIX');
   const [formNotaObservacao, setFormNotaObservacao] = useState('');
   const [formNotaComprovante, setFormNotaComprovante] = useState<{
@@ -145,11 +143,15 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
   // Carrega pedidos vinculados à estadia
   useEffect(() => {
     let ativo = true;
-    setCarregandoPedidos(true);
 
-    listarPedidosPorEstadia(estadiaLocal.id)
+    Promise.resolve()
+      .then(() => {
+        if (!ativo) return null;
+        setCarregandoPedidos(true);
+        return listarPedidosPorEstadia(estadiaLocal.id);
+      })
       .then((peds) => {
-        if (ativo) {
+        if (ativo && peds) {
           setPedidos(peds);
           setCarregandoPedidos(false);
         }
@@ -402,7 +404,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
     setFormNotaValor(saldo > 0 ? saldo.toFixed(2).replace('.', ',') : valorTotal.toFixed(2).replace('.', ','));
     setFormNotaQuemPagou('hospede');
     setFormNotaQuemPagouOutro('');
-    setFormNotaData(new Date().toISOString().slice(0, 10));
+    setFormNotaData(obterDataHojeIso());
     setFormNotaMetodo('PIX');
     setFormNotaObservacao('');
     setFormNotaComprovante(null);

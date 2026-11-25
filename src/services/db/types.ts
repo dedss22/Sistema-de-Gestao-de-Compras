@@ -104,7 +104,7 @@ export interface ItemPedidoBanco {
   id?: string;
   item_id?: string;
   fornecedor: string;
-  categoria: string;
+  categoria?: string;
   item: string;
   nome?: string;
   quantidade: number;

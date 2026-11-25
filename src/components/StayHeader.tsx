@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, Users, Home, Edit3, Check } from 'lucide-react';
+import { Calendar, Users, Home, Edit3, Check, Settings } from 'lucide-react';
 import { formatarDataBr } from '../utils/whatsapp';
 
 interface StayHeaderProps {
@@ -47,33 +47,34 @@ export const StayHeader: React.FC<StayHeaderProps> = ({
   };
 
   return (
-    <div className="bg-stone-900 text-white px-4 pt-3 pb-4 rounded-b-3xl shadow-md mb-2">
-      <div className="max-w-xl mx-auto">
-        <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-xl bg-white/10 text-amber-300">
-              <Home size={18} />
+    <header className="bg-stone-900/95 backdrop-blur-md text-white px-4 pt-3.5 pb-4 rounded-b-3xl shadow-lg shadow-stone-900/10 border-b border-stone-800/80 mb-2">
+      <div className="max-w-2xl mx-auto">
+        <div className="flex items-center justify-between gap-2 mb-2.5">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <span className="p-2 rounded-xl bg-white/10 text-amber-300 shrink-0 border border-white/10">
+              <Home size={18} aria-hidden="true" />
             </span>
-            <div>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-stone-400 block leading-tight">
+            <div className="min-w-0">
+              <span className="text-[11px] font-bold uppercase tracking-widest text-stone-300 block leading-tight">
                 Lista de Compras
               </span>
-              <h1 className="text-lg sm:text-xl font-extrabold text-white leading-tight">
+              <h1 className="text-lg sm:text-xl font-extrabold text-white leading-tight truncate">
                 {casaNome}
               </h1>
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 shrink-0">
             {isModoCozinheira ? (
               cozinheiraNome && (
-                <div className="flex items-center gap-1 text-xs text-amber-300 font-bold bg-amber-500/10 px-2.5 py-1 rounded-xl border border-amber-500/20">
-                  <span>👩‍🍳 {cozinheiraNome}</span>
+                <div className="flex items-center gap-1 text-xs text-amber-200 font-bold bg-amber-500/15 pl-3 pr-1.5 py-0.5 rounded-xl border border-amber-400/25 min-h-[44px]">
+                  <span className="truncate max-w-[120px] sm:max-w-none">👩‍🍳 {cozinheiraNome}</span>
                   {onAlterarCozinheira && (
                     <button
                       type="button"
                       onClick={onAlterarCozinheira}
-                      className="underline text-[10px] text-amber-200 hover:text-white ml-1 cursor-pointer"
+                      aria-label="Trocar nome da cozinheira"
+                      className="min-h-[40px] px-2 rounded-lg underline text-[11px] font-bold text-amber-200 hover:text-white hover:bg-white/10 transition-colors cursor-pointer flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                     >
                       (trocar)
                     </button>
@@ -85,9 +86,10 @@ export const StayHeader: React.FC<StayHeaderProps> = ({
                 <button
                   type="button"
                   onClick={() => setIsEditing(!isEditing)}
-                  className="px-2.5 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-stone-200 text-xs font-semibold flex items-center gap-1 tap-bounce cursor-pointer"
+                  aria-expanded={isEditing}
+                  className="min-h-[44px] px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-stone-100 text-xs font-semibold flex items-center gap-1.5 tap-bounce cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                 >
-                  <Edit3 size={13} />
+                  <Edit3 size={14} aria-hidden="true" />
                   <span>{isEditing ? 'Fechar' : 'Editar Estadia'}</span>
                 </button>
 
@@ -95,9 +97,10 @@ export const StayHeader: React.FC<StayHeaderProps> = ({
                   type="button"
                   onClick={onOpenAdmin}
                   title="Acesso da Gerência"
-                  className="p-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-stone-300 text-xs tap-bounce cursor-pointer"
+                  aria-label="Acesso da Gerência"
+                  className="min-w-[44px] min-h-[44px] p-2 rounded-xl bg-white/10 hover:bg-white/20 text-stone-200 hover:text-white flex items-center justify-center tap-bounce cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                 >
-                  ⚙️
+                  <Settings size={18} aria-hidden="true" />
                 </button>
               </>
             )}
@@ -106,106 +109,109 @@ export const StayHeader: React.FC<StayHeaderProps> = ({
 
         {/* Resumo da estadia em pílulas */}
         {!isEditing ? (
-          <div className="flex flex-wrap items-center gap-2 text-xs text-stone-300 pt-1">
-            <div className="flex items-center gap-1.5 bg-white/10 px-2.5 py-1 rounded-xl">
-              <Calendar size={13} className="text-amber-300" />
-              <span>
-                Chegada: <strong>{formatarDataBr(dataChegada) || 'A definir'}</strong>
+          <div className="flex flex-wrap items-center gap-2 text-xs text-stone-200 pt-0.5">
+            <div className="flex items-center gap-1.5 bg-white/10 px-2.5 py-1.5 rounded-xl border border-white/5">
+              <Calendar size={13} className="text-amber-300 shrink-0" aria-hidden="true" />
+              <span className="tabular-nums">
+                Chegada: <strong className="text-white">{formatarDataBr(dataChegada) || 'A definir'}</strong>
               </span>
             </div>
 
             {dataSaida && (
-              <div className="flex items-center gap-1.5 bg-white/10 px-2.5 py-1 rounded-xl">
-                <span>
-                  Saída: <strong>{formatarDataBr(dataSaida)}</strong>
+              <div className="flex items-center gap-1.5 bg-white/10 px-2.5 py-1.5 rounded-xl border border-white/5">
+                <span className="tabular-nums">
+                  Saída: <strong className="text-white">{formatarDataBr(dataSaida)}</strong>
                 </span>
               </div>
             )}
 
-            <div className="flex items-center gap-1.5 bg-white/10 px-2.5 py-1 rounded-xl">
-              <Users size={13} className="text-amber-300" />
-              <span>
-                <strong>{numHospedes}</strong> {numHospedes === 1 ? 'hóspede' : 'hóspedes'}
+            <div className="flex items-center gap-1.5 bg-white/10 px-2.5 py-1.5 rounded-xl border border-white/5">
+              <Users size={13} className="text-amber-300 shrink-0" aria-hidden="true" />
+              <span className="tabular-nums">
+                <strong className="text-white">{numHospedes}</strong> {numHospedes === 1 ? 'hóspede' : 'hóspedes'}
               </span>
             </div>
           </div>
         ) : (
           /* Formulário de Edição da Estadia */
-          <div className="mt-3 bg-stone-800 p-3.5 rounded-2xl border border-stone-700 space-y-3">
+          <div className="mt-3 bg-stone-800/95 p-3.5 rounded-2xl border border-stone-700 space-y-3">
             <div>
-              <label className="block text-[11px] font-bold text-stone-300 uppercase mb-1">
+              <label className="block text-[11px] font-bold text-stone-300 uppercase tracking-wider mb-1">
                 Nome da Casa:
               </label>
               <input
                 type="text"
                 value={tempCasa}
                 onChange={(e) => setTempCasa(e.target.value)}
-                className="w-full text-xs p-2 rounded-xl bg-stone-900 border border-stone-600 text-white focus:outline-none focus:ring-2 focus:ring-amber-400"
+                className="w-full min-h-[44px] text-sm px-3 py-2 rounded-xl bg-stone-900 border border-stone-600 text-white focus:outline-none focus:ring-2 focus:ring-amber-400"
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-2.5">
               <div>
-                <label className="block text-[11px] font-bold text-stone-300 uppercase mb-1">
+                <label className="block text-[11px] font-bold text-stone-300 uppercase tracking-wider mb-1">
                   Data de Chegada:
                 </label>
                 <input
                   type="date"
                   value={tempChegada}
                   onChange={(e) => setTempChegada(e.target.value)}
-                  className="w-full text-xs p-2 rounded-xl bg-stone-900 border border-stone-600 text-white focus:outline-none focus:ring-2 focus:ring-amber-400"
+                  className="w-full min-h-[44px] text-xs sm:text-sm px-2.5 py-2 rounded-xl bg-stone-900 border border-stone-600 text-white tabular-nums focus:outline-none focus:ring-2 focus:ring-amber-400"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold text-stone-300 uppercase mb-1">
+                <label className="block text-[11px] font-bold text-stone-300 uppercase tracking-wider mb-1">
                   Data de Saída:
                 </label>
                 <input
                   type="date"
                   value={tempSaida}
                   onChange={(e) => setTempSaida(e.target.value)}
-                  className="w-full text-xs p-2 rounded-xl bg-stone-900 border border-stone-600 text-white focus:outline-none focus:ring-2 focus:ring-amber-400"
+                  className="w-full min-h-[44px] text-xs sm:text-sm px-2.5 py-2 rounded-xl bg-stone-900 border border-stone-600 text-white tabular-nums focus:outline-none focus:ring-2 focus:ring-amber-400"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[11px] font-bold text-stone-300 uppercase mb-1">
+              <label className="block text-[11px] font-bold text-stone-300 uppercase tracking-wider mb-1">
                 Número de Hóspedes:
               </label>
               <div className="flex items-center gap-3">
                 <button
                   type="button"
                   onClick={() => setTempHospedes(Math.max(1, tempHospedes - 1))}
-                  className="w-10 h-10 rounded-xl bg-stone-700 text-white font-bold text-lg flex items-center justify-center tap-bounce"
+                  aria-label="Diminuir número de hóspedes"
+                  className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-stone-700 hover:bg-stone-600 text-white font-bold text-lg flex items-center justify-center tap-bounce cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                 >
                   -
                 </button>
-                <span className="text-lg font-black min-w-[40px] text-center">
+                <span className="text-lg font-black min-w-[40px] text-center tabular-nums">
                   {tempHospedes}
                 </span>
                 <button
                   type="button"
                   onClick={() => setTempHospedes(tempHospedes + 1)}
-                  className="w-10 h-10 rounded-xl bg-amber-500 text-stone-950 font-bold text-lg flex items-center justify-center tap-bounce"
+                  aria-label="Aumentar número de hóspedes"
+                  className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-lg flex items-center justify-center tap-bounce cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   +
                 </button>
-                <span className="text-xs text-stone-400">pessoas na estadia</span>
+                <span className="text-xs text-stone-300">pessoas na estadia</span>
               </div>
             </div>
 
             <button
+              type="button"
               onClick={handleSave}
-              className="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-extrabold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-md tap-bounce"
+              className="w-full min-h-[44px] py-2.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-extrabold text-xs sm:text-sm rounded-xl flex items-center justify-center gap-1.5 shadow-md tap-bounce cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
-              <Check size={16} strokeWidth={3} />
+              <Check size={16} strokeWidth={3} aria-hidden="true" />
               <span>Salvar Dados da Estadia</span>
             </button>
           </div>
         )}
       </div>
-    </div>
+    </header>
   );
 };

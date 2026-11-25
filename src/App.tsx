@@ -717,20 +717,24 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#faf7f2] flex flex-col pb-28">
+    <div className="min-h-screen bg-[#faf7f2] flex flex-col pb-[calc(7.5rem+env(safe-area-inset-bottom))]">
       {/* Banner de Conexão Offline */}
       {isOffline && (
-        <div className="bg-amber-600 text-stone-950 px-4 py-1.5 text-xs font-bold flex items-center justify-center gap-1.5 shadow-xs">
-          <WifiOff size={14} />
+        <div role="status" className="bg-amber-500 text-stone-950 px-4 py-2 text-xs font-bold flex items-center justify-center gap-2 shadow-xs">
+          <WifiOff size={15} className="shrink-0" aria-hidden="true" />
           <span>Modo Offline: Suas alterações estão salvas no celular e funcionarão normalmente.</span>
         </div>
       )}
 
       {/* Toast Feedback */}
       {toastMessage && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-stone-900 text-white text-xs font-bold px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-2 animate-in slide-in-from-top duration-200">
-          <Sparkles size={14} className="text-amber-400" />
-          <span>{toastMessage}</span>
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed top-4 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-2rem)] bg-stone-900/95 backdrop-blur-md text-white text-xs font-bold px-4 py-2.5 rounded-2xl shadow-xl border border-white/10 flex items-center gap-2 animate-in slide-in-from-top duration-200"
+        >
+          <Sparkles size={14} className="text-amber-400 shrink-0" aria-hidden="true" />
+          <span className="truncate">{toastMessage}</span>
         </div>
       )}
 
@@ -755,7 +759,7 @@ export const App: React.FC = () => {
 
       {/* 2. Kits Prontos com 1 Toque (Apenas no 1º pedido da estadia) */}
       {isPrimeiroPedido && (
-        <div className="max-w-xl mx-auto w-full">
+        <div className="max-w-2xl mx-auto w-full">
           <KitsSelector
             onAplicarKit={handleAplicarKit}
             numHospedes={numHospedes}
@@ -772,30 +776,33 @@ export const App: React.FC = () => {
       />
 
       {/* 4. Barra de Busca e Indicador de Rascunho */}
-      <div className="max-w-xl mx-auto w-full px-4 pt-3 pb-2 space-y-2">
+      <div className="max-w-2xl mx-auto w-full px-4 pt-3 pb-2 space-y-2">
         <div className="relative">
-          <Search size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400" />
+          <Search size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 pointer-events-none" aria-hidden="true" />
           <input
             type="text"
+            aria-label={`Buscar em ${FORNECEDORES[activeTab].nome}`}
             placeholder={`Buscar em ${FORNECEDORES[activeTab].nome}... (ex: filé, manga, água)`}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full text-xs sm:text-sm pl-10 pr-10 py-3 rounded-2xl bg-white border border-stone-200 focus:outline-none focus:ring-2 focus:ring-stone-900 shadow-xs"
+            className="w-full min-h-[48px] text-sm pl-10 pr-12 py-3 rounded-2xl bg-white border border-stone-200/90 text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 shadow-xs transition-shadow"
           />
           {searchQuery && (
             <button
+              type="button"
               onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700"
+              aria-label="Limpar busca"
+              className="absolute right-1 top-1/2 -translate-y-1/2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl text-stone-500 hover:text-stone-900 hover:bg-stone-100 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
             >
-              <X size={16} />
+              <X size={18} aria-hidden="true" />
             </button>
           )}
         </div>
 
         {draftSavedAt && (
-          <div className="flex items-center justify-between text-[11px] text-stone-500 px-1">
-            <span>{draftSavedAt}</span>
-            <span className="font-semibold text-stone-700">
+          <div className="flex items-center justify-between gap-2 text-[11px] text-stone-600 px-1 tabular-nums">
+            <span className="truncate">{draftSavedAt}</span>
+            <span className="font-semibold text-stone-700 shrink-0">
               {itensFiltrados.length} opções disponíveis
             </span>
           </div>
@@ -803,31 +810,33 @@ export const App: React.FC = () => {
       </div>
 
       {/* 5. Grade de Cards de Itens Agrupados por Subcategoria */}
-      <div className="max-w-xl mx-auto w-full px-4 space-y-6 mt-1 flex-1">
+      <main className="max-w-2xl mx-auto w-full px-4 space-y-6 mt-1 flex-1">
         {Object.keys(gruposSubcategorias).length === 0 ? (
-          <div className="bg-white rounded-3xl p-8 text-center border border-stone-200 space-y-2 my-6">
-            <span className="text-4xl">🔍</span>
-            <h3 className="font-bold text-stone-800 text-sm">
+          <div className="bg-white rounded-3xl p-8 text-center border border-stone-200 shadow-xs space-y-3 my-6">
+            <div className="w-14 h-14 rounded-2xl bg-stone-100 text-stone-500 flex items-center justify-center mx-auto">
+              <Search size={26} aria-hidden="true" />
+            </div>
+            <h3 className="font-bold text-stone-900 text-sm">
               Nenhum produto encontrado para "{searchQuery}"
             </h3>
-            <p className="text-xs text-stone-500">
+            <p className="text-xs text-stone-600 leading-relaxed max-w-sm mx-auto">
               Tente buscar por outro termo ou use o botão de "Adicionar item que não está na lista" na tela de revisão.
             </p>
           </div>
         ) : (
           Object.entries(gruposSubcategorias).map(([subcategoria, itens]) => (
-            <div key={subcategoria} className="space-y-3">
+            <section key={subcategoria} className="space-y-3">
               {/* Cabeçalho da Subcategoria */}
               <div className="flex items-center gap-2 pt-2">
-                <span className={`w-2.5 h-2.5 rounded-full ${FORNECEDORES[activeTab].corPrimaria}`} />
+                <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${FORNECEDORES[activeTab].corPrimaria}`} aria-hidden="true" />
                 <h3 className="font-black text-stone-900 text-sm uppercase tracking-wider">
                   {subcategoria}
                 </h3>
-                <span className="text-stone-400 text-xs">({itens.length})</span>
+                <span className="text-stone-500 text-xs font-semibold tabular-nums">({itens.length})</span>
               </div>
 
               {/* Grid 2 colunas no celular / mobile-first */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5 items-stretch">
                 {itens.map((item) => {
                   const isDecimal = item.unidade === 'kg' || item.unidade.toLowerCase().includes('litro');
                   const sugestao = isPrimeiroPedido && item.quantidade_por_pessoa_dia
@@ -848,10 +857,10 @@ export const App: React.FC = () => {
                   );
                 })}
               </div>
-            </div>
+            </section>
           ))
         )}
-      </div>
+      </main>
 
       {/* 6. Barra Fixa Inferior com Totais por Aba e Botão Revisar */}
       <BottomSummaryBar

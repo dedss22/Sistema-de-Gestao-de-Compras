@@ -847,58 +847,70 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#f8f9fa] flex flex-col font-sans text-stone-900 selection:bg-amber-100">
+    <div className="min-h-screen w-full bg-[#faf7f2] flex flex-col font-sans text-stone-900 selection:bg-amber-200 selection:text-stone-950">
       {/* Toast flutuante */}
       {toast && (
-        <div className="fixed top-5 left-1/2 -translate-x-1/2 z-80 bg-stone-950 text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-2xl flex items-center gap-2 border border-stone-800 animate-in fade-in slide-in-from-top-2">
-          <Sparkles className="text-amber-400" size={15} />
-          <span>{toast}</span>
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed top-4 sm:top-5 left-1/2 -translate-x-1/2 z-80 bg-stone-950/95 backdrop-blur-md text-white text-xs font-bold px-4 py-2.5 rounded-full shadow-2xl flex items-center gap-2 border border-stone-800 animate-in fade-in slide-in-from-top-2 max-w-[92vw]"
+        >
+          <Sparkles className="text-amber-400 shrink-0" size={15} aria-hidden="true" />
+          <span className="truncate">{toast}</span>
         </div>
       )}
 
       {/* Cabeçalho Superior Full-Width */}
-      <header className="bg-stone-950 text-white border-b border-stone-800 sticky top-0 z-40 shadow-sm">
-        <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black text-lg border border-amber-500/30 shadow-inner">
-              ⚡
+      <header className="bg-stone-950/95 backdrop-blur-md text-white border-b border-stone-800/90 sticky top-0 z-40 shadow-sm">
+        <div className="max-w-7xl w-full mx-auto px-3.5 sm:px-6 lg:px-8 py-3 sm:py-3.5 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center border border-amber-500/30 shadow-inner shrink-0">
+              <Sparkles size={18} aria-hidden="true" />
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <h1 className="font-extrabold text-base leading-tight text-white tracking-tight">Painel da Equipe</h1>
-                <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/20 px-2 py-0.5 rounded-md">
+                <h1 className="font-extrabold text-sm sm:text-base leading-tight text-white tracking-tight truncate">
+                  Painel da Equipe
+                </h1>
+                <span className="hidden sm:inline-flex text-[11px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-500/25 px-2 py-0.5 rounded-md shrink-0">
                   Backoffice
                 </span>
               </div>
-              <p className="text-xs text-stone-400">Gestão de Estadias e Pedidos</p>
+              <p className="text-[11px] sm:text-xs text-stone-300 truncate">
+                Gestão de Estadias e Pedidos
+              </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {onAbrirCardapio && (
               <button
                 type="button"
                 onClick={onAbrirCardapio}
-                className="px-3.5 py-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 active:scale-95 text-stone-950 font-black rounded-xl text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+                aria-label="Ver Cardápio Digital"
+                className="min-h-[44px] min-w-[44px] sm:min-w-0 px-3 sm:px-3.5 py-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 active:scale-95 text-stone-950 font-black rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-xs tap-bounce"
                 title="Abrir Cardápio Digital / Fazer Pedido"
               >
-                <ChefHat size={14} />
+                <ChefHat size={16} aria-hidden="true" />
                 <span className="hidden sm:inline">Ver Cardápio Digital</span>
               </button>
             )}
 
             {session && (
               <>
-                <div className="flex items-center gap-2.5 text-xs text-stone-200 bg-stone-900 px-3.5 py-1.5 rounded-xl border border-stone-800 shadow-inner">
-                  <div className="w-6 h-6 rounded-lg bg-amber-500/20 text-amber-400 font-black flex items-center justify-center text-[10px] border border-amber-500/30">
+                <div className="flex items-center gap-2.5 text-xs text-stone-200 bg-stone-900 min-h-[44px] px-2.5 sm:px-3.5 py-1.5 rounded-xl border border-stone-800 shadow-inner">
+                  <div
+                    className="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-300 font-black flex items-center justify-center text-xs border border-amber-500/30 shrink-0"
+                    aria-hidden="true"
+                  >
                     {(session.user?.nome || session.user?.email || 'U').charAt(0).toUpperCase()}
                   </div>
-                  <div className="flex flex-col text-left">
+                  <div className="hidden md:flex flex-col text-left">
                     <span className="font-extrabold text-white leading-tight">
                       {session.user?.nome || session.user?.email || 'Equipe'}
                     </span>
                     {session.user?.cargo && (
-                      <span className="text-[10px] text-amber-400 font-medium leading-tight">
+                      <span className="text-[11px] text-amber-300 font-medium leading-tight">
                         {session.user.cargo}
                       </span>
                     )}
@@ -908,11 +920,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="px-3.5 py-2 bg-stone-900 hover:bg-stone-800 text-stone-300 hover:text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors border border-stone-800 cursor-pointer shadow-xs"
+                  aria-label="Encerrar sessão"
+                  className="min-h-[44px] min-w-[44px] sm:min-w-0 px-3 sm:px-3.5 py-2 bg-stone-900 hover:bg-stone-800 text-stone-200 hover:text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors border border-stone-800 cursor-pointer shadow-xs"
                   title="Encerrar sessão"
                 >
-                  <LogOut size={14} />
-                  <span>Sair</span>
+                  <LogOut size={15} aria-hidden="true" />
+                  <span className="hidden sm:inline">Sair</span>
                 </button>
               </>
             )}
@@ -924,33 +937,37 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       {/* CASO 1: CARREGANDO SESSÃO                                */}
       {/* ========================================================= */}
       {loadingAuth ? (
-        <div className="flex-1 flex flex-col items-center justify-center p-12 text-stone-500 gap-3">
-          <RefreshCw className="animate-spin text-amber-600" size={32} />
-          <p className="text-sm font-medium">Verificando sessão segura...</p>
+        <div className="flex-1 flex flex-col items-center justify-center p-12 text-stone-600 gap-3">
+          <RefreshCw className="animate-spin text-amber-600" size={32} aria-hidden="true" />
+          <p className="text-sm font-semibold">Verificando sessão segura...</p>
         </div>
       ) : !session ? (
         /* ========================================================= */
         /* CASO 2: LOGIN DA EQUIPE (PÁGINA INTEIRA CENTRALIZADA)     */
         /* ========================================================= */
-        <div className="flex-1 p-6 sm:p-12 flex flex-col items-center justify-center">
-          <div className="w-full max-w-md bg-white p-6 sm:p-8 rounded-3xl border border-stone-200/90 shadow-xl space-y-6">
-            <div className="text-center space-y-1.5">
-              <div className="w-12 h-12 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center mx-auto mb-2 border border-amber-200">
-                <Lock size={22} />
+        <div className="flex-1 p-4 sm:p-8 lg:p-12 flex flex-col items-center justify-center">
+          <div className="w-full max-w-md bg-white p-5 sm:p-8 rounded-3xl border border-stone-200/90 shadow-xl shadow-stone-900/5 space-y-6 animate-modal-in">
+            <div className="text-center space-y-2">
+              <div className="w-13 h-13 bg-amber-100/80 text-amber-800 rounded-2xl flex items-center justify-center mx-auto mb-2 border border-amber-200 shadow-inner">
+                <Lock size={22} aria-hidden="true" />
               </div>
-              <h3 className="text-xl font-black text-stone-900">Acesso da Equipe</h3>
-              <p className="text-xs text-stone-500">
+              <h3 className="text-xl sm:text-2xl font-black text-stone-900 tracking-tight">
+                Acesso da Equipe
+              </h3>
+              <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
                 Selecione seu perfil abaixo ou informe suas credenciais individuais.
               </p>
             </div>
 
             {/* Perfis Rápidos da Equipe */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between text-[11px] font-bold text-stone-500 uppercase tracking-wider px-1">
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between gap-2 text-[11px] font-bold text-stone-600 uppercase tracking-wider px-1">
                 <span>Perfis Cadastrados</span>
-                <span className="text-[10px] text-amber-600 font-medium">Toque para selecionar</span>
+                <span className="text-[11px] text-amber-800 font-semibold normal-case">
+                  Toque para selecionar
+                </span>
               </div>
-              <div className="grid grid-cols-1 gap-2">
+              <div className="grid grid-cols-1 gap-2.5">
                 {USUARIOS_EQUIPE.map((user) => {
                   const isSelected =
                     loginEmail.toLowerCase() === user.login.toLowerCase() ||
@@ -972,18 +989,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         }
                         setLoginError(null);
                       }}
-                      className={`p-3 rounded-2xl border text-left flex items-center justify-between transition-all cursor-pointer ${
+                      className={`min-h-[56px] p-3.5 rounded-2xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${
                         isSelected
                           ? 'bg-amber-50/90 border-amber-400 shadow-xs ring-2 ring-amber-400/40'
-                          : 'bg-stone-50/70 hover:bg-stone-100/90 border-stone-200'
+                          : 'bg-stone-50/80 hover:bg-stone-100 hover:border-stone-300 border-stone-200'
                       }`}
                     >
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-3 min-w-0">
                         <div
-                          className={`w-9 h-9 rounded-xl flex items-center justify-center font-black text-xs border ${
+                          className={`w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs border shrink-0 transition-colors ${
                             isSelected
                               ? 'bg-amber-500 text-stone-950 border-amber-600 shadow-xs'
-                              : 'bg-white text-stone-700 border-stone-300'
+                              : 'bg-white text-stone-800 border-stone-300'
                           }`}
                         >
                           {user.nome
@@ -992,25 +1009,25 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             .slice(0, 2)
                             .join('')}
                         </div>
-                        <div>
-                          <p className="text-xs font-black text-stone-900 leading-tight">
+                        <div className="min-w-0">
+                          <p className="text-sm font-black text-stone-900 leading-tight truncate">
                             {user.nome}
                           </p>
-                          <div className="flex items-center gap-2 mt-0.5 text-[10px] text-stone-500">
-                            <span className="font-semibold text-amber-700">{user.cargo}</span>
-                            <span>•</span>
-                            <span className="font-mono">@{user.login}</span>
+                          <div className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-1.5 mt-0.5 text-[11px] text-stone-600">
+                            <span className="font-semibold text-amber-800">{user.cargo}</span>
+                            <span className="hidden sm:inline" aria-hidden="true">•</span>
+                            <span className="font-mono text-stone-600">@{user.login}</span>
                           </div>
                         </div>
                       </div>
 
-                      <div className="text-xs font-bold">
+                      <div className="text-xs font-bold shrink-0">
                         {isSelected ? (
-                          <span className="bg-amber-500 text-stone-950 text-[10px] px-2.5 py-0.5 rounded-full font-bold shadow-xs">
+                          <span className="bg-amber-500 text-stone-950 text-[11px] px-2.5 py-1 rounded-full font-extrabold shadow-xs">
                             Selecionado
                           </span>
                         ) : (
-                          <span className="text-stone-400 text-[11px] hover:text-stone-600">
+                          <span className="text-stone-600 font-semibold text-xs bg-white px-2.5 py-1 rounded-full border border-stone-200">
                             Usar
                           </span>
                         )}
@@ -1022,48 +1039,59 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </div>
 
             {loginError && (
-              <div className="p-3 bg-red-50 border border-red-200 rounded-2xl text-xs text-red-700 flex items-start gap-2">
-                <ShieldAlert className="shrink-0 text-red-600 mt-0.5" size={16} />
+              <div
+                role="alert"
+                className="p-3.5 bg-red-50 border border-red-200 rounded-2xl text-xs text-red-800 font-medium flex items-start gap-2"
+              >
+                <ShieldAlert className="shrink-0 text-red-600 mt-0.5" size={16} aria-hidden="true" />
                 <span>{loginError}</span>
               </div>
             )}
 
             <form onSubmit={handleLogin} className="space-y-4 pt-1">
               <div>
-                <label className="block text-xs font-bold text-stone-700 mb-1">
+                <label
+                  htmlFor="admin-login-email"
+                  className="block text-xs font-bold text-stone-800 mb-1.5"
+                >
                   Usuário ou E-mail
                 </label>
                 <input
+                  id="admin-login-email"
                   type="text"
                   required
                   value={loginEmail}
                   onChange={(e) => setLoginEmail(e.target.value)}
                   placeholder="Seu login (ex: alexandre, andre, lorena)"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-hidden focus:border-amber-500 text-sm bg-white"
+                  className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 text-sm text-stone-900 placeholder:text-stone-500 bg-white transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-stone-700 mb-1">
+                <label
+                  htmlFor="admin-login-password"
+                  className="block text-xs font-bold text-stone-800 mb-1.5"
+                >
                   Senha
                 </label>
                 <input
+                  id="admin-login-password"
                   type="password"
                   required
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-hidden focus:border-amber-500 text-sm bg-white"
+                  className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 text-sm text-stone-900 placeholder:text-stone-500 bg-white transition-all"
                 />
               </div>
 
-              <div className="flex items-center justify-between pt-0.5">
-                <label className="flex items-center gap-2 cursor-pointer select-none text-xs text-stone-600 hover:text-stone-900 transition-colors">
+              <div className="flex items-center justify-between">
+                <label className="min-h-[44px] flex items-center gap-2.5 cursor-pointer select-none text-xs font-medium text-stone-700 hover:text-stone-900 transition-colors">
                   <input
                     type="checkbox"
                     checked={lembrarSenha}
                     onChange={(e) => setLembrarSenha(e.target.checked)}
-                    className="w-4 h-4 rounded border-stone-300 text-amber-600 focus:ring-amber-500 cursor-pointer"
+                    className="w-4 h-4 rounded border-stone-300 text-amber-600 focus:ring-amber-500 cursor-pointer accent-amber-500"
                   />
                   <span>Salvar senha neste dispositivo</span>
                 </label>
@@ -1072,11 +1100,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               <button
                 type="submit"
                 disabled={loginLoading}
-                className="w-full py-3 bg-amber-500 hover:bg-amber-400 disabled:bg-stone-300 text-stone-950 font-bold rounded-xl text-sm transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer tap-bounce"
+                className="w-full min-h-[46px] py-3 bg-amber-500 hover:bg-amber-400 disabled:bg-stone-300 disabled:text-stone-600 text-stone-950 font-black rounded-xl text-sm transition-all shadow-md shadow-amber-500/20 flex items-center justify-center gap-2 cursor-pointer tap-bounce"
               >
                 {loginLoading ? (
                   <>
-                    <RefreshCw className="animate-spin" size={16} />
+                    <RefreshCw className="animate-spin" size={16} aria-hidden="true" />
                     <span>Entrando...</span>
                   </>
                 ) : (
@@ -1090,24 +1118,24 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         /* ========================================================= */
         /* CASO 3: PAINEL DA EQUIPE (USUÁRIO AUTENTICADO)            */
         /* ========================================================= */
-        <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col gap-6">
+        <main className="flex-1 max-w-7xl w-full mx-auto p-3.5 sm:p-6 lg:p-8 flex flex-col gap-5 sm:gap-6">
           {/* Seletor Principal: Estadias vs Todos os Pedidos vs Histórico de Ações */}
-          <div className="p-5 bg-white rounded-3xl border border-stone-200/90 shadow-xs space-y-4">
+          <div className="p-4 sm:p-5 bg-white rounded-3xl border border-stone-200/90 shadow-xs space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 {/* Abas Superiores */}
-                <div className="flex flex-wrap items-center gap-1.5 bg-stone-100 p-1 rounded-2xl w-fit">
+                <div className="flex items-center gap-1.5 bg-stone-100 p-1.5 rounded-2xl w-full sm:w-fit overflow-x-auto no-scrollbar">
                   <button
                     type="button"
                     onClick={() => setAbaPrincipal('estadias')}
-                    className={`px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center gap-2 cursor-pointer ${
+                    className={`min-h-[44px] px-3.5 sm:px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer ${
                       abaPrincipal === 'estadias'
                         ? 'bg-white text-stone-900 shadow-sm'
-                        : 'text-stone-500 hover:text-stone-800'
+                        : 'text-stone-600 hover:text-stone-900'
                     }`}
                   >
-                    <Home size={15} />
+                    <Home size={15} aria-hidden="true" />
                     <span>Estadias</span>
-                    <span className="text-[10px] bg-stone-200 text-stone-700 px-1.5 py-0.2 rounded-full font-bold">
+                    <span className="text-[11px] bg-stone-200 text-stone-800 px-2 py-0.5 rounded-full font-bold tabular-nums">
                       {contadores.ativas}
                     </span>
                   </button>
@@ -1119,15 +1147,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       setFiltroStatusPedido('ativos');
                       carregarPedidosGlobais();
                     }}
-                    className={`px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center gap-2 cursor-pointer ${
+                    className={`min-h-[44px] px-3.5 sm:px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer ${
                       abaPrincipal === 'pedidos'
                         ? 'bg-white text-stone-900 shadow-sm'
-                        : 'text-stone-500 hover:text-stone-800'
+                        : 'text-stone-600 hover:text-stone-900'
                     }`}
                   >
-                    <ShoppingBag size={15} />
+                    <ShoppingBag size={15} aria-hidden="true" />
                     <span>Todos os Pedidos</span>
-                    <span className="text-[10px] bg-amber-500 text-stone-950 px-1.5 py-0.2 rounded-full font-bold">
+                    <span className="text-[11px] bg-amber-500 text-stone-950 px-2 py-0.5 rounded-full font-bold tabular-nums">
                       {contadoresPedidos.ativos}
                     </span>
                   </button>
@@ -1138,15 +1166,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       setAbaPrincipal('historico');
                       carregarLogsAuditoria();
                     }}
-                    className={`px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center gap-2 cursor-pointer ${
+                    className={`min-h-[44px] px-3.5 sm:px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer ${
                       abaPrincipal === 'historico'
                         ? 'bg-white text-stone-900 shadow-sm'
-                        : 'text-stone-500 hover:text-stone-800'
+                        : 'text-stone-600 hover:text-stone-900'
                     }`}
                   >
-                    <History size={15} />
+                    <History size={15} aria-hidden="true" />
                     <span>Histórico de Ações</span>
-                    <span className="text-[10px] bg-stone-200 text-stone-700 px-1.5 py-0.2 rounded-full font-bold">
+                    <span className="text-[11px] bg-stone-200 text-stone-800 px-2 py-0.5 rounded-full font-bold tabular-nums">
                       {logsAuditoria.length}
                     </span>
                   </button>
@@ -1157,20 +1185,20 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       setAbaPrincipal('sugestoes');
                       carregarPedidosGlobais();
                     }}
-                    className={`px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center gap-2 cursor-pointer ${
+                    className={`min-h-[44px] px-3.5 sm:px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center gap-2 whitespace-nowrap shrink-0 cursor-pointer ${
                       abaPrincipal === 'sugestoes'
                         ? 'bg-white text-stone-900 shadow-sm'
-                        : 'text-stone-500 hover:text-stone-800'
+                        : 'text-stone-600 hover:text-stone-900'
                     }`}
                   >
-                    <Lightbulb size={15} className={sugestoesPendentesCount > 0 ? 'text-amber-500' : 'text-stone-400'} />
+                    <Lightbulb size={15} className={sugestoesPendentesCount > 0 ? 'text-amber-600' : 'text-stone-500'} aria-hidden="true" />
                     <span>Itens Fora do Menu</span>
                     {sugestoesPendentesCount > 0 ? (
-                      <span className="text-[10px] bg-amber-500 text-stone-950 px-1.5 py-0.2 rounded-full font-black animate-pulse">
+                      <span className="text-[11px] bg-amber-500 text-stone-950 px-2 py-0.5 rounded-full font-black animate-pulse tabular-nums">
                         {sugestoesPendentesCount}
                       </span>
                     ) : (
-                      <span className="text-[10px] bg-stone-200 text-stone-600 px-1.5 py-0.2 rounded-full font-bold">
+                      <span className="text-[11px] bg-stone-200 text-stone-700 px-2 py-0.5 rounded-full font-bold tabular-nums">
                         {todasSugestoes.length}
                       </span>
                     )}
@@ -1178,20 +1206,22 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 </div>
 
                 {/* Botões de Ação */}
-                <div className="flex items-center gap-2 self-end sm:self-center">
+                <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
                   <button
                     type="button"
                     disabled={recarregandoManual || loadingEstadias || loadingPedidosGlobais || loadingLogs}
                     onClick={handleRecarregarManual}
-                    className={`p-2 rounded-xl transition-all cursor-pointer tap-bounce flex items-center justify-center ${
+                    aria-label="Recarregar dados do sistema"
+                    className={`min-w-[44px] min-h-[44px] p-2.5 rounded-xl transition-all cursor-pointer tap-bounce flex items-center justify-center ${
                       recarregandoManual
                         ? 'bg-amber-100 text-amber-900 border border-amber-300 shadow-inner'
-                        : 'text-stone-500 hover:text-stone-900 bg-stone-100 hover:bg-stone-200 active:scale-90 border border-transparent'
+                        : 'text-stone-600 hover:text-stone-900 bg-stone-100 hover:bg-stone-200 active:scale-90 border border-stone-200/70'
                     }`}
                     title="Recarregar dados do sistema"
                   >
                     <RefreshCw
                       size={16}
+                      aria-hidden="true"
                       className={`transition-all duration-300 ${
                         recarregandoManual || loadingEstadias || loadingPedidosGlobais || loadingLogs
                           ? 'animate-spin text-amber-700'
@@ -1204,9 +1234,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     <button
                       type="button"
                       onClick={handleAbrirCriar}
-                      className="px-3.5 py-2 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition-all tap-bounce cursor-pointer"
+                      className="min-h-[44px] px-4 py-2 bg-amber-500 hover:bg-amber-400 text-stone-950 font-black rounded-xl text-xs flex items-center gap-1.5 shadow-sm shadow-amber-500/20 transition-all tap-bounce cursor-pointer"
                     >
-                      <Plus size={16} />
+                      <Plus size={16} aria-hidden="true" />
                       <span>Nova Estadia</span>
                     </button>
                   )}
@@ -1217,7 +1247,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               {abaPrincipal === 'estadias' ? (
                 <div className="flex flex-col sm:flex-row gap-2.5 sm:items-center justify-between pt-1">
                   {/* Abas de status */}
-                  <div className="flex items-center gap-1 bg-stone-100 p-1 rounded-xl text-xs overflow-x-auto">
+                  <div className="flex items-center gap-1 bg-stone-100 p-1 rounded-xl text-xs overflow-x-auto no-scrollbar">
                     {(
                       [
                         { id: 'ativas', label: 'Ativas', count: contadores.ativas },
@@ -1230,18 +1260,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         key={tab.id}
                         type="button"
                         onClick={() => setStatusFilter(tab.id)}
-                        className={`px-3 py-1.5 rounded-lg font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
+                        className={`min-h-[38px] px-3 py-1.5 rounded-lg font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
                           statusFilter === tab.id
                             ? 'bg-white text-stone-900 shadow-xs'
-                            : 'text-stone-500 hover:text-stone-800'
+                            : 'text-stone-600 hover:text-stone-900'
                         }`}
                       >
                         <span>{tab.label}</span>
                         <span
-                          className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                          className={`text-[11px] px-1.5 py-0.5 rounded-full tabular-nums ${
                             statusFilter === tab.id
                               ? 'bg-stone-900 text-white'
-                              : 'bg-stone-200 text-stone-600'
+                              : 'bg-stone-200 text-stone-700'
                           }`}
                         >
                           {tab.count}
@@ -1252,21 +1282,23 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                   {/* Campo de Busca */}
                   <div className="relative sm:w-64">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" size={15} />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-500 pointer-events-none" size={15} aria-hidden="true" />
                     <input
                       type="text"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       placeholder="Buscar por casa ou titular..."
-                      className="w-full pl-9 pr-3 py-1.5 bg-stone-100 focus:bg-white text-xs rounded-xl border border-stone-200 focus:border-amber-500 focus:outline-hidden transition-all"
+                      aria-label="Buscar estadia por casa ou titular"
+                      className="w-full min-h-[40px] pl-9 pr-9 py-1.5 bg-stone-100 focus:bg-white text-xs text-stone-900 placeholder:text-stone-500 rounded-xl border border-stone-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none transition-all"
                     />
                     {searchTerm && (
                       <button
                         type="button"
                         onClick={() => setSearchTerm('')}
-                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600"
+                        aria-label="Limpar busca de estadias"
+                        className="absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-lg text-stone-500 hover:text-stone-800 hover:bg-stone-200/70 flex items-center justify-center transition-colors cursor-pointer"
                       >
-                        <X size={13} />
+                        <X size={13} aria-hidden="true" />
                       </button>
                     )}
                   </div>
@@ -1275,7 +1307,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 /* Sub-filtros da aba "Todos os Pedidos" */
                 <div className="space-y-3 pt-1">
                   {/* Abas de Status da Esteira de Pedidos */}
-                  <div className="flex items-center gap-1 bg-stone-100 p-1 rounded-xl text-xs overflow-x-auto">
+                  <div className="flex items-center gap-1 bg-stone-100 p-1 rounded-xl text-xs overflow-x-auto no-scrollbar">
                     {(
                       [
                         { id: 'todos', label: 'Todos os Pedidos', count: contadoresPedidos.todos },
@@ -1291,18 +1323,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         key={tab.id}
                         type="button"
                         onClick={() => setFiltroStatusPedido(tab.id)}
-                        className={`px-3 py-1.5 rounded-lg font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
+                        className={`min-h-[38px] px-3 py-1.5 rounded-lg font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
                           filtroStatusPedido === tab.id
                             ? 'bg-white text-stone-900 shadow-xs'
-                            : 'text-stone-500 hover:text-stone-800'
+                            : 'text-stone-600 hover:text-stone-900'
                         }`}
                       >
                         <span>{tab.label}</span>
                         <span
-                          className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                          className={`text-[11px] px-1.5 py-0.5 rounded-full tabular-nums ${
                             filtroStatusPedido === tab.id
                               ? 'bg-stone-900 text-white'
-                              : 'bg-stone-200 text-stone-600'
+                              : 'bg-stone-200 text-stone-700'
                           }`}
                         >
                           {tab.count}
@@ -1313,11 +1345,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                   <div className="flex flex-col sm:flex-row gap-2.5 sm:items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Filter size={14} className="text-stone-400 shrink-0" />
+                      <Filter size={14} className="text-stone-500 shrink-0" aria-hidden="true" />
                       <select
                         value={filtroEstadiaId}
                         onChange={(e) => setFiltroEstadiaId(e.target.value)}
-                        className="bg-stone-100 text-xs font-bold text-stone-800 px-3 py-1.5 rounded-xl border border-stone-200 focus:outline-hidden focus:border-amber-500 cursor-pointer"
+                        aria-label="Filtrar pedidos por estadia"
+                        className="min-h-[40px] bg-stone-100 text-xs font-bold text-stone-800 px-3 py-1.5 rounded-xl border border-stone-200 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 cursor-pointer w-full sm:w-auto"
                       >
                         <option value="todas">Todas as Estadias</option>
                         {todasEstadias.map((est) => (
@@ -1329,21 +1362,23 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     </div>
 
                     <div className="relative sm:w-64">
-                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" size={15} />
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-500 pointer-events-none" size={15} aria-hidden="true" />
                       <input
                         type="text"
                         value={buscaPedidos}
                         onChange={(e) => setBuscaPedidos(e.target.value)}
                         placeholder="Buscar por cozinheira ou casa..."
-                        className="w-full pl-9 pr-3 py-1.5 bg-stone-100 focus:bg-white text-xs rounded-xl border border-stone-200 focus:border-amber-500 focus:outline-hidden transition-all"
+                        aria-label="Buscar pedidos por cozinheira ou casa"
+                        className="w-full min-h-[40px] pl-9 pr-9 py-1.5 bg-stone-100 focus:bg-white text-xs text-stone-900 placeholder:text-stone-500 rounded-xl border border-stone-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none transition-all"
                       />
                       {buscaPedidos && (
                         <button
                           type="button"
                           onClick={() => setBuscaPedidos('')}
-                          className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600"
+                          aria-label="Limpar busca de pedidos"
+                          className="absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-lg text-stone-500 hover:text-stone-800 hover:bg-stone-200/70 flex items-center justify-center transition-colors cursor-pointer"
                         >
-                          <X size={13} />
+                          <X size={13} aria-hidden="true" />
                         </button>
                       )}
                     </div>
@@ -1356,10 +1391,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     <button
                       type="button"
                       onClick={() => setFiltroTipoLog('todos')}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                      className={`min-h-[38px] px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                         filtroTipoLog === 'todos'
                           ? 'bg-stone-900 text-white shadow-xs'
-                          : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                          : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
                       }`}
                     >
                       Todas as Ações
@@ -1368,26 +1403,26 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     <button
                       type="button"
                       onClick={() => setFiltroTipoLog('EXCLUIR_ESTADIA')}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                      className={`min-h-[38px] px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                         filtroTipoLog === 'EXCLUIR_ESTADIA'
                           ? 'bg-rose-600 text-white shadow-xs'
                           : 'bg-rose-50 text-rose-800 hover:bg-rose-100 border border-rose-200'
                       }`}
                     >
-                      <Trash2 size={13} />
+                      <Trash2 size={13} aria-hidden="true" />
                       <span>Exclusões</span>
                     </button>
 
                     <button
                       type="button"
                       onClick={() => setFiltroTipoLog('PEDIDO_CRIADO')}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                      className={`min-h-[38px] px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                         filtroTipoLog === 'PEDIDO_CRIADO'
                           ? 'bg-purple-600 text-white shadow-xs'
                           : 'bg-purple-50 text-purple-800 hover:bg-purple-100 border border-purple-200'
                       }`}
                     >
-                      <ShoppingBag size={13} />
+                      <ShoppingBag size={13} aria-hidden="true" />
                       <span>Pedidos Criados</span>
                     </button>
 
@@ -1395,7 +1430,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       <select
                         value={filtroTipoLog}
                         onChange={(e) => setFiltroTipoLog(e.target.value)}
-                        className="bg-stone-100 text-xs font-bold text-stone-800 px-2.5 py-1.5 rounded-xl border border-stone-200 focus:outline-hidden focus:border-amber-500 cursor-pointer"
+                        aria-label="Filtrar histórico por tipo de ação"
+                        className="min-h-[38px] bg-stone-100 text-xs font-bold text-stone-800 px-2.5 py-1.5 rounded-xl border border-stone-200 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 cursor-pointer"
                       >
                         <option value="todos">Mais Filtros...</option>
                         <option value="EXCLUIR_ESTADIA">🗑️ Exclusões de Estadia</option>
@@ -1414,21 +1450,23 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   </div>
 
                   <div className="relative sm:w-72">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" size={15} />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-500 pointer-events-none" size={15} aria-hidden="true" />
                     <input
                       type="text"
                       value={buscaLogs}
                       onChange={(e) => setBuscaLogs(e.target.value)}
                       placeholder="Buscar por pessoa, casa, ação..."
-                      className="w-full pl-9 pr-3 py-1.5 bg-stone-100 focus:bg-white text-xs rounded-xl border border-stone-200 focus:border-amber-500 focus:outline-hidden transition-all"
+                      aria-label="Buscar no histórico por pessoa, casa ou ação"
+                      className="w-full min-h-[40px] pl-9 pr-9 py-1.5 bg-stone-100 focus:bg-white text-xs text-stone-900 placeholder:text-stone-500 rounded-xl border border-stone-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none transition-all"
                     />
                     {buscaLogs && (
                       <button
                         type="button"
                         onClick={() => setBuscaLogs('')}
-                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600"
+                        aria-label="Limpar busca do histórico"
+                        className="absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-lg text-stone-500 hover:text-stone-800 hover:bg-stone-200/70 flex items-center justify-center transition-colors cursor-pointer"
                       >
-                        <X size={13} />
+                        <X size={13} aria-hidden="true" />
                       </button>
                     )}
                   </div>
@@ -1437,7 +1475,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 /* Sub-filtros da aba "Itens Fora do Menu / Sugestões" */
                 <div className="flex flex-col sm:flex-row gap-2.5 sm:items-center justify-between pt-1">
                   {/* Status Pills */}
-                  <div className="flex items-center gap-1 bg-stone-100 p-1 rounded-xl text-xs overflow-x-auto">
+                  <div className="flex items-center gap-1 bg-stone-100 p-1 rounded-xl text-xs overflow-x-auto no-scrollbar">
                     {(
                       [
                         { id: 'pendente', label: '🟡 Pendentes', count: sugestoesPendentesCount },
@@ -1458,18 +1496,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         key={tab.id}
                         type="button"
                         onClick={() => setFiltroStatusSugestao(tab.id)}
-                        className={`px-3 py-1.5 rounded-lg font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
+                        className={`min-h-[38px] px-3 py-1.5 rounded-lg font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
                           filtroStatusSugestao === tab.id
                             ? 'bg-white text-stone-900 shadow-xs'
-                            : 'text-stone-500 hover:text-stone-800'
+                            : 'text-stone-600 hover:text-stone-900'
                         }`}
                       >
                         <span>{tab.label}</span>
                         <span
-                          className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                          className={`text-[11px] px-1.5 py-0.5 rounded-full tabular-nums ${
                             filtroStatusSugestao === tab.id
                               ? 'bg-stone-900 text-white'
-                              : 'bg-stone-200 text-stone-600'
+                              : 'bg-stone-200 text-stone-700'
                           }`}
                         >
                           {tab.count}
@@ -1483,7 +1521,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     <select
                       value={filtroFornecedorSugestao}
                       onChange={(e) => setFiltroFornecedorSugestao(e.target.value)}
-                      className="bg-stone-100 text-xs font-bold text-stone-800 px-3 py-1.5 rounded-xl border border-stone-200 focus:outline-hidden focus:border-amber-500 cursor-pointer"
+                      aria-label="Filtrar sugestões por fornecedor"
+                      className="min-h-[40px] bg-stone-100 text-xs font-bold text-stone-800 px-3 py-1.5 rounded-xl border border-stone-200 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 cursor-pointer"
                     >
                       <option value="todos">Todos os Fornecedores</option>
                       {Object.values(FORNECEDORES).map((f) => (
@@ -1494,21 +1533,23 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     </select>
 
                     <div className="relative sm:w-64">
-                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" size={15} />
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-500 pointer-events-none" size={15} aria-hidden="true" />
                       <input
                         type="text"
                         value={buscaSugestoes}
                         onChange={(e) => setBuscaSugestoes(e.target.value)}
                         placeholder="Buscar por item, cozinheira, casa..."
-                        className="w-full pl-9 pr-3 py-1.5 bg-stone-100 focus:bg-white text-xs rounded-xl border border-stone-200 focus:border-amber-500 focus:outline-hidden transition-all"
+                        aria-label="Buscar sugestões por item, cozinheira ou casa"
+                        className="w-full min-h-[40px] pl-9 pr-9 py-1.5 bg-stone-100 focus:bg-white text-xs text-stone-900 placeholder:text-stone-500 rounded-xl border border-stone-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none transition-all"
                       />
                       {buscaSugestoes && (
                         <button
                           type="button"
                           onClick={() => setBuscaSugestoes('')}
-                          className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600"
+                          aria-label="Limpar busca de sugestões"
+                          className="absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-lg text-stone-500 hover:text-stone-800 hover:bg-stone-200/70 flex items-center justify-center transition-colors cursor-pointer"
                         >
-                          <X size={13} />
+                          <X size={13} aria-hidden="true" />
                         </button>
                       )}
                     </div>
@@ -1524,17 +1565,19 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 /* LISTAGEM DE ESTADIAS                                      */
                 /* ========================================================= */
                 loadingEstadias ? (
-                  <div className="text-center py-16 text-stone-400 flex flex-col items-center gap-2">
-                    <RefreshCw className="animate-spin text-amber-500" size={24} />
-                    <p className="text-xs">Carregando estadias...</p>
+                  <div className="text-center py-16 text-stone-600 flex flex-col items-center gap-2.5">
+                    <RefreshCw className="animate-spin text-amber-600" size={24} aria-hidden="true" />
+                    <p className="text-xs font-medium">Carregando estadias...</p>
                   </div>
                 ) : estadias.length === 0 ? (
-                  <div className="text-center py-16 bg-white rounded-3xl border border-stone-200 p-8 space-y-3">
-                    <div className="w-12 h-12 bg-stone-100 text-stone-400 rounded-full flex items-center justify-center mx-auto">
-                      <Home size={22} />
+                  <div className="text-center py-14 sm:py-16 bg-white rounded-3xl border border-stone-200/90 p-6 sm:p-8 space-y-3 shadow-xs">
+                    <div className="w-14 h-14 bg-amber-50 text-amber-700 border border-amber-200/80 rounded-2xl flex items-center justify-center mx-auto shadow-inner">
+                      <Home size={24} aria-hidden="true" />
                     </div>
-                    <h4 className="font-bold text-stone-800 text-sm">Nenhuma estadia encontrada</h4>
-                    <p className="text-xs text-stone-500 max-w-sm mx-auto">
+                    <h4 className="font-extrabold text-stone-900 text-sm sm:text-base">
+                      Nenhuma estadia encontrada
+                    </h4>
+                    <p className="text-xs text-stone-600 max-w-sm mx-auto leading-relaxed">
                       Não há estadias correspondentes ao filtro. Clique em &quot;Nova Estadia&quot; para cadastrar a primeira.
                     </p>
                   </div>
@@ -1545,26 +1588,26 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     return (
                       <div
                         key={estadia.id}
-                        className="bg-white rounded-2xl border border-stone-200 p-4 sm:p-5 shadow-xs hover:shadow-md transition-shadow space-y-3.5"
+                        className="bg-white rounded-3xl border border-stone-200/90 p-4 sm:p-5 shadow-xs hover:shadow-md transition-shadow space-y-3.5"
                       >
                         {/* Topo do Card */}
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-100 pb-3">
-                          <div className="flex items-center gap-2.5">
-                            <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold">
-                              <Home size={18} />
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-stone-100 pb-3.5">
+                          <div className="flex items-center gap-3 min-w-0">
+                            <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 border border-amber-200/80 flex items-center justify-center font-bold shrink-0">
+                              <Home size={18} aria-hidden="true" />
                             </div>
-                            <div>
-                              <h4 className="font-extrabold text-stone-900 text-base leading-tight">
+                            <div className="min-w-0">
+                              <h4 className="font-extrabold text-stone-900 text-base leading-tight truncate">
                                 {estadia.casa}
                               </h4>
-                              <div className="flex items-center gap-2 text-xs text-stone-500 mt-0.5">
+                              <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-stone-600 mt-0.5 tabular-nums">
                                 <span className="flex items-center gap-1">
-                                  <Calendar size={13} className="text-stone-400" />
+                                  <Calendar size={13} className="text-stone-500 shrink-0" aria-hidden="true" />
                                   {formatarDataBr(estadia.entrada)} até {formatarDataBr(estadia.saida)}
                                 </span>
-                                <span>•</span>
+                                <span aria-hidden="true">•</span>
                                 <span className="flex items-center gap-1">
-                                  <Users size={13} className="text-stone-400" />
+                                  <Users size={13} className="text-stone-500 shrink-0" aria-hidden="true" />
                                   {estadia.hospedes} hóspede{estadia.hospedes > 1 ? 's' : ''}
                                 </span>
                               </div>
@@ -1572,25 +1615,26 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                           </div>
 
                           {/* Botão de Pedidos e Badge de Status */}
-                          <div className="flex items-center gap-2 self-start sm:self-center">
+                          <div className="flex items-center gap-2 self-start sm:self-center shrink-0">
                             <button
                               type="button"
                               onClick={() => handleAbrirPedidosEstadia(estadia)}
-                              className="text-[11px] font-bold px-3 py-1 bg-stone-100 hover:bg-amber-100 hover:text-amber-950 text-stone-700 rounded-full border border-stone-200 transition-colors flex items-center gap-1.5 tap-bounce cursor-pointer"
+                              aria-label={`Ver ${estadia.total_pedidos ?? 0} pedidos de ${estadia.casa}`}
+                              className="min-h-[38px] text-xs font-bold px-3.5 py-1.5 bg-stone-100 hover:bg-amber-100 hover:text-amber-950 text-stone-800 rounded-full border border-stone-200 transition-colors flex items-center gap-1.5 tap-bounce cursor-pointer tabular-nums"
                               title="Ver pedidos desta estadia"
                             >
-                              <ShoppingBag size={13} className="text-amber-600" />
+                              <ShoppingBag size={13} className="text-amber-700" aria-hidden="true" />
                               <span>{estadia.total_pedidos ?? 0} pedido{(estadia.total_pedidos ?? 0) !== 1 ? 's' : ''}</span>
-                              <ChevronRight size={12} className="text-stone-400" />
+                              <ChevronRight size={12} className="text-stone-500" aria-hidden="true" />
                             </button>
 
                             <span
-                              className={`text-[11px] font-bold px-2.5 py-1 rounded-full border ${
+                              className={`text-xs font-bold px-2.5 py-1 rounded-full border ${
                                 estadia.status === 'ativa'
-                                  ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                                  ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
                                   : estadia.status === 'finalizada'
-                                  ? 'bg-amber-50 text-amber-800 border-amber-200'
-                                  : 'bg-stone-100 text-stone-600 border-stone-200'
+                                  ? 'bg-amber-50 text-amber-900 border-amber-200'
+                                  : 'bg-stone-100 text-stone-700 border-stone-300'
                               }`}
                             >
                               {estadia.status === 'ativa'
@@ -1603,50 +1647,50 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         </div>
 
                         {/* Dados da Estadia */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-stone-600 bg-stone-50/70 p-3 rounded-xl border border-stone-100">
-                          <div className="flex items-center gap-1.5">
-                            <User size={14} className="text-stone-400 shrink-0" />
-                            <span>
-                              <strong className="text-stone-800">Titular:</strong> {estadia.titular}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-stone-700 bg-stone-50/80 p-3 rounded-xl border border-stone-200/70">
+                          <div className="flex items-center gap-1.5 min-w-0">
+                            <User size={14} className="text-stone-500 shrink-0" aria-hidden="true" />
+                            <span className="truncate">
+                              <strong className="text-stone-900">Titular:</strong> {estadia.titular}
                             </span>
                           </div>
-                          <div className="flex items-center gap-1.5">
-                            <ShieldAlert size={14} className="text-stone-400 shrink-0" />
-                            <span>
-                              <strong className="text-stone-800">Responsável:</strong> {estadia.funcionario}
+                          <div className="flex items-center gap-1.5 min-w-0">
+                            <ShieldAlert size={14} className="text-stone-500 shrink-0" aria-hidden="true" />
+                            <span className="truncate">
+                              <strong className="text-stone-900">Responsável:</strong> {estadia.funcionario}
                             </span>
                           </div>
                         </div>
 
                         {/* Rastreabilidade / Auditoria da Estadia */}
-                        <div className="flex flex-wrap items-center gap-2 text-[11px] text-stone-500 px-1">
+                        <div className="flex flex-wrap items-center gap-2 text-[11px] text-stone-600 px-1 tabular-nums">
                           <span className="flex items-center gap-1">
-                            <User size={12} className="text-stone-400" />
-                            Cadastrada por: <strong className="text-stone-700">{estadia.criada_por_nome || estadia.funcionario || 'Equipe'}</strong>
+                            <User size={12} className="text-stone-500" aria-hidden="true" />
+                            Cadastrada por: <strong className="text-stone-800">{estadia.criada_por_nome || estadia.funcionario || 'Equipe'}</strong>
                           </span>
                           {estadia.status === 'arquivada' && (
                             <>
-                              <span>•</span>
-                              <span className="flex items-center gap-1 text-amber-800 font-semibold bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
-                                <Archive size={11} className="text-amber-600" />
+                              <span aria-hidden="true">•</span>
+                              <span className="flex items-center gap-1 text-amber-900 font-semibold bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
+                                <Archive size={11} className="text-amber-700" aria-hidden="true" />
                                 Arquivada por <strong>{estadia.arquivada_por_nome || 'Equipe'}</strong> {estadia.arquivada_em ? `em ${formatarDataHoraBahia(estadia.arquivada_em)}` : ''}
                               </span>
                             </>
                           )}
                           {estadia.status === 'finalizada' && (
                             <>
-                              <span>•</span>
-                              <span className="flex items-center gap-1 text-stone-700 font-semibold bg-stone-100 px-2 py-0.5 rounded-md border border-stone-200">
-                                <CheckCircle2 size={11} className="text-emerald-600" />
+                              <span aria-hidden="true">•</span>
+                              <span className="flex items-center gap-1 text-stone-800 font-semibold bg-stone-100 px-2 py-0.5 rounded-md border border-stone-200">
+                                <CheckCircle2 size={11} className="text-emerald-700" aria-hidden="true" />
                                 Finalizada por <strong>{estadia.finalizada_por_nome || 'Equipe'}</strong> {estadia.finalizada_em ? `em ${formatarDataHoraBahia(estadia.finalizada_em)}` : ''}
                               </span>
                             </>
                           )}
                           {estadia.reativada_por_nome && estadia.status === 'ativa' && (
                             <>
-                              <span>•</span>
-                              <span className="flex items-center gap-1 text-emerald-800 font-semibold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
-                                <RefreshCw size={11} className="text-emerald-600" />
+                              <span aria-hidden="true">•</span>
+                              <span className="flex items-center gap-1 text-emerald-900 font-semibold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                                <RefreshCw size={11} className="text-emerald-700" aria-hidden="true" />
                                 Reativada por <strong>{estadia.reativada_por_nome}</strong>
                               </span>
                             </>
@@ -1654,29 +1698,30 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         </div>
 
                         {/* Link do Cardápio & Compartilhamento */}
-                        <div className="bg-amber-50/60 border border-amber-200/70 rounded-xl p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs">
-                          <div className="flex items-center gap-2 overflow-hidden">
+                        <div className="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs">
+                          <div className="flex items-center gap-2 overflow-hidden min-w-0">
                             <span className="font-bold text-amber-950 shrink-0">Link da Cozinheira:</span>
-                            <code className="text-amber-800 font-mono truncate text-[11px] bg-white/80 px-2 py-0.5 rounded border border-amber-200">
+                            <code className="text-amber-900 font-mono truncate text-xs bg-white px-2.5 py-1 rounded-lg border border-amber-200/80">
                               /e/{estadia.codigo}
                             </code>
                           </div>
 
-                          <div className="flex items-center gap-1.5 shrink-0">
+                          <div className="flex flex-wrap items-center gap-2 shrink-0">
                             <button
                               type="button"
                               onClick={() => handleCopiarLink(estadia.codigo)}
-                              className="px-2.5 py-1 bg-white hover:bg-amber-100 text-amber-900 border border-amber-300 font-semibold rounded-lg text-xs flex items-center gap-1 transition-colors tap-bounce cursor-pointer"
+                              aria-label={`Copiar link do cardápio de ${estadia.casa}`}
+                              className="min-h-[40px] sm:min-h-[36px] px-3 py-1.5 bg-white hover:bg-amber-100 text-amber-950 border border-amber-300 font-semibold rounded-xl text-xs flex items-center gap-1.5 transition-colors tap-bounce cursor-pointer"
                               title="Copiar URL do cardápio"
                             >
                               {copiedId === estadia.codigo ? (
                                 <>
-                                  <Check size={13} className="text-emerald-600" />
+                                  <Check size={14} className="text-emerald-700" aria-hidden="true" />
                                   <span>Copiado</span>
                                 </>
                               ) : (
                                 <>
-                                  <Copy size={13} />
+                                  <Copy size={14} aria-hidden="true" />
                                   <span>Copiar Link</span>
                                 </>
                               )}
@@ -1685,10 +1730,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             <button
                               type="button"
                               onClick={() => handleCopiarMensagemWhatsApp(estadia)}
-                              className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg text-xs flex items-center gap-1 shadow-xs transition-colors tap-bounce cursor-pointer"
+                              aria-label={`Copiar mensagem de WhatsApp para ${estadia.casa}`}
+                              className="min-h-[40px] sm:min-h-[36px] px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-xs flex items-center gap-1.5 shadow-xs transition-colors tap-bounce cursor-pointer"
                               title="Copiar texto para WhatsApp"
                             >
-                              <Share2 size={13} />
+                              <Share2 size={14} aria-hidden="true" />
                               <span>WhatsApp</span>
                             </button>
 
@@ -1696,27 +1742,28 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                               href={linkCardapio}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="p-1 text-amber-800 hover:text-amber-950 hover:bg-amber-100 rounded-lg transition-colors"
+                              aria-label={`Abrir cardápio de ${estadia.casa} em nova aba`}
+                              className="min-w-[44px] min-h-[44px] sm:min-w-[36px] sm:min-h-[36px] p-2 text-amber-900 hover:text-amber-950 hover:bg-amber-100 rounded-xl border border-amber-200/70 bg-white/70 flex items-center justify-center transition-colors"
                               title="Abrir cardápio em nova aba"
                             >
-                              <ExternalLink size={15} />
+                              <ExternalLink size={15} aria-hidden="true" />
                             </a>
                           </div>
                         </div>
 
                         {/* Ações */}
                         <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
-                          <div className="flex flex-wrap items-center gap-1.5">
+                          <div className="flex flex-wrap items-center gap-2">
                             <button
                               type="button"
                               onClick={() => setEstadiaModalFinanceiro(estadia)}
-                              className="px-3 py-1.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-stone-950 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-all shadow-xs cursor-pointer tap-bounce"
+                              className="min-h-[40px] px-3.5 py-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-stone-950 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-all shadow-xs cursor-pointer tap-bounce"
                               title="Gerenciar pagamentos, notas fiscais, saldos e despesas da estadia"
                             >
-                              <CreditCard size={13} />
+                              <CreditCard size={14} aria-hidden="true" />
                               <span>Pagamentos</span>
                               {estadia.adiantamentos && estadia.adiantamentos.length > 0 && (
-                                <span className="bg-stone-950 text-white text-[10px] px-1.5 py-0.2 rounded-full font-black">
+                                <span className="bg-stone-950 text-white text-[11px] px-1.5 py-0.5 rounded-full font-black tabular-nums">
                                   {estadia.adiantamentos.length}
                                 </span>
                               )}
@@ -1725,9 +1772,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             <button
                               type="button"
                               onClick={() => handleAbrirEditar(estadia)}
-                              className="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl text-xs flex items-center gap-1 transition-colors cursor-pointer"
+                              className="min-h-[40px] px-3.5 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
                             >
-                              <Edit3 size={13} />
+                              <Edit3 size={14} aria-hidden="true" />
                               <span>Editar</span>
                             </button>
 
@@ -1735,9 +1782,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                               <button
                                 type="button"
                                 onClick={() => setEstadiaFinalizar(estadia)}
-                                className="px-3 py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold rounded-xl text-xs flex items-center gap-1 transition-colors cursor-pointer"
+                                className="min-h-[40px] px-3.5 py-2 bg-amber-100 hover:bg-amber-200 text-amber-950 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
                               >
-                                <CheckCircle2 size={13} />
+                                <CheckCircle2 size={14} aria-hidden="true" />
                                 <span>Finalizar</span>
                               </button>
                             )}
@@ -1746,10 +1793,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                               <button
                                 type="button"
                                 disabled
-                                className="px-3 py-1.5 bg-stone-100 text-stone-400 font-bold rounded-xl text-xs flex items-center gap-1 cursor-not-allowed border border-dashed border-stone-300"
+                                className="min-h-[40px] px-3.5 py-2 bg-stone-100 text-stone-500 font-bold rounded-xl text-xs flex items-center gap-1.5 cursor-not-allowed border border-dashed border-stone-300"
                                 title="Recurso em desenvolvimento"
                               >
-                                <Sparkles size={13} />
+                                <Sparkles size={14} aria-hidden="true" />
                                 <span>Gerar apresentação (em breve)</span>
                               </button>
                             )}
@@ -1758,18 +1805,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                               <button
                                 type="button"
                                 onClick={() => handleArquivar(estadia)}
-                                className="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-600 font-bold rounded-xl text-xs flex items-center gap-1 transition-colors cursor-pointer"
+                                className="min-h-[40px] px-3.5 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
                               >
-                                <Archive size={13} />
+                                <Archive size={14} aria-hidden="true" />
                                 <span>Arquivar</span>
                               </button>
                             ) : (
                               <button
                                 type="button"
                                 onClick={() => handleReativar(estadia)}
-                                className="px-3 py-1.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold rounded-xl text-xs flex items-center gap-1 transition-colors cursor-pointer"
+                                className="min-h-[40px] px-3.5 py-2 bg-emerald-100 hover:bg-emerald-200 text-emerald-900 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
                               >
-                                <RefreshCw size={13} />
+                                <RefreshCw size={14} aria-hidden="true" />
                                 <span>Reativar</span>
                               </button>
                             )}
@@ -1781,10 +1828,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                               setEstadiaExcluir(estadia);
                               setNomeConfirmacaoExclusao('');
                             }}
-                            className="px-3 py-1.5 text-red-600 hover:bg-red-50 font-bold rounded-xl text-xs flex items-center gap-1 transition-colors cursor-pointer"
+                            aria-label={`Excluir estadia ${estadia.casa}`}
+                            className="min-h-[40px] px-3.5 py-2 text-red-700 hover:bg-red-50 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
                             title="Excluir estadia e pedidos"
                           >
-                            <Trash2 size={13} />
+                            <Trash2 size={14} aria-hidden="true" />
                             <span>Excluir</span>
                           </button>
                         </div>
@@ -1797,21 +1845,21 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 /* VISÃO GERAL DE TODOS OS PEDIDOS (CRONOLÓGICA)             */
                 /* ========================================================= */
                 loadingPedidosGlobais ? (
-                  <div className="text-center py-16 text-stone-400 flex flex-col items-center gap-2">
-                    <RefreshCw className="animate-spin text-amber-500" size={24} />
-                    <p className="text-xs">Carregando pedidos...</p>
+                  <div className="text-center py-16 text-stone-600 flex flex-col items-center gap-2.5">
+                    <RefreshCw className="animate-spin text-amber-600" size={24} aria-hidden="true" />
+                    <p className="text-xs font-medium">Carregando pedidos...</p>
                   </div>
                 ) : pedidosFiltrados.length === 0 ? (
-                  <div className="text-center py-16 bg-white rounded-3xl border border-stone-200 p-8 space-y-3">
-                    <div className="w-12 h-12 bg-stone-100 text-stone-400 rounded-full flex items-center justify-center mx-auto">
-                      <ShoppingBag size={22} />
+                  <div className="text-center py-14 sm:py-16 bg-white rounded-3xl border border-stone-200/90 p-6 sm:p-8 space-y-3 shadow-xs">
+                    <div className="w-14 h-14 bg-amber-50 text-amber-700 border border-amber-200/80 rounded-2xl flex items-center justify-center mx-auto shadow-inner">
+                      <ShoppingBag size={24} aria-hidden="true" />
                     </div>
-                    <h4 className="font-bold text-stone-800 text-sm">
+                    <h4 className="font-extrabold text-stone-900 text-sm sm:text-base">
                       {filtroStatusPedido === 'ativos'
                         ? 'Nenhum pedido ativo no momento'
                         : 'Nenhum pedido encontrado'}
                     </h4>
-                    <p className="text-xs text-stone-500 max-w-sm mx-auto">
+                    <p className="text-xs text-stone-600 max-w-sm mx-auto leading-relaxed">
                       {filtroStatusPedido === 'ativos'
                         ? 'Não há pedidos em aprovação, envio para fornecedor ou preparação no momento. Clique na aba "Todos os Pedidos" ou "Finalizados" para ver o histórico.'
                         : 'Os pedidos finalizados pela cozinheira no link da estadia aparecerão aqui em tempo real.'}
@@ -1827,37 +1875,37 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     return (
                       <div
                         key={ped.id}
-                        className="bg-white rounded-2xl border border-stone-200 p-4 sm:p-5 shadow-xs hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between gap-3.5"
+                        className="bg-white rounded-3xl border border-stone-200/90 p-4 sm:p-5 shadow-xs hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between gap-3.5"
                       >
-                        <div className="flex items-start gap-3">
-                          <div className="w-10 h-10 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center font-black text-sm border border-amber-200 shrink-0 mt-0.5">
+                        <div className="flex items-start gap-3 min-w-0">
+                          <div className="w-10 h-10 rounded-2xl bg-amber-50 text-amber-800 flex items-center justify-center font-black text-sm border border-amber-200 shrink-0 mt-0.5 tabular-nums">
                             #{ped.numero}
                           </div>
 
-                          <div className="space-y-1">
+                          <div className="space-y-1.5 min-w-0">
                             <div className="flex items-center gap-2 flex-wrap">
-                              <h4 className="font-extrabold text-stone-900 text-sm">
+                              <h4 className="font-extrabold text-stone-900 text-sm tabular-nums">
                                 Pedido #{ped.numero}
                               </h4>
                               <span className="text-[11px] font-bold px-2.5 py-0.5 bg-stone-100 text-stone-800 rounded-full border border-stone-200">
                                 {dadosEstadia.casa || 'Casa'}
                               </span>
-                              <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                              <span className="text-[11px] font-bold text-emerald-900 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200 tabular-nums">
                                 {totalItens} {totalItens === 1 ? 'item' : 'itens'}
                               </span>
 
                               {/* Badge de Status do Pedido */}
                               <span
-                                className={`text-[10px] font-black px-2.5 py-0.5 rounded-full border ${
+                                className={`text-[11px] font-black px-2.5 py-0.5 rounded-full border ${
                                   statusPed === 'em_aprovacao'
-                                    ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                    ? 'bg-amber-100 text-amber-950 border-amber-300'
                                     : statusPed === 'enviar_fornecedores'
-                                    ? 'bg-sky-100 text-sky-900 border-sky-300'
+                                    ? 'bg-sky-100 text-sky-950 border-sky-300'
                                     : statusPed === 'preparacao_entrega'
-                                    ? 'bg-purple-100 text-purple-900 border-purple-300'
+                                    ? 'bg-purple-100 text-purple-950 border-purple-300'
                                     : statusPed === 'finalizado'
-                                    ? 'bg-emerald-100 text-emerald-900 border-emerald-300'
-                                    : 'bg-red-100 text-red-900 border-red-300'
+                                    ? 'bg-emerald-100 text-emerald-950 border-emerald-300'
+                                    : 'bg-red-100 text-red-950 border-red-300'
                                 }`}
                               >
                                 {statusPed === 'em_aprovacao'
@@ -1872,29 +1920,29 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                               </span>
 
                               {qtdAnexos > 0 && (
-                                <span className="text-[10px] font-bold text-purple-800 bg-purple-50 px-2 py-0.5 rounded-md border border-purple-200 flex items-center gap-1">
-                                  <Paperclip size={10} />
+                                <span className="text-[11px] font-bold text-purple-900 bg-purple-50 px-2 py-0.5 rounded-md border border-purple-200 flex items-center gap-1 tabular-nums">
+                                  <Paperclip size={11} aria-hidden="true" />
                                   <span>{qtdAnexos} anexo(s)</span>
                                 </span>
                               )}
                             </div>
 
                             {/* Trilha de Auditoria do Pedido */}
-                            <div className="flex items-center gap-2 text-xs text-stone-500 flex-wrap">
-                              <span className="flex items-center gap-1 text-stone-700 font-medium">
-                                <ChefHat size={13} className="text-amber-600" />
+                            <div className="flex items-center gap-2 text-xs text-stone-600 flex-wrap tabular-nums">
+                              <span className="flex items-center gap-1 text-stone-800 font-medium">
+                                <ChefHat size={13} className="text-amber-700" aria-hidden="true" />
                                 {ped.cozinheira}
                               </span>
-                              <span>•</span>
+                              <span aria-hidden="true">•</span>
                               <span className="flex items-center gap-1">
-                                <Clock size={13} className="text-stone-400" />
+                                <Clock size={13} className="text-stone-500" aria-hidden="true" />
                                 {formatarDataHoraBahia(ped.finalizado_em)}
                               </span>
 
                               {ped.aprovado_por_nome && (
                                 <>
-                                  <span>•</span>
-                                  <span className="text-sky-800 font-medium">
+                                  <span aria-hidden="true">•</span>
+                                  <span className="text-sky-900 font-medium">
                                     Aprovado por {ped.aprovado_por_nome}
                                   </span>
                                 </>
@@ -1902,8 +1950,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                               {ped.rejeitado_por_nome && (
                                 <>
-                                  <span>•</span>
-                                  <span className="text-red-800 font-medium">
+                                  <span aria-hidden="true">•</span>
+                                  <span className="text-red-900 font-medium">
                                     Rejeitado por {ped.rejeitado_por_nome}
                                   </span>
                                 </>
@@ -1911,8 +1959,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                               {ped.enviado_fornecedor_por_nome && (
                                 <>
-                                  <span>•</span>
-                                  <span className="text-purple-800 font-medium">
+                                  <span aria-hidden="true">•</span>
+                                  <span className="text-purple-900 font-medium">
                                     Enviado aos fornecedores por {ped.enviado_fornecedor_por_nome}
                                   </span>
                                 </>
@@ -1920,8 +1968,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                               {ped.concluido_por_nome && (
                                 <>
-                                  <span>•</span>
-                                  <span className="text-emerald-800 font-medium">
+                                  <span aria-hidden="true">•</span>
+                                  <span className="text-emerald-900 font-medium">
                                     Finalizado por {ped.concluido_por_nome}
                                   </span>
                                 </>
@@ -1937,20 +1985,20 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                               <button
                                 type="button"
                                 onClick={() => handleAlterarStatusPedidoRapido(ped.id, 'enviar_fornecedores')}
-                                className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-xs transition-colors cursor-pointer tap-bounce"
+                                className="min-h-[40px] px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer tap-bounce"
                                 title="Aprovar pedido para envio ao fornecedor"
                               >
-                                <CheckCircle2 size={13} />
+                                <CheckCircle2 size={14} aria-hidden="true" />
                                 <span>Aprovar</span>
                               </button>
 
                               <button
                                 type="button"
                                 onClick={() => handleAlterarStatusPedidoRapido(ped.id, 'rejeitado')}
-                                className="px-2.5 py-1.5 bg-red-50 hover:bg-red-100 text-red-700 rounded-xl text-xs font-bold border border-red-200 transition-colors flex items-center gap-1 cursor-pointer"
+                                className="min-h-[40px] px-3 py-2 bg-red-50 hover:bg-red-100 text-red-800 rounded-xl text-xs font-bold border border-red-200 transition-colors flex items-center gap-1.5 cursor-pointer"
                                 title="Rejeitar pedido"
                               >
-                                <XCircle size={13} />
+                                <XCircle size={14} aria-hidden="true" />
                                 <span>Rejeitar</span>
                               </button>
                             </>
@@ -1960,10 +2008,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             <button
                               type="button"
                               onClick={() => handleAlterarStatusPedidoRapido(ped.id, 'em_aprovacao')}
-                              className="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-xl text-xs font-bold flex items-center gap-1 shadow-xs transition-colors cursor-pointer tap-bounce"
+                              className="min-h-[40px] px-3.5 py-2 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer tap-bounce"
                               title="Desfazer rejeição e voltar para aprovação"
                             >
-                              <RotateCcw size={13} />
+                              <RotateCcw size={14} aria-hidden="true" />
                               <span>Voltar p/ Aprovação</span>
                             </button>
                           )}
@@ -1972,10 +2020,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             <button
                               type="button"
                               onClick={() => handleAlterarStatusPedidoRapido(ped.id, 'preparacao_entrega')}
-                              className="px-3 py-1.5 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-xs transition-colors cursor-pointer tap-bounce"
+                              className="min-h-[40px] px-3.5 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer tap-bounce"
                               title="Marcar como enviado aos fornecedores"
                             >
-                              <Send size={13} />
+                              <Send size={14} aria-hidden="true" />
                               <span>Marcar Enviado</span>
                             </button>
                           )}
@@ -1984,10 +2032,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             <button
                               type="button"
                               onClick={() => handleAlterarStatusPedidoRapido(ped.id, 'finalizado')}
-                              className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-xs transition-colors cursor-pointer tap-bounce"
+                              className="min-h-[40px] px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer tap-bounce"
                               title="Concluir e finalizar o pedido"
                             >
-                              <CheckCircle2 size={13} />
+                              <CheckCircle2 size={14} aria-hidden="true" />
                               <span>Finalizar Pedido</span>
                             </button>
                           )}
@@ -1995,30 +2043,31 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                           <button
                             type="button"
                             onClick={() => baixarPlanilhaPedido(ped, dadosEstadia)}
-                            className="p-1.5 sm:px-3 sm:py-1.5 bg-stone-100 hover:bg-emerald-50 hover:text-emerald-800 text-stone-700 rounded-xl text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer"
+                            aria-label={`Baixar planilha Excel do pedido #${ped.numero}`}
+                            className="min-w-[40px] min-h-[40px] p-2 sm:px-3 sm:py-2 bg-stone-100 hover:bg-emerald-50 hover:text-emerald-900 text-stone-700 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                             title="Baixar planilha (.xlsx)"
                           >
-                            <FileSpreadsheet size={14} className="text-emerald-700" />
+                            <FileSpreadsheet size={15} className="text-emerald-700" aria-hidden="true" />
                             <span className="hidden sm:inline">Excel</span>
                           </button>
 
                           <button
                             type="button"
                             onClick={() => setPedidoDetalhe({ pedido: ped, estadia: dadosEstadia })}
-                            className="px-3.5 py-1.5 bg-stone-900 hover:bg-stone-800 active:scale-95 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer tap-bounce"
+                            className="min-h-[40px] px-3.5 py-2 bg-stone-900 hover:bg-stone-800 active:scale-95 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer tap-bounce"
                             title="Ver pedido de compra completo"
                           >
-                            <Eye size={13} />
+                            <Eye size={14} aria-hidden="true" />
                             <span>Ver Pedido</span>
-                            <ChevronRight size={14} />
+                            <ChevronRight size={14} aria-hidden="true" />
                           </button>
                         </div>
 
                         {/* Prévia dos itens do pedido */}
                         {Array.isArray(ped.itens) && ped.itens.length > 0 && (
                           <div className="w-full bg-stone-50/90 rounded-xl p-2.5 border border-stone-200/80 text-xs mt-1">
-                            <div className="text-[10px] font-extrabold text-stone-500 uppercase tracking-wider mb-1 flex items-center gap-1">
-                              <ShoppingBag size={11} className="text-amber-600" />
+                            <div className="text-[11px] font-extrabold text-stone-600 uppercase tracking-wider mb-1.5 flex items-center gap-1.5 tabular-nums">
+                              <ShoppingBag size={12} className="text-amber-700" aria-hidden="true" />
                               <span>Itens do Pedido de Compras ({ped.itens.length}):</span>
                             </div>
                             <div className="flex flex-wrap gap-1.5 max-h-20 overflow-y-auto">
@@ -2027,12 +2076,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                   key={idx}
                                   className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-white text-stone-800 text-[11px] font-medium border border-stone-200 shadow-2xs"
                                 >
-                                  <strong className="text-stone-900 font-bold">{it.quantidade} {it.unidade}</strong>
+                                  <strong className="text-stone-950 font-bold tabular-nums">{it.quantidade} {it.unidade}</strong>
                                   <span>{it.item || it.nome}</span>
                                 </span>
                               ))}
                               {ped.itens.length > 8 && (
-                                <span className="text-[11px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-lg border border-amber-200">
+                                <span className="text-[11px] font-bold text-amber-900 bg-amber-50 px-2 py-0.5 rounded-lg border border-amber-200 tabular-nums">
                                   +{ped.itens.length - 8} outros itens...
                                 </span>
                               )}
@@ -2048,17 +2097,19 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 /* HISTÓRICO DE AÇÕES & AUDITORIA (QUEM ARQUIVOU, ETC)        */
                 /* ========================================================= */
                 loadingLogs ? (
-                  <div className="text-center py-16 text-stone-400 flex flex-col items-center gap-2">
-                    <RefreshCw className="animate-spin text-amber-500" size={24} />
-                    <p className="text-xs">Carregando histórico de auditoria...</p>
+                  <div className="text-center py-16 text-stone-600 flex flex-col items-center gap-2.5">
+                    <RefreshCw className="animate-spin text-amber-600" size={24} aria-hidden="true" />
+                    <p className="text-xs font-medium">Carregando histórico de auditoria...</p>
                   </div>
                 ) : logsAuditoria.length === 0 ? (
-                  <div className="text-center py-16 bg-white rounded-3xl border border-stone-200 p-8 space-y-3">
-                    <div className="w-12 h-12 bg-stone-100 text-stone-400 rounded-full flex items-center justify-center mx-auto">
-                      <History size={22} />
+                  <div className="text-center py-14 sm:py-16 bg-white rounded-3xl border border-stone-200/90 p-6 sm:p-8 space-y-3 shadow-xs">
+                    <div className="w-14 h-14 bg-stone-100 text-stone-600 border border-stone-200 rounded-2xl flex items-center justify-center mx-auto shadow-inner">
+                      <History size={24} aria-hidden="true" />
                     </div>
-                    <h4 className="font-bold text-stone-800 text-sm">Nenhuma atividade registrada</h4>
-                    <p className="text-xs text-stone-500 max-w-sm mx-auto">
+                    <h4 className="font-extrabold text-stone-900 text-sm sm:text-base">
+                      Nenhuma atividade registrada
+                    </h4>
+                    <p className="text-xs text-stone-600 max-w-sm mx-auto leading-relaxed">
                       Todas as ações no sistema (criação, arquivamento, finalização, exclusão, reativação e pedidos) serão registradas com nome do responsável, data e hora.
                     </p>
                   </div>
@@ -2124,21 +2175,21 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       return (
                         <div
                           key={log.id}
-                          className="bg-white rounded-2xl border border-stone-200 p-4 shadow-xs hover:shadow-md transition-shadow flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                          className="bg-white rounded-3xl border border-stone-200/90 p-4 sm:p-5 shadow-xs hover:shadow-md transition-shadow flex flex-col sm:flex-row sm:items-center justify-between gap-3"
                         >
-                          <div className="flex items-start gap-3.5">
+                          <div className="flex items-start gap-3.5 min-w-0">
                             <div className="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 border mt-0.5 bg-stone-50 border-stone-200">
                               {icone}
                             </div>
 
-                            <div className="space-y-1">
+                            <div className="space-y-1.5 min-w-0">
                               <div className="flex flex-wrap items-center gap-2">
-                                <span className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md border ${estiloBadge}`}>
+                                <span className={`text-[11px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md border ${estiloBadge}`}>
                                   {rotuloAcao}
                                 </span>
                                 {log.estadia_casa && (
-                                  <span className="text-[11px] font-bold text-amber-900 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200 flex items-center gap-1">
-                                    <Home size={12} className="text-amber-600" />
+                                  <span className="text-[11px] font-bold text-amber-950 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200 flex items-center gap-1">
+                                    <Home size={12} className="text-amber-700" aria-hidden="true" />
                                     {log.estadia_casa}
                                   </span>
                                 )}
@@ -2157,8 +2208,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                   {/* Se tiver lista estruturada em dados_backup */}
                                   {Array.isArray(log.dados_backup?.alteracoes) && log.dados_backup.alteracoes.length > 0 ? (
                                     <div className="bg-amber-50/60 border border-amber-200/90 rounded-xl p-2.5 space-y-1.5">
-                                      <span className="text-[10px] font-black uppercase text-amber-950 tracking-wider flex items-center gap-1.5">
-                                        <Edit3 size={11} className="text-amber-700" />
+                                      <span className="text-[11px] font-black uppercase text-amber-950 tracking-wider flex items-center gap-1.5 tabular-nums">
+                                        <Edit3 size={11} className="text-amber-700" aria-hidden="true" />
                                         <span>O que foi editado ({log.dados_backup.alteracoes.length} {log.dados_backup.alteracoes.length === 1 ? 'item' : 'itens'}):</span>
                                       </span>
                                       <div className="flex flex-col gap-1">
@@ -2184,8 +2235,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                     </div>
                                   ) : log.descricao.includes('\n• ') ? (
                                     <div className="bg-amber-50/60 border border-amber-200/90 rounded-xl p-2.5 space-y-1">
-                                      <span className="text-[10px] font-black uppercase text-amber-950 tracking-wider flex items-center gap-1.5">
-                                        <Edit3 size={11} className="text-amber-700" />
+                                      <span className="text-[11px] font-black uppercase text-amber-950 tracking-wider flex items-center gap-1.5">
+                                        <Edit3 size={11} className="text-amber-700" aria-hidden="true" />
                                         <span>O que foi editado:</span>
                                       </span>
                                       <div className="text-xs text-stone-800 space-y-1 whitespace-pre-line font-medium">
@@ -2195,17 +2246,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                   ) : null}
                                 </div>
                               ) : (
-                                <p className="text-xs text-stone-600 leading-relaxed whitespace-pre-line">
+                                <p className="text-xs text-stone-700 leading-relaxed whitespace-pre-line">
                                   {log.descricao}
                                 </p>
                               )}
 
-                              <div className="flex items-center gap-2 text-[11px] text-stone-500 pt-0.5">
-                                <span className="flex items-center gap-1 font-semibold text-stone-700">
-                                  <User size={12} className="text-stone-400" />
+                              <div className="flex items-center gap-2 text-[11px] text-stone-600 pt-0.5">
+                                <span className="flex items-center gap-1 font-semibold text-stone-800">
+                                  <User size={12} className="text-stone-500" aria-hidden="true" />
                                   {log.usuario_nome}
                                   {log.usuario_login && (
-                                    <span className="text-stone-400 font-mono text-[10px]">
+                                    <span className="text-stone-600 font-mono text-[11px]">
                                       (@{log.usuario_login})
                                     </span>
                                   )}
@@ -2215,9 +2266,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                           </div>
 
                           {/* Data/Hora e Botões de Ação Específicos */}
-                          <div className="sm:text-right shrink-0 border-t sm:border-t-0 pt-2 sm:pt-0 border-stone-100 flex flex-wrap sm:flex-col items-start sm:items-end justify-between gap-2 text-xs text-stone-500">
-                            <span className="flex items-center gap-1 font-semibold text-stone-700 bg-stone-50 px-2.5 py-1 rounded-lg border border-stone-200">
-                              <Clock size={13} className="text-amber-500" />
+                          <div className="sm:text-right shrink-0 border-t sm:border-t-0 pt-2.5 sm:pt-0 border-stone-100 flex flex-wrap sm:flex-col items-start sm:items-end justify-between gap-2 text-xs text-stone-600">
+                            <span className="flex items-center gap-1.5 font-semibold text-stone-800 bg-stone-50 px-2.5 py-1 rounded-lg border border-stone-200 tabular-nums">
+                              <Clock size={13} className="text-amber-600" aria-hidden="true" />
                               {formatarDataHoraBahia(log.criado_em)}
                             </span>
 
@@ -2225,8 +2276,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             {log.tipo_acao === 'EXCLUIR_ESTADIA' && (
                               <div className="flex items-center gap-2 mt-1">
                                 {isEstadiaAtivaAgora ? (
-                                  <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-xl flex items-center gap-1">
-                                    <Check size={12} className="text-emerald-600" />
+                                  <span className="text-[11px] font-bold text-emerald-900 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-xl flex items-center gap-1">
+                                    <Check size={12} className="text-emerald-700" aria-hidden="true" />
                                     <span>Ativa em Estadias</span>
                                   </span>
                                 ) : (
@@ -2234,10 +2285,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                     type="button"
                                     onClick={() => handleRecuperarEstadia(log)}
                                     disabled={recuperandoId === log.id}
-                                    className="px-3.5 py-1.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition-all tap-bounce cursor-pointer"
+                                    className="min-h-[38px] px-3.5 py-1.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition-all tap-bounce cursor-pointer"
                                     title="Recuperar esta estadia e fazê-la voltar para a aba de Estadias"
                                   >
-                                    <RotateCcw size={13} className={recuperandoId === log.id ? 'animate-spin' : ''} />
+                                    <RotateCcw size={13} className={recuperandoId === log.id ? 'animate-spin' : ''} aria-hidden="true" />
                                     <span>{recuperandoId === log.id ? 'Recuperando...' : 'Recuperar Estadia'}</span>
                                   </button>
                                 )}
@@ -2253,10 +2304,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                     setAbaPrincipal('pedidos');
                                     if (log.estadia_casa) setBuscaPedidos(log.estadia_casa);
                                   }}
-                                  className="px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 font-bold rounded-xl text-[11px] flex items-center gap-1 transition-colors cursor-pointer"
+                                  className="min-h-[36px] px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 font-bold rounded-xl text-[11px] flex items-center gap-1 transition-colors cursor-pointer"
                                   title="Ver este pedido no painel"
                                 >
-                                  <ShoppingBag size={12} className="text-purple-600" />
+                                  <ShoppingBag size={12} className="text-purple-700" aria-hidden="true" />
                                   <span>Ver Pedidos</span>
                                 </button>
                               </div>
@@ -2270,10 +2321,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                   onClick={() => {
                                     setAbaPrincipal('sugestoes');
                                   }}
-                                  className="px-3 py-1 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-bold rounded-xl text-[11px] flex items-center gap-1 transition-colors cursor-pointer"
+                                  className="min-h-[36px] px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-950 border border-amber-200 font-bold rounded-xl text-[11px] flex items-center gap-1 transition-colors cursor-pointer"
                                   title="Ver itens fora do cardápio"
                                 >
-                                  <Lightbulb size={12} className="text-amber-600" />
+                                  <Lightbulb size={12} className="text-amber-700" aria-hidden="true" />
                                   <span>Ver Sugestões</span>
                                 </button>
                               </div>
@@ -2290,25 +2341,25 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 /* ========================================================= */
                 <div className="space-y-4">
                   {/* Banner Explicativo */}
-                  <div className="bg-gradient-to-r from-amber-50 via-amber-50/60 to-orange-50 border border-amber-200/80 rounded-3xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
+                  <div className="bg-gradient-to-r from-amber-50 via-amber-50/70 to-orange-50 border border-amber-200/80 rounded-3xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
                     <div className="flex items-start gap-3">
                       <div className="w-10 h-10 rounded-2xl bg-amber-500 text-stone-950 flex items-center justify-center shrink-0 shadow-sm font-black">
-                        <Lightbulb size={20} />
+                        <Lightbulb size={20} aria-hidden="true" />
                       </div>
                       <div>
-                        <h3 className="font-extrabold text-stone-900 text-sm sm:text-base flex items-center gap-2">
+                        <h3 className="font-extrabold text-stone-900 text-sm sm:text-base flex items-center gap-2 flex-wrap">
                           <span>Itens Fora do Cardápio</span>
                           {sugestoesPendentesCount > 0 ? (
-                            <span className="text-[10px] bg-amber-500 text-stone-950 px-2 py-0.5 rounded-full font-black animate-pulse">
+                            <span className="text-[11px] bg-amber-500 text-stone-950 px-2 py-0.5 rounded-full font-black animate-pulse tabular-nums">
                               {sugestoesPendentesCount} pendente{sugestoesPendentesCount > 1 ? 's' : ''}
                             </span>
                           ) : (
-                            <span className="text-[10px] bg-stone-200 text-stone-700 px-2 py-0.5 rounded-full font-bold">
+                            <span className="text-[11px] bg-stone-200 text-stone-800 px-2 py-0.5 rounded-full font-bold">
                               Tudo revisado
                             </span>
                           )}
                         </h3>
-                        <p className="text-xs text-stone-600 mt-0.5 max-w-2xl leading-relaxed">
+                        <p className="text-xs text-stone-700 mt-0.5 max-w-2xl leading-relaxed">
                           Sempre que uma cozinheira ou cliente adicionar um produto que não existe no menu oficial, ele aparece aqui automaticamente. Você pode avaliar, escolher a categoria e publicar no cardápio de todas as casas!
                         </p>
                       </div>
@@ -2317,17 +2368,19 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                   {/* Lista de Sugestões */}
                   {loadingPedidosGlobais ? (
-                    <div className="text-center py-16 text-stone-400 flex flex-col items-center gap-2">
-                      <RefreshCw className="animate-spin text-amber-500" size={24} />
-                      <p className="text-xs">Carregando sugestões de itens...</p>
+                    <div className="text-center py-16 text-stone-600 flex flex-col items-center gap-2.5">
+                      <RefreshCw className="animate-spin text-amber-600" size={24} aria-hidden="true" />
+                      <p className="text-xs font-medium">Carregando sugestões de itens...</p>
                     </div>
                   ) : sugestoesFiltradas.length === 0 ? (
-                    <div className="text-center py-16 bg-white rounded-3xl border border-stone-200 p-8 space-y-3">
-                      <div className="w-12 h-12 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mx-auto">
-                        <Lightbulb size={24} />
+                    <div className="text-center py-14 sm:py-16 bg-white rounded-3xl border border-stone-200/90 p-6 sm:p-8 space-y-3 shadow-xs">
+                      <div className="w-14 h-14 bg-amber-50 text-amber-700 border border-amber-200/80 rounded-2xl flex items-center justify-center mx-auto shadow-inner">
+                        <Lightbulb size={24} aria-hidden="true" />
                       </div>
-                      <h4 className="font-bold text-stone-800 text-sm">Nenhum item fora do menu encontrado</h4>
-                      <p className="text-xs text-stone-500 max-w-sm mx-auto">
+                      <h4 className="font-extrabold text-stone-900 text-sm sm:text-base">
+                        Nenhum item fora do menu encontrado
+                      </h4>
+                      <p className="text-xs text-stone-600 max-w-sm mx-auto leading-relaxed">
                         {filtroStatusSugestao === 'pendente'
                           ? 'Excelente! Não há nenhum item customizado pendente de avaliação no momento.'
                           : 'Nenhuma sugestão encontrada com os filtros selecionados.'}
@@ -2344,42 +2397,42 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         return (
                           <div
                             key={sug.id}
-                            className={`bg-white rounded-3xl border transition-all p-5 shadow-xs hover:shadow-md flex flex-col justify-between gap-4 ${
+                            className={`bg-white rounded-3xl border transition-all p-4 sm:p-5 shadow-xs hover:shadow-md flex flex-col justify-between gap-4 ${
                               isPendente
                                 ? 'border-amber-300 ring-2 ring-amber-400/20'
                                 : isAdicionado
                                 ? 'border-emerald-200 bg-emerald-50/20'
-                                : 'border-stone-200 opacity-75'
+                                : 'border-stone-200 opacity-85'
                             }`}
                           >
                             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                               <div className="space-y-1.5 flex-1">
                                 <div className="flex items-center gap-2 flex-wrap">
-                                  <span className="text-xs font-bold text-stone-600 bg-stone-100 px-2.5 py-1 rounded-xl flex items-center gap-1">
+                                  <span className="text-xs font-bold text-stone-700 bg-stone-100 px-2.5 py-1 rounded-xl flex items-center gap-1">
                                     <span>{EMOJI_FORNECEDORES[sug.fornecedor] || '📦'}</span>
                                     <span>{forn?.nome || sug.fornecedor}</span>
                                   </span>
 
                                   {isPendente && (
-                                    <span className="text-[11px] font-black bg-amber-100 text-amber-900 border border-amber-300 px-2.5 py-0.5 rounded-xl flex items-center gap-1.5">
-                                      <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                                    <span className="text-[11px] font-black bg-amber-100 text-amber-950 border border-amber-300 px-2.5 py-0.5 rounded-xl flex items-center gap-1.5">
+                                      <span className="w-2 h-2 rounded-full bg-amber-600 animate-pulse" />
                                       <span>Aguardando Avaliação</span>
                                     </span>
                                   )}
                                   {isAdicionado && (
-                                    <span className="text-[11px] font-black bg-emerald-100 text-emerald-900 border border-emerald-300 px-2.5 py-0.5 rounded-xl flex items-center gap-1">
-                                      <CheckCircle2 size={13} className="text-emerald-600" />
+                                    <span className="text-[11px] font-black bg-emerald-100 text-emerald-950 border border-emerald-300 px-2.5 py-0.5 rounded-xl flex items-center gap-1">
+                                      <CheckCircle2 size={13} className="text-emerald-700" aria-hidden="true" />
                                       <span>Publicado no Cardápio Oficial</span>
                                     </span>
                                   )}
                                   {isDescartado && (
-                                    <span className="text-[11px] font-bold bg-stone-100 text-stone-600 border border-stone-200 px-2.5 py-0.5 rounded-xl">
+                                    <span className="text-[11px] font-bold bg-stone-100 text-stone-700 border border-stone-300 px-2.5 py-0.5 rounded-xl">
                                       Descartado
                                     </span>
                                   )}
 
-                                  <span className="text-[11px] font-bold text-stone-600 bg-stone-50 px-2 py-0.5 rounded-lg border border-stone-200">
-                                    Unidade pedida: <strong>{sug.unidade}</strong>
+                                  <span className="text-[11px] font-bold text-stone-700 bg-stone-50 px-2 py-0.5 rounded-lg border border-stone-200">
+                                    Unidade pedida: <strong className="text-stone-900">{sug.unidade}</strong>
                                   </span>
                                 </div>
 
@@ -2390,7 +2443,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                 {/* Observações feitas pela cozinheira */}
                                 {sug.observacoes.length > 0 && (
                                   <div className="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-2.5 text-xs text-amber-950 flex items-start gap-2 mt-2">
-                                    <ChefHat size={14} className="text-amber-600 shrink-0 mt-0.5" />
+                                    <ChefHat size={14} className="text-amber-700 shrink-0 mt-0.5" aria-hidden="true" />
                                     <div>
                                       <strong className="font-bold">Observação da cozinheira:</strong>
                                       <div className="italic text-stone-700 mt-0.5 space-y-0.5">
@@ -2410,19 +2463,19 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                     <button
                                       type="button"
                                       onClick={() => handleAbrirAdicionarAoCardapio(sug)}
-                                      className="px-3.5 py-2 bg-amber-500 hover:bg-amber-400 text-stone-950 font-black rounded-xl text-xs flex items-center gap-1.5 shadow-xs transition-all cursor-pointer tap-bounce"
+                                      className="min-h-[40px] px-3.5 py-2 bg-amber-500 hover:bg-amber-400 text-stone-950 font-black rounded-xl text-xs flex items-center gap-1.5 shadow-xs transition-all cursor-pointer tap-bounce"
                                     >
-                                      <Plus size={15} />
+                                      <Plus size={15} aria-hidden="true" />
                                       <span>Adicionar ao Cardápio</span>
                                     </button>
 
                                     <button
                                       type="button"
                                       onClick={() => handleAlterarStatusSugestao(sug.nome, 'descartado')}
-                                      className="px-3 py-2 bg-stone-100 hover:bg-stone-200 text-stone-600 font-bold rounded-xl text-xs flex items-center gap-1 transition-colors cursor-pointer"
+                                      className="min-h-[40px] px-3 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl text-xs flex items-center gap-1 transition-colors cursor-pointer"
                                       title="Descartar esta sugestão"
                                     >
-                                      <X size={14} />
+                                      <X size={14} aria-hidden="true" />
                                       <span>Descartar</span>
                                     </button>
                                   </>
@@ -2430,14 +2483,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                                 {isAdicionado && (
                                   <div className="flex items-center gap-2">
-                                    <span className="text-xs font-bold text-emerald-700 bg-emerald-100/70 px-3 py-1.5 rounded-xl border border-emerald-200 flex items-center gap-1">
-                                      <Check size={14} />
+                                    <span className="min-h-[38px] text-xs font-bold text-emerald-800 bg-emerald-100/80 px-3 py-1.5 rounded-xl border border-emerald-200 flex items-center gap-1">
+                                      <Check size={14} aria-hidden="true" />
                                       <span>Já no Cardápio</span>
                                     </span>
                                     <button
                                       type="button"
                                       onClick={() => handleAlterarStatusSugestao(sug.nome, 'pendente')}
-                                      className="px-2.5 py-1.5 text-stone-500 hover:text-stone-800 text-xs font-bold rounded-xl hover:bg-stone-100 transition-colors cursor-pointer"
+                                      className="min-h-[38px] px-3 py-1.5 text-stone-700 hover:text-stone-950 text-xs font-bold rounded-xl hover:bg-stone-100 transition-colors cursor-pointer"
                                       title="Reabrir como pendente"
                                     >
                                       Reabrir
@@ -2450,17 +2503,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                     <button
                                       type="button"
                                       onClick={() => handleAlterarStatusSugestao(sug.nome, 'pendente')}
-                                      className="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl text-xs flex items-center gap-1 transition-colors cursor-pointer"
+                                      className="min-h-[38px] px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-xl text-xs flex items-center gap-1 transition-colors cursor-pointer"
                                     >
-                                      <RotateCcw size={13} />
+                                      <RotateCcw size={13} aria-hidden="true" />
                                       <span>Reativar</span>
                                     </button>
                                     <button
                                       type="button"
                                       onClick={() => handleAbrirAdicionarAoCardapio(sug)}
-                                      className="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold rounded-xl text-xs flex items-center gap-1 transition-colors cursor-pointer"
+                                      className="min-h-[38px] px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold rounded-xl text-xs flex items-center gap-1 transition-colors cursor-pointer"
                                     >
-                                      <Plus size={14} />
+                                      <Plus size={14} aria-hidden="true" />
                                       <span>Adicionar ao Menu</span>
                                     </button>
                                   </div>
@@ -2469,9 +2522,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             </div>
 
                             {/* Rodapé do Card: Histórico de quem pediu */}
-                            <div className="border-t border-stone-100 pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-stone-500">
+                            <div className="border-t border-stone-100 pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-stone-600 tabular-nums">
                               <div className="flex items-center gap-2 flex-wrap">
-                                <span className="font-bold text-stone-700">
+                                <span className="font-bold text-stone-800">
                                   Solicitado em {sug.total_pedidos} {sug.total_pedidos === 1 ? 'pedido' : 'pedidos'} ({sug.total_quantidade} {sug.unidade} total):
                                 </span>
                                 <div className="flex items-center gap-1.5 flex-wrap">
@@ -2488,14 +2541,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                           });
                                         }
                                       }}
-                                      className="bg-stone-100 hover:bg-amber-100 hover:text-amber-900 border border-stone-200 text-stone-700 px-2 py-0.5 rounded-lg text-[11px] font-semibold transition-colors cursor-pointer flex items-center gap-1"
+                                      className="bg-stone-100 hover:bg-amber-100 hover:text-amber-950 border border-stone-200 text-stone-800 px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-colors cursor-pointer flex items-center gap-1"
                                       title="Clique para ver os detalhes deste pedido"
                                     >
-                                      <ShoppingBag size={11} className="text-amber-600" />
+                                      <ShoppingBag size={11} className="text-amber-700" aria-hidden="true" />
                                       <span>
                                         Pedido #{ped.pedido_numero} ({ped.estadia_casa} - {ped.cozinheira})
                                       </span>
-                                      <span className="font-bold text-stone-900">
+                                      <span className="font-bold text-stone-950">
                                         &bull; {ped.quantidade} {sug.unidade}
                                       </span>
                                     </button>
@@ -2503,7 +2556,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                 </div>
                               </div>
 
-                              <div className="text-[11px] text-stone-400 shrink-0">
+                              <div className="text-[11px] text-stone-600 shrink-0 font-medium">
                                 Última vez: {formatarDataHoraBahia(sug.ultima_vez_pedido)}
                               </div>
                             </div>
@@ -2522,18 +2575,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       {/* MODAL DE PEDIDOS DE UMA ESTADIA ESPECÍFICA                */}
       {/* ========================================================= */}
       {estadiaModalPedidos && (
-        <div className="fixed inset-0 z-70 bg-stone-950/70 backdrop-blur-xs flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-70 bg-stone-950/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
           <div className="bg-white w-full max-w-2xl rounded-3xl shadow-2xl border border-stone-200 flex flex-col max-h-[85vh] overflow-hidden animate-in zoom-in-95 duration-200">
-            <div className="p-4 sm:p-5 bg-stone-950 text-white flex items-center justify-between border-b border-stone-800">
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">
-                  <ShoppingBag size={18} />
+            <div className="p-4 sm:p-5 bg-stone-950 text-white flex items-center justify-between gap-3 border-b border-stone-800">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold shrink-0">
+                  <ShoppingBag size={18} aria-hidden="true" />
                 </div>
-                <div>
-                  <h3 className="font-extrabold text-base leading-tight">
+                <div className="min-w-0">
+                  <h3 className="font-extrabold text-base leading-tight truncate">
                     Pedidos da {estadiaModalPedidos.casa}
                   </h3>
-                  <p className="text-xs text-stone-400">
+                  <p className="text-xs text-stone-300">
                     Histórico de compras enviadas pela cozinheira
                   </p>
                 </div>
@@ -2542,23 +2595,26 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               <button
                 type="button"
                 onClick={() => setEstadiaModalPedidos(null)}
-                className="w-8 h-8 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-400 hover:text-white flex items-center justify-center transition-colors"
+                aria-label="Fechar modal de pedidos"
+                className="w-10 h-10 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white flex items-center justify-center transition-colors shrink-0 cursor-pointer"
               >
-                <X size={18} />
+                <X size={18} aria-hidden="true" />
               </button>
             </div>
 
             <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3">
               {loadingPedidosDaEstadia ? (
-                <div className="text-center py-12 text-stone-400 flex flex-col items-center gap-2">
-                  <RefreshCw className="animate-spin text-amber-500" size={24} />
-                  <p className="text-xs">Carregando pedidos da estadia...</p>
+                <div className="text-center py-12 text-stone-600 flex flex-col items-center gap-2">
+                  <RefreshCw className="animate-spin text-amber-600" size={24} aria-hidden="true" />
+                  <p className="text-xs font-medium">Carregando pedidos da estadia...</p>
                 </div>
               ) : pedidosDaEstadia.length === 0 ? (
-                <div className="text-center py-12 text-stone-500 space-y-2">
-                  <ShoppingBag size={28} className="mx-auto text-stone-300" />
-                  <p className="font-bold text-sm">Nenhum pedido finalizado ainda.</p>
-                  <p className="text-xs text-stone-400">
+                <div className="text-center py-12 text-stone-600 space-y-2.5">
+                  <div className="w-12 h-12 rounded-2xl bg-stone-100 text-stone-500 flex items-center justify-center mx-auto border border-stone-200">
+                    <ShoppingBag size={24} aria-hidden="true" />
+                  </div>
+                  <p className="font-bold text-sm text-stone-900">Nenhum pedido finalizado ainda.</p>
+                  <p className="text-xs text-stone-600 max-w-xs mx-auto">
                     Os pedidos enviados pela cozinheira através do link aparecerão listados aqui.
                   </p>
                 </div>
@@ -2574,28 +2630,28 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center font-black text-sm border border-amber-200 shrink-0">
+                          <div className="w-10 h-10 rounded-2xl bg-amber-100 text-amber-900 flex items-center justify-center font-black text-sm border border-amber-200 shrink-0 tabular-nums">
                             #{ped.numero}
                           </div>
                           <div>
                             <div className="flex items-center gap-2 flex-wrap">
-                              <span className="font-bold text-stone-900 text-sm">
+                              <span className="font-bold text-stone-900 text-sm tabular-nums">
                                 Pedido #{ped.numero}
                               </span>
-                              <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                              <span className="text-[11px] font-bold text-emerald-900 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 tabular-nums">
                                 {totalItens} {totalItens === 1 ? 'item' : 'itens'}
                               </span>
                               <span
-                                className={`text-[10px] font-black px-2 py-0.5 rounded-full border ${
+                                className={`text-[11px] font-black px-2 py-0.5 rounded-full border ${
                                   statusPed === 'em_aprovacao'
-                                    ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                    ? 'bg-amber-100 text-amber-950 border-amber-300'
                                     : statusPed === 'enviar_fornecedores'
-                                    ? 'bg-sky-100 text-sky-900 border-sky-300'
+                                    ? 'bg-sky-100 text-sky-950 border-sky-300'
                                     : statusPed === 'preparacao_entrega'
-                                    ? 'bg-purple-100 text-purple-900 border-purple-300'
+                                    ? 'bg-purple-100 text-purple-950 border-purple-300'
                                     : statusPed === 'finalizado'
-                                    ? 'bg-emerald-100 text-emerald-900 border-emerald-300'
-                                    : 'bg-red-100 text-red-900 border-red-300'
+                                    ? 'bg-emerald-100 text-emerald-950 border-emerald-300'
+                                    : 'bg-red-100 text-red-950 border-red-300'
                                 }`}
                               >
                                 {statusPed === 'em_aprovacao'
@@ -2609,25 +2665,25 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                   : '❌ Rejeitado'}
                               </span>
                             </div>
-                            <div className="text-xs text-stone-500 flex items-center gap-2 mt-0.5">
-                              <span className="text-stone-700 font-medium">
+                            <div className="text-xs text-stone-600 flex items-center gap-2 mt-0.5 tabular-nums flex-wrap">
+                              <span className="text-stone-800 font-medium">
                                 Cozinheira: {ped.cozinheira}
                               </span>
-                              <span>•</span>
+                              <span aria-hidden="true">•</span>
                               <span>{formatarDataHoraBahia(ped.finalizado_em)}</span>
                             </div>
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-1.5 self-end sm:self-center shrink-0">
+                        <div className="flex flex-wrap items-center gap-1.5 self-end sm:self-center shrink-0">
                           {statusPed === 'em_aprovacao' && (
                             <button
                               type="button"
                               onClick={() => handleAlterarStatusPedidoRapido(ped.id, 'enviar_fornecedores')}
-                              className="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-xs transition-colors cursor-pointer"
+                              className="min-h-[38px] px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-xs transition-colors cursor-pointer"
                               title="Aprovar pedido"
                             >
-                              <CheckCircle2 size={12} />
+                              <CheckCircle2 size={13} aria-hidden="true" />
                               <span>Aprovar</span>
                             </button>
                           )}
@@ -2636,10 +2692,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             <button
                               type="button"
                               onClick={() => handleAlterarStatusPedidoRapido(ped.id, 'preparacao_entrega')}
-                              className="px-2.5 py-1.5 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-xs transition-colors cursor-pointer"
+                              className="min-h-[38px] px-3 py-1.5 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-xs transition-colors cursor-pointer"
                               title="Marcar como enviado ao fornecedor"
                             >
-                              <Send size={12} />
+                              <Send size={13} aria-hidden="true" />
                               <span>Enviado</span>
                             </button>
                           )}
@@ -2647,21 +2703,22 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                           <button
                             type="button"
                             onClick={() => baixarPlanilhaPedido(ped, estadiaModalPedidos)}
-                            className="p-2 bg-white hover:bg-emerald-50 text-stone-600 hover:text-emerald-800 rounded-xl border border-stone-200 transition-colors cursor-pointer"
+                            aria-label={`Baixar planilha Excel do pedido #${ped.numero}`}
+                            className="min-w-[38px] min-h-[38px] p-2 bg-white hover:bg-emerald-50 text-stone-700 hover:text-emerald-900 rounded-xl border border-stone-200 flex items-center justify-center transition-colors cursor-pointer"
                             title="Baixar planilha (.xlsx)"
                           >
-                            <FileSpreadsheet size={15} />
+                            <FileSpreadsheet size={15} aria-hidden="true" />
                           </button>
 
                           <button
                             type="button"
                             onClick={() => setPedidoDetalhe({ pedido: ped, estadia: estadiaModalPedidos })}
-                            className="px-3.5 py-1.5 bg-stone-900 hover:bg-stone-800 active:scale-95 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer tap-bounce"
+                            className="min-h-[38px] px-3.5 py-1.5 bg-stone-900 hover:bg-stone-800 active:scale-95 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer tap-bounce"
                             title="Ver pedido de compras completo"
                           >
-                            <Eye size={13} />
+                            <Eye size={13} aria-hidden="true" />
                             <span>Ver Pedido</span>
-                            <ChevronRight size={13} />
+                            <ChevronRight size={13} aria-hidden="true" />
                           </button>
                         </div>
                       </div>
@@ -2669,8 +2726,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       {/* Prévia dos itens do pedido visíveis no card */}
                       {Array.isArray(ped.itens) && ped.itens.length > 0 && (
                         <div className="bg-white rounded-xl p-2.5 border border-stone-200/90 text-xs">
-                          <div className="text-[10px] font-extrabold text-stone-500 uppercase tracking-wider mb-1 flex items-center gap-1">
-                            <ShoppingBag size={11} className="text-amber-600" />
+                          <div className="text-[11px] font-extrabold text-stone-600 uppercase tracking-wider mb-1.5 flex items-center gap-1 tabular-nums">
+                            <ShoppingBag size={11} className="text-amber-700" aria-hidden="true" />
                             <span>Itens do Pedido de Compras ({ped.itens.length}):</span>
                           </div>
                           <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto">
@@ -2679,12 +2736,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                 key={idx}
                                 className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-stone-100 text-stone-800 text-[11px] font-medium border border-stone-200 shadow-2xs"
                               >
-                                <strong className="text-stone-900 font-bold">{it.quantidade} {it.unidade}</strong>
+                                <strong className="text-stone-950 font-bold tabular-nums">{it.quantidade} {it.unidade}</strong>
                                 <span>{it.item || it.nome}</span>
                               </span>
                             ))}
                             {ped.itens.length > 8 && (
-                              <span className="text-[11px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-lg border border-amber-200">
+                              <span className="text-[11px] font-bold text-amber-900 bg-amber-50 px-2 py-0.5 rounded-lg border border-amber-200 tabular-nums">
                                 +{ped.itens.length - 8} outros itens...
                               </span>
                             )}
@@ -2783,14 +2840,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       {/* MODAL CRIAR / EDITAR ESTADIA                              */}
       {/* ========================================================= */}
       {modalForm.aberto && (
-        <div className="fixed inset-0 z-70 bg-stone-950/70 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-stone-200 p-6 space-y-5 animate-in fade-in zoom-in-95">
-            <div className="flex items-center justify-between border-b border-stone-100 pb-3">
+        <div className="fixed inset-0 z-70 bg-stone-950/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-stone-200 p-5 sm:p-6 space-y-5 animate-in fade-in zoom-in-95 my-auto">
+            <div className="flex items-center justify-between gap-3 border-b border-stone-100 pb-3.5">
               <div>
                 <h3 className="font-extrabold text-stone-900 text-base">
                   {modalForm.modo === 'criar' ? 'Nova Estadia' : 'Editar Estadia'}
                 </h3>
-                <p className="text-xs text-stone-500">
+                <p className="text-xs text-stone-600 mt-0.5">
                   {modalForm.modo === 'criar'
                     ? 'Preencha os dados da estadia para gerar o link do cardápio.'
                     : 'Atualize os dados cadastrais da estadia.'}
@@ -2799,22 +2856,26 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               <button
                 type="button"
                 onClick={() => setModalForm({ aberto: false, modo: 'criar' })}
-                className="w-8 h-8 rounded-full bg-stone-100 text-stone-500 hover:bg-stone-200 flex items-center justify-center"
+                aria-label="Fechar modal de estadia"
+                className="w-10 h-10 rounded-full bg-stone-100 text-stone-600 hover:bg-stone-200 hover:text-stone-900 flex items-center justify-center transition-colors shrink-0 cursor-pointer"
               >
-                <X size={16} />
+                <X size={17} aria-hidden="true" />
               </button>
             </div>
 
             {formError && (
-              <div className="p-3 bg-red-50 border border-red-200 rounded-2xl text-xs text-red-700 flex items-center gap-2">
-                <AlertTriangle size={15} className="shrink-0 text-red-600" />
+              <div
+                role="alert"
+                className="p-3 bg-red-50 border border-red-200 rounded-2xl text-xs text-red-800 font-medium flex items-center gap-2"
+              >
+                <AlertTriangle size={15} className="shrink-0 text-red-600" aria-hidden="true" />
                 <span>{formError}</span>
               </div>
             )}
 
             <form onSubmit={handleSalvarForm} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-bold text-stone-700 mb-1">
+                <label className="block text-xs font-bold text-stone-800 mb-1">
                   Nome da Casa *
                 </label>
                 <input
@@ -2823,13 +2884,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   value={formCasa}
                   onChange={(e) => setFormCasa(e.target.value)}
                   placeholder="Ex: Villa Trancoso, Casa das Falésias..."
-                  className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:outline-hidden text-sm"
+                  className="w-full min-h-[42px] px-3.5 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none text-sm text-stone-900 placeholder:text-stone-500"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                  <label className="block text-xs font-bold text-stone-800 mb-1">
                     Data de Entrada *
                   </label>
                   <input
@@ -2837,11 +2898,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     required
                     value={formEntrada}
                     onChange={(e) => setFormEntrada(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:outline-hidden text-sm"
+                    className="w-full min-h-[42px] px-3 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none text-sm text-stone-900 tabular-nums"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                  <label className="block text-xs font-bold text-stone-800 mb-1">
                     Data de Saída *
                   </label>
                   <input
@@ -2849,14 +2910,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     required
                     value={formSaida}
                     onChange={(e) => setFormSaida(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:outline-hidden text-sm"
+                    className="w-full min-h-[42px] px-3 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none text-sm text-stone-900 tabular-nums"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                  <label className="block text-xs font-bold text-stone-800 mb-1">
                     Nº de Hóspedes *
                   </label>
                   <input
@@ -2866,18 +2927,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     max={100}
                     value={formHospedes}
                     onChange={(e) => setFormHospedes(Number(e.target.value))}
-                    className="w-full px-3 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:outline-hidden text-sm"
+                    className="w-full min-h-[42px] px-3 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none text-sm text-stone-900 tabular-nums"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                  <label className="block text-xs font-bold text-stone-800 mb-1">
                     Responsável (Equipe) *
                   </label>
                   <select
                     required
                     value={formFuncionario}
                     onChange={(e) => setFormFuncionario(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-amber-500 focus:outline-hidden text-sm bg-white font-medium text-stone-900 cursor-pointer shadow-2xs"
+                    className="w-full min-h-[42px] px-3.5 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none text-sm bg-white font-medium text-stone-900 cursor-pointer shadow-2xs"
                   >
                     <option value="" disabled>Selecione o responsável...</option>
                     {USUARIOS_EQUIPE.map((user) => (
@@ -2893,7 +2954,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-stone-700 mb-1">
+                <label className="block text-xs font-bold text-stone-800 mb-1">
                   Titular da Hospedagem *
                 </label>
                 <input
@@ -2902,7 +2963,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   value={formTitular}
                   onChange={(e) => setFormTitular(e.target.value)}
                   placeholder="Nome completo do hóspede titular"
-                  className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:outline-hidden text-sm"
+                  className="w-full min-h-[42px] px-3.5 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none text-sm text-stone-900 placeholder:text-stone-500"
                 />
               </div>
 
@@ -2910,18 +2971,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 <button
                   type="button"
                   onClick={() => setModalForm({ aberto: false, modo: 'criar' })}
-                  className="px-4 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl text-xs transition-colors cursor-pointer"
+                  className="min-h-[40px] px-4 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-xl text-xs transition-colors cursor-pointer"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
                   disabled={formSalvando}
-                  className="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold rounded-xl text-xs shadow-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                  className="min-h-[40px] px-5 py-2 bg-amber-500 hover:bg-amber-400 text-stone-950 font-black rounded-xl text-xs shadow-xs transition-all flex items-center gap-1.5 cursor-pointer tap-bounce"
                 >
                   {formSalvando ? (
                     <>
-                      <RefreshCw className="animate-spin" size={14} />
+                      <RefreshCw className="animate-spin" size={14} aria-hidden="true" />
                       <span>Salvando...</span>
                     </>
                   ) : (
@@ -2939,16 +3000,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       {/* ========================================================= */}
       {estadiaFinalizar && (
         <div className="fixed inset-0 z-70 bg-stone-950/70 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-stone-200 p-6 space-y-4">
-            <div className="w-12 h-12 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center mx-auto">
-              <CheckCircle2 size={24} />
+          <div className="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-stone-200 p-6 space-y-4 animate-modal-in">
+            <div className="w-12 h-12 bg-amber-100 text-amber-800 rounded-2xl flex items-center justify-center mx-auto border border-amber-200">
+              <CheckCircle2 size={24} aria-hidden="true" />
             </div>
 
-            <div className="text-center space-y-1">
+            <div className="text-center space-y-1.5">
               <h3 className="font-extrabold text-stone-900 text-base">
                 Finalizar Estadia &quot;{estadiaFinalizar.casa}&quot;?
               </h3>
-              <p className="text-xs text-stone-500 leading-relaxed">
+              <p className="text-xs text-stone-600 leading-relaxed">
                 Ao finalizar esta estadia, o link deixará de aceitar novos pedidos pela cozinheira. Os pedidos já realizados permanecerão gravados para consulta.
               </p>
             </div>
@@ -2957,7 +3018,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               <button
                 type="button"
                 onClick={() => setEstadiaFinalizar(null)}
-                className="px-4 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl text-xs cursor-pointer"
+                className="min-h-[40px] px-4 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-xl text-xs cursor-pointer transition-colors"
               >
                 Cancelar
               </button>
@@ -2965,11 +3026,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 type="button"
                 disabled={finalizando}
                 onClick={handleConfirmarFinalizar}
-                className="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold rounded-xl text-xs shadow-xs flex items-center gap-1.5 cursor-pointer"
+                className="min-h-[40px] px-5 py-2 bg-amber-500 hover:bg-amber-400 text-stone-950 font-black rounded-xl text-xs shadow-xs flex items-center gap-1.5 cursor-pointer tap-bounce"
               >
                 {finalizando ? (
                   <>
-                    <RefreshCw className="animate-spin" size={14} />
+                    <RefreshCw className="animate-spin" size={14} aria-hidden="true" />
                     <span>Finalizando...</span>
                   </>
                 ) : (
@@ -2985,18 +3046,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       {/* MODAL ADICIONAR ITEM AO CARDÁPIO OFICIAL                   */}
       {/* ========================================================= */}
       {modalNovoItem.aberto && (
-        <div className="fixed inset-0 z-80 bg-stone-950/75 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-stone-200 overflow-hidden animate-in zoom-in-95 duration-200">
-            <div className="p-4 sm:p-5 bg-stone-950 text-white flex items-center justify-between border-b border-stone-800">
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">
-                  <Lightbulb size={18} />
+        <div className="fixed inset-0 z-80 bg-stone-950/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-stone-200 overflow-hidden animate-in zoom-in-95 duration-200 my-auto">
+            <div className="p-4 sm:p-5 bg-stone-950 text-white flex items-center justify-between gap-3 border-b border-stone-800">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold shrink-0">
+                  <Lightbulb size={18} aria-hidden="true" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <h3 className="font-extrabold text-base leading-tight">
                     Adicionar Produto ao Cardápio Oficial
                   </h3>
-                  <p className="text-xs text-stone-400">
+                  <p className="text-xs text-stone-300">
                     Disponibilize este produto oficialmente para todas as casas
                   </p>
                 </div>
@@ -3004,22 +3065,26 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               <button
                 type="button"
                 onClick={() => setModalNovoItem({ aberto: false })}
-                className="w-8 h-8 rounded-full bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-300 transition-colors cursor-pointer"
+                aria-label="Fechar modal de novo produto"
+                className="w-10 h-10 rounded-full bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-stone-300 hover:text-white transition-colors shrink-0 cursor-pointer"
               >
-                <X size={16} />
+                <X size={17} aria-hidden="true" />
               </button>
             </div>
 
             <form onSubmit={handleSalvarNovoItemCardapio} className="p-5 sm:p-6 space-y-4">
               {formNovoErro && (
-                <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-800 text-xs flex items-center gap-2">
-                  <AlertTriangle size={15} className="shrink-0" />
+                <div
+                  role="alert"
+                  className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-800 text-xs font-medium flex items-center gap-2"
+                >
+                  <AlertTriangle size={15} className="shrink-0" aria-hidden="true" />
                   <span>{formNovoErro}</span>
                 </div>
               )}
 
               <div>
-                <label className="block text-xs font-bold text-stone-700 mb-1">
+                <label className="block text-xs font-bold text-stone-800 mb-1">
                   Nome do Produto no Cardápio *
                 </label>
                 <input
@@ -3028,13 +3093,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   value={formNovoNome}
                   onChange={(e) => setFormNovoNome(e.target.value)}
                   placeholder="Ex: Polvo em Postas, Queijo Parmesão..."
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-amber-500 focus:outline-hidden text-sm font-semibold"
+                  className="w-full min-h-[42px] px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none text-sm font-semibold text-stone-900 placeholder:text-stone-500"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                  <label className="block text-xs font-bold text-stone-800 mb-1">
                     Fornecedor *
                   </label>
                   <select
@@ -3045,7 +3110,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       const subcats = SUBCATEGORIAS_POR_FORNECEDOR[novoForn] || ['Outros'];
                       setFormNovoSubcategoria(subcats[0]);
                     }}
-                    className="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:border-amber-500 focus:outline-hidden text-xs font-bold bg-white cursor-pointer"
+                    className="w-full min-h-[42px] px-3 py-2.5 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none text-xs font-bold bg-white cursor-pointer"
                   >
                     {Object.values(FORNECEDORES).map((f) => (
                       <option key={f.id} value={f.id}>
@@ -3056,13 +3121,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                  <label className="block text-xs font-bold text-stone-800 mb-1">
                     Subcategoria *
                   </label>
                   <select
                     value={formNovoSubcategoria}
                     onChange={(e) => setFormNovoSubcategoria(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:border-amber-500 focus:outline-hidden text-xs font-bold bg-white cursor-pointer"
+                    className="w-full min-h-[42px] px-3 py-2.5 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none text-xs font-bold bg-white cursor-pointer"
                   >
                     {(SUBCATEGORIAS_POR_FORNECEDOR[formNovoFornecedor] || ['Outros']).map((sub) => (
                       <option key={sub} value={sub}>
@@ -3075,7 +3140,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
               {formNovoSubcategoria === 'Outros' && (
                 <div>
-                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                  <label className="block text-xs font-bold text-stone-800 mb-1">
                     Nome da Subcategoria Personalizada *
                   </label>
                   <input
@@ -3084,20 +3149,20 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     value={formNovoSubcategoriaCustom}
                     onChange={(e) => setFormNovoSubcategoriaCustom(e.target.value)}
                     placeholder="Ex: Especiais da Bahia..."
-                    className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:outline-hidden text-xs"
+                    className="w-full min-h-[40px] px-3.5 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none text-xs text-stone-900 placeholder:text-stone-500"
                   />
                 </div>
               )}
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                  <label className="block text-xs font-bold text-stone-800 mb-1">
                     Unidade de Medida *
                   </label>
                   <select
                     value={formNovoUnidade}
                     onChange={(e) => setFormNovoUnidade(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:border-amber-500 focus:outline-hidden text-xs font-bold bg-white cursor-pointer"
+                    className="w-full min-h-[42px] px-3 py-2.5 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none text-xs font-bold bg-white cursor-pointer"
                   >
                     <option value="kg">kg (Quilograma)</option>
                     <option value="g">g (Grama)</option>
@@ -3114,7 +3179,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                  <label className="block text-xs font-bold text-stone-800 mb-1">
                     Qtd Sugerida / Pessoa / Dia
                   </label>
                   <input
@@ -3124,13 +3189,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     value={formNovoQtdPessoaDia}
                     onChange={(e) => setFormNovoQtdPessoaDia(Number(e.target.value))}
                     placeholder="0 = sem sugestão"
-                    className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:outline-hidden text-xs"
+                    className="w-full min-h-[42px] px-3.5 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none text-xs tabular-nums"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-stone-700 mb-1">
+                <label className="block text-xs font-bold text-stone-800 mb-1">
                   Descrição Breve (opcional)
                 </label>
                 <textarea
@@ -3138,31 +3203,31 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   value={formNovoDescricao}
                   onChange={(e) => setFormNovoDescricao(e.target.value)}
                   placeholder="Ex: Produto fresco, selecionar peças inteiras..."
-                  className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:outline-hidden text-xs resize-none"
+                  className="w-full px-3.5 py-2 rounded-xl border border-stone-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:outline-none text-xs resize-none text-stone-900 placeholder:text-stone-500"
                 />
               </div>
 
-              <div className="pt-2 flex items-center justify-end gap-2 border-t border-stone-100">
+              <div className="pt-2 flex flex-wrap items-center justify-end gap-2 border-t border-stone-100">
                 <button
                   type="button"
                   onClick={() => setModalNovoItem({ aberto: false })}
-                  className="px-4 py-2.5 rounded-xl text-stone-600 hover:text-stone-900 hover:bg-stone-100 font-bold text-xs transition-colors cursor-pointer"
+                  className="min-h-[42px] px-4 py-2.5 rounded-xl text-stone-700 hover:text-stone-950 hover:bg-stone-100 font-bold text-xs transition-colors cursor-pointer"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
                   disabled={formNovoSalvando}
-                  className="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-black rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition-all cursor-pointer disabled:opacity-50 tap-bounce"
+                  className="min-h-[42px] px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-black rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition-all cursor-pointer disabled:opacity-50 tap-bounce"
                 >
                   {formNovoSalvando ? (
                     <>
-                      <RefreshCw size={14} className="animate-spin" />
+                      <RefreshCw size={14} className="animate-spin" aria-hidden="true" />
                       <span>Salvando...</span>
                     </>
                   ) : (
                     <>
-                      <Check size={14} />
+                      <Check size={14} aria-hidden="true" />
                       <span>Confirmar e Publicar no Cardápio</span>
                     </>
                   )}
@@ -3178,25 +3243,25 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       {/* ========================================================= */}
       {estadiaExcluir && (
         <div className="fixed inset-0 z-70 bg-stone-950/70 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-stone-200 p-6 space-y-4">
-            <div className="w-12 h-12 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center mx-auto">
-              <Trash2 size={24} />
+          <div className="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-stone-200 p-6 space-y-4 animate-modal-in">
+            <div className="w-12 h-12 bg-red-100 text-red-700 rounded-2xl flex items-center justify-center mx-auto border border-red-200">
+              <Trash2 size={24} aria-hidden="true" />
             </div>
 
-            <div className="text-center space-y-1">
+            <div className="text-center space-y-1.5">
               <h3 className="font-extrabold text-red-950 text-base">
                 Excluir Definitivamente?
               </h3>
-              <p className="text-xs text-stone-500 leading-relaxed">
+              <p className="text-xs text-stone-600 leading-relaxed">
                 Esta ação é irreversível. A estadia e <strong>todos os seus pedidos</strong> serão apagados do banco de dados.
               </p>
             </div>
 
-            <div className="bg-red-50/70 border border-red-200 rounded-2xl p-3 text-xs text-red-900 space-y-2">
+            <div className="bg-red-50/70 border border-red-200 rounded-2xl p-3 text-xs text-red-950 space-y-2">
               <p className="font-semibold text-center">
                 Para confirmar, digite exatamente o nome da casa:
               </p>
-              <p className="text-center font-bold font-mono text-stone-900 bg-white py-1 rounded-lg border border-red-200">
+              <p className="text-center font-bold font-mono text-stone-900 bg-white py-1.5 px-2 rounded-lg border border-red-200 select-all">
                 {estadiaExcluir.casa}
               </p>
               <input
@@ -3204,7 +3269,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 value={nomeConfirmacaoExclusao}
                 onChange={(e) => setNomeConfirmacaoExclusao(e.target.value)}
                 placeholder="Digite o nome da casa aqui..."
-                className="w-full px-3 py-2 bg-white text-stone-900 text-xs rounded-xl border border-red-300 focus:outline-hidden focus:border-red-500 text-center font-semibold"
+                aria-label="Digite o nome da casa para confirmar exclusão"
+                className="w-full min-h-[40px] px-3 py-2 bg-white text-stone-900 placeholder:text-stone-500 text-xs rounded-xl border border-red-300 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 text-center font-semibold"
               />
             </div>
 
@@ -3215,7 +3281,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   setEstadiaExcluir(null);
                   setNomeConfirmacaoExclusao('');
                 }}
-                className="px-4 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl text-xs cursor-pointer"
+                className="min-h-[40px] px-4 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-xl text-xs cursor-pointer transition-colors"
               >
                 Cancelar
               </button>
@@ -3226,11 +3292,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   nomeConfirmacaoExclusao.trim().toLowerCase() !== estadiaExcluir.casa.trim().toLowerCase()
                 }
                 onClick={handleConfirmarExcluir}
-                className="px-5 py-2 bg-red-600 hover:bg-red-500 disabled:bg-stone-200 disabled:text-stone-400 text-white font-bold rounded-xl text-xs shadow-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="min-h-[40px] px-5 py-2 bg-red-600 hover:bg-red-500 disabled:bg-stone-200 disabled:text-stone-500 text-white font-bold rounded-xl text-xs shadow-xs flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 {excluindo ? (
                   <>
-                    <RefreshCw className="animate-spin" size={14} />
+                    <RefreshCw className="animate-spin" size={14} aria-hidden="true" />
                     <span>Excluindo...</span>
                   </>
                 ) : (

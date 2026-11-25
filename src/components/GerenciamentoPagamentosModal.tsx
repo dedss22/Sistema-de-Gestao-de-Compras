@@ -654,67 +654,69 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
         {/* ========================================================= */}
         <div className="bg-stone-900 text-white p-4 sm:p-6 shrink-0 border-b border-stone-800">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 min-w-0">
               <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg text-stone-950 shrink-0">
-                <CreditCard size={24} />
+                <CreditCard size={24} aria-hidden="true" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white">
+                  <h2 className="text-lg sm:text-2xl font-black tracking-tight text-white">
                     Gerenciamento de Pagamentos
                   </h2>
                   <span className="bg-amber-400/20 text-amber-300 border border-amber-400/30 text-[11px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">
                     Financeiro da Estadia
                   </span>
                 </div>
-                <div className="flex items-center gap-2 sm:gap-4 mt-1 text-xs text-stone-300 flex-wrap">
+                <div className="flex items-center gap-x-2.5 gap-y-1 sm:gap-x-3.5 mt-1 text-xs text-stone-300 flex-wrap tabular-nums">
                   <span className="flex items-center gap-1 font-semibold text-white">
-                    <Home size={13} className="text-amber-400" />
+                    <Home size={13} className="text-amber-400 shrink-0" aria-hidden="true" />
                     {estadiaLocal.casa}
                   </span>
-                  <span>•</span>
+                  <span aria-hidden="true">•</span>
                   <span className="flex items-center gap-1">
-                    <User size={13} className="text-stone-400" />
+                    <User size={13} className="text-stone-400 shrink-0" aria-hidden="true" />
                     Titular: <strong className="text-stone-100">{estadiaLocal.titular}</strong>
                   </span>
-                  <span>•</span>
+                  <span aria-hidden="true">•</span>
                   <span className="flex items-center gap-1">
-                    <Calendar size={13} className="text-stone-400" />
+                    <Calendar size={13} className="text-stone-400 shrink-0" aria-hidden="true" />
                     {formatarDataBr(estadiaLocal.entrada)} até {formatarDataBr(estadiaLocal.saida)}
                   </span>
-                  <span>•</span>
+                  <span aria-hidden="true">•</span>
                   <span className="flex items-center gap-1">
-                    <Users size={13} className="text-stone-400" />
+                    <Users size={13} className="text-stone-400 shrink-0" aria-hidden="true" />
                     {estadiaLocal.hospedes} hóspedes
                   </span>
-                  <span>•</span>
+                  <span aria-hidden="true">•</span>
                   <span className="flex items-center gap-1">
-                    <ShieldCheck size={13} className="text-emerald-400" />
-                    Resp: <strong className="text-stone-200">{estadiaLocal.funcionario}</strong>
+                    <ShieldCheck size={13} className="text-emerald-400 shrink-0" aria-hidden="true" />
+                    Resp: <strong className="text-stone-100">{estadiaLocal.funcionario}</strong>
                   </span>
                 </div>
               </div>
             </div>
 
             {/* Botões do topo */}
-            <div className="flex items-center gap-2 self-end sm:self-auto print:hidden">
+            <div className="flex items-center gap-2 self-end sm:self-auto shrink-0 print:hidden">
               <button
                 type="button"
                 onClick={handleImprimir}
-                className="px-3 py-2 bg-stone-800 hover:bg-stone-700 text-stone-200 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                aria-label="Imprimir relatório financeiro desta estadia"
+                className="min-h-[40px] min-w-[40px] sm:min-w-0 px-3 py-2 bg-stone-800 hover:bg-stone-700 text-stone-200 hover:text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                 title="Imprimir relatório financeiro desta estadia"
               >
-                <Printer size={15} />
+                <Printer size={15} aria-hidden="true" />
                 <span className="hidden sm:inline">Imprimir Resumo</span>
               </button>
 
               <button
                 type="button"
                 onClick={onClose}
-                className="p-2 text-stone-400 hover:text-white hover:bg-stone-800 rounded-xl transition-colors cursor-pointer"
+                aria-label="Fechar gerenciamento de pagamentos"
+                className="w-10 h-10 text-stone-300 hover:text-white bg-stone-800/80 hover:bg-stone-700 rounded-xl flex items-center justify-center transition-colors cursor-pointer"
                 title="Fechar"
               >
-                <X size={20} />
+                <X size={19} aria-hidden="true" />
               </button>
             </div>
           </div>
@@ -732,50 +734,50 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
             
             {/* CARD 1: TOTAL GERAL GASTO */}
             <div className="bg-stone-50 rounded-2xl p-4 border border-stone-200 flex flex-col justify-between relative overflow-hidden shadow-xs hover:border-stone-300 transition-all">
-              <div className="flex items-center justify-between text-xs text-stone-500 font-bold mb-1">
+              <div className="flex items-center justify-between text-xs text-stone-600 font-bold mb-1">
                 <span className="uppercase tracking-wider">Total Geral Gasto</span>
-                <span className="p-1.5 rounded-xl bg-stone-200/70 text-stone-700">
-                  <Receipt size={16} />
+                <span className="p-1.5 rounded-xl bg-stone-200/80 text-stone-700">
+                  <Receipt size={16} aria-hidden="true" />
                 </span>
               </div>
-              <div className="text-2xl font-black text-stone-900 tracking-tight my-1">
+              <div className="text-2xl font-black text-stone-900 tracking-tight my-1 tabular-nums">
                 {formatarMoeda(totalGasto)}
               </div>
-              <div className="text-[11px] text-stone-500 flex items-center justify-between pt-1 border-t border-stone-200/60 mt-1">
+              <div className="text-[11px] text-stone-600 flex items-center justify-between pt-1.5 border-t border-stone-200/70 mt-1 tabular-nums">
                 <span>Todas as notas ({todasAsNotas.length})</span>
-                <span className="font-semibold text-stone-700">Total Compras</span>
+                <span className="font-semibold text-stone-800">Total Compras</span>
               </div>
             </div>
 
             {/* CARD 2: TOTAL PAGO PELO CLIENTE */}
-            <div className="bg-emerald-50/60 rounded-2xl p-4 border border-emerald-200 flex flex-col justify-between relative overflow-hidden shadow-xs hover:border-emerald-300 transition-all">
-              <div className="flex items-center justify-between text-xs text-emerald-800 font-bold mb-1">
+            <div className="bg-emerald-50/70 rounded-2xl p-4 border border-emerald-200 flex flex-col justify-between relative overflow-hidden shadow-xs hover:border-emerald-300 transition-all">
+              <div className="flex items-center justify-between text-xs text-emerald-900 font-bold mb-1">
                 <span className="uppercase tracking-wider">Pago pelo Cliente</span>
-                <span className="p-1.5 rounded-xl bg-emerald-100 text-emerald-700">
-                  <Wallet size={16} />
+                <span className="p-1.5 rounded-xl bg-emerald-100 text-emerald-800">
+                  <Wallet size={16} aria-hidden="true" />
                 </span>
               </div>
-              <div className="text-2xl font-black text-emerald-900 tracking-tight my-1">
+              <div className="text-2xl font-black text-emerald-950 tracking-tight my-1 tabular-nums">
                 {formatarMoeda(totalPagoPeloCliente)}
               </div>
-              <div className="text-[11px] text-emerald-700 flex items-center justify-between pt-1 border-t border-emerald-200/60 mt-1">
+              <div className="text-[11px] text-emerald-800 flex items-center justify-between gap-1 pt-1.5 border-t border-emerald-200/70 mt-1 tabular-nums flex-wrap">
                 <span>Notas ({formatarMoeda(totalNotasQuitadasPeloHospede)})</span>
                 <span className="font-bold">+ Saldos/Superávit ({formatarMoeda(totalCreditosCliente)})</span>
               </div>
             </div>
 
             {/* CARD 3: TOTAL PAGO POR OUTRAS PESSOAS */}
-            <div className="bg-purple-50/60 rounded-2xl p-4 border border-purple-200 flex flex-col justify-between relative overflow-hidden shadow-xs hover:border-purple-300 transition-all">
-              <div className="flex items-center justify-between text-xs text-purple-800 font-bold mb-1">
+            <div className="bg-purple-50/70 rounded-2xl p-4 border border-purple-200 flex flex-col justify-between relative overflow-hidden shadow-xs hover:border-purple-300 transition-all">
+              <div className="flex items-center justify-between text-xs text-purple-900 font-bold mb-1">
                 <span className="uppercase tracking-wider">Pago por Outros</span>
-                <span className="p-1.5 rounded-xl bg-purple-100 text-purple-700">
-                  <Users size={16} />
+                <span className="p-1.5 rounded-xl bg-purple-100 text-purple-800">
+                  <Users size={16} aria-hidden="true" />
                 </span>
               </div>
-              <div className="text-2xl font-black text-purple-950 tracking-tight my-1">
+              <div className="text-2xl font-black text-purple-950 tracking-tight my-1 tabular-nums">
                 {formatarMoeda(totalPagoPorOutrasPessoas)}
               </div>
-              <div className="text-[11px] text-purple-700 flex items-center justify-between pt-1 border-t border-purple-200/60 mt-1">
+              <div className="text-[11px] text-purple-800 flex items-center justify-between pt-1.5 border-t border-purple-200/70 mt-1 tabular-nums">
                 <span>{notasPendentes.length} nota(s) pendente(s)</span>
                 <span className="font-semibold">Concierge / Equipe</span>
               </div>
@@ -809,42 +811,42 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                   }`}
                 >
                   {isSuperavit ? (
-                    <Sparkles size={16} />
+                    <Sparkles size={16} aria-hidden="true" />
                   ) : isDevendo ? (
-                    <AlertTriangle size={16} />
+                    <AlertTriangle size={16} aria-hidden="true" />
                   ) : (
-                    <CheckCircle2 size={16} />
+                    <CheckCircle2 size={16} aria-hidden="true" />
                   )}
                 </span>
               </div>
 
               <div
-                className={`text-2xl font-black tracking-tight my-1 ${
+                className={`text-2xl font-black tracking-tight my-1 tabular-nums ${
                   isSuperavit
-                    ? 'text-blue-700'
+                    ? 'text-blue-800'
                     : isDevendo
-                    ? 'text-rose-700'
-                    : 'text-emerald-700'
+                    ? 'text-rose-800'
+                    : 'text-emerald-800'
                 }`}
               >
                 {formatarMoeda(isSuperavit ? saldoSituacao : (isDevendo ? totalDevendo : 0))}
               </div>
 
-              <div className="text-[11px] flex items-center justify-between pt-1 border-t border-black/10 mt-1 font-semibold">
+              <div className="text-[11px] flex items-center justify-between pt-1.5 border-t border-black/10 mt-1 font-semibold">
                 {isSuperavit ? (
                   <>
-                    <span className="text-blue-800">🟢 Crédito p/ Cliente</span>
-                    <span className="text-blue-700 text-[10px] font-bold">Disponível p/ compras</span>
+                    <span className="text-blue-900">🟢 Crédito p/ Cliente</span>
+                    <span className="text-blue-800 text-[11px] font-bold">Disponível p/ compras</span>
                   </>
                 ) : isDevendo ? (
                   <>
-                    <span className="text-amber-800">⚠️ Pendente Reembolso</span>
-                    <span className="text-stone-600 text-[10px]">Aguardando pagamento</span>
+                    <span className="text-amber-900">⚠️ Pendente Reembolso</span>
+                    <span className="text-stone-700 text-[11px]">Aguardando pagamento</span>
                   </>
                 ) : (
                   <>
-                    <span className="text-emerald-800">✓ Quitado / Em dia</span>
-                    <span className="text-emerald-600 text-[10px]">100% Coberto</span>
+                    <span className="text-emerald-900">✓ Quitado / Em dia</span>
+                    <span className="text-emerald-800 text-[11px]">100% Coberto</span>
                   </>
                 )}
               </div>
@@ -854,17 +856,17 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
 
           {/* BANNER DE SUPERÁVIT DISPONÍVEL DO CLIENTE */}
           {saldoDisponivelCliente > 0.01 && (
-            <div className="bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-50 border border-blue-200 rounded-2xl p-3 sm:p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 shadow-xs animate-in fade-in">
+            <div className="bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-50 border border-blue-200 rounded-2xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 shadow-xs animate-in fade-in">
               <div className="flex items-center gap-2.5 min-w-0">
                 <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-sm">
-                  <Sparkles size={16} />
+                  <Sparkles size={16} aria-hidden="true" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-xs font-black text-blue-950 flex items-center gap-2">
+                  <p className="text-xs font-black text-blue-950 flex items-center gap-2 flex-wrap">
                     <span>Superávit Disponível do Cliente:</span>
-                    <span className="text-blue-700 font-mono text-sm">{formatarMoeda(saldoDisponivelCliente)}</span>
+                    <span className="text-blue-800 font-mono text-sm tabular-nums">{formatarMoeda(saldoDisponivelCliente)}</span>
                   </p>
-                  <p className="text-[11px] text-blue-800">
+                  <p className="text-[11px] text-blue-900">
                     O cliente pagou a mais e possui este saldo disponível em crédito. Use o botão <strong>"Pagar com Saldo"</strong> em notas pendentes para abater automaticamente!
                   </p>
                 </div>
@@ -877,19 +879,19 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
           {/* ========================================================= */}
           <div className="bg-stone-50 border border-stone-200 rounded-2xl p-3 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
             {/* Tabs de alternância */}
-            <div className="flex items-center gap-1 bg-stone-200/80 p-1 rounded-xl self-start sm:self-auto">
+            <div className="flex items-center gap-1 bg-stone-200/80 p-1 rounded-xl w-full md:w-fit overflow-x-auto no-scrollbar">
               <button
                 type="button"
                 onClick={() => setAbaAtiva('notas')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                className={`min-h-[40px] px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0 ${
                   abaAtiva === 'notas'
                     ? 'bg-white text-stone-900 shadow-xs'
-                    : 'text-stone-600 hover:text-stone-900'
+                    : 'text-stone-700 hover:text-stone-950'
                 }`}
               >
-                <Receipt size={14} />
+                <Receipt size={14} aria-hidden="true" />
                 <span>Notas Fiscais dos Pedidos</span>
-                <span className="ml-1 bg-stone-200 text-stone-700 text-[10px] px-1.5 py-0.2 rounded-full">
+                <span className="ml-0.5 bg-stone-200 text-stone-800 text-[11px] px-1.5 py-0.5 rounded-full tabular-nums">
                   {todasAsNotas.length}
                 </span>
               </button>
@@ -897,22 +899,22 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
               <button
                 type="button"
                 onClick={() => setAbaAtiva('adiantamentos')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                className={`min-h-[40px] px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0 ${
                   abaAtiva === 'adiantamentos'
                     ? 'bg-white text-stone-900 shadow-xs'
-                    : 'text-stone-600 hover:text-stone-900'
+                    : 'text-stone-700 hover:text-stone-950'
                 }`}
               >
-                <DollarSign size={14} />
+                <DollarSign size={14} aria-hidden="true" />
                 <span>Pagamentos Recebidos</span>
-                <span className="ml-1 bg-emerald-100 text-emerald-800 text-[10px] px-1.5 py-0.2 rounded-full font-bold">
+                <span className="ml-0.5 bg-emerald-100 text-emerald-900 text-[11px] px-1.5 py-0.5 rounded-full font-bold tabular-nums">
                   {adiantamentos.length}
                 </span>
               </button>
             </div>
 
             {/* Botão de Receber Pagamento */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 shrink-0">
               <button
                 type="button"
                 onClick={() => {
@@ -925,9 +927,9 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                   setErroPagamento(null);
                   setModalReceberPagamentoAberto(true);
                 }}
-                className="px-4 py-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-black rounded-xl text-xs flex items-center gap-2 shadow-sm transition-all tap-bounce cursor-pointer"
+                className="min-h-[42px] px-4 py-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-black rounded-xl text-xs flex items-center gap-2 shadow-sm transition-all tap-bounce cursor-pointer"
               >
-                <DollarSign size={16} />
+                <DollarSign size={16} aria-hidden="true" />
                 <span>Receber Pagamento</span>
               </button>
             </div>
@@ -945,10 +947,10 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                   <button
                     type="button"
                     onClick={() => setFiltroNotas('todas')}
-                    className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
+                    className={`min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer tabular-nums ${
                       filtroNotas === 'todas'
                         ? 'bg-stone-900 text-white'
-                        : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                        : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
                     }`}
                   >
                     Todas ({todasAsNotas.length})
@@ -957,47 +959,49 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                   <button
                     type="button"
                     onClick={() => setFiltroNotas('pendentes')}
-                    className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-1 ${
+                    className={`min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-1 tabular-nums ${
                       filtroNotas === 'pendentes'
                         ? 'bg-rose-600 text-white'
-                        : 'bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200'
+                        : 'bg-rose-50 text-rose-800 hover:bg-rose-100 border border-rose-200'
                     }`}
                   >
-                    <AlertTriangle size={12} />
+                    <AlertTriangle size={12} aria-hidden="true" />
                     <span>⚠️ Pendente Reembolso Hóspede ({notasPendentes.length})</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => setFiltroNotas('hospede')}
-                    className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-1 ${
+                    className={`min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-1 tabular-nums ${
                       filtroNotas === 'hospede'
                         ? 'bg-emerald-600 text-white'
-                        : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200'
+                        : 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-200'
                     }`}
                   >
-                    <CheckCircle2 size={12} />
+                    <CheckCircle2 size={12} aria-hidden="true" />
                     <span>✓ Pago pelo Hóspede ({notasQuitadas.length})</span>
                   </button>
                 </div>
 
                 {/* Busca rápida */}
-                <div className="relative min-w-[220px]">
-                  <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" />
+                <div className="relative w-full sm:w-64">
+                  <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-500 pointer-events-none" aria-hidden="true" />
                   <input
                     type="text"
                     value={buscaFornecedor}
                     onChange={(e) => setBuscaFornecedor(e.target.value)}
                     placeholder="Buscar fornecedor ou pagador..."
-                    className="w-full pl-8 pr-3 py-1.5 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 focus:bg-white transition-colors"
+                    aria-label="Buscar notas por fornecedor ou pagador"
+                    className="w-full min-h-[38px] pl-8 pr-9 py-1.5 text-xs text-stone-900 placeholder:text-stone-500 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 focus:bg-white transition-colors"
                   />
                   {buscaFornecedor && (
                     <button
                       type="button"
                       onClick={() => setBuscaFornecedor('')}
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600"
+                      aria-label="Limpar busca de notas"
+                      className="absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-lg text-stone-500 hover:text-stone-800 hover:bg-stone-200/70 flex items-center justify-center transition-colors cursor-pointer"
                     >
-                      <X size={12} />
+                      <X size={12} aria-hidden="true" />
                     </button>
                   )}
                 </div>
@@ -1005,19 +1009,19 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
 
               {/* Listagem das Notas */}
               {carregandoPedidos ? (
-                <div className="text-center py-12 text-stone-400 text-xs flex flex-col items-center gap-2">
+                <div className="text-center py-12 text-stone-600 text-xs flex flex-col items-center gap-2">
                   <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
-                  <span>Carregando comprovantes dos pedidos...</span>
+                  <span className="font-medium">Carregando comprovantes dos pedidos...</span>
                 </div>
               ) : notasFiltradas.length === 0 ? (
                 <div className="text-center py-12 bg-stone-50/70 border border-dashed border-stone-200 rounded-3xl p-6">
-                  <div className="w-12 h-12 rounded-2xl bg-stone-100 text-stone-400 flex items-center justify-center mx-auto mb-3">
-                    <Receipt size={24} />
+                  <div className="w-12 h-12 rounded-2xl bg-stone-100 text-stone-500 border border-stone-200 flex items-center justify-center mx-auto mb-3">
+                    <Receipt size={24} aria-hidden="true" />
                   </div>
-                  <h4 className="text-sm font-bold text-stone-700 mb-1">
+                  <h4 className="text-sm font-bold text-stone-800 mb-1">
                     Nenhum comprovante encontrado
                   </h4>
-                  <p className="text-xs text-stone-500 max-w-md mx-auto">
+                  <p className="text-xs text-stone-600 max-w-md mx-auto leading-relaxed">
                     {todasAsNotas.length === 0
                       ? 'Nenhum comprovante ou nota fiscal foi anexado aos pedidos desta estadia ainda. Conforme as compras forem feitas e as fotos/PDFs forem anexados nos pedidos em "Preparação e Entrega", as notas aparecerão aqui com os cálculos automáticos.'
                       : 'Nenhuma nota corresponde ao filtro ou busca selecionada.'}
@@ -1067,11 +1071,11 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                                 alt={anexo.nome}
                                 className="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-200"
                               />
-                              <div className="absolute top-1 left-1 bg-stone-950/85 text-white font-black text-[9px] px-1.5 py-0.5 rounded shadow">
+                              <div className="absolute top-1 left-1 bg-stone-950/85 text-white font-black text-[9px] px-1.5 py-0.5 rounded shadow tabular-nums">
                                 Nota {numeroNota}
                               </div>
                               <div className="absolute inset-0 bg-stone-950/20 group-hover/img:bg-stone-950/40 flex items-center justify-center text-white opacity-0 group-hover/img:opacity-100 transition-opacity">
-                                <Eye size={16} />
+                                <Eye size={16} aria-hidden="true" />
                               </div>
                             </div>
                           ) : (
@@ -1082,58 +1086,58 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                               className="w-16 h-16 rounded-xl shrink-0 border border-purple-200 bg-purple-50 text-purple-700 flex flex-col items-center justify-center gap-1 hover:bg-purple-100 transition-colors shadow-inner relative"
                               title="Abrir PDF em nova aba"
                             >
-                              <div className="absolute top-1 left-1 bg-stone-950/85 text-white font-black text-[9px] px-1.5 py-0.5 rounded shadow">
+                              <div className="absolute top-1 left-1 bg-stone-950/85 text-white font-black text-[9px] px-1.5 py-0.5 rounded shadow tabular-nums">
                                 Nota {numeroNota}
                               </div>
-                              <FileText size={20} className="mt-2" />
+                              <FileText size={20} className="mt-2" aria-hidden="true" />
                               <span className="text-[10px] font-black uppercase">PDF</span>
                             </a>
                           )}
 
                           {/* Dados da Nota */}
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between gap-1 flex-wrap">
+                            <div className="flex items-center justify-between gap-1.5 flex-wrap">
                               <div className="flex items-center gap-1.5 truncate">
-                                <span className="text-[10px] font-black bg-purple-100 text-purple-900 border border-purple-200 px-1.5 py-0.5 rounded">
+                                <span className="text-[11px] font-black bg-purple-100 text-purple-950 border border-purple-200 px-1.5 py-0.5 rounded tabular-nums">
                                   Nota {numeroNota}
                                 </span>
                                 <span className="text-xs font-bold text-stone-900 truncate">
                                   {anexo.fornecedor || 'Fornecedor não especificado'}
                                 </span>
                               </div>
-                              <span className="text-xs font-mono font-black text-stone-900">
+                              <span className="text-xs font-mono font-black text-stone-950 tabular-nums">
                                 {formatarMoeda(valorTotal)}
                               </span>
                             </div>
 
                             {/* Badge de Quem Pagou / Pendência / Superávit */}
-                            <div className="mt-1 flex items-center gap-1.5 flex-wrap">
+                            <div className="mt-1.5 flex items-center gap-1.5 flex-wrap">
                               {isTotalmentePago ? (
-                                <span className="bg-emerald-100 text-emerald-800 border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
-                                  <CheckCircle2 size={11} className="text-emerald-600" />
+                                <span className="bg-emerald-100 text-emerald-900 border border-emerald-200 text-[11px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+                                  <CheckCircle2 size={11} className="text-emerald-700" aria-hidden="true" />
                                   <span>Pago pelo Hóspede</span>
                                 </span>
                               ) : isParcial ? (
-                                <span className="bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-black px-2 py-0.5 rounded-md flex items-center gap-1">
-                                  <AlertTriangle size={11} className="text-amber-600" />
+                                <span className="bg-amber-100 text-amber-950 border border-amber-300 text-[11px] font-black px-2 py-0.5 rounded-md flex items-center gap-1 tabular-nums">
+                                  <AlertTriangle size={11} className="text-amber-700" aria-hidden="true" />
                                   <span>Pendente Parcial: Cliente deve {formatarMoeda(saldoDevedor)}</span>
                                 </span>
                               ) : (
-                                <span className="bg-rose-100 text-rose-800 border border-rose-200 text-[10px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
-                                  <AlertTriangle size={11} className="text-rose-600" />
+                                <span className="bg-rose-100 text-rose-900 border border-rose-200 text-[11px] font-bold px-2 py-0.5 rounded-md flex items-center gap-1">
+                                  <AlertTriangle size={11} className="text-rose-700" aria-hidden="true" />
                                   <span>Pendente de Pagamento pelo Cliente</span>
                                 </span>
                               )}
 
                               {superavitNota > 0.01 && (
-                                <span className="bg-blue-100 text-blue-900 border border-blue-300 text-[10px] font-black px-2 py-0.5 rounded-md flex items-center gap-1 shadow-xs">
-                                  <Sparkles size={11} className="text-blue-600" />
+                                <span className="bg-blue-100 text-blue-950 border border-blue-300 text-[11px] font-black px-2 py-0.5 rounded-md flex items-center gap-1 shadow-xs tabular-nums">
+                                  <Sparkles size={11} className="text-blue-700" aria-hidden="true" />
                                   <span>💰 Superávit: + {formatarMoeda(superavitNota)} em crédito</span>
                                 </span>
                               )}
 
                               {anexo.data_comprovante && (
-                                <span className="text-[10px] text-stone-500 bg-stone-100 px-1.5 py-0.5 rounded">
+                                <span className="text-[11px] text-stone-600 bg-stone-100 px-1.5 py-0.5 rounded tabular-nums">
                                   {formatarDataBr(anexo.data_comprovante)}
                                 </span>
                               )}
@@ -1141,22 +1145,22 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
 
                             {/* Detalhes de pagamento parcial */}
                             {isParcial && (
-                              <div className="mt-1.5 text-[11px] bg-amber-50 border border-amber-200 rounded-lg p-2 space-y-0.5">
-                                <div className="flex items-center justify-between text-stone-600">
+                              <div className="mt-1.5 text-[11px] bg-amber-50 border border-amber-200 rounded-lg p-2 space-y-0.5 tabular-nums">
+                                <div className="flex items-center justify-between text-stone-700">
                                   <span>Valor total da nota:</span>
                                   <span className="font-semibold">{formatarMoeda(valorTotal)}</span>
                                 </div>
-                                <div className="flex items-center justify-between text-emerald-700">
+                                <div className="flex items-center justify-between text-emerald-800">
                                   <span>Já pago pelo cliente:</span>
                                   <span className="font-bold">{formatarMoeda(quitadoHospede)}</span>
                                 </div>
-                                <div className="flex items-center justify-between text-rose-700 font-black border-t border-amber-200/60 pt-0.5">
+                                <div className="flex items-center justify-between text-rose-800 font-black border-t border-amber-200/60 pt-0.5">
                                   <span>Restante a pagar:</span>
                                   <span>{formatarMoeda(saldoDevedor)}</span>
                                 </div>
                                 {anexo.quem_pagou_outro && (
-                                  <div className="text-[10px] text-stone-500 pt-0.5">
-                                    Originalmente pago por: <strong>{anexo.quem_pagou_outro}</strong>
+                                  <div className="text-[11px] text-stone-600 pt-0.5">
+                                    Originalmente pago por: <strong className="text-stone-800">{anexo.quem_pagou_outro}</strong>
                                   </div>
                                 )}
                               </div>
@@ -1170,11 +1174,11 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                             )}
 
                             {/* Vínculo com o pedido */}
-                            <div className="mt-1.5 text-[10px] text-stone-500 flex items-center justify-between gap-2 border-t border-stone-100 pt-1">
-                              <span className="truncate">
+                            <div className="mt-1.5 text-[11px] text-stone-600 flex items-center justify-between gap-2 border-t border-stone-100 pt-1 tabular-nums">
+                              <span className="truncate font-medium">
                                 Pedido #{anexo.pedido_numero} • {anexo.pedido_cozinheira}
                               </span>
-                              <span className="text-stone-400">
+                              <span className="text-stone-600 shrink-0">
                                 Anexado por: {anexo.anexado_por_nome || 'Equipe'}
                               </span>
                             </div>
@@ -1183,7 +1187,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
 
                         {/* Botões de Ação na Nota */}
                         <div className="mt-2.5 pt-2 border-t border-stone-100 flex items-center justify-between text-xs flex-wrap gap-2">
-                          <span className="text-[10px] text-stone-400 truncate max-w-[150px]" title={anexo.nome}>
+                          <span className="text-[11px] text-stone-600 truncate max-w-[160px]" title={anexo.nome}>
                             {anexo.nome} ({anexo.tamanho})
                           </span>
 
@@ -1193,10 +1197,10 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                               <button
                                 type="button"
                                 onClick={() => handleAbrirModalReceberPagamentoNota(anexo, numeroNota)}
-                                className="px-2.5 py-1 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 active:scale-95 text-white font-bold rounded-lg text-[11px] transition-all cursor-pointer flex items-center gap-1 shadow-xs"
+                                className="min-h-[34px] px-2.5 py-1 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 active:scale-95 text-white font-bold rounded-lg text-[11px] transition-all cursor-pointer flex items-center gap-1 shadow-xs"
                                 title="Registrar recebimento de pagamento desta nota com comprovante"
                               >
-                                <DollarSign size={12} />
+                                <DollarSign size={12} aria-hidden="true" />
                                 <span>Receber Pagamento</span>
                               </button>
                             )}
@@ -1206,10 +1210,10 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                               <button
                                 type="button"
                                 onClick={() => handleAbrirModalPagarComSaldo(anexo, numeroNota)}
-                                className="px-2.5 py-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:scale-95 text-white font-bold rounded-lg text-[11px] transition-all cursor-pointer flex items-center gap-1 shadow-xs"
+                                className="min-h-[34px] px-2.5 py-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:scale-95 text-white font-bold rounded-lg text-[11px] transition-all cursor-pointer flex items-center gap-1 shadow-xs tabular-nums"
                                 title={`Usar saldo disponível do cliente (${formatarMoeda(saldoDisponivelCliente)}) para pagar esta nota`}
                               >
-                                <Sparkles size={12} />
+                                <Sparkles size={12} aria-hidden="true" />
                                 <span>Pagar com Saldo</span>
                               </button>
                             )}
@@ -1219,10 +1223,10 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                               <button
                                 type="button"
                                 onClick={() => setModalComprovantesNota({ anexo, numeroNota })}
-                                className="px-2.5 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold rounded-lg text-[10px] transition-colors cursor-pointer flex items-center gap-1 border border-blue-200"
+                                className="min-h-[34px] px-2.5 py-1 bg-blue-50 hover:bg-blue-100 text-blue-800 font-bold rounded-lg text-[11px] transition-colors cursor-pointer flex items-center gap-1 border border-blue-200 tabular-nums"
                                 title="Abrir todos os comprovantes anexados nesta nota"
                               >
-                                <FileCheck size={11} />
+                                <FileCheck size={12} aria-hidden="true" />
                                 <span>Comprovante PIX ({anexo.pagamentos.length})</span>
                               </button>
                             )}
@@ -1231,9 +1235,9 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                               <button
                                 type="button"
                                 onClick={() => setImagemZoom(anexo.url)}
-                                className="px-2.5 py-1 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-lg text-[11px] transition-colors cursor-pointer flex items-center gap-1"
+                                className="min-h-[34px] px-2.5 py-1 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-lg text-[11px] transition-colors cursor-pointer flex items-center gap-1"
                               >
-                                <Eye size={12} />
+                                <Eye size={12} aria-hidden="true" />
                                 <span>Ampliar</span>
                               </button>
                             ) : (
@@ -1241,9 +1245,9 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                                 href={anexo.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="px-2.5 py-1 bg-purple-100 hover:bg-purple-200 text-purple-800 font-bold rounded-lg text-[11px] transition-colors cursor-pointer flex items-center gap-1"
+                                className="min-h-[34px] px-2.5 py-1 bg-purple-100 hover:bg-purple-200 text-purple-900 font-bold rounded-lg text-[11px] transition-colors cursor-pointer flex items-center gap-1"
                               >
-                                <ExternalLink size={12} />
+                                <ExternalLink size={12} aria-hidden="true" />
                                 <span>Abrir PDF</span>
                               </a>
                             )}
@@ -1255,11 +1259,11 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                                   const pedidoEncontrado = pedidos.find((p) => p.id === anexo.pedido_id);
                                   onAbrirPedido(anexo.pedido_id, pedidoEncontrado);
                                 }}
-                                className="px-2.5 py-1 bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold rounded-lg text-[11px] transition-colors cursor-pointer flex items-center gap-1 hover:text-stone-900"
+                                className="min-h-[34px] px-2.5 py-1 bg-stone-100 hover:bg-stone-200 text-stone-800 font-semibold rounded-lg text-[11px] transition-colors cursor-pointer flex items-center gap-1 hover:text-stone-950 tabular-nums"
                                 title="Ver pedido completo de compras"
                               >
                                 <span>Ver Pedido #{anexo.pedido_numero}</span>
-                                <ArrowRight size={11} />
+                                <ArrowRight size={11} aria-hidden="true" />
                               </button>
                             )}
                           </div>
@@ -1280,10 +1284,10 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 rounded-2xl border border-stone-200">
                 <div>
                   <h4 className="text-xs font-bold text-stone-900 uppercase tracking-wider flex items-center gap-1.5">
-                    <DollarSign size={14} className="text-emerald-600" />
+                    <DollarSign size={14} className="text-emerald-700" aria-hidden="true" />
                     <span>Pagamentos Recebidos da Estadia</span>
                   </h4>
-                  <p className="text-[11px] text-stone-500">
+                  <p className="text-[11px] text-stone-600 mt-0.5">
                     Comprovantes anexados, valores recebidos e identificação de quem pagou (hóspede ou outra pessoa).
                   </p>
                 </div>
@@ -1299,9 +1303,9 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                     setErroPagamento(null);
                     setModalReceberPagamentoAberto(true);
                   }}
-                  className="px-3.5 py-1.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs self-start sm:self-auto"
+                  className="min-h-[40px] px-3.5 py-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs self-start sm:self-auto"
                 >
-                  <DollarSign size={14} />
+                  <DollarSign size={14} aria-hidden="true" />
                   <span>Receber Pagamento</span>
                 </button>
               </div>
@@ -1309,16 +1313,16 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
               {/* Resumo de Superávits Gerados por Pagamentos em Notas */}
               {totalSuperavitNotas > 0 && (
                 <div className="bg-blue-50 border border-blue-200 rounded-2xl p-3.5 space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-black text-blue-950 flex items-center gap-1.5">
-                      <Sparkles size={14} className="text-blue-600" />
+                  <div className="flex items-center justify-between gap-2 text-xs flex-wrap">
+                    <span className="font-black text-blue-950 flex items-center gap-1.5 tabular-nums">
+                      <Sparkles size={14} className="text-blue-700" aria-hidden="true" />
                       Superávit Gerado por Pagamento de Notas ({formatarMoeda(totalSuperavitNotas)})
                     </span>
-                    <span className="bg-blue-200/80 text-blue-900 font-black text-[10px] px-2 py-0.5 rounded-full">
+                    <span className="bg-blue-200/80 text-blue-950 font-black text-[11px] px-2 py-0.5 rounded-full">
                       Crédito em Conta
                     </span>
                   </div>
-                  <p className="text-[11px] text-blue-800">
+                  <p className="text-[11px] text-blue-900">
                     Valores pagos pelo cliente acima do valor das notas que foram convertidos em saldo a favor do cliente:
                   </p>
                   <div className="space-y-1.5 pt-1">
@@ -1340,18 +1344,18 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                         return (
                           <div
                             key={n.id}
-                            className="bg-white border border-blue-200 rounded-xl p-2.5 flex items-center justify-between text-xs"
+                            className="bg-white border border-blue-200 rounded-xl p-2.5 flex items-center justify-between gap-2 text-xs tabular-nums"
                           >
-                            <div className="flex items-center gap-2">
-                              <span className="bg-purple-100 text-purple-900 font-bold px-1.5 py-0.5 rounded text-[10px]">
+                            <div className="flex items-center gap-2 min-w-0 flex-wrap">
+                              <span className="bg-purple-100 text-purple-950 font-bold px-1.5 py-0.5 rounded text-[11px]">
                                 Nota #{num}
                               </span>
                               <span className="font-bold text-stone-900">{n.fornecedor || 'Fornecedor'}</span>
-                              <span className="text-[11px] text-stone-500">
+                              <span className="text-[11px] text-stone-600">
                                 (Valor Nota: {formatarMoeda(vTotal)} • Pago: {formatarMoeda(pagoHospede)})
                               </span>
                             </div>
-                            <span className="font-mono font-black text-blue-700">
+                            <span className="font-mono font-black text-blue-800 shrink-0">
                               + {formatarMoeda(sup)}
                             </span>
                           </div>
@@ -1364,12 +1368,12 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
               {adiantamentos.length === 0 ? (
                 <div className="text-center py-12 bg-stone-50/70 border border-dashed border-stone-200 rounded-3xl p-6">
                   <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center mx-auto mb-3">
-                    <Wallet size={24} />
+                    <Wallet size={24} aria-hidden="true" />
                   </div>
-                  <h4 className="text-sm font-bold text-stone-700 mb-1">
+                  <h4 className="text-sm font-bold text-stone-800 mb-1">
                     Nenhum pagamento registrado ainda
                   </h4>
-                  <p className="text-xs text-stone-500 max-w-md mx-auto mb-4">
+                  <p className="text-xs text-stone-600 max-w-md mx-auto mb-4 leading-relaxed">
                     Quando o hóspede ou outra pessoa efetuar um pagamento (PIX, TED, cartão), clique no botão abaixo para anexar o comprovante e salvar os dados da transação.
                   </p>
                   <button
@@ -1384,9 +1388,9 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                       setErroPagamento(null);
                       setModalReceberPagamentoAberto(true);
                     }}
-                    className="px-4 py-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-bold rounded-xl text-xs inline-flex items-center gap-2 transition-colors cursor-pointer shadow-sm"
+                    className="min-h-[42px] px-4 py-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-bold rounded-xl text-xs inline-flex items-center gap-2 transition-colors cursor-pointer shadow-sm"
                   >
-                    <DollarSign size={15} />
+                    <DollarSign size={15} aria-hidden="true" />
                     <span>Receber Primeiro Pagamento</span>
                   </button>
                 </div>
@@ -1409,7 +1413,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                           {/* Miniatura do Comprovante ou Ícone de Débito */}
                           {isDebito ? (
                             <div className="w-16 h-16 rounded-xl bg-indigo-100 text-indigo-800 flex items-center justify-center shrink-0 font-black border border-indigo-200">
-                              <Sparkles size={24} />
+                              <Sparkles size={24} aria-hidden="true" />
                             </div>
                           ) : item.comprovante_url ? (
                             item.comprovante_tipo === 'pdf' || item.comprovante_url.startsWith('data:application/pdf') ? (
@@ -1420,7 +1424,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                                 className="w-16 h-16 rounded-xl shrink-0 border border-purple-200 bg-purple-50 text-purple-700 flex flex-col items-center justify-center gap-0.5 hover:bg-purple-100 transition-colors shadow-inner cursor-pointer"
                                 title="Abrir comprovante em PDF"
                               >
-                                <FileText size={20} />
+                                <FileText size={20} aria-hidden="true" />
                                 <span className="text-[9px] font-black uppercase">PDF</span>
                               </a>
                             ) : (
@@ -1435,13 +1439,13 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                                   className="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-200"
                                 />
                                 <div className="absolute inset-0 bg-stone-950/20 group-hover/img:bg-stone-950/40 flex items-center justify-center text-white opacity-0 group-hover/img:opacity-100 transition-opacity">
-                                  <Eye size={16} />
+                                  <Eye size={16} aria-hidden="true" />
                                 </div>
                               </div>
                             )
                           ) : (
                             <div className="w-16 h-16 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 font-black border border-emerald-200">
-                              <DollarSign size={24} />
+                              <DollarSign size={24} aria-hidden="true" />
                             </div>
                           )}
 
@@ -1449,7 +1453,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 flex-wrap">
                               <span
-                                className={`text-base font-black font-mono ${
+                                className={`text-base font-black font-mono tabular-nums ${
                                   isDebito ? 'text-indigo-900' : 'text-emerald-950'
                                 }`}
                               >
@@ -1460,51 +1464,51 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
 
                               {/* Badge Quem Pagou ou Débito de Saldo */}
                               {isDebito ? (
-                                <span className="bg-indigo-100 text-indigo-900 border border-indigo-200 text-[11px] font-bold px-2 py-0.5 rounded-lg flex items-center gap-1">
-                                  <Sparkles size={12} className="text-indigo-600" />
+                                <span className="bg-indigo-100 text-indigo-950 border border-indigo-200 text-[11px] font-bold px-2 py-0.5 rounded-lg flex items-center gap-1">
+                                  <Sparkles size={12} className="text-indigo-700" aria-hidden="true" />
                                   <span>Débito de Saldo Utilizado</span>
                                 </span>
                               ) : isOutro ? (
-                                <span className="bg-purple-100 text-purple-900 border border-purple-200 text-[11px] font-bold px-2 py-0.5 rounded-lg flex items-center gap-1">
-                                  <Users size={12} className="text-purple-700" />
+                                <span className="bg-purple-100 text-purple-950 border border-purple-200 text-[11px] font-bold px-2 py-0.5 rounded-lg flex items-center gap-1">
+                                  <Users size={12} className="text-purple-700" aria-hidden="true" />
                                   <span>Pago por: <strong>{item.quem_pagou_nome || 'Outra pessoa'}</strong></span>
                                 </span>
                               ) : (
-                                <span className="bg-emerald-100 text-emerald-800 border border-emerald-200 text-[11px] font-bold px-2 py-0.5 rounded-lg flex items-center gap-1">
-                                  <User size={12} className="text-emerald-700" />
+                                <span className="bg-emerald-100 text-emerald-900 border border-emerald-200 text-[11px] font-bold px-2 py-0.5 rounded-lg flex items-center gap-1">
+                                  <User size={12} className="text-emerald-700" aria-hidden="true" />
                                   <span>Pago pelo Hóspede {item.quem_pagou_nome ? `(${item.quem_pagou_nome})` : (estadiaLocal.titular ? `(${estadiaLocal.titular})` : '')}</span>
                                 </span>
                               )}
 
-                              <span className="bg-stone-100 text-stone-700 font-bold text-[11px] px-2 py-0.5 rounded-md border border-stone-200">
+                              <span className="bg-stone-100 text-stone-800 font-bold text-[11px] px-2 py-0.5 rounded-md border border-stone-200">
                                 {item.forma_pagamento || 'PIX'}
                               </span>
 
-                              <span className="text-xs text-stone-500 flex items-center gap-1">
-                                <Calendar size={12} className="text-stone-400" />
+                              <span className="text-xs text-stone-600 flex items-center gap-1 tabular-nums">
+                                <Calendar size={12} className="text-stone-500" aria-hidden="true" />
                                 {formatarDataBr(item.data)}
                               </span>
                             </div>
 
                             {item.observacao && (
-                              <p className="text-xs text-stone-600 mt-1 italic">
+                              <p className="text-xs text-stone-700 mt-1 italic">
                                 "{item.observacao}"
                               </p>
                             )}
 
-                            <div className="text-[11px] text-stone-400 mt-1.5 flex items-center gap-2 flex-wrap">
+                            <div className="text-[11px] text-stone-600 mt-1.5 flex items-center gap-2 flex-wrap tabular-nums">
                               {item.comprovante_nome && (
                                 <>
-                                  <span className="text-stone-600 font-medium truncate max-w-[220px]" title={item.comprovante_nome}>
+                                  <span className="text-stone-700 font-medium truncate max-w-[220px]" title={item.comprovante_nome}>
                                     📎 {item.comprovante_nome} {item.comprovante_tamanho ? `(${item.comprovante_tamanho})` : ''}
                                   </span>
-                                  <span>•</span>
+                                  <span aria-hidden="true">•</span>
                                 </>
                               )}
-                              <span>Registrado por: <strong className="text-stone-600">{item.registrado_por_nome || 'Equipe'}</strong></span>
+                              <span>Registrado por: <strong className="text-stone-800">{item.registrado_por_nome || 'Equipe'}</strong></span>
                               {item.registrado_em && (
                                 <>
-                                  <span>•</span>
+                                  <span aria-hidden="true">•</span>
                                   <span>{formatarDataHoraBahia(item.registrado_em)}</span>
                                 </>
                               )}
@@ -1520,18 +1524,18 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                                 href={item.comprovante_url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="px-2.5 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-xl text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer"
+                                className="min-h-[36px] px-2.5 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 rounded-xl text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer"
                               >
-                                <ExternalLink size={12} />
+                                <ExternalLink size={12} aria-hidden="true" />
                                 <span>Ver PDF</span>
                               </a>
                             ) : (
                               <button
                                 type="button"
                                 onClick={() => setImagemZoom(item.comprovante_url || null)}
-                                className="px-2.5 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer"
+                                className="min-h-[36px] px-2.5 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-xl text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer"
                               >
-                                <Eye size={12} />
+                                <Eye size={12} aria-hidden="true" />
                                 <span>Ampliar</span>
                               </button>
                             )
@@ -1540,10 +1544,10 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                           <button
                             type="button"
                             onClick={() => handleRemoverSaldo(item.id, item.valor)}
-                            className="px-2.5 py-1.5 text-rose-600 hover:text-rose-700 hover:bg-rose-50 rounded-xl text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer"
+                            className="min-h-[36px] px-2.5 py-1.5 text-rose-700 hover:text-rose-900 hover:bg-rose-50 rounded-xl text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer"
                             title="Excluir este registro"
                           >
-                            <Trash2 size={13} />
+                            <Trash2 size={13} aria-hidden="true" />
                             <span>Excluir</span>
                           </button>
                         </div>
@@ -1561,19 +1565,19 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
         {/* RODAPÉ DO MODAL: RESUMO FINAL & FECHAR                    */}
         {/* ========================================================= */}
         <div className="bg-stone-50 border-t border-stone-200 p-4 sm:p-5 shrink-0 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div className="text-xs text-stone-600">
+          <div className="text-xs text-stone-700 tabular-nums">
             <span>Resumo: </span>
             <strong className="text-stone-900">{todasAsNotas.length} nota(s)</strong>
-            <span> • </span>
+            <span aria-hidden="true"> • </span>
             <strong className="text-stone-900">{adiantamentos.length} transação(ões)</strong>
-            <span> • </span>
+            <span aria-hidden="true"> • </span>
             <span>Situação: </span>
             {isSuperavit ? (
-              <strong className="text-blue-700">Superávit de {formatarMoeda(saldoSituacao)} (Crédito do cliente)</strong>
+              <strong className="text-blue-800">Superávit de {formatarMoeda(saldoSituacao)} (Crédito do cliente)</strong>
             ) : isDevendo ? (
-              <strong className="text-rose-700">Cliente devendo {formatarMoeda(totalDevendo)}</strong>
+              <strong className="text-rose-800">Cliente devendo {formatarMoeda(totalDevendo)}</strong>
             ) : (
-              <strong className="text-emerald-700">✓ Quitado (Em dia)</strong>
+              <strong className="text-emerald-800">✓ Quitado (Em dia)</strong>
             )}
           </div>
 
@@ -1581,15 +1585,15 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
             <button
               type="button"
               onClick={handleImprimir}
-              className="px-4 py-2 bg-stone-200 hover:bg-stone-300 text-stone-800 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="min-h-[40px] px-4 py-2 bg-stone-200 hover:bg-stone-300 text-stone-900 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
             >
-              <Printer size={15} />
+              <Printer size={15} aria-hidden="true" />
               <span>Imprimir</span>
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-2 bg-stone-900 hover:bg-stone-800 text-white font-bold rounded-xl text-xs transition-colors cursor-pointer"
+              className="min-h-[40px] px-5 py-2 bg-stone-900 hover:bg-stone-800 text-white font-bold rounded-xl text-xs transition-colors cursor-pointer"
             >
               Concluído / Fechar
             </button>
@@ -1605,17 +1609,17 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
         <div className="fixed inset-0 z-60 bg-stone-950/75 backdrop-blur-xs flex items-center justify-center p-3 animate-in fade-in overflow-y-auto">
           <div className="bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-stone-200 overflow-hidden my-auto">
             {/* Header */}
-            <div className="bg-stone-900 text-white p-4 sm:p-5 flex items-center justify-between">
-              <div className="flex items-center gap-3">
+            <div className="bg-stone-900 text-white p-4 sm:p-5 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3 min-w-0">
                 <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 text-stone-950 flex items-center justify-center font-black shadow-md shrink-0">
-                  <DollarSign size={22} />
+                  <DollarSign size={22} aria-hidden="true" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <h3 className="text-base font-black tracking-tight text-white flex items-center gap-2">
                     Receber Pagamento
                   </h3>
-                  <p className="text-xs text-stone-400">
-                    Estadia: <strong className="text-stone-200">{estadiaLocal.casa}</strong> • Titular: <strong className="text-stone-200">{estadiaLocal.titular}</strong>
+                  <p className="text-xs text-stone-300 truncate">
+                    Estadia: <strong className="text-white">{estadiaLocal.casa}</strong> • Titular: <strong className="text-white">{estadiaLocal.titular}</strong>
                   </p>
                 </div>
               </div>
@@ -1625,17 +1629,21 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                   setModalReceberPagamentoAberto(false);
                   setErroPagamento(null);
                 }}
-                className="p-1.5 text-stone-400 hover:text-white hover:bg-stone-800 rounded-xl transition-colors cursor-pointer"
+                aria-label="Fechar modal de receber pagamento"
+                className="w-10 h-10 text-stone-300 hover:text-white hover:bg-stone-800 rounded-xl flex items-center justify-center transition-colors shrink-0 cursor-pointer"
                 title="Fechar"
               >
-                <X size={18} />
+                <X size={18} aria-hidden="true" />
               </button>
             </div>
 
             <form onSubmit={handleSalvarPagamento} className="p-5 sm:p-6 space-y-4 max-h-[80vh] overflow-y-auto">
               {erroPagamento && (
-                <div className="bg-rose-50 border border-rose-200 text-rose-700 text-xs p-3.5 rounded-2xl flex items-center gap-2.5 animate-in fade-in">
-                  <AlertCircle size={16} className="shrink-0 text-rose-600" />
+                <div
+                  role="alert"
+                  className="bg-rose-50 border border-rose-200 text-rose-800 text-xs p-3.5 rounded-2xl flex items-center gap-2.5 animate-in fade-in"
+                >
+                  <AlertCircle size={16} className="shrink-0 text-rose-600" aria-hidden="true" />
                   <span className="font-semibold">{erroPagamento}</span>
                 </div>
               )}
@@ -1645,8 +1653,8 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                 <label className="block text-xs font-bold text-stone-800 mb-1.5 flex items-center justify-between">
                   <span>Comprovante de Pagamento (Foto ou PDF) *</span>
                   {formComprovante && (
-                    <span className="text-[11px] text-emerald-600 font-bold flex items-center gap-1">
-                      <CheckCircle2 size={12} /> Anexado com sucesso
+                    <span className="text-[11px] text-emerald-700 font-bold flex items-center gap-1">
+                      <CheckCircle2 size={12} aria-hidden="true" /> Anexado com sucesso
                     </span>
                   )}
                 </label>
@@ -1664,18 +1672,18 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                     onClick={() => fileInputRef.current?.click()}
                     className="border-2 border-dashed border-stone-300 hover:border-emerald-500 hover:bg-emerald-50/40 rounded-2xl p-5 text-center cursor-pointer transition-all group"
                   >
-                    <div className="w-12 h-12 rounded-2xl bg-stone-100 group-hover:bg-emerald-100 text-stone-400 group-hover:text-emerald-700 flex items-center justify-center mx-auto mb-2 transition-colors">
-                      <UploadCloud size={24} />
+                    <div className="w-12 h-12 rounded-2xl bg-stone-100 group-hover:bg-emerald-100 text-stone-500 group-hover:text-emerald-700 flex items-center justify-center mx-auto mb-2 transition-colors">
+                      <UploadCloud size={24} aria-hidden="true" />
                     </div>
                     <p className="text-xs font-bold text-stone-800 group-hover:text-emerald-900 mb-0.5">
                       Clique ou arraste para anexar o comprovante
                     </p>
-                    <p className="text-[11px] text-stone-500">
+                    <p className="text-[11px] text-stone-600">
                       Formatos aceitos: JPG, PNG, WEBP ou documento PDF (máx. 15 MB)
                     </p>
                   </div>
                 ) : (
-                  <div className="border border-emerald-200 bg-emerald-50/50 rounded-2xl p-3 flex items-center justify-between gap-3">
+                  <div className="border border-emerald-200 bg-emerald-50/50 rounded-2xl p-3 flex flex-wrap items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
                       {formComprovante.tipo === 'imagem' ? (
                         <div
@@ -1689,12 +1697,12 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                             className="w-full h-full object-cover group-hover/thumb:scale-110 transition-transform"
                           />
                           <div className="absolute inset-0 bg-stone-950/20 group-hover/thumb:bg-stone-950/40 flex items-center justify-center text-white opacity-0 group-hover/thumb:opacity-100 transition-opacity">
-                            <Eye size={14} />
+                            <Eye size={14} aria-hidden="true" />
                           </div>
                         </div>
                       ) : (
                         <div className="w-14 h-14 rounded-xl bg-purple-100 text-purple-700 border border-purple-200 flex flex-col items-center justify-center shrink-0">
-                          <FileText size={20} />
+                          <FileText size={20} aria-hidden="true" />
                           <span className="text-[9px] font-black uppercase">PDF</span>
                         </div>
                       )}
@@ -1702,7 +1710,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                         <p className="text-xs font-bold text-stone-900 truncate" title={formComprovante.nome}>
                           {formComprovante.nome}
                         </p>
-                        <p className="text-[11px] text-stone-500">
+                        <p className="text-[11px] text-stone-600">
                           {formComprovante.tamanho} • {formComprovante.tipo === 'pdf' ? 'Documento PDF' : 'Imagem'}
                         </p>
                       </div>
@@ -1713,9 +1721,9 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                         <button
                           type="button"
                           onClick={() => setImagemZoom(formComprovante.url)}
-                          className="px-2.5 py-1.5 bg-white hover:bg-stone-100 text-stone-700 font-bold rounded-xl text-xs border border-stone-200 transition-colors cursor-pointer flex items-center gap-1"
+                          className="min-h-[34px] px-2.5 py-1.5 bg-white hover:bg-stone-100 text-stone-800 font-bold rounded-xl text-xs border border-stone-200 transition-colors cursor-pointer flex items-center gap-1"
                         >
-                          <Eye size={12} />
+                          <Eye size={12} aria-hidden="true" />
                           <span>Ver</span>
                         </button>
                       ) : (
@@ -1723,16 +1731,16 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                           href={formComprovante.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-2.5 py-1.5 bg-white hover:bg-stone-100 text-purple-700 font-bold rounded-xl text-xs border border-purple-200 transition-colors cursor-pointer flex items-center gap-1"
+                          className="min-h-[34px] px-2.5 py-1.5 bg-white hover:bg-stone-100 text-purple-800 font-bold rounded-xl text-xs border border-purple-200 transition-colors cursor-pointer flex items-center gap-1"
                         >
-                          <ExternalLink size={12} />
+                          <ExternalLink size={12} aria-hidden="true" />
                           <span>Ver PDF</span>
                         </a>
                       )}
                       <button
                         type="button"
                         onClick={() => fileInputRef.current?.click()}
-                        className="px-2.5 py-1.5 bg-white hover:bg-stone-100 text-stone-700 font-bold rounded-xl text-xs border border-stone-200 transition-colors cursor-pointer"
+                        className="min-h-[34px] px-2.5 py-1.5 bg-white hover:bg-stone-100 text-stone-800 font-bold rounded-xl text-xs border border-stone-200 transition-colors cursor-pointer"
                         title="Substituir por outro arquivo"
                       >
                         Trocar
@@ -1740,10 +1748,11 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                       <button
                         type="button"
                         onClick={() => setFormComprovante(null)}
-                        className="p-1.5 text-stone-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-colors cursor-pointer"
+                        aria-label="Remover anexo"
+                        className="w-9 h-9 text-stone-500 hover:text-rose-700 hover:bg-rose-50 rounded-xl flex items-center justify-center transition-colors cursor-pointer"
                         title="Remover anexo"
                       >
-                        <Trash2 size={14} />
+                        <Trash2 size={14} aria-hidden="true" />
                       </button>
                     </div>
                   </div>
@@ -1759,45 +1768,45 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                   <button
                     type="button"
                     onClick={() => setFormQuemPagou('hospede')}
-                    className={`p-3 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-center justify-between ${
+                    className={`min-h-[46px] p-3 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-center justify-between ${
                       formQuemPagou === 'hospede'
                         ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-bold shadow-xs'
                         : 'border-stone-200 hover:border-stone-300 bg-stone-50/60 text-stone-700'
                     }`}
                   >
                     <div className="flex items-center gap-2">
-                      <User size={16} className={formQuemPagou === 'hospede' ? 'text-purple-600' : 'text-stone-400'} />
+                      <User size={16} className={formQuemPagou === 'hospede' ? 'text-purple-700' : 'text-stone-500'} aria-hidden="true" />
                       <span className="text-xs font-bold">Hóspede</span>
                     </div>
                     {formQuemPagou === 'hospede' && (
-                      <Check size={16} className="text-purple-600" />
+                      <Check size={16} className="text-purple-700" aria-hidden="true" />
                     )}
                   </button>
 
                   <button
                     type="button"
                     onClick={() => setFormQuemPagou('outra_pessoa')}
-                    className={`p-3 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-center justify-between ${
+                    className={`min-h-[46px] p-3 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-center justify-between ${
                       formQuemPagou === 'outra_pessoa'
                         ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-bold shadow-xs'
                         : 'border-stone-200 hover:border-stone-300 bg-stone-50/60 text-stone-700'
                     }`}
                   >
                     <div className="flex items-center gap-2">
-                      <Users size={16} className={formQuemPagou === 'outra_pessoa' ? 'text-purple-600' : 'text-stone-400'} />
+                      <Users size={16} className={formQuemPagou === 'outra_pessoa' ? 'text-purple-700' : 'text-stone-500'} aria-hidden="true" />
                       <span className="text-xs font-bold">Outra pessoa</span>
                     </div>
                     {formQuemPagou === 'outra_pessoa' && (
-                      <Check size={16} className="text-purple-600" />
+                      <Check size={16} className="text-purple-700" aria-hidden="true" />
                     )}
                   </button>
                 </div>
 
                 {/* Subinfo Hóspede ou Input Outra pessoa */}
                 {formQuemPagou === 'hospede' ? (
-                  <p className="mt-2 text-[11px] text-stone-500 bg-stone-50 border border-stone-200 rounded-xl p-2.5 flex items-center gap-2">
-                    <User size={13} className="text-purple-600 shrink-0" />
-                    <span>Pagamento efetuado pelo hóspede titular: <strong className="text-stone-800">{estadiaLocal.titular || 'Hóspede Titular'}</strong></span>
+                  <p className="mt-2 text-[11px] text-stone-600 bg-stone-50 border border-stone-200 rounded-xl p-2.5 flex items-center gap-2">
+                    <User size={13} className="text-purple-700 shrink-0" aria-hidden="true" />
+                    <span>Pagamento efetuado pelo hóspede titular: <strong className="text-stone-900">{estadiaLocal.titular || 'Hóspede Titular'}</strong></span>
                   </p>
                 ) : (
                   <div className="mt-3 p-3.5 bg-purple-50/60 border border-purple-200 rounded-2xl space-y-1.5 animate-in fade-in">
@@ -1810,10 +1819,10 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                       value={formQuemPagouOutro}
                       onChange={(e) => setFormQuemPagouOutro(e.target.value)}
                       placeholder="Ex: Fernando, Esposa, Secretária..."
-                      className="w-full px-3.5 py-2 text-xs bg-white border border-purple-300 rounded-xl focus:outline-none focus:border-purple-600 focus:ring-1 focus:ring-purple-600 font-semibold"
+                      className="w-full min-h-[40px] px-3.5 py-2 text-xs bg-white border border-purple-300 rounded-xl focus:outline-none focus:border-purple-600 focus:ring-1 focus:ring-purple-600 font-semibold text-stone-900 placeholder:text-stone-500"
                       autoFocus
                     />
-                    <p className="text-[11px] text-purple-800 flex items-center gap-1.5 pt-0.5">
+                    <p className="text-[11px] text-purple-900 flex items-center gap-1.5 pt-0.5">
                       <span>💡</span>
                       <span>Esta informação será guardada para o acerto e relatório final da estadia.</span>
                     </p>
@@ -1827,7 +1836,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                   Valor que foi pago (R$) *
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 font-bold text-sm">
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-600 font-bold text-sm">
                     R$
                   </span>
                   <input
@@ -1836,7 +1845,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                     placeholder="0,00"
                     value={formValor}
                     onChange={(e) => setFormValor(e.target.value)}
-                    className="w-full pl-11 pr-3 py-2.5 text-base font-mono font-black border border-stone-300 rounded-2xl focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 bg-white"
+                    className="w-full min-h-[44px] pl-11 pr-3 py-2.5 text-base font-mono font-black border border-stone-300 rounded-2xl focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 bg-white text-stone-900 placeholder:text-stone-400 tabular-nums"
                   />
                 </div>
               </div>
@@ -1852,7 +1861,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                     required
                     value={formData}
                     onChange={(e) => setFormData(e.target.value)}
-                    className="w-full px-3 py-2 text-xs border border-stone-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white"
+                    className="w-full min-h-[40px] px-3 py-2 text-xs border border-stone-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white tabular-nums"
                   />
                 </div>
 
@@ -1863,7 +1872,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                   <select
                     value={formMetodo}
                     onChange={(e) => setFormMetodo(e.target.value)}
-                    className="w-full px-3 py-2 text-xs border border-stone-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white font-medium"
+                    className="w-full min-h-[40px] px-3 py-2 text-xs border border-stone-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white font-medium"
                   >
                     <option value="PIX">PIX</option>
                     <option value="Transferência Bancária">Transferência Bancária (TED/DOC)</option>
@@ -1885,7 +1894,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                   placeholder="Ex: Adiantamento para peixaria e carnes"
                   value={formObservacao}
                   onChange={(e) => setFormObservacao(e.target.value)}
-                  className="w-full px-3.5 py-2 text-xs border border-stone-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white"
+                  className="w-full min-h-[40px] px-3.5 py-2 text-xs border border-stone-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white text-stone-900 placeholder:text-stone-500"
                 />
               </div>
 
@@ -1898,14 +1907,14 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                     setErroPagamento(null);
                   }}
                   disabled={salvandoPagamento}
-                  className="px-4 py-2.5 text-stone-600 hover:bg-stone-100 font-bold rounded-xl text-xs transition-colors cursor-pointer"
+                  className="min-h-[42px] px-4 py-2.5 text-stone-700 hover:bg-stone-100 font-bold rounded-xl text-xs transition-colors cursor-pointer"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
                   disabled={salvandoPagamento}
-                  className="px-6 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 disabled:opacity-50 text-white font-black rounded-xl text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer tap-bounce"
+                  className="min-h-[42px] px-6 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 disabled:opacity-50 text-white font-black rounded-xl text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer tap-bounce"
                 >
                   {salvandoPagamento ? (
                     <>
@@ -1914,7 +1923,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                     </>
                   ) : (
                     <>
-                      <CheckCircle2 size={15} />
+                      <CheckCircle2 size={15} aria-hidden="true" />
                       <span>Confirmar Pagamento</span>
                     </>
                   )}
@@ -1944,18 +1953,18 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
               
               {/* HEADER DO MODAL */}
               <div className="flex items-start justify-between gap-3 border-b border-stone-100 pb-3">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 min-w-0">
                   <div className="w-11 h-11 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 border border-emerald-200">
-                    <DollarSign size={24} />
+                    <DollarSign size={24} aria-hidden="true" />
                   </div>
-                  <div>
-                    <h3 className="text-base font-black text-stone-900 flex items-center gap-2">
+                  <div className="min-w-0">
+                    <h3 className="text-base font-black text-stone-900 flex items-center gap-2 flex-wrap">
                       <span>Receber Pagamento</span>
-                      <span className="text-xs bg-purple-100 text-purple-900 border border-purple-200 px-2 py-0.5 rounded-md font-bold">
+                      <span className="text-xs bg-purple-100 text-purple-950 border border-purple-200 px-2 py-0.5 rounded-md font-bold tabular-nums">
                         Nota {numNota}
                       </span>
                     </h3>
-                    <p className="text-xs text-stone-500">
+                    <p className="text-xs text-stone-600 tabular-nums truncate">
                       {nota.fornecedor || 'Fornecedor'} • Pedido #{nota.pedido_numero}
                     </p>
                   </div>
@@ -1967,32 +1976,36 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                     setNotaParaReceber(null);
                     setErroNotaPagamento(null);
                   }}
-                  className="w-8 h-8 rounded-full hover:bg-stone-100 text-stone-400 hover:text-stone-700 flex items-center justify-center transition-colors cursor-pointer"
+                  aria-label="Fechar modal de pagamento da nota"
+                  className="w-10 h-10 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 hover:text-stone-900 flex items-center justify-center transition-colors shrink-0 cursor-pointer"
                 >
-                  <X size={18} />
+                  <X size={18} aria-hidden="true" />
                 </button>
               </div>
 
               {/* CARD RESUMO DA NOTA */}
               <div className="bg-stone-50 border border-stone-200 rounded-2xl p-3.5 grid grid-cols-3 gap-2 text-center">
-                <div className="bg-white p-2 rounded-xl border border-stone-100">
-                  <span className="text-[10px] text-stone-500 uppercase font-bold block">Valor da Nota</span>
-                  <span className="text-xs font-black text-stone-900 font-mono">{formatarMoeda(vTotal)}</span>
+                <div className="bg-white p-2.5 rounded-xl border border-stone-100">
+                  <span className="text-[10px] text-stone-600 uppercase font-bold block">Valor da Nota</span>
+                  <span className="text-xs font-black text-stone-900 font-mono tabular-nums">{formatarMoeda(vTotal)}</span>
                 </div>
-                <div className="bg-white p-2 rounded-xl border border-stone-100">
-                  <span className="text-[10px] text-emerald-700 uppercase font-bold block">Já Pago</span>
-                  <span className="text-xs font-black text-emerald-700 font-mono">{formatarMoeda(jaPago)}</span>
+                <div className="bg-white p-2.5 rounded-xl border border-stone-100">
+                  <span className="text-[10px] text-emerald-800 uppercase font-bold block">Já Pago</span>
+                  <span className="text-xs font-black text-emerald-800 font-mono tabular-nums">{formatarMoeda(jaPago)}</span>
                 </div>
-                <div className="bg-rose-50 p-2 rounded-xl border border-rose-200">
-                  <span className="text-[10px] text-rose-700 uppercase font-bold block">Saldo a Pagar</span>
-                  <span className="text-xs font-black text-rose-800 font-mono">{formatarMoeda(saldoRestante)}</span>
+                <div className="bg-rose-50 p-2.5 rounded-xl border border-rose-200">
+                  <span className="text-[10px] text-rose-800 uppercase font-bold block">Saldo a Pagar</span>
+                  <span className="text-xs font-black text-rose-900 font-mono tabular-nums">{formatarMoeda(saldoRestante)}</span>
                 </div>
               </div>
 
               {/* ERRO BANNER */}
               {erroNotaPagamento && (
-                <div className="p-3 bg-rose-50 border border-rose-200 rounded-2xl flex items-center gap-2 text-xs font-bold text-rose-800 animate-shake">
-                  <AlertCircle size={16} className="text-rose-600 shrink-0" />
+                <div
+                  role="alert"
+                  className="p-3 bg-rose-50 border border-rose-200 rounded-2xl flex items-center gap-2 text-xs font-bold text-rose-800 animate-shake"
+                >
+                  <AlertCircle size={16} className="text-rose-600 shrink-0" aria-hidden="true" />
                   <span>{erroNotaPagamento}</span>
                 </div>
               )}
@@ -2004,7 +2017,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                 <div>
                   <label className="block text-xs font-bold text-stone-800 mb-1 flex items-center justify-between">
                     <span>1. Comprovante de Pagamento * (Foto ou PDF)</span>
-                    <span className="text-[10px] text-rose-600 font-black uppercase">Obrigatório</span>
+                    <span className="text-[10px] text-rose-700 font-black uppercase">Obrigatório</span>
                   </label>
 
                   <input
@@ -2021,12 +2034,12 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                       className="border-2 border-dashed border-emerald-300 hover:border-emerald-500 bg-emerald-50/30 hover:bg-emerald-50/60 rounded-2xl p-4 text-center cursor-pointer transition-all flex flex-col items-center justify-center gap-1 group"
                     >
                       <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <UploadCloud size={20} />
+                        <UploadCloud size={20} aria-hidden="true" />
                       </div>
                       <p className="text-xs font-bold text-stone-800">
                         Clique para anexar o comprovante do pagamento
                       </p>
-                      <p className="text-[11px] text-stone-500">
+                      <p className="text-[11px] text-stone-600">
                         Foto (JPG, PNG) ou PDF do comprovante bancário / recibo
                       </p>
                     </div>
@@ -2043,7 +2056,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                           />
                         ) : (
                           <div className="w-12 h-12 bg-purple-100 text-purple-700 rounded-xl flex items-center justify-center border border-purple-300 shrink-0">
-                            <FileText size={22} />
+                            <FileText size={22} aria-hidden="true" />
                           </div>
                         )}
                         <div className="truncate">
@@ -2061,16 +2074,17 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                           <button
                             type="button"
                             onClick={() => setImagemZoom(formNotaComprovante.url)}
-                            className="p-1.5 text-stone-600 hover:text-stone-900 hover:bg-stone-100 rounded-lg transition-colors cursor-pointer"
+                            aria-label="Visualizar comprovante"
+                            className="w-9 h-9 text-stone-700 hover:text-stone-950 hover:bg-stone-100 rounded-lg flex items-center justify-center transition-colors cursor-pointer"
                             title="Visualizar"
                           >
-                            <Eye size={16} />
+                            <Eye size={16} aria-hidden="true" />
                           </button>
                         )}
                         <button
                           type="button"
                           onClick={() => fileInputNotaRef.current?.click()}
-                          className="px-2.5 py-1 text-xs text-emerald-800 bg-emerald-100 hover:bg-emerald-200 font-bold rounded-lg transition-colors cursor-pointer"
+                          className="min-h-[34px] px-2.5 py-1 text-xs text-emerald-900 bg-emerald-100 hover:bg-emerald-200 font-bold rounded-lg transition-colors cursor-pointer"
                         >
                           Trocar
                         </button>
@@ -2089,44 +2103,44 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                     <button
                       type="button"
                       onClick={() => setFormNotaQuemPagou('hospede')}
-                      className={`p-3 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-center justify-between ${
+                      className={`min-h-[46px] p-3 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-center justify-between ${
                         formNotaQuemPagou === 'hospede'
                           ? 'border-emerald-600 bg-emerald-50/80 text-emerald-950 font-bold shadow-xs'
                           : 'border-stone-200 hover:border-stone-300 bg-stone-50/60 text-stone-700'
                       }`}
                     >
                       <div className="flex items-center gap-2">
-                        <User size={16} className={formNotaQuemPagou === 'hospede' ? 'text-emerald-600' : 'text-stone-400'} />
+                        <User size={16} className={formNotaQuemPagou === 'hospede' ? 'text-emerald-700' : 'text-stone-500'} aria-hidden="true" />
                         <span className="text-xs font-bold">Hóspede</span>
                       </div>
                       {formNotaQuemPagou === 'hospede' && (
-                        <Check size={16} className="text-emerald-600" />
+                        <Check size={16} className="text-emerald-700" aria-hidden="true" />
                       )}
                     </button>
 
                     <button
                       type="button"
                       onClick={() => setFormNotaQuemPagou('outra_pessoa')}
-                      className={`p-3 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-center justify-between ${
+                      className={`min-h-[46px] p-3 rounded-2xl border-2 text-left transition-all cursor-pointer flex items-center justify-between ${
                         formNotaQuemPagou === 'outra_pessoa'
                           ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-bold shadow-xs'
                           : 'border-stone-200 hover:border-stone-300 bg-stone-50/60 text-stone-700'
                       }`}
                     >
                       <div className="flex items-center gap-2">
-                        <Users size={16} className={formNotaQuemPagou === 'outra_pessoa' ? 'text-purple-600' : 'text-stone-400'} />
+                        <Users size={16} className={formNotaQuemPagou === 'outra_pessoa' ? 'text-purple-700' : 'text-stone-500'} aria-hidden="true" />
                         <span className="text-xs font-bold">Outro terceiro</span>
                       </div>
                       {formNotaQuemPagou === 'outra_pessoa' && (
-                        <Check size={16} className="text-purple-600" />
+                        <Check size={16} className="text-purple-700" aria-hidden="true" />
                       )}
                     </button>
                   </div>
 
                   {/* Detalhe de acordo com quem pagou */}
                   {formNotaQuemPagou === 'hospede' ? (
-                    <p className="mt-2 text-[11px] text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-xl p-2.5 flex items-center gap-2">
-                      <User size={13} className="text-emerald-600 shrink-0" />
+                    <p className="mt-2 text-[11px] text-emerald-900 bg-emerald-50 border border-emerald-200 rounded-xl p-2.5 flex items-center gap-2">
+                      <User size={13} className="text-emerald-700 shrink-0" aria-hidden="true" />
                       <span>Pago pelo cliente: <strong className="text-emerald-950">{estadiaLocal.titular || 'Hóspede Titular'}</strong>. O valor recebido abaterá da dívida do cliente!</span>
                     </p>
                   ) : (
@@ -2140,10 +2154,10 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                         value={formNotaQuemPagouOutro}
                         onChange={(e) => setFormNotaQuemPagouOutro(e.target.value)}
                         placeholder="Ex: Alexandre Pampolini, Concierge, Outro funcionário..."
-                        className="w-full px-3.5 py-2 text-xs bg-white border border-purple-300 rounded-xl focus:outline-none focus:border-purple-600 focus:ring-1 focus:ring-purple-600 font-semibold"
+                        className="w-full min-h-[40px] px-3.5 py-2 text-xs bg-white border border-purple-300 rounded-xl focus:outline-none focus:border-purple-600 focus:ring-1 focus:ring-purple-600 font-semibold text-stone-900 placeholder:text-stone-500"
                         autoFocus
                       />
-                      <p className="text-[11px] text-purple-800 flex items-center gap-1 pt-0.5">
+                      <p className="text-[11px] text-purple-900 flex items-center gap-1 pt-0.5">
                         <span>💡</span>
                         <span>A nota continuará pendente de reembolso pelo cliente, com o nome do terceiro atualizado.</span>
                       </p>
@@ -2157,7 +2171,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                     3. Valor Recebido / Pago nesta Nota (R$) *
                   </label>
                   <div className="relative">
-                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 font-bold text-sm">
+                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-600 font-bold text-sm">
                       R$
                     </span>
                     <input
@@ -2166,33 +2180,33 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                       placeholder="0,00"
                       value={formNotaValor}
                       onChange={(e) => setFormNotaValor(e.target.value)}
-                      className="w-full pl-11 pr-3 py-2.5 text-base font-mono font-black border border-stone-300 rounded-2xl focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 bg-white"
+                      className="w-full min-h-[44px] pl-11 pr-3 py-2.5 text-base font-mono font-black border border-stone-300 rounded-2xl focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 bg-white text-stone-900 tabular-nums"
                     />
                   </div>
 
                   {/* Feedback dinâmico de quitação vs pagamento parcial vs SUPERÁVIT */}
                   {vDigitado > 0 && formNotaQuemPagou === 'hospede' && (
-                    <div className="mt-2">
+                    <div className="mt-2 tabular-nums">
                       {vDigitado > saldoRestante + 0.001 ? (
                         <div className="p-3 bg-blue-50 border-2 border-blue-400 rounded-2xl text-xs text-blue-950 font-bold space-y-1">
                           <div className="flex items-center gap-2 text-blue-900">
-                            <Sparkles size={16} className="text-blue-600 shrink-0" />
+                            <Sparkles size={16} className="text-blue-600 shrink-0" aria-hidden="true" />
                             <span className="text-sm font-black">
                               ✓ Quitação Total + Superávit a Favor do Cliente!
                             </span>
                           </div>
-                          <p className="text-[11px] text-blue-800 font-medium">
+                          <p className="text-[11px] text-blue-900 font-medium">
                             A nota será 100% quitada ({formatarMoeda(saldoRestante)}) e o excedente de <strong className="text-blue-950 font-black">{formatarMoeda(vDigitado - saldoRestante)}</strong> ficará como <strong>Superávit / Crédito em Conta</strong> para o cliente abater em novas compras.
                           </p>
                         </div>
                       ) : quitaraTotal ? (
                         <div className="p-2.5 bg-emerald-50 border border-emerald-300 rounded-xl text-xs text-emerald-900 font-bold flex items-center gap-2">
-                          <CheckCircle2 size={15} className="text-emerald-600 shrink-0" />
+                          <CheckCircle2 size={15} className="text-emerald-700 shrink-0" aria-hidden="true" />
                           <span>✓ Quitação Total da Nota! A nota será marcada como "Pago pelo Hóspede".</span>
                         </div>
                       ) : (
-                        <div className="p-2.5 bg-amber-50 border border-amber-300 rounded-xl text-xs text-amber-900 font-bold flex items-center gap-2">
-                          <AlertTriangle size={15} className="text-amber-600 shrink-0" />
+                        <div className="p-2.5 bg-amber-50 border border-amber-300 rounded-xl text-xs text-amber-950 font-bold flex items-center gap-2">
+                          <AlertTriangle size={15} className="text-amber-700 shrink-0" aria-hidden="true" />
                           <span>
                             ⚠️ Pagamento Parcial! Restará <strong>{formatarMoeda(saldoAposEstePagamento)}</strong> pendente de reembolso pelo cliente.
                           </span>
@@ -2203,9 +2217,9 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
 
                   {/* Atalho se o cliente já possui saldo disponível */}
                   {saldoDisponivelCliente > 0.01 && (
-                    <div className="mt-2.5 p-2.5 bg-indigo-50 border border-indigo-200 rounded-xl flex items-center justify-between gap-2">
-                      <div className="text-[11px] text-indigo-900 font-semibold flex items-center gap-1.5 min-w-0">
-                        <Sparkles size={13} className="text-indigo-600 shrink-0" />
+                    <div className="mt-2.5 p-2.5 bg-indigo-50 border border-indigo-200 rounded-xl flex items-center justify-between gap-2 tabular-nums">
+                      <div className="text-[11px] text-indigo-950 font-semibold flex items-center gap-1.5 min-w-0">
+                        <Sparkles size={13} className="text-indigo-700 shrink-0" aria-hidden="true" />
                         <span className="truncate">Cliente possui <strong>{formatarMoeda(saldoDisponivelCliente)}</strong> em saldo disponível.</span>
                       </div>
                       <button
@@ -2215,7 +2229,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                           setNotaParaReceber(null);
                           handleAbrirModalPagarComSaldo(alvo.anexo, alvo.numeroNota);
                         }}
-                        className="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[10px] font-bold cursor-pointer transition-colors shrink-0"
+                        className="min-h-[32px] px-2.5 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[11px] font-bold cursor-pointer transition-colors shrink-0"
                       >
                         Pagar com Saldo
                       </button>
@@ -2234,7 +2248,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                       required
                       value={formNotaData}
                       onChange={(e) => setFormNotaData(e.target.value)}
-                      className="w-full px-3 py-2 text-xs border border-stone-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white"
+                      className="w-full min-h-[40px] px-3 py-2 text-xs border border-stone-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white tabular-nums"
                     />
                   </div>
 
@@ -2245,7 +2259,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                     <select
                       value={formNotaMetodo}
                       onChange={(e) => setFormNotaMetodo(e.target.value)}
-                      className="w-full px-3 py-2 text-xs border border-stone-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white font-medium"
+                      className="w-full min-h-[40px] px-3 py-2 text-xs border border-stone-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white font-medium"
                     >
                       <option value="PIX">PIX</option>
                       <option value="Transferência Bancária">Transferência Bancária (TED/DOC)</option>
@@ -2267,7 +2281,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                     placeholder="Ex: Comprovante enviado via WhatsApp pelo cliente"
                     value={formNotaObservacao}
                     onChange={(e) => setFormNotaObservacao(e.target.value)}
-                    className="w-full px-3.5 py-2 text-xs border border-stone-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white"
+                    className="w-full min-h-[40px] px-3.5 py-2 text-xs border border-stone-300 rounded-xl focus:outline-none focus:border-emerald-500 bg-white text-stone-900 placeholder:text-stone-500"
                   />
                 </div>
 
@@ -2280,14 +2294,14 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                       setErroNotaPagamento(null);
                     }}
                     disabled={salvandoNotaPagamento}
-                    className="px-4 py-2.5 text-stone-600 hover:bg-stone-100 font-bold rounded-xl text-xs transition-colors cursor-pointer"
+                    className="min-h-[42px] px-4 py-2.5 text-stone-700 hover:bg-stone-100 font-bold rounded-xl text-xs transition-colors cursor-pointer"
                   >
                     Cancelar
                   </button>
                   <button
                     type="submit"
                     disabled={salvandoNotaPagamento}
-                    className="px-6 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 disabled:opacity-50 text-white font-black rounded-xl text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer tap-bounce"
+                    className="min-h-[42px] px-6 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 disabled:opacity-50 text-white font-black rounded-xl text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer tap-bounce"
                   >
                     {salvandoNotaPagamento ? (
                       <>
@@ -2296,7 +2310,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                       </>
                     ) : (
                       <>
-                        <CheckCircle2 size={15} />
+                        <CheckCircle2 size={15} aria-hidden="true" />
                         <span>Confirmar e Salvar Recebimento</span>
                       </>
                     )}
@@ -2323,18 +2337,18 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
               
               {/* Header */}
               <div className="flex items-start justify-between gap-3 border-b border-stone-100 pb-3 shrink-0">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 min-w-0">
                   <div className="w-11 h-11 rounded-2xl bg-blue-100 text-blue-800 flex items-center justify-center shrink-0 border border-blue-200">
-                    <FileCheck size={24} />
+                    <FileCheck size={24} aria-hidden="true" />
                   </div>
-                  <div>
-                    <h3 className="text-base font-black text-stone-900 flex items-center gap-2">
+                  <div className="min-w-0">
+                    <h3 className="text-base font-black text-stone-900 flex items-center gap-2 flex-wrap">
                       <span>Comprovantes e Pagamentos</span>
-                      <span className="text-xs bg-purple-100 text-purple-900 border border-purple-200 px-2 py-0.5 rounded-md font-bold">
+                      <span className="text-xs bg-purple-100 text-purple-950 border border-purple-200 px-2 py-0.5 rounded-md font-bold tabular-nums">
                         Nota {numNota}
                       </span>
                     </h3>
-                    <p className="text-xs text-stone-500">
+                    <p className="text-xs text-stone-600 tabular-nums truncate">
                       {nota.fornecedor || 'Fornecedor'} • Pedido #{nota.pedido_numero} • Valor: {formatarMoeda(Number(nota.valor_total) || 0)}
                     </p>
                   </div>
@@ -2343,9 +2357,10 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                 <button
                   type="button"
                   onClick={() => setModalComprovantesNota(null)}
-                  className="w-8 h-8 rounded-full hover:bg-stone-100 text-stone-400 hover:text-stone-700 flex items-center justify-center transition-colors cursor-pointer"
+                  aria-label="Fechar comprovantes da nota"
+                  className="w-10 h-10 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 hover:text-stone-900 flex items-center justify-center transition-colors shrink-0 cursor-pointer"
                 >
-                  <X size={18} />
+                  <X size={18} aria-hidden="true" />
                 </button>
               </div>
 
@@ -2354,12 +2369,12 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                 
                 {/* 1. Comprovante / Recibo da Compra Original */}
                 <div className="bg-stone-50 border border-stone-200 rounded-2xl p-3.5 space-y-2">
-                  <div className="flex items-center justify-between text-xs">
+                  <div className="flex items-center justify-between text-xs gap-2">
                     <span className="font-bold text-stone-800 flex items-center gap-1.5">
-                      <Receipt size={14} className="text-stone-500" />
+                      <Receipt size={14} className="text-stone-600" aria-hidden="true" />
                       Nota Fiscal / Recibo de Compra Original
                     </span>
-                    <span className="text-[11px] text-stone-500 font-medium">
+                    <span className="text-[11px] text-stone-600 font-medium tabular-nums">
                       {nota.data_comprovante ? formatarDataBr(nota.data_comprovante) : ''}
                     </span>
                   </div>
@@ -2378,7 +2393,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                             className="w-full h-full object-cover group-hover/img:scale-110 transition-transform"
                           />
                           <div className="absolute inset-0 bg-stone-950/20 group-hover/img:bg-stone-950/40 flex items-center justify-center text-white opacity-0 group-hover/img:opacity-100 transition-opacity">
-                            <Eye size={16} />
+                            <Eye size={16} aria-hidden="true" />
                           </div>
                         </div>
                       ) : (
@@ -2388,7 +2403,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                           rel="noopener noreferrer"
                           className="w-14 h-14 rounded-xl bg-purple-100 text-purple-700 border border-purple-200 flex flex-col items-center justify-center shrink-0 hover:bg-purple-200 transition-colors"
                         >
-                          <FileText size={20} />
+                          <FileText size={20} aria-hidden="true" />
                           <span className="text-[9px] font-black uppercase">PDF</span>
                         </a>
                       )}
@@ -2396,7 +2411,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                         <p className="text-xs font-bold text-stone-900 truncate" title={nota.nome}>
                           {nota.nome}
                         </p>
-                        <p className="text-[11px] text-stone-500">
+                        <p className="text-[11px] text-stone-600">
                           {nota.tamanho} • Anexado por {nota.anexado_por_nome || 'Equipe'}
                         </p>
                       </div>
@@ -2407,9 +2422,9 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                         <button
                           type="button"
                           onClick={() => setImagemZoom(nota.url)}
-                          className="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                          className="min-h-[36px] px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
                         >
-                          <Eye size={13} />
+                          <Eye size={13} aria-hidden="true" />
                           <span>Ampliar</span>
                         </button>
                       ) : (
@@ -2417,9 +2432,9 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                           href={nota.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-800 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors"
+                          className="min-h-[36px] px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-900 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors"
                         >
-                          <ExternalLink size={13} />
+                          <ExternalLink size={13} aria-hidden="true" />
                           <span>Abrir PDF</span>
                         </a>
                       )}
@@ -2429,18 +2444,18 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
 
                 {/* 2. Lista de Comprovantes de Pagamento Registrados */}
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs font-bold text-stone-800">
+                  <div className="flex items-center justify-between text-xs font-bold text-stone-800 gap-2 flex-wrap tabular-nums">
                     <span className="flex items-center gap-1.5">
-                      <DollarSign size={14} className="text-emerald-600" />
+                      <DollarSign size={14} className="text-emerald-700" aria-hidden="true" />
                       Comprovantes de Pagamento Recebidos ({pagamentos.length})
                     </span>
-                    <span className="text-[11px] text-emerald-700 font-black">
+                    <span className="text-[11px] text-emerald-800 font-black">
                       Total Pago: {formatarMoeda(pagamentos.reduce((acc, p) => acc + (Number(p.valor) || 0), 0))}
                     </span>
                   </div>
 
                   {pagamentos.length === 0 ? (
-                    <div className="p-6 text-center bg-stone-50 border border-dashed border-stone-200 rounded-2xl text-xs text-stone-500">
+                    <div className="p-6 text-center bg-stone-50 border border-dashed border-stone-200 rounded-2xl text-xs text-stone-600">
                       Nenhum comprovante de pagamento adicional registrado nesta nota.
                     </div>
                   ) : (
@@ -2461,7 +2476,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                                   className="w-14 h-14 rounded-xl shrink-0 border border-purple-200 bg-purple-50 text-purple-700 flex flex-col items-center justify-center gap-0.5 hover:bg-purple-100 transition-colors shadow-inner"
                                   title="Abrir comprovante em PDF"
                                 >
-                                  <FileText size={18} />
+                                  <FileText size={18} aria-hidden="true" />
                                   <span className="text-[9px] font-black uppercase">PDF</span>
                                 </a>
                               ) : (
@@ -2476,30 +2491,30 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                                     className="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-200"
                                   />
                                   <div className="absolute inset-0 bg-stone-950/20 group-hover/img:bg-stone-950/40 flex items-center justify-center text-white opacity-0 group-hover/img:opacity-100 transition-opacity">
-                                    <Eye size={14} />
+                                    <Eye size={14} aria-hidden="true" />
                                   </div>
                                 </div>
                               )
                             ) : (
                               <div className="w-14 h-14 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center shrink-0 font-black border border-blue-200">
-                                <DollarSign size={20} />
+                                <DollarSign size={20} aria-hidden="true" />
                               </div>
                             )}
 
                             {/* Informações */}
                             <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-2 flex-wrap">
-                                <span className="text-xs bg-stone-100 text-stone-700 font-bold px-1.5 py-0.5 rounded">
+                              <div className="flex items-center gap-2 flex-wrap tabular-nums">
+                                <span className="text-xs bg-stone-100 text-stone-800 font-bold px-1.5 py-0.5 rounded">
                                   #{idx + 1}
                                 </span>
                                 <span className="text-sm font-black text-stone-900 font-mono">
                                   {formatarMoeda(pag.valor)}
                                 </span>
-                                <span className="bg-blue-100 text-blue-900 text-[10px] font-bold px-2 py-0.5 rounded">
+                                <span className="bg-blue-100 text-blue-950 text-[11px] font-bold px-2 py-0.5 rounded">
                                   {pag.forma_pagamento || 'PIX'}
                                 </span>
                                 {pag.data && (
-                                  <span className="text-[11px] text-stone-500">
+                                  <span className="text-[11px] text-stone-600">
                                     {formatarDataBr(pag.data)}
                                   </span>
                                 )}
@@ -2513,7 +2528,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                               </div>
 
                               {pag.observacao && (
-                                <p className="text-[11px] text-stone-500 italic mt-0.5">
+                                <p className="text-[11px] text-stone-600 italic mt-0.5">
                                   "{pag.observacao}"
                                 </p>
                               )}
@@ -2528,18 +2543,18 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                                   href={pag.comprovante_url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="px-2.5 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-xl text-xs font-bold flex items-center gap-1 transition-colors"
+                                  className="min-h-[36px] px-2.5 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 rounded-xl text-xs font-bold flex items-center gap-1 transition-colors"
                                 >
-                                  <ExternalLink size={12} />
+                                  <ExternalLink size={12} aria-hidden="true" />
                                   <span>Ver PDF</span>
                                 </a>
                               ) : (
                                 <button
                                   type="button"
                                   onClick={() => setImagemZoom(pag.comprovante_url || null)}
-                                  className="px-2.5 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer"
+                                  className="min-h-[36px] px-2.5 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 rounded-xl text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer"
                                 >
-                                  <Eye size={12} />
+                                  <Eye size={12} aria-hidden="true" />
                                   <span>Ampliar</span>
                                 </button>
                               )
@@ -2558,7 +2573,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                 <button
                   type="button"
                   onClick={() => setModalComprovantesNota(null)}
-                  className="px-4 py-2 bg-stone-900 hover:bg-stone-800 text-white font-bold rounded-xl text-xs transition-colors cursor-pointer"
+                  className="min-h-[40px] px-4 py-2 bg-stone-900 hover:bg-stone-800 text-white font-bold rounded-xl text-xs transition-colors cursor-pointer"
                 >
                   Fechar
                 </button>
@@ -2590,18 +2605,18 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
               
               {/* Header */}
               <div className="flex items-start justify-between gap-3 border-b border-stone-100 pb-3">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 min-w-0">
                   <div className="w-11 h-11 rounded-2xl bg-indigo-100 text-indigo-800 flex items-center justify-center shrink-0 border border-indigo-200">
-                    <Sparkles size={24} />
+                    <Sparkles size={24} aria-hidden="true" />
                   </div>
-                  <div>
-                    <h3 className="text-base font-black text-stone-900 flex items-center gap-2">
+                  <div className="min-w-0">
+                    <h3 className="text-base font-black text-stone-900 flex items-center gap-2 flex-wrap">
                       <span>Pagar com Saldo em Conta</span>
-                      <span className="text-xs bg-purple-100 text-purple-900 border border-purple-200 px-2 py-0.5 rounded-md font-bold">
+                      <span className="text-xs bg-purple-100 text-purple-950 border border-purple-200 px-2 py-0.5 rounded-md font-bold tabular-nums">
                         Nota {numNota}
                       </span>
                     </h3>
-                    <p className="text-xs text-stone-500">
+                    <p className="text-xs text-stone-600 tabular-nums truncate">
                       {nota.fornecedor || 'Fornecedor'} • Pedido #{nota.pedido_numero}
                     </p>
                   </div>
@@ -2610,28 +2625,29 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                 <button
                   type="button"
                   onClick={() => setModalPagarComSaldo(null)}
-                  className="w-8 h-8 rounded-full hover:bg-stone-100 text-stone-400 hover:text-stone-700 flex items-center justify-center transition-colors cursor-pointer"
+                  aria-label="Fechar modal de pagamento com saldo"
+                  className="w-10 h-10 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 hover:text-stone-900 flex items-center justify-center transition-colors shrink-0 cursor-pointer"
                 >
-                  <X size={18} />
+                  <X size={18} aria-hidden="true" />
                 </button>
               </div>
 
               {/* Informações de Saldo */}
-              <div className="grid grid-cols-2 gap-2 text-center">
+              <div className="grid grid-cols-2 gap-2 text-center tabular-nums">
                 <div className="bg-indigo-50 border border-indigo-200 rounded-2xl p-3">
-                  <span className="text-[10px] text-indigo-700 uppercase font-black block">Saldo Disponível Cliente</span>
+                  <span className="text-[10px] text-indigo-800 uppercase font-black block">Saldo Disponível Cliente</span>
                   <span className="text-sm font-black text-indigo-950 font-mono">{formatarMoeda(saldoDisponivelCliente)}</span>
                 </div>
                 <div className="bg-rose-50 border border-rose-200 rounded-2xl p-3">
-                  <span className="text-[10px] text-rose-700 uppercase font-black block">Pendente nesta Nota</span>
+                  <span className="text-[10px] text-rose-800 uppercase font-black block">Pendente nesta Nota</span>
                   <span className="text-sm font-black text-rose-900 font-mono">{formatarMoeda(saldoDevedor)}</span>
                 </div>
               </div>
 
-              <div className="p-3 bg-stone-50 border border-stone-200 rounded-2xl text-xs text-stone-600 flex items-center gap-2">
-                <Sparkles size={16} className="text-indigo-600 shrink-0" />
+              <div className="p-3 bg-stone-50 border border-stone-200 rounded-2xl text-xs text-stone-700 flex items-center gap-2">
+                <Sparkles size={16} className="text-indigo-700 shrink-0" aria-hidden="true" />
                 <span>
-                  O valor será debitado do crédito existente do cliente (<strong className="text-stone-800">{estadiaLocal.titular}</strong>). Não é necessário anexar novo comprovante.
+                  O valor será debitado do crédito existente do cliente (<strong className="text-stone-900">{estadiaLocal.titular}</strong>). Não é necessário anexar novo comprovante.
                 </span>
               </div>
 
@@ -2641,7 +2657,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                     Valor a Debitar do Saldo (R$) *
                   </label>
                   <div className="relative">
-                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 font-bold text-sm">
+                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-600 font-bold text-sm">
                       R$
                     </span>
                     <input
@@ -2649,20 +2665,20 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                       required
                       value={formValorSaldoDebitar}
                       onChange={(e) => setFormValorSaldoDebitar(e.target.value)}
-                      className="w-full pl-11 pr-3 py-2.5 text-base font-mono font-black border border-stone-300 rounded-2xl focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 bg-white"
+                      className="w-full min-h-[44px] pl-11 pr-3 py-2.5 text-base font-mono font-black border border-stone-300 rounded-2xl focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 bg-white text-stone-900 tabular-nums"
                     />
                   </div>
                 </div>
 
                 {/* Previsão pós débito */}
-                <div className="bg-stone-50 border border-stone-200 rounded-xl p-2.5 text-[11px] space-y-1 text-stone-600">
+                <div className="bg-stone-50 border border-stone-200 rounded-xl p-2.5 text-[11px] space-y-1 text-stone-700 tabular-nums">
                   <div className="flex items-center justify-between">
                     <span>Saldo restante do cliente após débito:</span>
-                    <strong className="text-indigo-900">{formatarMoeda(saldoRestanteCliente)}</strong>
+                    <strong className="text-indigo-950">{formatarMoeda(saldoRestanteCliente)}</strong>
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Restante a pagar na nota:</span>
-                    <strong className={saldoRestanteNota <= 0.01 ? 'text-emerald-700' : 'text-rose-700'}>
+                    <strong className={saldoRestanteNota <= 0.01 ? 'text-emerald-800' : 'text-rose-800'}>
                       {saldoRestanteNota <= 0.01 ? '✓ Quitada' : formatarMoeda(saldoRestanteNota)}
                     </strong>
                   </div>
@@ -2674,14 +2690,14 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                     type="button"
                     onClick={() => setModalPagarComSaldo(null)}
                     disabled={salvandoPagamentoSaldo}
-                    className="px-4 py-2.5 text-stone-600 hover:bg-stone-100 font-bold rounded-xl text-xs transition-colors cursor-pointer"
+                    className="min-h-[42px] px-4 py-2.5 text-stone-700 hover:bg-stone-100 font-bold rounded-xl text-xs transition-colors cursor-pointer"
                   >
                     Cancelar
                   </button>
                   <button
                     type="submit"
                     disabled={salvandoPagamentoSaldo || valorDigitado <= 0 || valorDigitado > saldoDisponivelCliente + 0.01}
-                    className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50 text-white font-black rounded-xl text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer tap-bounce"
+                    className="min-h-[42px] px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50 text-white font-black rounded-xl text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer tap-bounce"
                   >
                     {salvandoPagamentoSaldo ? (
                       <>
@@ -2690,7 +2706,7 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
                       </>
                     ) : (
                       <>
-                        <CheckCircle2 size={15} />
+                        <CheckCircle2 size={15} aria-hidden="true" />
                         <span>Confirmar Pagamento com Saldo</span>
                       </>
                     )}
@@ -2720,9 +2736,10 @@ export const GerenciamentoPagamentosModal: React.FC<GerenciamentoPagamentosModal
             <button
               type="button"
               onClick={() => setImagemZoom(null)}
-              className="absolute top-2 right-2 w-10 h-10 rounded-full bg-stone-900/80 hover:bg-stone-900 text-white flex items-center justify-center transition-colors cursor-pointer"
+              aria-label="Fechar ampliação do comprovante"
+              className="absolute top-2 right-2 w-10 h-10 rounded-full bg-stone-900/90 hover:bg-stone-900 text-white flex items-center justify-center transition-colors cursor-pointer"
             >
-              <X size={20} />
+              <X size={20} aria-hidden="true" />
             </button>
           </div>
         </div>

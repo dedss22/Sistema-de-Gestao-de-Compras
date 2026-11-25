@@ -513,5 +513,6 @@ export async function baixarPlanilhaPedido(pedido, estadia) {
     }
   } catch (err) {
     console.error('Erro ao gerar planilha Excel estilizada:', err);
+    throw err;
   }
 }

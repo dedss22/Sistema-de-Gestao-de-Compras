@@ -5,10 +5,24 @@
  * impedindo que o localStorage (que tem teto estrito de apenas 5MB no navegador) estoure a cota.
  */
 
+import type { AnexoPedido, PagamentoNota, PedidoBanco } from './db/types';
+
 const DB_NAME = 'ListaComprasArquivosDB';
 const DB_VERSION = 2;
 const STORE_NAME = 'comprovantes_midia';
 const STORE_PEDIDOS = 'pedidos_store';
+
+interface MidiaRecord {
+  id: string;
+  dataUrl: string;
+  salvoEm: string;
+}
+
+interface PedidosSnapshotRecord {
+  id: string;
+  lista: PedidoBanco[];
+  atualizadoEm: string;
+}
 
 function abrirDB(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
@@ -65,7 +79,8 @@ export async function obterMidiaIndexedDB(id: string): Promise<string | null> {
       const store = tx.objectStore(STORE_NAME);
       const req = store.get(id);
       req.onsuccess = () => {
-        resolve(req.result ? req.result.dataUrl : null);
+        const result = req.result as MidiaRecord | undefined;
+        resolve(result ? result.dataUrl : null);
       };
       req.onerror = () => resolve(null);
     });
@@ -96,7 +111,7 @@ export async function removerMidiaIndexedDB(id: string): Promise<void> {
 /**
  * Salva um snapshot de backup completo dos pedidos no IndexedDB.
  */
-export async function salvarPedidosIndexedDB(pedidos: any[]): Promise<void> {
+export async function salvarPedidosIndexedDB(pedidos: PedidoBanco[]): Promise<void> {
   if (!Array.isArray(pedidos)) return;
   try {
     const db = await abrirDB();
@@ -119,7 +134,7 @@ export async function salvarPedidosIndexedDB(pedidos: any[]): Promise<void> {
 /**
  * Recupera o snapshot de pedidos do IndexedDB se o localStorage estiver vazio.
  */
-export async function obterPedidosIndexedDB(): Promise<any[] | null> {
+export async function obterPedidosIndexedDB(): Promise<PedidoBanco[] | null> {
   try {
     const db = await abrirDB();
     return new Promise((resolve) => {
@@ -127,7 +142,8 @@ export async function obterPedidosIndexedDB(): Promise<any[] | null> {
       const store = tx.objectStore(STORE_PEDIDOS);
       const req = store.get('__pedidos_snapshot__');
       req.onsuccess = () => {
-        resolve(req.result && Array.isArray(req.result.lista) ? req.result.lista : null);
+        const result = req.result as PedidosSnapshotRecord | undefined;
+        resolve(result && Array.isArray(result.lista) ? result.lista : null);
       };
       req.onerror = () => resolve(null);
     });
@@ -140,7 +156,7 @@ export async function obterPedidosIndexedDB(): Promise<any[] | null> {
  * Hidrata pedidos injetando as imagens em alta resolução do IndexedDB nos anexos.
  * Transforma `indexeddb:id` ou anexos truncados de volta em `dataUrl` funcional.
  */
-export async function hidratarAnexosComMidia(pedidos: any[]): Promise<any[]> {
+export async function hidratarAnexosComMidia(pedidos: PedidoBanco[]): Promise<PedidoBanco[]> {
   if (!Array.isArray(pedidos)) return [];
 
   const promessas = pedidos.map(async (p) => {
@@ -149,7 +165,7 @@ export async function hidratarAnexosComMidia(pedidos: any[]): Promise<any[]> {
     }
 
     const anexosHidratados = await Promise.all(
-      p.anexos.map(async (anexo: any) => {
+      p.anexos.map(async (anexo: AnexoPedido) => {
         if (!anexo) return anexo;
 
         // Se já tem URL válida, completa e funcional (> 500 chars se dataUrl)
@@ -183,7 +199,7 @@ export async function hidratarAnexosComMidia(pedidos: any[]): Promise<any[]> {
         let pagamentosHidratados = anexo.pagamentos;
         if (Array.isArray(anexo.pagamentos) && anexo.pagamentos.length > 0) {
           pagamentosHidratados = await Promise.all(
-            anexo.pagamentos.map(async (pg: any) => {
+            anexo.pagamentos.map(async (pg: PagamentoNota) => {
               if (pg && pg.id && (!pg.comprovante_url || pg.comprovante_url.startsWith('indexeddb:'))) {
                 try {
                   const midiaPg = await obterMidiaIndexedDB(pg.id);
@@ -217,7 +233,7 @@ export async function hidratarAnexosComMidia(pedidos: any[]): Promise<any[]> {
 /**
  * Hidrata um único pedido com suas imagens do IndexedDB.
  */
-export async function hidratarPedidoComMidia(pedido: any): Promise<any> {
+export async function hidratarPedidoComMidia(pedido: PedidoBanco): Promise<PedidoBanco> {
   if (!pedido) return pedido;
   const [hidratado] = await hidratarAnexosComMidia([pedido]);
   return hidratado || pedido;

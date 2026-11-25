@@ -64,7 +64,7 @@ export const ItemImage: React.FC<ItemImageProps> = ({
         <span className="text-4xl mb-1 select-none" role="img" aria-label={alt}>
           {fallbackEmoji || FORNECEDOR_FALLBACK_ICONS[fornecedor]}
         </span>
-        <span className="text-[11px] font-bold text-center line-clamp-2 px-1 text-stone-700 leading-tight">
+        <span className="text-[11px] font-bold text-center line-clamp-2 px-1 text-stone-800 leading-tight">
           {alt}
         </span>
       </div>
@@ -72,11 +72,11 @@ export const ItemImage: React.FC<ItemImageProps> = ({
   }
 
   return (
-    <div className={`w-full aspect-[4/3] rounded-2xl overflow-hidden bg-stone-100 shadow-sm border border-stone-200/80 relative group ${className}`}>
+    <div className={`w-full aspect-[4/3] rounded-2xl overflow-hidden bg-stone-100/90 shadow-xs border border-stone-200/80 relative group ${className}`}>
       {/* Shimmer de carregamento */}
       {!isLoaded && (
-        <div className="absolute inset-0 bg-stone-100 animate-pulse flex items-center justify-center text-stone-300">
-          <span className="text-2xl">{fallbackEmoji || FORNECEDOR_FALLBACK_ICONS[fornecedor]}</span>
+        <div aria-hidden="true" className="absolute inset-0 bg-stone-100 animate-pulse flex items-center justify-center text-stone-400">
+          <span className="text-2xl select-none">{fallbackEmoji || FORNECEDOR_FALLBACK_ICONS[fornecedor]}</span>
         </div>
       )}
       

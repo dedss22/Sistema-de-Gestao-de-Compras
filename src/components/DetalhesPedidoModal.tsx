@@ -581,50 +581,52 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
       {/* ========================================================= */}
       <div className="bg-white w-full max-w-5xl rounded-3xl shadow-2xl border border-stone-200 flex flex-col max-h-[94vh] overflow-hidden animate-in zoom-in-95 duration-200 modal-conteudo-tela print:hidden">
         {/* Cabeçalho do Modal */}
-        <div className="p-4 sm:px-6 sm:py-4 bg-stone-950 text-white flex items-center justify-between border-b border-stone-800 shrink-0">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black text-lg border border-amber-500/30 shrink-0 shadow-inner">
+        <div className="p-4 sm:px-6 sm:py-4 bg-stone-950 text-white flex flex-wrap sm:flex-nowrap items-center justify-between gap-3 border-b border-stone-800 shrink-0">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-11 h-11 rounded-2xl bg-amber-500/20 text-amber-300 flex items-center justify-center font-black text-lg border border-amber-500/30 shrink-0 shadow-inner tabular-nums">
               #{pedido.numero}
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
-                <h3 className="font-extrabold text-base sm:text-lg leading-tight text-white">
+                <h3 className="font-extrabold text-base sm:text-lg leading-tight text-white tabular-nums">
                   Pedido #{pedido.numero}
                 </h3>
-                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 tabular-nums">
                   {totalItens} {totalItens === 1 ? 'item solicitado' : 'itens solicitados'}
                 </span>
-                <span className="text-xs font-bold text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/25">
+                <span className="text-xs font-bold text-amber-300 bg-amber-500/15 px-2.5 py-0.5 rounded-full border border-amber-500/25">
                   👩‍🍳 {pedido.cozinheira}
                 </span>
               </div>
-              <p className="text-xs text-stone-400 flex items-center gap-1.5 mt-0.5">
-                <Home size={12} className="text-amber-400" />
-                <span className="font-bold text-stone-200">{estadia.casa || 'Casa de Temporada'}</span>
-                <span>•</span>
+              <p className="text-xs text-stone-300 flex items-center gap-1.5 mt-0.5 flex-wrap tabular-nums">
+                <Home size={12} className="text-amber-400 shrink-0" aria-hidden="true" />
+                <span className="font-bold text-white">{estadia.casa || 'Casa de Temporada'}</span>
+                <span aria-hidden="true">•</span>
                 <span>Enviado em {formatarDataHoraBahia(pedido.finalizado_em)}</span>
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-2 shrink-0 ml-auto">
             <button
               type="button"
               onClick={handleBaixarExcel}
-              className="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-600 active:scale-95 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer tap-bounce"
+              aria-label="Baixar planilha formatada em Excel"
+              className="min-h-[40px] min-w-[40px] sm:min-w-0 px-3 py-1.5 bg-emerald-700 hover:bg-emerald-600 active:scale-95 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-xs cursor-pointer tap-bounce"
               title="Baixar planilha formatada em Excel"
             >
-              <FileSpreadsheet size={15} />
+              <FileSpreadsheet size={15} aria-hidden="true" />
               <span className="hidden sm:inline">Baixar Excel (.xlsx)</span>
             </button>
 
             <button
               type="button"
               onClick={handleImprimir}
-              className="px-3 py-1.5 bg-stone-800 hover:bg-stone-700 active:scale-95 text-stone-200 hover:text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer tap-bounce"
+              aria-label={abaModal === 'anexos' ? 'Imprimir relatório de comprovantes' : 'Imprimir lista de compras'}
+              className="min-h-[40px] min-w-[40px] sm:min-w-0 px-3 py-1.5 bg-stone-800 hover:bg-stone-700 active:scale-95 text-stone-200 hover:text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer tap-bounce"
               title={abaModal === 'anexos' ? 'Imprimir relatório de comprovantes e fotos numeradas' : 'Imprimir lista de compras no mesmo design da tela'}
             >
-              <Printer size={15} />
+              <Printer size={15} aria-hidden="true" />
               <span className="hidden sm:inline">
                 {abaModal === 'anexos' ? 'Imprimir Relatório de Notas' : 'Imprimir / PDF'}
               </span>
@@ -633,9 +635,10 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="w-8 h-8 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-400 hover:text-white flex items-center justify-center transition-colors ml-1 cursor-pointer"
+              aria-label="Fechar detalhes do pedido"
+              className="w-10 h-10 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white flex items-center justify-center transition-colors ml-1 cursor-pointer"
             >
-              <X size={18} />
+              <X size={18} aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -646,17 +649,17 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
         <div className="bg-stone-100/90 border-b border-stone-200 p-3 sm:px-6 sm:py-3.5 space-y-2.5 shrink-0">
           {/* Stepper Visual de Fases */}
           {statusAtual !== 'rejeitado' ? (
-            <div className="grid grid-cols-4 gap-1.5 text-center text-[11px] font-bold">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 text-center text-[11px] font-bold">
               {/* Passo 1: Em Aprovação */}
               <div
                 className={`p-2 rounded-xl border flex flex-col items-center justify-center gap-1 transition-all ${
                   statusAtual === 'em_aprovacao'
-                    ? 'bg-amber-100/80 border-amber-300 text-amber-950 ring-2 ring-amber-400/30 font-black'
-                    : 'bg-white border-stone-200 text-stone-500'
+                    ? 'bg-amber-100/90 border-amber-300 text-amber-950 ring-2 ring-amber-400/30 font-black'
+                    : 'bg-white border-stone-200 text-stone-600'
                 }`}
               >
                 <div className="flex items-center gap-1">
-                  <Clock size={12} className={statusAtual === 'em_aprovacao' ? 'text-amber-700' : 'text-stone-400'} />
+                  <Clock size={12} className={statusAtual === 'em_aprovacao' ? 'text-amber-700' : 'text-stone-500'} aria-hidden="true" />
                   <span>1. Em Aprovação</span>
                 </div>
               </div>
@@ -665,12 +668,12 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
               <div
                 className={`p-2 rounded-xl border flex flex-col items-center justify-center gap-1 transition-all ${
                   statusAtual === 'enviar_fornecedores'
-                    ? 'bg-sky-100/80 border-sky-300 text-sky-950 ring-2 ring-sky-400/30 font-black'
-                    : 'bg-white border-stone-200 text-stone-500'
+                    ? 'bg-sky-100/90 border-sky-300 text-sky-950 ring-2 ring-sky-400/30 font-black'
+                    : 'bg-white border-stone-200 text-stone-600'
                 }`}
               >
                 <div className="flex items-center gap-1">
-                  <Send size={12} className={statusAtual === 'enviar_fornecedores' ? 'text-sky-700' : 'text-stone-400'} />
+                  <Send size={12} className={statusAtual === 'enviar_fornecedores' ? 'text-sky-700' : 'text-stone-500'} aria-hidden="true" />
                   <span>2. Enviar Fornecedores</span>
                 </div>
               </div>
@@ -679,12 +682,12 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
               <div
                 className={`p-2 rounded-xl border flex flex-col items-center justify-center gap-1 transition-all ${
                   statusAtual === 'preparacao_entrega'
-                    ? 'bg-purple-100/80 border-purple-300 text-purple-950 ring-2 ring-purple-400/30 font-black'
-                    : 'bg-white border-stone-200 text-stone-500'
+                    ? 'bg-purple-100/90 border-purple-300 text-purple-950 ring-2 ring-purple-400/30 font-black'
+                    : 'bg-white border-stone-200 text-stone-600'
                 }`}
               >
                 <div className="flex items-center gap-1">
-                  <Package size={12} className={statusAtual === 'preparacao_entrega' ? 'text-purple-700' : 'text-stone-400'} />
+                  <Package size={12} className={statusAtual === 'preparacao_entrega' ? 'text-purple-700' : 'text-stone-500'} aria-hidden="true" />
                   <span>3. Preparação & Entrega</span>
                 </div>
               </div>
@@ -693,24 +696,24 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
               <div
                 className={`p-2 rounded-xl border flex flex-col items-center justify-center gap-1 transition-all ${
                   statusAtual === 'finalizado'
-                    ? 'bg-emerald-100/80 border-emerald-300 text-emerald-950 ring-2 ring-emerald-400/30 font-black'
-                    : 'bg-white border-stone-200 text-stone-500'
+                    ? 'bg-emerald-100/90 border-emerald-300 text-emerald-950 ring-2 ring-emerald-400/30 font-black'
+                    : 'bg-white border-stone-200 text-stone-600'
                 }`}
               >
                 <div className="flex items-center gap-1">
-                  <CheckCircle2 size={12} className={statusAtual === 'finalizado' ? 'text-emerald-700' : 'text-stone-400'} />
+                  <CheckCircle2 size={12} className={statusAtual === 'finalizado' ? 'text-emerald-700' : 'text-stone-500'} aria-hidden="true" />
                   <span>4. Finalizado</span>
                 </div>
               </div>
             </div>
           ) : (
             /* Banner de Pedido Rejeitado */
-            <div className="p-3 bg-red-50 border border-red-200 rounded-2xl flex items-center justify-between gap-3 text-red-900 text-xs">
+            <div className="p-3 bg-red-50 border border-red-200 rounded-2xl flex flex-wrap items-center justify-between gap-3 text-red-900 text-xs">
               <div className="flex items-center gap-2">
-                <XCircle size={18} className="text-red-600 shrink-0" />
+                <XCircle size={18} className="text-red-600 shrink-0" aria-hidden="true" />
                 <div>
                   <strong className="block font-black text-sm text-red-950">Pedido Rejeitado</strong>
-                  <span>
+                  <span className="tabular-nums">
                     Rejeitado por <strong>{pedido.rejeitado_por_nome || 'Equipe'}</strong> {pedido.rejeitado_em ? `em ${formatarDataHoraBahia(pedido.rejeitado_em)}` : ''}.
                   </span>
                 </div>
@@ -720,64 +723,64 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                 type="button"
                 disabled={salvandoStatus}
                 onClick={() => handleAlterarStatus('em_aprovacao')}
-                className="px-3.5 py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition-all cursor-pointer tap-bounce shrink-0"
+                className="min-h-[38px] px-3.5 py-1.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition-all cursor-pointer tap-bounce shrink-0"
               >
-                <RotateCcw size={13} />
+                <RotateCcw size={13} aria-hidden="true" />
                 <span>Voltar para Aprovação</span>
               </button>
             </div>
           )}
 
           {/* Barra de Ações Contextuais Conforme a Fase Atual */}
-          <div className="bg-white p-2.5 sm:px-4 sm:py-2.5 rounded-2xl border border-stone-200/90 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+          <div className="bg-white p-3 sm:px-4 sm:py-2.5 rounded-2xl border border-stone-200/90 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
             {/* Mensagem e Contexto da Fase */}
             <div className="text-xs">
               {statusAtual === 'em_aprovacao' && (
-                <div className="flex items-center gap-2 text-amber-900 font-semibold">
-                  <AlertCircle size={15} className="text-amber-600 shrink-0" />
+                <div className="flex items-center gap-2 text-amber-950 font-semibold">
+                  <AlertCircle size={15} className="text-amber-700 shrink-0" aria-hidden="true" />
                   <span>Pedido enviado pela cozinheira <strong>{pedido.cozinheira}</strong>. Aguarda aprovação para prosseguir.</span>
                 </div>
               )}
               {statusAtual === 'enviar_fornecedores' && (
-                <div className="flex items-center gap-2 text-sky-900 font-semibold">
-                  <Send size={15} className="text-sky-600 shrink-0" />
+                <div className="flex items-center gap-2 text-sky-950 font-semibold">
+                  <Send size={15} className="text-sky-700 shrink-0" aria-hidden="true" />
                   <span>
                     Aprovado por <strong>{pedido.aprovado_por_nome || 'Equipe'}</strong>. Encaminhe para os fornecedores e confirme abaixo.
                   </span>
                 </div>
               )}
               {statusAtual === 'preparacao_entrega' && (
-                <div className="flex items-center gap-2 text-purple-900 font-semibold">
-                  <Package size={15} className="text-purple-600 shrink-0" />
+                <div className="flex items-center gap-2 text-purple-950 font-semibold">
+                  <Package size={15} className="text-purple-700 shrink-0" aria-hidden="true" />
                   <span>
                     Enviado aos fornecedores por <strong>{pedido.enviado_fornecedor_por_nome || 'Equipe'}</strong>. Anexe os comprovantes e finalize quando entregue.
                   </span>
                 </div>
               )}
               {statusAtual === 'finalizado' && (
-                <div className="flex items-center gap-2 text-emerald-900 font-semibold">
-                  <CheckCircle2 size={15} className="text-emerald-600 shrink-0" />
+                <div className="flex items-center gap-2 text-emerald-950 font-semibold tabular-nums">
+                  <CheckCircle2 size={15} className="text-emerald-700 shrink-0" aria-hidden="true" />
                   <span>
                     Pedido finalizado com sucesso por <strong>{pedido.concluido_por_nome || 'Equipe'}</strong> {pedido.concluido_em ? `em ${formatarDataHoraBahia(pedido.concluido_em)}` : ''}.
                   </span>
                 </div>
               )}
               {statusAtual === 'rejeitado' && (
-                <span className="text-stone-500">Este pedido foi rejeitado. Você pode reabri-lo caso a rejeição tenha sido feita por engano.</span>
+                <span className="text-stone-600">Este pedido foi rejeitado. Você pode reabri-lo caso a rejeição tenha sido feita por engano.</span>
               )}
             </div>
 
             {/* Botões de Ação Dinâmicos */}
-            <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
+            <div className="flex flex-wrap items-center gap-2 self-end sm:self-center shrink-0">
               {statusAtual === 'em_aprovacao' && (
                 <>
                   <button
                     type="button"
                     onClick={handleAbrirEdicao}
-                    className="px-3.5 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-950 font-black rounded-xl text-xs border border-amber-300 transition-all flex items-center gap-1.5 cursor-pointer tap-bounce shadow-2xs"
+                    className="min-h-[38px] px-3.5 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-950 font-black rounded-xl text-xs border border-amber-300 transition-all flex items-center gap-1.5 cursor-pointer tap-bounce shadow-2xs"
                     title="Editar itens, quantidades e observações do pedido"
                   >
-                    <Edit3 size={13} className="text-amber-700" />
+                    <Edit3 size={13} className="text-amber-700" aria-hidden="true" />
                     <span>Editar Pedido</span>
                   </button>
 
@@ -785,9 +788,9 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                     type="button"
                     disabled={salvandoStatus}
                     onClick={() => handleAlterarStatus('rejeitado')}
-                    className="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-700 font-bold rounded-xl text-xs border border-red-200 transition-colors flex items-center gap-1 cursor-pointer"
+                    className="min-h-[38px] px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-800 font-bold rounded-xl text-xs border border-red-200 transition-colors flex items-center gap-1 cursor-pointer"
                   >
-                    <XCircle size={13} />
+                    <XCircle size={13} aria-hidden="true" />
                     <span>Rejeitar</span>
                   </button>
 
@@ -795,23 +798,23 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                     type="button"
                     disabled={salvandoStatus}
                     onClick={() => handleAlterarStatus('enviar_fornecedores')}
-                    className="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs shadow-xs transition-all flex items-center gap-1.5 cursor-pointer tap-bounce"
+                    className="min-h-[38px] px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs shadow-xs transition-all flex items-center gap-1.5 cursor-pointer tap-bounce"
                   >
-                    <CheckCircle2 size={14} />
+                    <CheckCircle2 size={14} aria-hidden="true" />
                     <span>Aprovar Pedido</span>
                   </button>
                 </>
               )}
 
               {statusAtual === 'enviar_fornecedores' && (
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <button
                     type="button"
                     onClick={handleAbrirEdicao}
-                    className="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl text-xs transition-colors flex items-center gap-1.5 cursor-pointer tap-bounce"
+                    className="min-h-[38px] px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-xl text-xs transition-colors flex items-center gap-1.5 cursor-pointer tap-bounce"
                     title="Editar itens e quantidades antes do envio"
                   >
-                    <Edit3 size={13} />
+                    <Edit3 size={13} aria-hidden="true" />
                     <span>Editar Pedido</span>
                   </button>
 
@@ -819,25 +822,25 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                     type="button"
                     disabled={salvandoStatus}
                     onClick={() => handleAlterarStatus('preparacao_entrega')}
-                    className="px-4 py-1.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl text-xs shadow-xs transition-all flex items-center gap-1.5 cursor-pointer tap-bounce"
+                    className="min-h-[38px] px-4 py-1.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl text-xs shadow-xs transition-all flex items-center gap-1.5 cursor-pointer tap-bounce"
                   >
-                    <Send size={14} />
+                    <Send size={14} aria-hidden="true" />
                     <span>Marcar Pedido Enviado</span>
                   </button>
                 </div>
               )}
 
               {statusAtual === 'preparacao_entrega' && (
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <button
                     type="button"
                     onClick={() => {
                       setAbaModal('anexos');
                       fileInputRef.current?.click();
                     }}
-                    className="px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-800 font-bold rounded-xl text-xs border border-purple-200 transition-colors flex items-center gap-1.5 cursor-pointer"
+                    className="min-h-[38px] px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-900 font-bold rounded-xl text-xs border border-purple-200 transition-colors flex items-center gap-1.5 cursor-pointer"
                   >
-                    <Paperclip size={13} />
+                    <Paperclip size={13} aria-hidden="true" />
                     <span>Anexar Comprovante</span>
                   </button>
 
@@ -845,9 +848,9 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                     type="button"
                     disabled={salvandoStatus}
                     onClick={() => handleAlterarStatus('finalizado')}
-                    className="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs shadow-xs transition-all flex items-center gap-1.5 cursor-pointer tap-bounce"
+                    className="min-h-[38px] px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs shadow-xs transition-all flex items-center gap-1.5 cursor-pointer tap-bounce"
                   >
-                    <CheckCircle2 size={14} />
+                    <CheckCircle2 size={14} aria-hidden="true" />
                     <span>Finalizar Pedido</span>
                   </button>
                 </div>
@@ -860,9 +863,9 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                     setAbaModal('anexos');
                     fileInputRef.current?.click();
                   }}
-                  className="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl text-xs transition-colors flex items-center gap-1.5 cursor-pointer"
+                  className="min-h-[38px] px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-xl text-xs transition-colors flex items-center gap-1.5 cursor-pointer"
                 >
-                  <Paperclip size={13} />
+                  <Paperclip size={13} aria-hidden="true" />
                   <span>Anexar Comprovante Extra</span>
                 </button>
               )}
@@ -882,49 +885,49 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
         {/* ========================================================= */}
         {/* NAVEGAÇÃO DE ABAS: ITENS DO PEDIDO | ANEXOS | HOSPEDAGEM */}
         {/* ========================================================= */}
-        <div className="flex items-center justify-between px-4 sm:px-6 pt-3 pb-2 border-b border-stone-200 bg-stone-50/80 shrink-0">
-          <div className="flex items-center gap-2 overflow-x-auto">
+        <div className="flex items-center justify-between gap-3 px-4 sm:px-6 pt-3 pb-2.5 border-b border-stone-200 bg-stone-50/90 shrink-0">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
             <button
               type="button"
               onClick={() => setAbaModal('itens')}
-              className={`px-3.5 py-2 rounded-xl text-xs font-black flex items-center gap-2 transition-all cursor-pointer ${
+              className={`min-h-[40px] px-3.5 py-2 rounded-xl text-xs font-black flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap shrink-0 tabular-nums ${
                 abaModal === 'itens'
                   ? 'bg-amber-500 text-stone-950 shadow-sm shadow-amber-500/20'
-                  : 'bg-white hover:bg-stone-100 text-stone-600 border border-stone-200'
+                  : 'bg-white hover:bg-stone-100 text-stone-700 border border-stone-200'
               }`}
             >
-              <ShoppingBag size={14} className={abaModal === 'itens' ? 'text-stone-950' : 'text-amber-600'} />
+              <ShoppingBag size={14} className={abaModal === 'itens' ? 'text-stone-950' : 'text-amber-700'} aria-hidden="true" />
               <span>Pedido de Compras ({totalItens} itens)</span>
             </button>
 
             <button
               type="button"
               onClick={() => setAbaModal('anexos')}
-              className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all cursor-pointer ${
+              className={`min-h-[40px] px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap shrink-0 tabular-nums ${
                 abaModal === 'anexos'
                   ? 'bg-purple-600 text-white shadow-sm'
-                  : 'bg-white hover:bg-stone-100 text-stone-600 border border-stone-200'
+                  : 'bg-white hover:bg-stone-100 text-stone-700 border border-stone-200'
               }`}
             >
-              <Paperclip size={14} className={abaModal === 'anexos' ? 'text-white' : 'text-purple-600'} />
+              <Paperclip size={14} className={abaModal === 'anexos' ? 'text-white' : 'text-purple-700'} aria-hidden="true" />
               <span>Comprovantes & Notas ({anexosLista.length})</span>
             </button>
 
             <button
               type="button"
               onClick={() => setAbaModal('estadia')}
-              className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all cursor-pointer ${
+              className={`min-h-[40px] px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap shrink-0 ${
                 abaModal === 'estadia'
                   ? 'bg-stone-900 text-white shadow-sm'
-                  : 'bg-white hover:bg-stone-100 text-stone-600 border border-stone-200'
+                  : 'bg-white hover:bg-stone-100 text-stone-700 border border-stone-200'
               }`}
             >
-              <Home size={14} className={abaModal === 'estadia' ? 'text-amber-400' : 'text-stone-400'} />
+              <Home size={14} className={abaModal === 'estadia' ? 'text-amber-400' : 'text-stone-500'} aria-hidden="true" />
               <span>Hospedagem & Auditoria</span>
             </button>
           </div>
 
-          <div className="text-[11px] text-stone-500 font-medium hidden md:block">
+          <div className="text-[11px] text-stone-600 font-semibold hidden md:block shrink-0 tabular-nums">
             {totalItens} itens • {anexosLista.length} comprovante(s)
           </div>
         </div>
@@ -940,41 +943,41 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
             <div className="space-y-4 animate-in fade-in duration-200">
               {/* Cabeçalho Resumo estilo Planilha de Compras */}
               <div className="bg-white border border-stone-200/90 rounded-2xl p-3.5 sm:px-4 shadow-xs">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-stone-400 block">Cozinheira:</span>
+                    <span className="text-[10px] uppercase font-bold text-stone-600 block tracking-wider">Cozinheira:</span>
                     <span className="font-extrabold text-stone-900 text-sm">{pedido.cozinheira}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-stone-400 block">Casa:</span>
-                    <span className="font-bold text-stone-800">{estadia.casa || '-'}</span>
+                    <span className="text-[10px] uppercase font-bold text-stone-600 block tracking-wider">Casa:</span>
+                    <span className="font-bold text-stone-900">{estadia.casa || '-'}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-stone-400 block">Período:</span>
-                    <span className="font-medium text-stone-700">{formatarDataBr(estadia.entrada || '')} a {formatarDataBr(estadia.saida || '')}</span>
+                    <span className="text-[10px] uppercase font-bold text-stone-600 block tracking-wider">Período:</span>
+                    <span className="font-medium text-stone-800 tabular-nums">{formatarDataBr(estadia.entrada || '')} a {formatarDataBr(estadia.saida || '')}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-stone-400 block">Hóspedes / Titular:</span>
-                    <span className="font-medium text-stone-700">{estadia.hospedes || '-'} pess. • {estadia.titular || '-'}</span>
+                    <span className="text-[10px] uppercase font-bold text-stone-600 block tracking-wider">Hóspedes / Titular:</span>
+                    <span className="font-medium text-stone-800 tabular-nums">{estadia.hospedes || '-'} pess. • {estadia.titular || '-'}</span>
                   </div>
                 </div>
               </div>
 
               {/* Filtro Rápido por Fornecedor (se houver mais de um) */}
               {fornecedoresDisponiveis.length > 1 && (
-                <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
-                  <span className="text-xs font-bold text-stone-400 flex items-center gap-1 pr-1">
-                    <Filter size={12} />
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+                  <span className="text-xs font-bold text-stone-600 flex items-center gap-1 pr-1 shrink-0">
+                    <Filter size={12} aria-hidden="true" />
                     <span>Filtrar:</span>
                   </span>
 
                   <button
                     type="button"
                     onClick={() => setFiltroFornecedor('todos')}
-                    className={`px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    className={`min-h-[36px] px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 tabular-nums ${
                       filtroFornecedor === 'todos'
                         ? 'bg-stone-900 text-white'
-                        : 'bg-white hover:bg-stone-100 text-stone-600 border border-stone-200'
+                        : 'bg-white hover:bg-stone-100 text-stone-700 border border-stone-200'
                     }`}
                   >
                     Todos ({totalItens})
@@ -988,10 +991,10 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                         key={fornKey}
                         type="button"
                         onClick={() => setFiltroFornecedor(fornKey)}
-                        className={`px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                        className={`min-h-[36px] px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 tabular-nums ${
                           filtroFornecedor === fornKey
                             ? 'bg-amber-600 text-white'
-                            : 'bg-white hover:bg-stone-100 text-stone-600 border border-stone-200'
+                            : 'bg-white hover:bg-stone-100 text-stone-700 border border-stone-200'
                         }`}
                       >
                         {info.nome} ({qtd})
@@ -1003,9 +1006,9 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
 
               {/* Tabela do Pedido de Compras Formatada */}
               {totalItens === 0 ? (
-                <div className="text-center py-12 bg-white rounded-2xl border border-stone-200 text-stone-500 space-y-2">
-                  <ShoppingBag size={32} className="mx-auto text-stone-300" />
-                  <p className="font-bold text-sm text-stone-800">Nenhum item encontrado neste pedido.</p>
+                <div className="text-center py-12 bg-white rounded-2xl border border-stone-200 text-stone-600 space-y-2">
+                  <ShoppingBag size={32} className="mx-auto text-stone-400" aria-hidden="true" />
+                  <p className="font-bold text-sm text-stone-900">Nenhum item encontrado neste pedido.</p>
                 </div>
               ) : (
                 Object.entries(itensPorFornecedor)
@@ -1027,7 +1030,7 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                           <div className="flex items-center gap-2">
                             <span className="uppercase tracking-wider font-black">{fornInfo.nome}</span>
                           </div>
-                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-white/70 border border-stone-300/60 text-stone-800">
+                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-white/80 border border-stone-300/70 text-stone-900 tabular-nums">
                             {itens.length} {itens.length === 1 ? 'item' : 'itens'}
                           </span>
                         </div>
@@ -1036,7 +1039,7 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                         <div className="overflow-x-auto">
                           <table className="w-full text-left text-xs border-collapse">
                             <thead>
-                              <tr className="bg-stone-50/80 border-b border-stone-200 text-stone-500 font-extrabold text-[11px] uppercase tracking-wider">
+                              <tr className="bg-stone-50/90 border-b border-stone-200 text-stone-600 font-extrabold text-[11px] uppercase tracking-wider">
                                 <th className="py-2.5 pl-4 pr-2 w-10 text-center">#</th>
                                 <th className="py-2.5 px-3">Item Solicitado</th>
                                 <th className="py-2.5 px-3 hidden sm:table-cell">Categoria</th>
@@ -1048,7 +1051,7 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                             <tbody className="divide-y divide-stone-100">
                               {itens.map((item: any, idx: number) => (
                                 <tr key={idx} className="hover:bg-amber-50/30 transition-colors">
-                                  <td className="py-3 pl-4 pr-2 text-center font-mono text-stone-400 font-bold text-[11px]">
+                                  <td className="py-3 pl-4 pr-2 text-center font-mono text-stone-500 font-bold text-[11px] tabular-nums">
                                     {idx + 1}
                                   </td>
                                   <td className="py-3 px-3">
@@ -1056,22 +1059,22 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                                       {item.item || item.nome}
                                     </div>
                                     {item.observacao && item.observacao.trim() && (
-                                      <p className="text-[11px] text-amber-900 italic mt-0.5 md:hidden bg-amber-50 px-2 py-0.5 rounded inline-block">
+                                      <p className="text-[11px] text-amber-950 italic mt-0.5 md:hidden bg-amber-50 px-2 py-0.5 rounded inline-block">
                                         Obs: {item.observacao.trim()}
                                       </p>
                                     )}
                                   </td>
                                   <td className="py-3 px-3 hidden sm:table-cell">
                                     {item.categoria && item.categoria !== '-' ? (
-                                      <span className="text-[11px] font-semibold text-stone-600 bg-stone-100 px-2 py-0.5 rounded-md border border-stone-200">
+                                      <span className="text-[11px] font-semibold text-stone-700 bg-stone-100 px-2 py-0.5 rounded-md border border-stone-200">
                                         {item.categoria}
                                       </span>
                                     ) : (
-                                      <span className="text-stone-300">-</span>
+                                      <span className="text-stone-400">-</span>
                                     )}
                                   </td>
                                   <td className="py-3 px-3 text-right sm:text-left">
-                                    <span className="font-black text-stone-950 text-sm bg-stone-100 px-2.5 py-1 rounded-lg border border-stone-200 inline-block shadow-2xs">
+                                    <span className="font-black text-stone-950 text-sm bg-stone-100 px-2.5 py-1 rounded-lg border border-stone-200 inline-block shadow-2xs tabular-nums">
                                       {item.quantidade} {item.unidade}
                                     </span>
                                   </td>
@@ -1081,15 +1084,15 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                                         {item.observacao.trim()}
                                       </span>
                                     ) : (
-                                      <span className="text-stone-300">-</span>
+                                      <span className="text-stone-400">-</span>
                                     )}
                                   </td>
                                   <td className="py-3 pr-4 pl-2 text-right">
                                     <span
-                                      className={`text-[10px] font-bold px-2 py-0.5 rounded-md border inline-block ${
+                                      className={`text-[11px] font-bold px-2 py-0.5 rounded-md border inline-block ${
                                         item.aceitaSubstituto
-                                          ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
-                                          : 'bg-rose-50 text-rose-800 border-rose-200'
+                                          ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
+                                          : 'bg-rose-50 text-rose-900 border-rose-200'
                                       }`}
                                     >
                                       {item.aceitaSubstituto ? '✓ Aceita' : '✗ Não aceita'}
@@ -1116,23 +1119,23 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
               <div className="bg-white rounded-3xl border border-stone-200 p-4 sm:p-5 shadow-xs space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-stone-100">
                   <div>
-                    <h4 className="font-extrabold text-base text-stone-900 flex items-center gap-2">
-                      <Paperclip size={18} className="text-purple-600" />
+                    <h4 className="font-extrabold text-base text-stone-900 flex items-center gap-2 tabular-nums">
+                      <Paperclip size={18} className="text-purple-700" aria-hidden="true" />
                       <span>Comprovantes & Notas Fiscais ({anexosLista.length})</span>
                     </h4>
-                    <p className="text-xs text-stone-500 mt-0.5">
+                    <p className="text-xs text-stone-600 mt-0.5">
                       Anexe fotos de notas fiscais ou PDFs com fornecedor, valor e responsável pelo pagamento.
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <button
                       type="button"
                       onClick={handleImprimir}
-                      className="px-3.5 py-2.5 bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 rounded-2xl text-xs font-black flex items-center justify-center gap-2 transition-all cursor-pointer tap-bounce shrink-0 shadow-xs"
+                      className="min-h-[42px] px-3.5 py-2.5 bg-purple-50 hover:bg-purple-100 text-purple-950 border border-purple-200 rounded-2xl text-xs font-black flex items-center justify-center gap-2 transition-all cursor-pointer tap-bounce shrink-0 shadow-xs"
                       title="Imprimir relatório completo de comprovantes e fotos numeradas"
                     >
-                      <Printer size={15} className="text-purple-700" />
+                      <Printer size={15} className="text-purple-700" aria-hidden="true" />
                       <span>Imprimir Relatório de Notas</span>
                     </button>
 
@@ -1140,16 +1143,16 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                       type="button"
                       disabled={enviandoAnexos}
                       onClick={() => fileInputRef.current?.click()}
-                      className="px-4 py-2.5 bg-purple-600 hover:bg-purple-500 text-white rounded-2xl text-xs font-black flex items-center justify-center gap-2 shadow-md shadow-purple-600/25 transition-all cursor-pointer tap-bounce shrink-0"
+                      className="min-h-[42px] px-4 py-2.5 bg-purple-600 hover:bg-purple-500 text-white rounded-2xl text-xs font-black flex items-center justify-center gap-2 shadow-md shadow-purple-600/25 transition-all cursor-pointer tap-bounce shrink-0"
                     >
                       {enviandoAnexos ? (
                         <>
-                          <RefreshCw size={15} className="animate-spin" />
+                          <RefreshCw size={15} className="animate-spin" aria-hidden="true" />
                           <span>Processando...</span>
                         </>
                       ) : (
                         <>
-                          <Upload size={15} />
+                          <Upload size={15} aria-hidden="true" />
                           <span>Anexar Comprovante (Foto/PDF)</span>
                         </>
                       )}
@@ -1160,34 +1163,34 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                 {/* Cards de Métricas / Resumo dos Valores dos Comprovantes */}
                 {anexosLista.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
-                    <div className="bg-stone-50 p-3 rounded-2xl border border-stone-200">
-                      <span className="text-[10px] font-extrabold text-stone-400 uppercase tracking-wider block">
+                    <div className="bg-stone-50 p-3.5 rounded-2xl border border-stone-200">
+                      <span className="text-[11px] font-extrabold text-stone-600 uppercase tracking-wider block">
                         Total das Notas
                       </span>
-                      <span className="text-lg font-black text-stone-900 block mt-0.5">
+                      <span className="text-lg font-black text-stone-950 block mt-0.5 tabular-nums">
                         R$ {formatarMoeda(totaisComprovantes.total)}
                       </span>
-                      <span className="text-[11px] text-stone-500">{anexosLista.length} comprovante(s)</span>
+                      <span className="text-[11px] text-stone-600 font-medium tabular-nums">{anexosLista.length} comprovante(s)</span>
                     </div>
 
-                    <div className="bg-emerald-50/70 p-3 rounded-2xl border border-emerald-200/80">
-                      <span className="text-[10px] font-extrabold text-emerald-800 uppercase tracking-wider block">
+                    <div className="bg-emerald-50/70 p-3.5 rounded-2xl border border-emerald-200/80">
+                      <span className="text-[11px] font-extrabold text-emerald-900 uppercase tracking-wider block">
                         👤 Pago pelo Hóspede
                       </span>
-                      <span className="text-lg font-black text-emerald-950 block mt-0.5">
+                      <span className="text-lg font-black text-emerald-950 block mt-0.5 tabular-nums">
                         R$ {formatarMoeda(totaisComprovantes.totalHospede)}
                       </span>
-                      <span className="text-[11px] text-emerald-700">Reembolso / Acerto</span>
+                      <span className="text-[11px] text-emerald-800 font-medium">Reembolso / Acerto</span>
                     </div>
 
-                    <div className="bg-purple-50/70 p-3 rounded-2xl border border-purple-200/80">
-                      <span className="text-[10px] font-extrabold text-purple-800 uppercase tracking-wider block">
+                    <div className="bg-purple-50/70 p-3.5 rounded-2xl border border-purple-200/80">
+                      <span className="text-[11px] font-extrabold text-purple-900 uppercase tracking-wider block">
                         👥 Pago por Outra Pessoa
                       </span>
-                      <span className="text-lg font-black text-purple-950 block mt-0.5">
+                      <span className="text-lg font-black text-purple-950 block mt-0.5 tabular-nums">
                         R$ {formatarMoeda(totaisComprovantes.totalOutro)}
                       </span>
-                      <span className="text-[11px] text-purple-700">Equipe / Concierge / Terceiros</span>
+                      <span className="text-[11px] text-purple-800 font-medium">Equipe / Concierge / Terceiros</span>
                     </div>
                   </div>
                 )}
@@ -1197,16 +1200,16 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
               {anexosLista.length === 0 ? (
                 <div
                   onClick={() => fileInputRef.current?.click()}
-                  className="bg-white p-8 sm:p-12 rounded-3xl border-2 border-dashed border-stone-300 hover:border-purple-400 bg-stone-50/50 hover:bg-purple-50/30 text-center transition-all cursor-pointer space-y-3"
+                  className="p-8 sm:p-12 rounded-3xl border-2 border-dashed border-stone-300 hover:border-purple-400 bg-white/80 hover:bg-purple-50/40 text-center transition-all cursor-pointer space-y-3"
                 >
-                  <div className="w-14 h-14 bg-purple-100 text-purple-600 rounded-3xl flex items-center justify-center mx-auto shadow-inner">
-                    <Upload size={26} />
+                  <div className="w-14 h-14 bg-purple-100 text-purple-700 rounded-3xl flex items-center justify-center mx-auto shadow-inner border border-purple-200/70">
+                    <Upload size={26} aria-hidden="true" />
                   </div>
                   <div>
                     <p className="text-base font-extrabold text-stone-900">
                       Nenhum comprovante anexado a este pedido
                     </p>
-                    <p className="text-xs text-stone-500 max-w-md mx-auto mt-1">
+                    <p className="text-xs text-stone-600 max-w-md mx-auto mt-1 leading-relaxed">
                       Clique aqui para enviar fotos de notas fiscais, cupons de supermercado, peixaria ou comprovantes em PDF com o fornecedor e valor.
                     </p>
                   </div>
@@ -1226,13 +1229,13 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                         {/* Topo do Card: Número da Nota, Data e Quem Pagou */}
                         <div className="flex items-center justify-between gap-2 flex-wrap">
                           <div className="flex items-center gap-1.5">
-                            <span className="text-xs font-black bg-purple-700 text-white px-2.5 py-1 rounded-xl shadow-xs flex items-center gap-1">
-                              <FileText size={12} />
+                            <span className="text-xs font-black bg-purple-700 text-white px-2.5 py-1 rounded-xl shadow-xs flex items-center gap-1 tabular-nums">
+                              <FileText size={12} aria-hidden="true" />
                               <span>Nota {numeroNota}</span>
                             </span>
 
-                            <span className="text-xs font-bold text-stone-600 flex items-center gap-1 bg-stone-100 px-2.5 py-1 rounded-xl">
-                              <Calendar size={13} className="text-stone-400" />
+                            <span className="text-xs font-bold text-stone-700 flex items-center gap-1 bg-stone-100 px-2.5 py-1 rounded-xl tabular-nums">
+                              <Calendar size={13} className="text-stone-500" aria-hidden="true" />
                               <span>{anexo.data_comprovante ? formatarDataBr(anexo.data_comprovante) : 'Data não informada'}</span>
                             </span>
                           </div>
@@ -1246,12 +1249,12 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                           >
                             {isOutraPessoa ? (
                               <>
-                                <Users size={12} className="text-purple-600" />
+                                <Users size={12} className="text-purple-700" aria-hidden="true" />
                                 <span>Pago por: {anexo.quem_pagou_outro || 'Outra pessoa'}</span>
                               </>
                             ) : (
                               <>
-                                <User size={12} className="text-emerald-600" />
+                                <User size={12} className="text-emerald-700" aria-hidden="true" />
                                 <span>Pago pelo Hóspede</span>
                               </>
                             )}
@@ -1272,11 +1275,11 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                                 className="w-full h-full object-cover"
                               />
                               {/* Selo identificador sobre a imagem */}
-                              <div className="absolute top-1 left-1 bg-stone-950/85 text-white font-black text-[9px] px-1.5 py-0.5 rounded shadow">
+                              <div className="absolute top-1 left-1 bg-stone-950/85 text-white font-black text-[9px] px-1.5 py-0.5 rounded shadow tabular-nums">
                                 Nota {numeroNota}
                               </div>
                               <div className="absolute inset-0 bg-stone-900/40 opacity-0 group-hover/img:opacity-100 flex items-center justify-center transition-opacity text-white">
-                                <Eye size={16} />
+                                <Eye size={16} aria-hidden="true" />
                               </div>
                             </div>
                           ) : (
@@ -1285,39 +1288,39 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                               className="w-16 h-16 rounded-2xl bg-red-100 text-red-700 flex flex-col items-center justify-center shrink-0 border border-red-200 cursor-pointer shadow-inner hover:bg-red-200 transition-colors relative"
                               title="Clique para abrir o PDF"
                             >
-                              <div className="absolute top-1 left-1 bg-stone-950/85 text-white font-black text-[9px] px-1.5 py-0.5 rounded shadow">
+                              <div className="absolute top-1 left-1 bg-stone-950/85 text-white font-black text-[9px] px-1.5 py-0.5 rounded shadow tabular-nums">
                                 Nota {numeroNota}
                               </div>
-                              <FileText size={22} className="mt-2" />
+                              <FileText size={22} className="mt-2" aria-hidden="true" />
                               <span className="text-[10px] font-bold uppercase">PDF</span>
                             </div>
                           )}
 
                           <div className="flex-1 overflow-hidden">
-                            <div className="flex items-center gap-1.5 text-stone-500 text-xs font-semibold">
-                              <Building2 size={13} className="text-amber-600 shrink-0" />
+                            <div className="flex items-center gap-1.5 text-stone-600 text-xs font-semibold">
+                              <Building2 size={13} className="text-amber-700 shrink-0" aria-hidden="true" />
                               <span className="truncate">Fornecedor:</span>
                             </div>
                             <h5 className="font-black text-stone-900 text-base leading-tight truncate">
                               {anexo.fornecedor || 'Fornecedor não informado'}
                             </h5>
 
-                            <div className="mt-1 flex items-baseline gap-1">
-                              <span className="text-xs font-bold text-stone-500">Valor Total:</span>
-                              <span className="text-lg font-black text-emerald-800">
+                            <div className="mt-1 flex items-baseline gap-1.5">
+                              <span className="text-xs font-bold text-stone-600">Valor Total:</span>
+                              <span className="text-lg font-black text-emerald-800 tabular-nums">
                                 R$ {valorFormatado}
                               </span>
                             </div>
 
-                            <p className="text-[11px] text-stone-400 mt-1 truncate">
+                            <p className="text-[11px] text-stone-600 mt-1 truncate">
                               {anexo.nome} • {anexo.tamanho}
                             </p>
                           </div>
                         </div>
 
                         {/* Rodapé do Card com Ações */}
-                        <div className="pt-2 border-t border-stone-100 flex items-center justify-between text-xs">
-                          <span className="text-[11px] text-stone-400 truncate">
+                        <div className="pt-2.5 border-t border-stone-100 flex items-center justify-between gap-2 text-xs">
+                          <span className="text-[11px] text-stone-600 truncate">
                             Anexado por {anexo.anexado_por_nome || 'Equipe'}
                           </span>
 
@@ -1326,20 +1329,20 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                               <button
                                 type="button"
                                 onClick={() => setImagemZoom(anexo.url)}
-                                className="px-2.5 py-1 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl transition-colors cursor-pointer flex items-center gap-1"
+                                className="min-h-[36px] px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-xl transition-colors cursor-pointer flex items-center gap-1"
                                 title="Ver imagem ampliada"
                               >
-                                <Eye size={13} />
+                                <Eye size={13} aria-hidden="true" />
                                 <span>Ver</span>
                               </button>
                             ) : (
                               <button
                                 type="button"
                                 onClick={() => window.open(anexo.url, '_blank')}
-                                className="px-2.5 py-1 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl transition-colors cursor-pointer flex items-center gap-1"
+                                className="min-h-[36px] px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-xl transition-colors cursor-pointer flex items-center gap-1"
                                 title="Abrir PDF em nova aba"
                               >
-                                <ExternalLink size={13} />
+                                <ExternalLink size={13} aria-hidden="true" />
                                 <span>Abrir</span>
                               </button>
                             )}
@@ -1347,20 +1350,21 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                             <button
                               type="button"
                               onClick={() => handleEditarComprovante(anexo)}
-                              className="px-2.5 py-1 bg-amber-50 hover:bg-amber-100 text-amber-900 font-bold rounded-xl border border-amber-200 transition-colors cursor-pointer flex items-center gap-1"
+                              className="min-h-[36px] px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-950 font-bold rounded-xl border border-amber-200 transition-colors cursor-pointer flex items-center gap-1"
                               title="Editar fornecedor, valor ou quem pagou"
                             >
-                              <Edit3 size={13} />
+                              <Edit3 size={13} aria-hidden="true" />
                               <span>Editar</span>
                             </button>
 
                             <button
                               type="button"
                               onClick={() => handleRemoverAnexo(anexo.id)}
-                              className="p-1.5 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-xl transition-colors cursor-pointer"
+                              aria-label={`Excluir comprovante Nota ${numeroNota}`}
+                              className="min-w-[36px] min-h-[36px] p-1.5 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-xl flex items-center justify-center transition-colors cursor-pointer"
                               title="Excluir este comprovante"
                             >
-                              <Trash2 size={14} />
+                              <Trash2 size={15} aria-hidden="true" />
                             </button>
                           </div>
                         </div>
@@ -1378,34 +1382,34 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
           {abaModal === 'estadia' && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-in fade-in duration-200 text-xs">
               {/* Card 1: Dados da Hospedagem */}
-              <div className="bg-white p-4 rounded-2xl border border-stone-200 shadow-xs space-y-3">
-                <span className="font-extrabold text-[11px] text-stone-400 uppercase tracking-wider block border-b border-stone-100 pb-2">
+              <div className="bg-white p-4 sm:p-5 rounded-2xl border border-stone-200 shadow-xs space-y-3">
+                <span className="font-extrabold text-[11px] text-stone-600 uppercase tracking-wider block border-b border-stone-100 pb-2">
                   Dados da Hospedagem
                 </span>
                 <div className="flex items-center gap-2">
-                  <Home size={16} className="text-amber-600 shrink-0" />
+                  <Home size={16} className="text-amber-700 shrink-0" aria-hidden="true" />
                   <span className="font-extrabold text-stone-900 text-sm">{estadia.casa || '-'}</span>
                 </div>
-                <div className="flex items-center gap-2 text-stone-700">
-                  <Calendar size={15} className="text-amber-600 shrink-0" />
+                <div className="flex items-center gap-2 text-stone-700 tabular-nums">
+                  <Calendar size={15} className="text-amber-700 shrink-0" aria-hidden="true" />
                   <span>
                     <strong>Período:</strong> {formatarDataBr(estadia.entrada || '')} a {formatarDataBr(estadia.saida || '')}
                   </span>
                 </div>
-                <div className="flex items-center gap-2 text-stone-700">
-                  <Users size={15} className="text-amber-600 shrink-0" />
+                <div className="flex items-center gap-2 text-stone-700 tabular-nums">
+                  <Users size={15} className="text-amber-700 shrink-0" aria-hidden="true" />
                   <span>
                     <strong>Hóspedes:</strong> {estadia.hospedes || '-'} pessoas
                   </span>
                 </div>
                 <div className="flex items-center gap-2 text-stone-700">
-                  <User size={15} className="text-amber-600 shrink-0" />
+                  <User size={15} className="text-amber-700 shrink-0" aria-hidden="true" />
                   <span>
                     <strong>Titular:</strong> {estadia.titular || 'Não informado'}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 text-stone-700">
-                  <ShieldCheck size={15} className="text-amber-600 shrink-0" />
+                  <ShieldCheck size={15} className="text-amber-700 shrink-0" aria-hidden="true" />
                   <span>
                     <strong>Responsável da Equipe:</strong> {estadia.funcionario || 'Não informado'}
                   </span>
@@ -1413,18 +1417,18 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
               </div>
 
               {/* Card 2: Trilha Completa de Auditoria */}
-              <div className="bg-white p-4 rounded-2xl border border-stone-200 shadow-xs space-y-3">
-                <span className="font-extrabold text-[11px] text-stone-400 uppercase tracking-wider block border-b border-stone-100 pb-2">
+              <div className="bg-white p-4 sm:p-5 rounded-2xl border border-stone-200 shadow-xs space-y-3">
+                <span className="font-extrabold text-[11px] text-stone-600 uppercase tracking-wider block border-b border-stone-100 pb-2">
                   Histórico de Execução do Pedido
                 </span>
 
-                <div className="space-y-2 text-xs">
+                <div className="space-y-2.5 text-xs">
                   {/* Quem enviou pelo cardápio */}
                   <div className="flex items-start gap-2 text-stone-900">
-                    <ChefHat size={16} className="text-amber-600 shrink-0 mt-0.5" />
+                    <ChefHat size={16} className="text-amber-700 shrink-0 mt-0.5" aria-hidden="true" />
                     <div>
                       <strong className="block">Pedido Feito por: {pedido.cozinheira}</strong>
-                      <span className="text-[11px] text-stone-500">
+                      <span className="text-[11px] text-stone-600 tabular-nums">
                         {formatarDataHoraBahia(pedido.finalizado_em)}
                       </span>
                     </div>
@@ -1433,10 +1437,10 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                   {/* Quem aprovou */}
                   {pedido.aprovado_por_nome && (
                     <div className="flex items-start gap-2 text-sky-900 pt-2 border-t border-stone-100">
-                      <CheckCircle2 size={16} className="text-sky-600 shrink-0 mt-0.5" />
+                      <CheckCircle2 size={16} className="text-sky-600 shrink-0 mt-0.5" aria-hidden="true" />
                       <div>
                         <strong className="block">Aprovado por: {pedido.aprovado_por_nome}</strong>
-                        <span className="text-[11px] text-stone-500">
+                        <span className="text-[11px] text-stone-600 tabular-nums">
                           {formatarDataHoraBahia(pedido.aprovado_em || '')}
                         </span>
                       </div>
@@ -1446,10 +1450,10 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                   {/* Quem rejeitou */}
                   {pedido.rejeitado_por_nome && (
                     <div className="flex items-start gap-2 text-red-900 pt-2 border-t border-stone-100">
-                      <XCircle size={16} className="text-red-600 shrink-0 mt-0.5" />
+                      <XCircle size={16} className="text-red-600 shrink-0 mt-0.5" aria-hidden="true" />
                       <div>
                         <strong className="block">Rejeitado por: {pedido.rejeitado_por_nome}</strong>
-                        <span className="text-[11px] text-stone-500">
+                        <span className="text-[11px] text-stone-600 tabular-nums">
                           {formatarDataHoraBahia(pedido.rejeitado_em || '')}
                         </span>
                       </div>
@@ -1459,10 +1463,10 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                   {/* Quem marcou como enviado ao fornecedor */}
                   {pedido.enviado_fornecedor_por_nome && (
                     <div className="flex items-start gap-2 text-purple-900 pt-2 border-t border-stone-100">
-                      <Send size={16} className="text-purple-600 shrink-0 mt-0.5" />
+                      <Send size={16} className="text-purple-600 shrink-0 mt-0.5" aria-hidden="true" />
                       <div>
                         <strong className="block">Enviado aos fornecedores por: {pedido.enviado_fornecedor_por_nome}</strong>
-                        <span className="text-[11px] text-stone-500">
+                        <span className="text-[11px] text-stone-600 tabular-nums">
                           {formatarDataHoraBahia(pedido.enviado_fornecedor_em || '')}
                         </span>
                       </div>
@@ -1472,10 +1476,10 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                   {/* Quem finalizou */}
                   {pedido.concluido_por_nome && (
                     <div className="flex items-start gap-2 text-emerald-900 pt-2 border-t border-stone-100">
-                      <CheckCircle2 size={16} className="text-emerald-600 shrink-0 mt-0.5" />
+                      <CheckCircle2 size={16} className="text-emerald-600 shrink-0 mt-0.5" aria-hidden="true" />
                       <div>
                         <strong className="block">Finalizado por: {pedido.concluido_por_nome}</strong>
-                        <span className="text-[11px] text-stone-500">
+                        <span className="text-[11px] text-stone-600 tabular-nums">
                           {formatarDataHoraBahia(pedido.concluido_em || '')}
                         </span>
                       </div>
@@ -1485,11 +1489,11 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                   {/* Quem editou o pedido & O que foi editado */}
                   {pedido.editado_por_nome && (
                     <div className="flex items-start gap-2 text-amber-950 pt-2 border-t border-stone-100">
-                      <Edit3 size={16} className="text-amber-600 shrink-0 mt-0.5" />
+                      <Edit3 size={16} className="text-amber-700 shrink-0 mt-0.5" aria-hidden="true" />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-1 flex-wrap">
                           <strong className="block text-stone-900">Editado por: {pedido.editado_por_nome}</strong>
-                          <span className="text-[11px] text-stone-500">
+                          <span className="text-[11px] text-stone-600 tabular-nums">
                             {formatarDataHoraBahia(pedido.editado_em || '')}
                           </span>
                         </div>
@@ -1497,7 +1501,7 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                         {/* Detalhes de alterações registradas no pedido */}
                         {Array.isArray(pedido.historico_edicoes) && pedido.historico_edicoes.length > 0 && (
                           <div className="mt-2 space-y-2">
-                            <span className="text-[10px] font-black uppercase text-amber-900 tracking-wider block">
+                            <span className="text-[11px] font-black uppercase text-amber-900 tracking-wider block">
                               Histórico detalhado das edições:
                             </span>
                             {pedido.historico_edicoes.map((ed: any, edIdx: number) => (
@@ -1505,16 +1509,16 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                                 key={edIdx}
                                 className="bg-amber-50/70 border border-amber-200 rounded-xl p-2.5 text-xs space-y-1.5"
                               >
-                                <div className="flex items-center justify-between text-[11px] font-bold text-amber-950">
+                                <div className="flex items-center justify-between text-[11px] font-bold text-amber-950 tabular-nums">
                                   <span>
                                     Edição #{pedido.historico_edicoes!.length - edIdx} • {ed.autor_nome}
                                   </span>
-                                  <span className="text-stone-500 font-normal">
+                                  <span className="text-stone-600 font-normal">
                                     {formatarDataHoraBahia(ed.data)}
                                   </span>
                                 </div>
                                 {ed.motivo && (
-                                  <p className="text-[11px] italic text-stone-600">
+                                  <p className="text-[11px] italic text-stone-700">
                                     Motivo: {ed.motivo}
                                   </p>
                                 )}
@@ -1540,7 +1544,7 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                                     })}
                                   </div>
                                 ) : (
-                                  <span className="text-[11px] text-stone-500">
+                                  <span className="text-[11px] text-stone-600">
                                     {ed.resumo || 'Itens do pedido ajustados.'}
                                   </span>
                                 )}
@@ -1559,34 +1563,34 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
 
         {/* Rodapé do Modal */}
         <div className="p-3.5 sm:px-6 sm:py-3 bg-stone-50 border-t border-stone-200 flex flex-wrap items-center justify-between gap-2 shrink-0">
-          <span className="text-xs text-stone-500 hidden sm:inline">
+          <span className="text-xs text-stone-600 hidden sm:inline">
             Exportação para Microsoft Excel e visualização com caixas de conferência.
           </span>
 
-          <div className="flex items-center gap-2 ml-auto">
+          <div className="flex flex-wrap items-center gap-2 ml-auto">
             <button
               type="button"
               onClick={handleBaixarExcel}
-              className="px-3.5 py-1.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer"
+              className="min-h-[38px] px-3.5 py-1.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer"
             >
-              <FileSpreadsheet size={14} />
+              <FileSpreadsheet size={14} aria-hidden="true" />
               <span>Baixar Excel</span>
             </button>
 
             <button
               type="button"
               onClick={handleImprimir}
-              className="px-3.5 py-1.5 bg-stone-900 hover:bg-stone-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer"
+              className="min-h-[38px] px-3.5 py-1.5 bg-stone-900 hover:bg-stone-800 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer"
               title={abaModal === 'anexos' ? 'Imprimir relatório de comprovantes e fotos numeradas' : 'Imprimir lista de compras no mesmo design da tela'}
             >
-              <Printer size={14} />
+              <Printer size={14} aria-hidden="true" />
               <span>{abaModal === 'anexos' ? 'Imprimir Relatório de Notas' : 'Imprimir Lista de Compras'}</span>
             </button>
 
             <button
               type="button"
               onClick={onClose}
-              className="px-3.5 py-1.5 bg-stone-200 hover:bg-stone-300 text-stone-700 rounded-xl text-xs font-bold transition-colors cursor-pointer"
+              className="min-h-[38px] px-3.5 py-1.5 bg-stone-200 hover:bg-stone-300 text-stone-800 rounded-xl text-xs font-bold transition-colors cursor-pointer"
             >
               <span>Fechar</span>
             </button>
@@ -1601,30 +1605,30 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
         <div className="fixed inset-0 z-90 bg-stone-950/85 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
           <div className="bg-white w-full max-w-lg rounded-3xl p-5 sm:p-6 shadow-2xl border border-stone-200 animate-in zoom-in-95 duration-200 flex flex-col max-h-[92vh] overflow-hidden">
             {/* Cabeçalho */}
-            <div className="flex items-start justify-between pb-3.5 border-b border-stone-100 shrink-0">
-              <div className="flex items-center gap-2.5">
+            <div className="flex items-start justify-between gap-2 pb-3.5 border-b border-stone-100 shrink-0">
+              <div className="flex items-center gap-2.5 min-w-0">
                 <div className="w-10 h-10 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold shrink-0">
-                  <CreditCard size={20} />
+                  <CreditCard size={20} aria-hidden="true" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <h3 className="font-black text-stone-900 text-base leading-tight">
                     {comprovanteForm.id ? 'Editar Dados do Comprovante' : 'Dados do Comprovante'}
                   </h3>
-                  <p className="text-xs text-stone-500">
+                  <p className="text-xs text-stone-600">
                     Preencha os dados da nota para o relatório final
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 shrink-0">
                 <button
                   type="button"
                   onClick={() => setDocFullscreen(true)}
-                  className="px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="min-h-[38px] px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
                   title="Maximizar visualização da imagem ou documento"
                 >
-                  <Maximize2 size={14} className="text-purple-600" />
-                  <span>Maximizar</span>
+                  <Maximize2 size={14} className="text-purple-700" aria-hidden="true" />
+                  <span className="hidden sm:inline">Maximizar</span>
                 </button>
 
                 <button
@@ -1633,9 +1637,10 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                     setModalComprovanteAberto(false);
                     setComprovanteForm(null);
                   }}
-                  className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-500 flex items-center justify-center transition-colors cursor-pointer"
+                  aria-label="Fechar formulário de comprovante"
+                  className="w-10 h-10 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 hover:text-stone-900 flex items-center justify-center transition-colors cursor-pointer"
                 >
-                  <X size={16} />
+                  <X size={17} aria-hidden="true" />
                 </button>
               </div>
             </div>
@@ -1659,24 +1664,24 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                         />
                         <div className="absolute inset-0 bg-black/30 flex items-center justify-center text-white">
-                          <Maximize2 size={16} />
+                          <Maximize2 size={16} aria-hidden="true" />
                         </div>
                       </div>
                     ) : (
                       <div className="w-13 h-13 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center shrink-0 border border-purple-200">
-                        <FileText size={22} />
+                        <FileText size={22} aria-hidden="true" />
                       </div>
                     )}
 
                     <div className="min-w-0">
-                      <p className="font-bold text-xs text-stone-900 truncate group-hover:text-purple-700 transition-colors">
+                      <p className="font-bold text-xs text-stone-900 truncate group-hover:text-purple-800 transition-colors">
                         {comprovanteForm.nome}
                       </p>
-                      <p className="text-[11px] text-stone-400">
+                      <p className="text-[11px] text-stone-600">
                         {comprovanteForm.tamanho}
                       </p>
-                      <span className="inline-flex items-center gap-1 text-[11px] font-bold text-purple-600 mt-0.5">
-                        <Maximize2 size={11} />
+                      <span className="inline-flex items-center gap-1 text-[11px] font-bold text-purple-700 mt-0.5">
+                        <Maximize2 size={11} aria-hidden="true" />
                         <span>Toque para maximizar</span>
                       </span>
                     </div>
@@ -1688,9 +1693,9 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                       e.stopPropagation();
                       setDocFullscreen(true);
                     }}
-                    className="px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-800 border border-purple-200 rounded-xl text-xs font-black shrink-0 flex items-center gap-1 transition-colors cursor-pointer tap-bounce"
+                    className="min-h-[36px] px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-900 border border-purple-200 rounded-xl text-xs font-black shrink-0 flex items-center gap-1 transition-colors cursor-pointer tap-bounce"
                   >
-                    <Maximize2 size={12} />
+                    <Maximize2 size={12} aria-hidden="true" />
                     <span>Maximizar</span>
                   </button>
                 </div>
@@ -1711,7 +1716,7 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                       if (erroComprovante) setErroComprovante(null);
                     }}
                     placeholder="Ex: Peixaria Central, Supermercado, Hortifruti..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border-2 border-stone-200 focus:border-purple-600 focus:outline-hidden text-sm font-semibold text-stone-900 placeholder:text-stone-400 shadow-2xs"
+                    className="w-full min-h-[42px] px-3.5 py-2.5 rounded-xl border-2 border-stone-200 focus:border-purple-600 focus:outline-none text-sm font-semibold text-stone-900 placeholder:text-stone-500 shadow-2xs"
                   />
                   <datalist id="lista-fornecedores-sugestao">
                     <option value="Peixaria" />
@@ -1727,14 +1732,14 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                 </div>
 
                 {/* Grid: Valor Total & Data do Comprovante */}
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {/* Campo 2: Valor Total */}
                   <div>
                     <label className="block text-xs font-black text-stone-800 mb-1">
                       Valor total (R$) *
                     </label>
                     <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-stone-400">
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-stone-600">
                         R$
                       </span>
                       <input
@@ -1747,7 +1752,7 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                           if (erroComprovante) setErroComprovante(null);
                         }}
                         placeholder="0,00"
-                        className="w-full pl-9 pr-3 py-2.5 rounded-xl border-2 border-stone-200 focus:border-purple-600 focus:outline-hidden text-sm font-black text-stone-900 placeholder:text-stone-400 shadow-2xs"
+                        className="w-full min-h-[42px] pl-9 pr-3 py-2.5 rounded-xl border-2 border-stone-200 focus:border-purple-600 focus:outline-none text-sm font-black text-stone-900 placeholder:text-stone-500 shadow-2xs tabular-nums"
                       />
                     </div>
                   </div>
@@ -1765,7 +1770,7 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                         setComprovanteForm({ ...comprovanteForm, data_comprovante: e.target.value });
                         if (erroComprovante) setErroComprovante(null);
                       }}
-                      className="w-full px-3 py-2 rounded-xl border-2 border-stone-200 focus:border-purple-600 focus:outline-hidden text-sm font-semibold text-stone-900 shadow-2xs"
+                      className="w-full min-h-[42px] px-3 py-2 rounded-xl border-2 border-stone-200 focus:border-purple-600 focus:outline-none text-sm font-semibold text-stone-900 shadow-2xs tabular-nums"
                     />
                   </div>
                 </div>
@@ -1786,15 +1791,15 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                         });
                         if (erroComprovante) setErroComprovante(null);
                       }}
-                      className={`py-2.5 px-3 rounded-xl border-2 text-xs font-black flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                      className={`min-h-[44px] py-2.5 px-3 rounded-xl border-2 text-xs font-black flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                         comprovanteForm.quem_pagou === 'hospede'
                           ? 'bg-emerald-50 border-emerald-500 text-emerald-950 shadow-xs'
-                          : 'bg-white border-stone-200 text-stone-600 hover:bg-stone-50'
+                          : 'bg-white border-stone-200 text-stone-700 hover:bg-stone-50'
                       }`}
                     >
-                      <User size={14} className={comprovanteForm.quem_pagou === 'hospede' ? 'text-emerald-700' : 'text-stone-400'} />
+                      <User size={14} className={comprovanteForm.quem_pagou === 'hospede' ? 'text-emerald-700' : 'text-stone-500'} aria-hidden="true" />
                       <span>Hóspede</span>
-                      {comprovanteForm.quem_pagou === 'hospede' && <Check size={14} className="text-emerald-700 ml-auto" />}
+                      {comprovanteForm.quem_pagou === 'hospede' && <Check size={14} className="text-emerald-700 ml-auto" aria-hidden="true" />}
                     </button>
 
                     <button
@@ -1806,15 +1811,15 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                         });
                         if (erroComprovante) setErroComprovante(null);
                       }}
-                      className={`py-2.5 px-3 rounded-xl border-2 text-xs font-black flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                      className={`min-h-[44px] py-2.5 px-3 rounded-xl border-2 text-xs font-black flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                         comprovanteForm.quem_pagou === 'outra_pessoa'
                           ? 'bg-purple-50 border-purple-500 text-purple-950 shadow-xs'
-                          : 'bg-white border-stone-200 text-stone-600 hover:bg-stone-50'
+                          : 'bg-white border-stone-200 text-stone-700 hover:bg-stone-50'
                       }`}
                     >
-                      <Users size={14} className={comprovanteForm.quem_pagou === 'outra_pessoa' ? 'text-purple-700' : 'text-stone-400'} />
+                      <Users size={14} className={comprovanteForm.quem_pagou === 'outra_pessoa' ? 'text-purple-700' : 'text-stone-500'} aria-hidden="true" />
                       <span>Outra pessoa</span>
-                      {comprovanteForm.quem_pagou === 'outra_pessoa' && <Check size={14} className="text-purple-700 ml-auto" />}
+                      {comprovanteForm.quem_pagou === 'outra_pessoa' && <Check size={14} className="text-purple-700 ml-auto" aria-hidden="true" />}
                     </button>
                   </div>
                 </div>
@@ -1834,9 +1839,9 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                         if (erroComprovante) setErroComprovante(null);
                       }}
                       placeholder="Ex: André (Concierge), Empresa Paralelo 17, Motorista..."
-                      className="w-full px-3 py-2 rounded-xl border-2 border-purple-300 focus:border-purple-600 focus:outline-hidden text-xs font-bold text-stone-900 placeholder:text-stone-400 bg-white"
+                      className="w-full min-h-[40px] px-3 py-2 rounded-xl border-2 border-purple-300 focus:border-purple-600 focus:outline-none text-xs font-bold text-stone-900 placeholder:text-stone-500 bg-white"
                     />
-                    <p className="text-[10px] text-purple-700 font-medium">
+                    <p className="text-[11px] text-purple-800 font-medium">
                       💡 Esta informação será guardada para o acerto e relatório final da estadia.
                     </p>
                   </div>
@@ -1844,8 +1849,11 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
 
                 {/* Mensagem de Erro */}
                 {erroComprovante && (
-                  <div className="p-2.5 bg-red-50 text-red-700 rounded-xl border border-red-200 text-xs font-bold flex items-center gap-1.5">
-                    <AlertCircle size={14} className="shrink-0" />
+                  <div
+                    role="alert"
+                    className="p-2.5 bg-red-50 text-red-800 rounded-xl border border-red-200 text-xs font-bold flex items-center gap-1.5"
+                  >
+                    <AlertCircle size={14} className="shrink-0" aria-hidden="true" />
                     <span>{erroComprovante}</span>
                   </div>
                 )}
@@ -1859,7 +1867,7 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                     setModalComprovanteAberto(false);
                     setComprovanteForm(null);
                   }}
-                  className="flex-1 py-3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl text-xs transition-colors cursor-pointer"
+                  className="flex-1 min-h-[44px] py-3 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-xl text-xs transition-colors cursor-pointer"
                 >
                   Cancelar
                 </button>
@@ -1867,16 +1875,16 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                 <button
                   type="submit"
                   disabled={enviandoAnexos}
-                  className="flex-1 py-3 bg-purple-600 hover:bg-purple-500 active:scale-98 text-white font-black rounded-xl text-xs shadow-lg shadow-purple-600/25 transition-all flex items-center justify-center gap-1.5 cursor-pointer tap-bounce"
+                  className="flex-1 min-h-[44px] py-3 bg-purple-600 hover:bg-purple-500 active:scale-[0.98] text-white font-black rounded-xl text-xs shadow-lg shadow-purple-600/25 transition-all flex items-center justify-center gap-1.5 cursor-pointer tap-bounce"
                 >
                   {enviandoAnexos ? (
                     <>
-                      <RefreshCw size={14} className="animate-spin" />
+                      <RefreshCw size={14} className="animate-spin" aria-hidden="true" />
                       <span>Salvando...</span>
                     </>
                   ) : (
                     <>
-                      <Check size={14} strokeWidth={2.5} />
+                      <Check size={14} strokeWidth={2.5} aria-hidden="true" />
                       <span>{comprovanteForm.id ? 'Salvar Alterações' : 'Salvar Comprovante'}</span>
                     </>
                   )}
@@ -1893,53 +1901,56 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
       {docFullscreen && comprovanteForm && (
         <div className="fixed inset-0 z-100 bg-stone-950/95 backdrop-blur-md flex flex-col animate-in fade-in duration-200">
           {/* Barra Superior de Controle */}
-          <div className="p-3 sm:px-6 bg-stone-900 text-white flex items-center justify-between border-b border-stone-800 z-10 shadow-lg">
+          <div className="p-3 sm:px-6 bg-stone-900 text-white flex items-center justify-between gap-2 border-b border-stone-800 z-10 shadow-lg">
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold shrink-0">
-                {comprovanteForm.tipo === 'imagem' ? <Eye size={16} /> : <FileText size={16} />}
+              <div className="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center font-bold shrink-0">
+                {comprovanteForm.tipo === 'imagem' ? <Eye size={16} aria-hidden="true" /> : <FileText size={16} aria-hidden="true" />}
               </div>
               <div className="truncate">
                 <h4 className="font-extrabold text-xs sm:text-sm truncate text-white leading-tight">
                   {comprovanteForm.nome}
                 </h4>
-                <span className="text-[10px] text-stone-400">
+                <span className="text-[11px] text-stone-300">
                   Modo Maximizado • Use os controles para inspecionar os detalhes da nota
                 </span>
               </div>
             </div>
 
             {/* Ferramentas de Zoom & Rotação */}
-            <div className="flex items-center gap-1 sm:gap-2">
+            <div className="flex items-center gap-1 sm:gap-2 shrink-0">
               {comprovanteForm.tipo === 'imagem' && (
                 <>
                   <button
                     type="button"
                     onClick={() => setDocZoomEscala((prev) => Math.max(0.5, Number((prev - 0.25).toFixed(2))))}
-                    className="p-2 bg-stone-800 hover:bg-stone-700 text-stone-200 rounded-xl transition-colors cursor-pointer"
+                    aria-label="Diminuir zoom"
+                    className="min-w-[38px] min-h-[38px] p-2 bg-stone-800 hover:bg-stone-700 text-stone-200 rounded-xl flex items-center justify-center transition-colors cursor-pointer"
                     title="Diminuir Zoom (-)"
                   >
-                    <ZoomOut size={16} />
+                    <ZoomOut size={16} aria-hidden="true" />
                   </button>
-                  <span className="text-xs font-mono font-bold text-stone-300 px-1 hidden sm:inline">
+                  <span className="text-xs font-mono font-bold text-stone-200 px-1 hidden sm:inline tabular-nums">
                     {Math.round(docZoomEscala * 100)}%
                   </span>
                   <button
                     type="button"
                     onClick={() => setDocZoomEscala((prev) => Math.min(3, Number((prev + 0.25).toFixed(2))))}
-                    className="p-2 bg-stone-800 hover:bg-stone-700 text-stone-200 rounded-xl transition-colors cursor-pointer"
+                    aria-label="Aumentar zoom"
+                    className="min-w-[38px] min-h-[38px] p-2 bg-stone-800 hover:bg-stone-700 text-stone-200 rounded-xl flex items-center justify-center transition-colors cursor-pointer"
                     title="Aumentar Zoom (+)"
                   >
-                    <ZoomIn size={16} />
+                    <ZoomIn size={16} aria-hidden="true" />
                   </button>
                   <button
                     type="button"
                     onClick={() => setDocRotacao((prev) => (prev + 90) % 360)}
-                    className="px-2.5 py-2 bg-stone-800 hover:bg-stone-700 text-stone-200 rounded-xl text-xs font-bold transition-colors cursor-pointer flex items-center gap-1"
+                    aria-label="Girar imagem 90 graus"
+                    className="min-h-[38px] px-2.5 py-2 bg-stone-800 hover:bg-stone-700 text-stone-200 rounded-xl text-xs font-bold transition-colors cursor-pointer flex items-center gap-1 tabular-nums"
                     title="Girar 90 graus"
                   >
-                    <RotateCw size={15} />
+                    <RotateCw size={15} aria-hidden="true" />
                     <span className="hidden sm:inline">Girar</span>
-                    {docRotacao > 0 && <span className="text-[10px]">({docRotacao}°)</span>}
+                    {docRotacao > 0 && <span className="text-[11px]">({docRotacao}°)</span>}
                   </button>
                   <button
                     type="button"
@@ -1947,7 +1958,7 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                       setDocZoomEscala(1);
                       setDocRotacao(0);
                     }}
-                    className="px-2.5 py-2 bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white rounded-xl text-xs font-bold transition-colors cursor-pointer hidden md:inline"
+                    className="min-h-[38px] px-2.5 py-2 bg-stone-800 hover:bg-stone-700 text-stone-200 hover:text-white rounded-xl text-xs font-bold transition-colors cursor-pointer hidden md:inline"
                     title="Resetar Zoom e Rotação"
                   >
                     Resetar
@@ -1959,9 +1970,9 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                 <button
                   type="button"
                   onClick={() => window.open(comprovanteForm.url, '_blank')}
-                  className="px-3 py-2 bg-stone-800 hover:bg-stone-700 text-stone-200 rounded-xl text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5"
+                  className="min-h-[38px] px-3 py-2 bg-stone-800 hover:bg-stone-700 text-stone-200 rounded-xl text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5"
                 >
-                  <ExternalLink size={14} />
+                  <ExternalLink size={14} aria-hidden="true" />
                   <span>Abrir em Nova Aba</span>
                 </button>
               )}
@@ -1970,10 +1981,11 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
               <button
                 type="button"
                 onClick={() => setDocFullscreen(false)}
-                className="ml-2 px-3.5 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-xs font-black transition-all flex items-center gap-1.5 shadow-lg shadow-purple-600/30 tap-bounce cursor-pointer"
+                className="ml-1 sm:ml-2 min-h-[38px] px-3.5 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-xs font-black transition-all flex items-center gap-1.5 shadow-lg shadow-purple-600/30 tap-bounce cursor-pointer"
               >
-                <X size={15} />
-                <span>Voltar ao Formulário</span>
+                <X size={15} aria-hidden="true" />
+                <span className="hidden sm:inline">Voltar ao Formulário</span>
+                <span className="sm:hidden">Voltar</span>
               </button>
             </div>
           </div>
@@ -2022,9 +2034,10 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
             <button
               type="button"
               onClick={() => setImagemZoom(null)}
-              className="absolute top-2 right-2 w-10 h-10 rounded-full bg-stone-900/80 hover:bg-stone-900 text-white flex items-center justify-center transition-colors"
+              aria-label="Fechar ampliação da imagem"
+              className="absolute top-2 right-2 w-10 h-10 rounded-full bg-stone-900/90 hover:bg-stone-900 text-white flex items-center justify-center transition-colors cursor-pointer"
             >
-              <X size={20} />
+              <X size={20} aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -2037,49 +2050,50 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
         <div className="fixed inset-0 z-100 bg-stone-950/85 backdrop-blur-xs flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
           <div className="bg-white w-full max-w-4xl rounded-3xl p-4 sm:p-6 shadow-2xl border border-stone-200 animate-in zoom-in-95 duration-200 flex flex-col max-h-[92vh] overflow-hidden">
             {/* Cabeçalho do Modal de Edição */}
-            <div className="flex items-start justify-between pb-3 border-b border-stone-100 shrink-0">
-              <div className="flex items-center gap-3">
+            <div className="flex flex-wrap sm:flex-nowrap items-start justify-between gap-3 pb-3 border-b border-stone-100 shrink-0">
+              <div className="flex items-center gap-3 min-w-0">
                 <div className="w-10 h-10 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold shrink-0 shadow-xs">
-                  <Edit3 size={20} />
+                  <Edit3 size={20} aria-hidden="true" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <h3 className="font-black text-stone-900 text-base leading-tight">
+                    <h3 className="font-black text-stone-900 text-base leading-tight tabular-nums">
                       Editar Pedido #{pedido.numero}
                     </h3>
-                    <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-200">
+                    <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-950 border border-amber-200 tabular-nums">
                       {itensEdicao.length} {itensEdicao.length === 1 ? 'item' : 'itens'}
                     </span>
-                    <span className="text-xs font-semibold text-stone-500">
+                    <span className="text-xs font-semibold text-stone-600">
                       • {estadia.casa || 'Estadia'} ({pedido.cozinheira})
                     </span>
                   </div>
-                  <p className="text-xs text-stone-500 mt-0.5">
+                  <p className="text-xs text-stone-600 mt-0.5">
                     Ajuste quantidades, observações ou adicione e remova itens antes da aprovação
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center gap-2 shrink-0 ml-auto">
                 <button
                   type="button"
                   onClick={() => setMostrarNovoItemForm((prev) => !prev)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer tap-bounce ${
+                  className={`min-h-[38px] px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer tap-bounce ${
                     mostrarNovoItemForm
                       ? 'bg-amber-500 text-stone-950 shadow-xs'
-                      : 'bg-stone-100 hover:bg-stone-200 text-stone-700'
+                      : 'bg-stone-100 hover:bg-stone-200 text-stone-800'
                   }`}
                 >
-                  <Plus size={14} />
+                  <Plus size={14} aria-hidden="true" />
                   <span>{mostrarNovoItemForm ? 'Fechar Inclusão' : 'Adicionar Item'}</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setModalEditarAberto(false)}
-                  className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-500 flex items-center justify-center transition-colors cursor-pointer"
+                  aria-label="Fechar edição de itens do pedido"
+                  className="w-10 h-10 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 hover:text-stone-900 flex items-center justify-center transition-colors cursor-pointer"
                 >
-                  <X size={16} />
+                  <X size={17} aria-hidden="true" />
                 </button>
               </div>
             </div>
@@ -2087,12 +2101,12 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
             {/* Formulário Retrátil para Inserir Novo Item */}
             {mostrarNovoItemForm && (
               <div className="mt-3 p-3.5 bg-amber-50/70 border border-amber-200 rounded-2xl shrink-0 animate-in slide-in-from-top-2 duration-150 space-y-2.5 shadow-2xs">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-2 flex-wrap">
                   <span className="text-xs font-black text-amber-950 uppercase tracking-wider flex items-center gap-1.5">
-                    <Plus size={13} className="text-amber-700" />
+                    <Plus size={13} className="text-amber-700" aria-hidden="true" />
                     <span>Adicionar Novo Item ao Pedido</span>
                   </span>
-                  <span className="text-[11px] text-amber-800">
+                  <span className="text-[11px] text-amber-900 font-medium">
                     O item será adicionado no topo da lista
                   </span>
                 </div>
@@ -2100,23 +2114,23 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-12 gap-2 text-xs">
                   {/* Nome do Item */}
                   <div className="sm:col-span-4">
-                    <label className="block text-[10px] font-bold uppercase text-stone-600 mb-0.5">Item / Produto *</label>
+                    <label className="block text-[10px] font-bold uppercase text-stone-700 mb-0.5">Item / Produto *</label>
                     <input
                       type="text"
                       value={novoItem.item}
                       onChange={(e) => setNovoItem({ ...novoItem, item: e.target.value })}
                       placeholder="Ex: Queijo Minas Padrão, Pera Williams..."
-                      className="w-full px-3 py-1.5 rounded-xl border border-stone-300 bg-white text-xs font-bold text-stone-900 focus:outline-hidden focus:border-amber-600"
+                      className="w-full min-h-[38px] px-3 py-1.5 rounded-xl border border-stone-300 bg-white text-xs font-bold text-stone-900 placeholder:text-stone-500 focus:outline-none focus:border-amber-600"
                     />
                   </div>
 
                   {/* Fornecedor */}
                   <div className="sm:col-span-3">
-                    <label className="block text-[10px] font-bold uppercase text-stone-600 mb-0.5">Fornecedor / Categoria *</label>
+                    <label className="block text-[10px] font-bold uppercase text-stone-700 mb-0.5">Fornecedor / Categoria *</label>
                     <select
                       value={novoItem.fornecedor}
                       onChange={(e) => setNovoItem({ ...novoItem, fornecedor: e.target.value, categoria: NOMES_FORNECEDORES[e.target.value]?.nome || 'Geral' })}
-                      className="w-full px-2.5 py-1.5 rounded-xl border border-stone-300 bg-white text-xs font-bold text-stone-900 focus:outline-hidden focus:border-amber-600 cursor-pointer"
+                      className="w-full min-h-[38px] px-2.5 py-1.5 rounded-xl border border-stone-300 bg-white text-xs font-bold text-stone-900 focus:outline-none focus:border-amber-600 cursor-pointer"
                     >
                       <option value="hortifruti">Hortifruti</option>
                       <option value="bebidas">Bebidas</option>
@@ -2129,27 +2143,27 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
 
                   {/* Quantidade */}
                   <div className="sm:col-span-2">
-                    <label className="block text-[10px] font-bold uppercase text-stone-600 mb-0.5">Qtd *</label>
+                    <label className="block text-[10px] font-bold uppercase text-stone-700 mb-0.5">Qtd *</label>
                     <input
                       type="number"
                       step="any"
                       min="0.1"
                       value={novoItem.quantidade}
                       onChange={(e) => setNovoItem({ ...novoItem, quantidade: parseFloat(e.target.value) || 1 })}
-                      className="w-full px-2.5 py-1.5 rounded-xl border border-stone-300 bg-white text-xs font-bold text-stone-900 focus:outline-hidden focus:border-amber-600"
+                      className="w-full min-h-[38px] px-2.5 py-1.5 rounded-xl border border-stone-300 bg-white text-xs font-bold text-stone-900 focus:outline-none focus:border-amber-600 tabular-nums"
                     />
                   </div>
 
                   {/* Unidade */}
                   <div className="sm:col-span-3">
-                    <label className="block text-[10px] font-bold uppercase text-stone-600 mb-0.5">Unidade *</label>
+                    <label className="block text-[10px] font-bold uppercase text-stone-700 mb-0.5">Unidade *</label>
                     <input
                       type="text"
                       list="opcoes-unidades-edicao"
                       value={novoItem.unidade}
                       onChange={(e) => setNovoItem({ ...novoItem, unidade: e.target.value })}
                       placeholder="un, kg, litro..."
-                      className="w-full px-2.5 py-1.5 rounded-xl border border-stone-300 bg-white text-xs font-bold text-stone-900 focus:outline-hidden focus:border-amber-600"
+                      className="w-full min-h-[38px] px-2.5 py-1.5 rounded-xl border border-stone-300 bg-white text-xs font-bold text-stone-900 placeholder:text-stone-500 focus:outline-none focus:border-amber-600"
                     />
                     <datalist id="opcoes-unidades-edicao">
                       <option value="un" />
@@ -2166,24 +2180,24 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
 
                   {/* Observação */}
                   <div className="sm:col-span-8">
-                    <label className="block text-[10px] font-bold uppercase text-stone-600 mb-0.5">Observação (Opcional)</label>
+                    <label className="block text-[10px] font-bold uppercase text-stone-700 mb-0.5">Observação (Opcional)</label>
                     <input
                       type="text"
                       value={novoItem.observacao}
                       onChange={(e) => setNovoItem({ ...novoItem, observacao: e.target.value })}
                       placeholder="Ex: Marca específica, bem maduro, sem glúten..."
-                      className="w-full px-3 py-1.5 rounded-xl border border-stone-300 bg-white text-xs font-medium text-stone-800 focus:outline-hidden focus:border-amber-600"
+                      className="w-full min-h-[38px] px-3 py-1.5 rounded-xl border border-stone-300 bg-white text-xs font-medium text-stone-800 placeholder:text-stone-500 focus:outline-none focus:border-amber-600"
                     />
                   </div>
 
                   {/* Aceita substituto e Botão Inserir */}
                   <div className="sm:col-span-4 flex items-end gap-2">
-                    <label className="flex items-center gap-1.5 text-[11px] font-bold text-stone-700 pb-2 cursor-pointer select-none">
+                    <label className="flex items-center gap-1.5 text-[11px] font-bold text-stone-800 pb-2 cursor-pointer select-none">
                       <input
                         type="checkbox"
                         checked={novoItem.aceitaSubstituto}
                         onChange={(e) => setNovoItem({ ...novoItem, aceitaSubstituto: e.target.checked })}
-                        className="rounded text-emerald-600 focus:ring-0 cursor-pointer"
+                        className="rounded text-emerald-600 focus:ring-0 cursor-pointer accent-emerald-600"
                       />
                       <span>Aceita substituto</span>
                     </label>
@@ -2214,7 +2228,7 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                         });
                         showToast(`"${itemParaAdicionar.item}" adicionado à lista.`);
                       }}
-                      className="flex-1 py-1.5 px-3 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-xs font-black transition-colors cursor-pointer tap-bounce shrink-0"
+                      className="flex-1 min-h-[38px] py-1.5 px-3 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-xs font-black transition-colors cursor-pointer tap-bounce shrink-0"
                     >
                       Inserir
                     </button>
@@ -2226,22 +2240,23 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
             {/* Barra de Filtro e Busca Rápida */}
             <div className="flex items-center justify-between gap-3 pt-3 pb-2 shrink-0 flex-wrap">
               <div className="relative flex-1 min-w-[200px] max-w-sm">
-                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" />
+                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-500 pointer-events-none" aria-hidden="true" />
                 <input
                   type="text"
                   value={buscaItemEdicao}
                   onChange={(e) => setBuscaItemEdicao(e.target.value)}
                   placeholder="Filtrar por nome ou categoria..."
-                  className="w-full pl-8 pr-3 py-1.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 placeholder:text-stone-400 focus:outline-hidden focus:border-amber-600"
+                  aria-label="Filtrar itens do pedido por nome ou categoria"
+                  className="w-full min-h-[38px] pl-8 pr-3 py-1.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 placeholder:text-stone-500 focus:outline-none focus:border-amber-600"
                 />
               </div>
 
-              <div className="flex items-center gap-1 overflow-x-auto text-xs pb-1 sm:pb-0">
+              <div className="flex items-center gap-1 overflow-x-auto no-scrollbar text-xs pb-1 sm:pb-0">
                 <button
                   type="button"
                   onClick={() => setFiltroFornEdicao('todos')}
-                  className={`px-2.5 py-1 rounded-lg font-bold text-[11px] transition-colors cursor-pointer ${
-                    filtroFornEdicao === 'todos' ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                  className={`min-h-[34px] px-2.5 py-1 rounded-lg font-bold text-[11px] transition-colors cursor-pointer whitespace-nowrap shrink-0 tabular-nums ${
+                    filtroFornEdicao === 'todos' ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
                   }`}
                 >
                   Todos ({itensEdicao.length})
@@ -2255,8 +2270,8 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                       key={forn}
                       type="button"
                       onClick={() => setFiltroFornEdicao(forn)}
-                      className={`px-2 py-1 rounded-lg font-bold text-[11px] transition-colors cursor-pointer ${
-                        filtroFornEdicao === forn ? 'bg-amber-600 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                      className={`min-h-[34px] px-2.5 py-1 rounded-lg font-bold text-[11px] transition-colors cursor-pointer whitespace-nowrap shrink-0 tabular-nums ${
+                        filtroFornEdicao === forn ? 'bg-amber-600 text-white' : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
                       }`}
                     >
                       {label} ({qtd})
@@ -2269,7 +2284,7 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
             {/* Lista dos Itens Editáveis */}
             <div className="flex-1 overflow-y-auto space-y-2 pr-1 py-1">
               {itensEdicao.length === 0 ? (
-                <div className="text-center py-12 text-stone-400 text-xs">
+                <div className="text-center py-12 text-stone-600 text-xs">
                   Nenhum item no pedido. Clique em <strong>"Adicionar Item"</strong> acima para inserir.
                 </div>
               ) : (
@@ -2298,9 +2313,10 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                               novaLista[index] = { ...novaLista[index], item: e.target.value };
                               setItensEdicao(novaLista);
                             }}
-                            className="font-extrabold text-stone-900 text-xs sm:text-sm bg-transparent hover:bg-stone-50 focus:bg-amber-50 focus:outline-hidden px-1.5 py-0.5 rounded-lg border border-transparent focus:border-amber-400 flex-1 min-w-[180px]"
+                            aria-label="Nome do item"
+                            className="font-extrabold text-stone-900 text-xs sm:text-sm bg-transparent hover:bg-stone-50 focus:bg-amber-50 focus:outline-none px-1.5 py-0.5 rounded-lg border border-transparent focus:border-amber-400 flex-1 min-w-[160px]"
                           />
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-stone-100 text-stone-600 border border-stone-200 shrink-0">
+                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-stone-100 text-stone-700 border border-stone-200 shrink-0">
                             {NOMES_FORNECEDORES[item.fornecedor]?.nome || item.fornecedor || item.categoria || 'Geral'}
                           </span>
                         </div>
@@ -2316,13 +2332,14 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                               setItensEdicao(novaLista);
                             }}
                             placeholder="Obs / marca de preferência (opcional)..."
-                            className="w-full text-[11px] text-stone-600 italic bg-transparent hover:bg-stone-50 focus:bg-white focus:outline-hidden px-1.5 py-0.5 rounded border border-transparent focus:border-stone-300 placeholder:text-stone-300"
+                            aria-label="Observação do item"
+                            className="w-full text-[11px] text-stone-700 italic bg-transparent hover:bg-stone-50 focus:bg-white focus:outline-none px-1.5 py-0.5 rounded border border-transparent focus:border-stone-300 placeholder:text-stone-400"
                           />
                         </div>
                       </div>
 
                       {/* Controles de Quantidade, Substituto e Excluir */}
-                      <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
+                      <div className="flex flex-wrap items-center gap-2 self-end sm:self-center shrink-0">
                         {/* Seletor de Quantidade com - e + */}
                         <div className="flex items-center bg-stone-100 border border-stone-200 rounded-xl p-0.5 shadow-2xs">
                           <button
@@ -2335,7 +2352,8 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                               novaLista[index] = { ...novaLista[index], quantidade: novo };
                               setItensEdicao(novaLista);
                             }}
-                            className="w-7 h-7 rounded-lg bg-white hover:bg-stone-200 text-stone-700 flex items-center justify-center font-bold text-sm cursor-pointer shadow-2xs active:scale-95"
+                            aria-label={`Diminuir quantidade de ${item.item || item.nome}`}
+                            className="w-8 h-8 rounded-lg bg-white hover:bg-stone-200 text-stone-800 flex items-center justify-center font-bold text-sm cursor-pointer shadow-2xs active:scale-95"
                             title="Diminuir quantidade"
                           >
                             -
@@ -2351,7 +2369,8 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                               novaLista[index] = { ...novaLista[index], quantidade: parseFloat(e.target.value) || 0 };
                               setItensEdicao(novaLista);
                             }}
-                            className="w-12 text-center text-xs font-black text-stone-900 bg-transparent focus:outline-hidden"
+                            aria-label={`Quantidade de ${item.item || item.nome}`}
+                            className="w-12 text-center text-xs font-black text-stone-900 bg-transparent focus:outline-none tabular-nums"
                           />
 
                           <button
@@ -2364,13 +2383,14 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                               novaLista[index] = { ...novaLista[index], quantidade: novo };
                               setItensEdicao(novaLista);
                             }}
-                            className="w-7 h-7 rounded-lg bg-white hover:bg-stone-200 text-stone-700 flex items-center justify-center font-bold text-sm cursor-pointer shadow-2xs active:scale-95"
+                            aria-label={`Aumentar quantidade de ${item.item || item.nome}`}
+                            className="w-8 h-8 rounded-lg bg-white hover:bg-stone-200 text-stone-800 flex items-center justify-center font-bold text-sm cursor-pointer shadow-2xs active:scale-95"
                             title="Aumentar quantidade"
                           >
                             +
                           </button>
 
-                          <span className="text-[11px] font-bold text-stone-500 px-2 select-none">
+                          <span className="text-[11px] font-bold text-stone-600 px-2 select-none">
                             {item.unidade || 'un'}
                           </span>
                         </div>
@@ -2383,10 +2403,10 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                             novaLista[index] = { ...novaLista[index], aceitaSubstituto: !novaLista[index].aceitaSubstituto };
                             setItensEdicao(novaLista);
                           }}
-                          className={`px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition-colors cursor-pointer select-none ${
+                          className={`min-h-[36px] px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition-colors cursor-pointer select-none ${
                             item.aceitaSubstituto
-                              ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
-                              : 'bg-rose-50 text-rose-800 border-rose-300'
+                              ? 'bg-emerald-50 text-emerald-900 border-emerald-300'
+                              : 'bg-rose-50 text-rose-900 border-rose-300'
                           }`}
                           title="Clique para alternar se aceita substituto"
                         >
@@ -2404,10 +2424,11 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                               showToast(`"${nome}" removido do pedido.`);
                             }
                           }}
-                          className="w-8 h-8 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 flex items-center justify-center transition-colors cursor-pointer tap-bounce"
+                          aria-label={`Remover ${item.item || item.nome} do pedido`}
+                          className="w-9 h-9 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 flex items-center justify-center transition-colors cursor-pointer tap-bounce"
                           title="Remover item do pedido"
                         >
-                          <Trash2 size={14} />
+                          <Trash2 size={14} aria-hidden="true" />
                         </button>
                       </div>
                     </div>
@@ -2416,16 +2437,16 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
             </div>
 
             {/* Rodapé Fixo com Botões de Ação */}
-            <div className="flex items-center justify-between pt-3.5 mt-2 border-t border-stone-100 shrink-0">
-              <div className="text-xs text-stone-500 font-semibold">
+            <div className="flex flex-wrap items-center justify-between gap-2 pt-3.5 mt-2 border-t border-stone-100 shrink-0">
+              <div className="text-xs text-stone-600 font-semibold tabular-nums">
                 Total: <strong className="text-stone-900">{itensEdicao.length}</strong> itens no pedido
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 ml-auto">
                 <button
                   type="button"
                   onClick={() => setModalEditarAberto(false)}
-                  className="px-4 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold rounded-xl text-xs transition-colors cursor-pointer"
+                  className="min-h-[42px] px-4 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-800 font-bold rounded-xl text-xs transition-colors cursor-pointer"
                 >
                   Cancelar
                 </button>
@@ -2434,16 +2455,16 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                   type="button"
                   disabled={salvandoEdicao}
                   onClick={handleSalvarEdicao}
-                  className="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-black rounded-xl text-xs shadow-md shadow-amber-500/25 transition-all flex items-center gap-1.5 cursor-pointer tap-bounce"
+                  className="min-h-[42px] px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-black rounded-xl text-xs shadow-md shadow-amber-500/25 transition-all flex items-center gap-1.5 cursor-pointer tap-bounce"
                 >
                   {salvandoEdicao ? (
                     <>
-                      <RefreshCw size={14} className="animate-spin" />
+                      <RefreshCw size={14} className="animate-spin" aria-hidden="true" />
                       <span>Salvando...</span>
                     </>
                   ) : (
                     <>
-                      <Check size={15} strokeWidth={2.5} />
+                      <Check size={15} strokeWidth={2.5} aria-hidden="true" />
                       <span>Salvar Alterações</span>
                     </>
                   )}

@@ -89,20 +89,26 @@ export const ItemCard: React.FC<ItemCardProps> = ({
           className="rounded-2xl"
         />
 
-        {item.favorito && (
-          <span className="absolute top-2 left-2 inline-flex items-center gap-1 bg-amber-400 text-stone-950 text-[11px] font-extrabold uppercase tracking-wide px-2 py-0.5 rounded-full shadow-sm border border-amber-500/30">
-            <Star size={11} className="fill-stone-950 text-stone-950 shrink-0" aria-hidden="true" />
-            <span>Mais Pedido</span>
-          </span>
-        )}
+        {(item.favorito || isSelected) && (
+          <div className="absolute top-2 inset-x-2 flex items-center justify-between gap-1.5 pointer-events-none">
+            {item.favorito ? (
+              <span className="inline-flex items-center gap-1 bg-amber-400 text-stone-950 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wide px-1.5 sm:px-2 py-0.5 rounded-full shadow-sm border border-amber-500/30 whitespace-nowrap">
+                <Star size={10} className="fill-stone-950 text-stone-950 shrink-0" aria-hidden="true" />
+                <span>Mais Pedido</span>
+              </span>
+            ) : (
+              <span />
+            )}
 
-        {isSelected && (
-          <span
-            aria-hidden="true"
-            className="absolute top-2 right-2 bg-stone-900 text-white p-1.5 rounded-full shadow-md ring-2 ring-white"
-          >
-            <Check size={13} strokeWidth={3} />
-          </span>
+            {isSelected && (
+              <span
+                aria-hidden="true"
+                className="shrink-0 bg-stone-900 text-white p-1 sm:p-1.5 rounded-full shadow-md ring-2 ring-white"
+              >
+                <Check size={12} strokeWidth={3} />
+              </span>
+            )}
+          </div>
         )}
       </div>
 

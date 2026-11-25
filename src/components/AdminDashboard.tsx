@@ -1013,9 +1013,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                           <p className="text-sm font-black text-stone-900 leading-tight truncate">
                             {user.nome}
                           </p>
-                          <div className="flex items-center gap-1.5 mt-0.5 text-[11px] text-stone-600 flex-wrap">
+                          <div className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-1.5 mt-0.5 text-[11px] text-stone-600">
                             <span className="font-semibold text-amber-800">{user.cargo}</span>
-                            <span aria-hidden="true">•</span>
+                            <span className="hidden sm:inline" aria-hidden="true">•</span>
                             <span className="font-mono text-stone-600">@{user.login}</span>
                           </div>
                         </div>

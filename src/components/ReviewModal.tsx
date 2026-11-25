@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ItemPedido, FornecedorId } from '../types';
-import { FORNECEDORES, LISTA_FORNECEDORES } from '../data/fornecedores';
+import { LISTA_FORNECEDORES } from '../data/fornecedores';
 import { verificarItensEssenciais, AlertaItemEssencial } from '../utils/validation';
 import { 
   X, 
@@ -9,9 +9,7 @@ import {
   Minus, 
   AlertTriangle, 
   Send, 
-  PlusCircle, 
-  Check, 
-  HelpCircle 
+  PlusCircle
 } from 'lucide-react';
 
 interface ReviewModalProps {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { formatarDataBr } from '../services/gerarPlanilha';
 import { Home, Calendar, Users, ChefHat, ArrowRight, User, X } from 'lucide-react';
 
@@ -20,13 +20,15 @@ export const CozinheiraBoasVindasModal: React.FC<CozinheiraBoasVindasModalProps>
   onConfirmar
 }) => {
   const [nome, setNome] = useState(nomeInicial);
+  const [prevNomeInicial, setPrevNomeInicial] = useState(nomeInicial);
   const [erro, setErro] = useState<string | null>(null);
 
-  useEffect(() => {
+  if (nomeInicial !== prevNomeInicial) {
+    setPrevNomeInicial(nomeInicial);
     if (nomeInicial && !nome) {
       setNome(nomeInicial);
     }
-  }, [nomeInicial]);
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

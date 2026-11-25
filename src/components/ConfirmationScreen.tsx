@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Pedido } from '../types';
-import { CheckCircle, Share2, Home, ExternalLink, ArrowLeft } from 'lucide-react';
+import { CheckCircle, Share2, ExternalLink, ArrowLeft } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { copiarTextoParaClipboard } from '../services/clipboard';
 

@@ -8,6 +8,17 @@ import {
   hidratarAnexosComMidia,
   hidratarPedidoComMidia
 } from './anexoStorage';
+import {
+  prepararAnexoParaStorage,
+  prepararPagamentoParaStorage,
+  prepararAdiantamentoParaStorage,
+  desidratarAnexosParaBanco,
+  desidratarAdiantamentosParaBanco,
+  hidratarPedidosComStorage,
+  hidratarEstadiasComStorage,
+  removerMidiasAnexoStorage,
+  removerMidiaAdiantamentoStorage
+} from './supabaseStorage';
 
 // Variáveis de ambiente configuradas no .env
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
@@ -628,11 +639,13 @@ export async function listarEstadias({ status = 'todas', busca = '' } = {}) {
     const { data, error } = await query;
     if (error) throw error;
 
-    return (data || []).map(estadia => ({
+    const estadiasMapeadas = (data || []).map(estadia => ({
       ...estadia,
       adiantamentos: estadia.adiantamentos || [],
       total_pedidos: estadia.pedidos?.[0]?.count ?? 0
     }));
+
+    return hidratarEstadiasComStorage(supabase, estadiasMapeadas);
   }
 
   // Modo Localhost
@@ -1090,6 +1103,12 @@ export async function adicionarAdiantamentoEstadia(estadiaId, { valor, data, for
     : `Outra pessoa (${novoAdiantamento.quem_pagou_nome || 'Não especificado'})`;
 
   if (isSupabaseConfigured()) {
+    const { paraMemoria: adiantamentoMemoria } = await prepararAdiantamentoParaStorage(
+      supabase,
+      estadiaId,
+      novoAdiantamento
+    );
+
     const { data: estAtual, error: fetchErr } = await supabase
       .from('estadias')
       .select('*')
@@ -1099,12 +1118,12 @@ export async function adicionarAdiantamentoEstadia(estadiaId, { valor, data, for
     if (fetchErr) throw fetchErr;
 
     const listaAdiantamentos = Array.isArray(estAtual.adiantamentos) ? [...estAtual.adiantamentos] : [];
-    listaAdiantamentos.push(novoAdiantamento);
+    listaAdiantamentos.push(adiantamentoMemoria);
 
     const { data: estAtualizada, error: updateErr } = await supabase
       .from('estadias')
       .update({
-        adiantamentos: listaAdiantamentos,
+        adiantamentos: desidratarAdiantamentosParaBanco(listaAdiantamentos),
         atualizada_em: new Date().toISOString()
       })
       .eq('id', estadiaId)
@@ -1125,7 +1144,8 @@ export async function adicionarAdiantamentoEstadia(estadiaId, { valor, data, for
       usuario_login: autorLogin
     });
 
-    return estAtualizada;
+    const [estadiaHidratada] = await hidratarEstadiasComStorage(supabase, [estAtualizada]);
+    return estadiaHidratada || estAtualizada;
   }
 
   // Modo Localhost
@@ -1180,10 +1200,14 @@ export async function removerAdiantamentoEstadia(estadiaId, adiantamentoId) {
     const itemRemovido = (estAtual.adiantamentos || []).find((a) => a.id === adiantamentoId);
     const listaAdiantamentos = (estAtual.adiantamentos || []).filter((a) => a.id !== adiantamentoId);
 
+    if (itemRemovido) {
+      await removerMidiaAdiantamentoStorage(supabase, itemRemovido);
+    }
+
     const { data: estAtualizada, error: updateErr } = await supabase
       .from('estadias')
       .update({
-        adiantamentos: listaAdiantamentos,
+        adiantamentos: desidratarAdiantamentosParaBanco(listaAdiantamentos),
         atualizada_em: new Date().toISOString()
       })
       .eq('id', estadiaId)
@@ -1204,7 +1228,8 @@ export async function removerAdiantamentoEstadia(estadiaId, adiantamentoId) {
       usuario_login: autorLogin
     });
 
-    return estAtualizada;
+    const [estadiaHidratada] = await hidratarEstadiasComStorage(supabase, [estAtualizada]);
+    return estadiaHidratada || estAtualizada;
   }
 
   // Modo Localhost
@@ -1437,6 +1462,10 @@ async function obterPedidoPorIdGeral(pedidoId) {
   const pedidos = obterPedidosLocais();
   let idx = pedidos.findIndex((p) => p.id === pedidoId);
   if (idx !== -1) {
+    if (isSupabaseConfigured()) {
+      const [hidratado] = await hidratarPedidosComStorage(supabase, [pedidos[idx]]);
+      if (hidratado) pedidos[idx] = hidratado;
+    }
     return { pedidos, idx, ped: pedidos[idx] };
   }
 
@@ -1452,11 +1481,12 @@ async function obterPedidoPorIdGeral(pedidoId) {
         .maybeSingle();
 
       if (!error && data) {
-        const pedSupa = {
+        const pedSupaBase = {
           ...data,
           status: data.status || 'em_aprovacao',
           anexos: data.anexos || []
         };
+        const [pedSupa] = await hidratarPedidosComStorage(supabase, [pedSupaBase]);
         pedidos.unshift(pedSupa);
         salvarPedidosLocais(pedidos);
         return { pedidos, idx: 0, ped: pedSupa };
@@ -1838,13 +1868,25 @@ export async function adicionarAnexosPedido(pedidoId, novosAnexos) {
   const { pedidos, ped } = await obterPedidoPorIdGeral(pedidoId);
   if (!ped) throw new Error('Pedido não encontrado.');
 
-  ped.anexos = [...(ped.anexos || []), ...anexosFormatados];
+  const anexosProntos = isSupabaseConfigured()
+    ? await Promise.all(
+        anexosFormatados.map(async (anexo) => {
+          const { paraMemoria } = await prepararAnexoParaStorage(supabase, pedidoId, anexo);
+          return paraMemoria;
+        })
+      )
+    : anexosFormatados;
+
+  ped.anexos = [...(ped.anexos || []), ...anexosProntos];
 
   salvarPedidosLocais(pedidos);
 
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('pedidos').update({ anexos: ped.anexos }).eq('id', pedidoId);
+      await supabase
+        .from('pedidos')
+        .update({ anexos: desidratarAnexosParaBanco(ped.anexos) })
+        .eq('id', pedidoId);
     } catch (err) {
       console.warn('Supabase attachments update warning:', err);
     }
@@ -1874,6 +1916,22 @@ export async function atualizarAnexoPedido(pedidoId, anexoId, dadosAtualizados) 
   const { pedidos, ped } = await obterPedidoPorIdGeral(pedidoId);
   if (!ped) throw new Error('Pedido não encontrado.');
 
+  let anexoUrlAtualizada = dadosAtualizados.url;
+  let anexoStoragePathAtualizado;
+  if (
+    isSupabaseConfigured() &&
+    dadosAtualizados.url &&
+    (dadosAtualizados.url.startsWith('data:') || dadosAtualizados.url.startsWith('blob:'))
+  ) {
+    const { paraMemoria } = await prepararAnexoParaStorage(supabase, pedidoId, {
+      id: anexoId,
+      url: dadosAtualizados.url,
+      nome: dadosAtualizados.nome
+    });
+    anexoUrlAtualizada = paraMemoria.url;
+    anexoStoragePathAtualizado = paraMemoria.storage_path;
+  }
+
   ped.anexos = (ped.anexos || []).map((a) => {
     if (a.id !== anexoId) return a;
 
@@ -1889,7 +1947,8 @@ export async function atualizarAnexoPedido(pedidoId, anexoId, dadosAtualizados) 
 
     return {
       ...a,
-      url: dadosAtualizados.url || a.url,
+      url: anexoUrlAtualizada || a.url,
+      ...(anexoStoragePathAtualizado ? { storage_path: anexoStoragePathAtualizado } : {}),
       fornecedor: dadosAtualizados.fornecedor !== undefined ? dadosAtualizados.fornecedor.trim() : (a.fornecedor || 'Geral'),
       valor_total: valorNum,
       quem_pagou: dadosAtualizados.quem_pagou !== undefined ? dadosAtualizados.quem_pagou : (a.quem_pagou || 'hospede'),
@@ -1902,7 +1961,10 @@ export async function atualizarAnexoPedido(pedidoId, anexoId, dadosAtualizados) 
 
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('pedidos').update({ anexos: ped.anexos }).eq('id', pedidoId);
+      await supabase
+        .from('pedidos')
+        .update({ anexos: desidratarAnexosParaBanco(ped.anexos) })
+        .eq('id', pedidoId);
     } catch (err) {
       console.warn('Supabase attachments update warning:', err);
     }
@@ -1918,14 +1980,21 @@ export async function removerAnexoPedido(pedidoId, anexoId) {
   const { pedidos, ped } = await obterPedidoPorIdGeral(pedidoId);
   if (!ped) throw new Error('Pedido não encontrado.');
 
+  const anexoRemovido = (ped.anexos || []).find((a) => a.id === anexoId);
   ped.anexos = (ped.anexos || []).filter((a) => a.id !== anexoId);
   
   await removerMidiaIndexedDB(anexoId);
+  if (isSupabaseConfigured() && anexoRemovido) {
+    await removerMidiasAnexoStorage(supabase, anexoRemovido);
+  }
   salvarPedidosLocais(pedidos);
 
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('pedidos').update({ anexos: ped.anexos }).eq('id', pedidoId);
+      await supabase
+        .from('pedidos')
+        .update({ anexos: desidratarAnexosParaBanco(ped.anexos) })
+        .eq('id', pedidoId);
     } catch (err) {
       console.warn('Supabase attachments update warning:', err);
     }
@@ -1975,7 +2044,7 @@ export async function registrarPagamentoNotaPedido(pedidoId, anexoId, dados) {
     ? (dados.quem_pagou_nome || 'Hóspede')
     : (dados.quem_pagou_outro ? dados.quem_pagou_outro.trim() : 'Outro terceiro');
 
-  const novoPagamento = {
+  const novoPagamentoBase = {
     id: pagamentoId,
     valor: valorNum,
     data: dados.data || agora.split('T')[0],
@@ -1991,6 +2060,10 @@ export async function registrarPagamentoNotaPedido(pedidoId, anexoId, dados) {
     registrado_por_nome: autorNome,
     registrado_por_login: autorLogin
   };
+
+  const novoPagamento = isSupabaseConfigured()
+    ? (await prepararPagamentoParaStorage(supabase, pedidoId, novoPagamentoBase)).paraMemoria
+    : novoPagamentoBase;
 
   const listaPagamentos = Array.isArray(anexo.pagamentos) ? [...anexo.pagamentos] : [];
   listaPagamentos.push(novoPagamento);
@@ -2025,7 +2098,10 @@ export async function registrarPagamentoNotaPedido(pedidoId, anexoId, dados) {
 
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('pedidos').update({ anexos: ped.anexos }).eq('id', pedidoId);
+      await supabase
+        .from('pedidos')
+        .update({ anexos: desidratarAnexosParaBanco(ped.anexos) })
+        .eq('id', pedidoId);
     } catch (err) {
       console.warn('Supabase attachments update warning:', err);
     }
@@ -2058,11 +2134,12 @@ export async function listarPedidosPorEstadia(estadiaId) {
       .order('numero', { ascending: false });
 
     if (error) throw error;
-    const pedidos = (data || []).map((p) => ({
+    const pedidosMapeados = (data || []).map((p) => ({
       ...p,
       status: p.status || 'em_aprovacao',
       anexos: p.anexos || []
     }));
+    const pedidos = await hidratarPedidosComStorage(supabase, pedidosMapeados);
 
     const locais = obterPedidosLocais();
     pedidos.forEach((p) => {
@@ -2111,11 +2188,12 @@ export async function listarTodosPedidos() {
       .order('finalizado_em', { ascending: false });
 
     if (error) throw error;
-    const pedidos = (data || []).map((p) => ({
+    const pedidosMapeados = (data || []).map((p) => ({
       ...p,
       status: p.status || 'em_aprovacao',
       anexos: p.anexos || []
     }));
+    const pedidos = await hidratarPedidosComStorage(supabase, pedidosMapeados);
 
     salvarPedidosLocais(pedidos);
     return pedidos;

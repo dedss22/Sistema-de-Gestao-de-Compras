@@ -14,6 +14,12 @@ import {
   salvarPedidosLocais
 } from './localStore';
 import { salvarMidiaIndexedDB } from '../anexoStorage';
+import {
+  desidratarAdiantamentosParaBanco,
+  hidratarEstadiasComStorage,
+  prepararAdiantamentoParaStorage,
+  removerMidiaAdiantamentoStorage
+} from '../supabaseStorage';
 import type {
   AdiantamentoEstadia,
   DadosAdicionarAdiantamento,
@@ -90,11 +96,13 @@ export async function listarEstadias({
     if (error) throw error;
 
     type EstadiaComCount = Estadia & { pedidos?: Array<{ count?: number }> };
-    return ((data as EstadiaComCount[]) || []).map((estadia) => ({
+    const estadiasMapeadas = ((data as EstadiaComCount[]) || []).map((estadia) => ({
       ...estadia,
       adiantamentos: estadia.adiantamentos || [],
       total_pedidos: estadia.pedidos?.[0]?.count ?? 0
     }));
+
+    return hidratarEstadiasComStorage(supabase, estadiasMapeadas);
   }
 
   // Modo Localhost
@@ -624,6 +632,12 @@ export async function adicionarAdiantamentoEstadia(
       : `Outra pessoa (${novoAdiantamento.quem_pagou_nome || 'Não especificado'})`;
 
   if (isSupabaseConfigured()) {
+    const { paraMemoria: adiantamentoMemoria } = await prepararAdiantamentoParaStorage(
+      supabase,
+      estadiaId,
+      novoAdiantamento
+    );
+
     const { data: estAtual, error: fetchErr } = await supabase
       .from('estadias')
       .select('*')
@@ -634,12 +648,12 @@ export async function adicionarAdiantamentoEstadia(
 
     const estAtualTyped = estAtual as Estadia;
     const listaAdiantamentos = Array.isArray(estAtualTyped.adiantamentos) ? [...estAtualTyped.adiantamentos] : [];
-    listaAdiantamentos.push(novoAdiantamento);
+    listaAdiantamentos.push(adiantamentoMemoria);
 
     const { data: estAtualizada, error: updateErr } = await supabase
       .from('estadias')
       .update({
-        adiantamentos: listaAdiantamentos,
+        adiantamentos: desidratarAdiantamentosParaBanco(listaAdiantamentos),
         atualizada_em: new Date().toISOString()
       })
       .eq('id', estadiaId)
@@ -660,7 +674,8 @@ export async function adicionarAdiantamentoEstadia(
       usuario_login: autorLogin
     });
 
-    return estAtualizada as Estadia;
+    const [estadiaHidratada] = await hidratarEstadiasComStorage(supabase, [estAtualizada as Estadia]);
+    return estadiaHidratada || (estAtualizada as Estadia);
   }
 
   // Modo Localhost
@@ -714,10 +729,14 @@ export async function removerAdiantamentoEstadia(estadiaId: string, adiantamento
     const itemRemovido = (estAtualTyped.adiantamentos || []).find((a) => a.id === adiantamentoId);
     const listaAdiantamentos = (estAtualTyped.adiantamentos || []).filter((a) => a.id !== adiantamentoId);
 
+    if (itemRemovido) {
+      await removerMidiaAdiantamentoStorage(supabase, itemRemovido);
+    }
+
     const { data: estAtualizada, error: updateErr } = await supabase
       .from('estadias')
       .update({
-        adiantamentos: listaAdiantamentos,
+        adiantamentos: desidratarAdiantamentosParaBanco(listaAdiantamentos),
         atualizada_em: new Date().toISOString()
       })
       .eq('id', estadiaId)
@@ -740,7 +759,8 @@ export async function removerAdiantamentoEstadia(estadiaId: string, adiantamento
       usuario_login: autorLogin
     });
 
-    return estAtualizada as Estadia;
+    const [estadiaHidratada] = await hidratarEstadiasComStorage(supabase, [estAtualizada as Estadia]);
+    return estadiaHidratada || (estAtualizada as Estadia);
   }
 
   // Modo Localhost

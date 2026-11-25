@@ -45,7 +45,11 @@ create table if not exists estadias (
   arquivada_por_login varchar(80),
   arquivada_em timestamptz,
   reativada_por_nome varchar(150),
+  reativada_por_login varchar(80),
   reativada_em timestamptz,
+  atualizada_por_nome varchar(150),
+  atualizada_por_login varchar(80),
+  adiantamentos jsonb not null default '[]'::jsonb,
   criada_em timestamptz not null default now(),
   atualizada_em timestamptz not null default now(),
   constraint check_datas check (saida >= entrada)
@@ -61,7 +65,10 @@ alter table estadias add column if not exists arquivada_por_nome varchar(150);
 alter table estadias add column if not exists arquivada_por_login varchar(80);
 alter table estadias add column if not exists arquivada_em timestamptz;
 alter table estadias add column if not exists reativada_por_nome varchar(150);
+alter table estadias add column if not exists reativada_por_login varchar(80);
 alter table estadias add column if not exists reativada_em timestamptz;
+alter table estadias add column if not exists atualizada_por_nome varchar(150);
+alter table estadias add column if not exists atualizada_por_login varchar(80);
 alter table estadias add column if not exists adiantamentos jsonb not null default '[]'::jsonb;
 
 -- Índices para busca rápida e listagens
@@ -92,6 +99,10 @@ create table if not exists pedidos (
   concluido_por_nome varchar(150),
   concluido_por_login varchar(80),
   concluido_em timestamptz,
+  editado_por_nome varchar(150),
+  editado_por_login varchar(80),
+  editado_em timestamptz,
+  historico_edicoes jsonb not null default '[]'::jsonb,
   anexos jsonb not null default '[]'::jsonb,
   itens jsonb not null default '[]'::jsonb,
   constraint uk_estadia_numero unique (estadia_id, numero),
@@ -116,10 +127,15 @@ alter table pedidos add column if not exists enviado_fornecedor_em timestamptz;
 alter table pedidos add column if not exists concluido_por_nome varchar(150);
 alter table pedidos add column if not exists concluido_por_login varchar(80);
 alter table pedidos add column if not exists concluido_em timestamptz;
+alter table pedidos add column if not exists editado_por_nome varchar(150);
+alter table pedidos add column if not exists editado_por_login varchar(80);
+alter table pedidos add column if not exists editado_em timestamptz;
+alter table pedidos add column if not exists historico_edicoes jsonb not null default '[]'::jsonb;
 alter table pedidos add column if not exists anexos jsonb not null default '[]'::jsonb;
 
 -- Índices para pedidos
 create index if not exists idx_pedidos_estadia on pedidos (estadia_id);
+create index if not exists idx_pedidos_numero on pedidos (estadia_id, numero);
 create index if not exists idx_pedidos_status on pedidos (status);
 create index if not exists idx_pedidos_finalizado_em on pedidos (finalizado_em desc);
 
@@ -362,11 +378,15 @@ create table if not exists historico_atividades (
   estadia_casa text,
   usuario_nome text not null,
   usuario_login text not null,
-  criado_em timestamptz not null default now()
+  criado_em timestamptz not null default now(),
+  dados_backup jsonb
 );
+
+alter table historico_atividades add column if not exists dados_backup jsonb;
 
 -- Índices para busca rápida e cronológica
 create index if not exists idx_historico_criado_em on historico_atividades (criado_em desc);
+create index if not exists idx_historico_estadia on historico_atividades (estadia_id);
 create index if not exists idx_historico_tipo on historico_atividades (tipo_acao);
 create index if not exists idx_historico_usuario on historico_atividades (usuario_login);
 

@@ -12,6 +12,7 @@ export interface AdiantamentoEstadia {
   comprovante_tamanho?: string;
   quem_pagou?: 'hospede' | 'outra_pessoa';
   quem_pagou_nome?: string;
+  comprovante_storage_path?: string;
   registrado_por_nome: string;
   registrado_por_login?: string;
   registrado_em: string;
@@ -75,6 +76,7 @@ export interface PagamentoNota {
   comprovante_nome?: string;
   comprovante_tipo?: 'imagem' | 'pdf';
   comprovante_tamanho?: string;
+  comprovante_storage_path?: string;
   registrado_em: string;
   registrado_por_nome?: string;
   registrado_por_login?: string;
@@ -86,6 +88,7 @@ export interface AnexoPedido {
   tipo: 'imagem' | 'pdf';
   tamanho: string;
   url: string;
+  storage_path?: string;
   anexado_por_nome: string;
   anexado_por_login?: string;
   anexado_em: string;

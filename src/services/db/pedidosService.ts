@@ -1,4 +1,5 @@
 import { hidratarAnexosComMidia, obterPedidosIndexedDB } from '../anexoStorage';
+import { hidratarPedidosComStorage } from '../supabaseStorage';
 import { isSupabaseConfigured, supabase } from './client';
 import { obterAutorAtual } from './authService';
 import { registrarLogAuditoria } from './auditoriaService';
@@ -247,6 +248,10 @@ export async function obterPedidoPorIdGeral(
   const pedidos = obterPedidosLocais();
   const idx = pedidos.findIndex((p) => p.id === pedidoId);
   if (idx !== -1) {
+    if (isSupabaseConfigured()) {
+      const [hidratado] = await hidratarPedidosComStorage(supabase, [pedidos[idx]]);
+      if (hidratado) pedidos[idx] = hidratado;
+    }
     return { pedidos, idx, ped: pedidos[idx] };
   }
 
@@ -265,11 +270,12 @@ export async function obterPedidoPorIdGeral(
 
       if (!error && data) {
         const pedRaw = data as PedidoBanco;
-        const pedSupa: PedidoBanco = {
+        const pedSupaBase: PedidoBanco = {
           ...pedRaw,
           status: pedRaw.status || 'em_aprovacao',
           anexos: pedRaw.anexos || []
         };
+        const [pedSupa] = await hidratarPedidosComStorage(supabase, [pedSupaBase]);
         pedidos.unshift(pedSupa);
         salvarPedidosLocais(pedidos);
         return { pedidos, idx: 0, ped: pedSupa };
@@ -623,11 +629,12 @@ export async function listarPedidosPorEstadia(estadiaId: string): Promise<Pedido
       .order('numero', { ascending: false });
 
     if (error) throw error;
-    const pedidos: PedidoBanco[] = ((data as PedidoBanco[]) || []).map((p) => ({
+    const pedidosMapeados: PedidoBanco[] = ((data as PedidoBanco[]) || []).map((p) => ({
       ...p,
       status: p.status || 'em_aprovacao',
       anexos: p.anexos || []
     }));
+    const pedidos = await hidratarPedidosComStorage(supabase, pedidosMapeados);
 
     const locais = obterPedidosLocais();
     pedidos.forEach((p) => {
@@ -678,11 +685,12 @@ export async function listarTodosPedidos(): Promise<PedidoBanco[]> {
       .order('finalizado_em', { ascending: false });
 
     if (error) throw error;
-    const pedidos: PedidoBanco[] = ((data as PedidoBanco[]) || []).map((p) => ({
+    const pedidosMapeados: PedidoBanco[] = ((data as PedidoBanco[]) || []).map((p) => ({
       ...p,
       status: p.status || 'em_aprovacao',
       anexos: p.anexos || []
     }));
+    const pedidos = await hidratarPedidosComStorage(supabase, pedidosMapeados);
 
     salvarPedidosLocais(pedidos);
     return pedidos;

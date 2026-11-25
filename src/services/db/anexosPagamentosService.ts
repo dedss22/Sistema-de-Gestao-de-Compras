@@ -1,4 +1,11 @@
 import { removerMidiaIndexedDB, salvarMidiaIndexedDB } from '../anexoStorage';
+import {
+  type AnexoStorageLike,
+  desidratarAnexosParaBanco,
+  prepararAnexoParaStorage,
+  prepararPagamentoParaStorage,
+  removerMidiasAnexoStorage
+} from '../supabaseStorage';
 import { isSupabaseConfigured, supabase } from './client';
 import { obterAutorAtual } from './authService';
 import { registrarLogAuditoria } from './auditoriaService';
@@ -51,13 +58,25 @@ export async function adicionarAnexosPedido(
   const { pedidos, ped } = await obterPedidoPorIdGeral(pedidoId);
   if (!ped) throw new Error('Pedido não encontrado.');
 
-  ped.anexos = [...(ped.anexos || []), ...anexosFormatados];
+  const anexosProntos = isSupabaseConfigured()
+    ? await Promise.all(
+        anexosFormatados.map(async (anexo) => {
+          const { paraMemoria } = await prepararAnexoParaStorage(supabase, pedidoId, anexo);
+          return paraMemoria;
+        })
+      )
+    : anexosFormatados;
+
+  ped.anexos = [...(ped.anexos || []), ...anexosProntos];
 
   salvarPedidosLocais(pedidos);
 
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('pedidos').update({ anexos: ped.anexos }).eq('id', pedidoId);
+      await supabase
+        .from('pedidos')
+        .update({ anexos: desidratarAnexosParaBanco(ped.anexos || []) })
+        .eq('id', pedidoId);
     } catch (err) {
       console.warn('Supabase attachments update warning:', err);
     }
@@ -94,6 +113,22 @@ export async function atualizarAnexoPedido(
   const { pedidos, ped } = await obterPedidoPorIdGeral(pedidoId);
   if (!ped) throw new Error('Pedido não encontrado.');
 
+  let anexoUrlAtualizada = dadosAtualizados.url;
+  let anexoStoragePathAtualizado: string | undefined;
+  if (
+    isSupabaseConfigured() &&
+    dadosAtualizados.url &&
+    (dadosAtualizados.url.startsWith('data:') || dadosAtualizados.url.startsWith('blob:'))
+  ) {
+    const { paraMemoria } = await prepararAnexoParaStorage<AnexoStorageLike>(supabase, pedidoId, {
+      id: anexoId,
+      url: dadosAtualizados.url,
+      nome: dadosAtualizados.nome
+    });
+    anexoUrlAtualizada = paraMemoria.url;
+    anexoStoragePathAtualizado = paraMemoria.storage_path;
+  }
+
   ped.anexos = (ped.anexos || []).map((a) => {
     if (a.id !== anexoId) return a;
 
@@ -104,7 +139,8 @@ export async function atualizarAnexoPedido(
 
     return {
       ...a,
-      url: dadosAtualizados.url || a.url,
+      url: anexoUrlAtualizada || a.url,
+      ...(anexoStoragePathAtualizado ? { storage_path: anexoStoragePathAtualizado } : {}),
       fornecedor:
         dadosAtualizados.fornecedor !== undefined ? dadosAtualizados.fornecedor.trim() : a.fornecedor || 'Geral',
       valor_total: valorNum,
@@ -121,7 +157,10 @@ export async function atualizarAnexoPedido(
 
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('pedidos').update({ anexos: ped.anexos }).eq('id', pedidoId);
+      await supabase
+        .from('pedidos')
+        .update({ anexos: desidratarAnexosParaBanco(ped.anexos || []) })
+        .eq('id', pedidoId);
     } catch (err) {
       console.warn('Supabase attachments update warning:', err);
     }
@@ -137,14 +176,21 @@ export async function removerAnexoPedido(pedidoId: string, anexoId: string): Pro
   const { pedidos, ped } = await obterPedidoPorIdGeral(pedidoId);
   if (!ped) throw new Error('Pedido não encontrado.');
 
+  const anexoRemovido = (ped.anexos || []).find((a) => a.id === anexoId);
   ped.anexos = (ped.anexos || []).filter((a) => a.id !== anexoId);
 
   await removerMidiaIndexedDB(anexoId);
+  if (isSupabaseConfigured() && anexoRemovido) {
+    await removerMidiasAnexoStorage(supabase, anexoRemovido);
+  }
   salvarPedidosLocais(pedidos);
 
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('pedidos').update({ anexos: ped.anexos }).eq('id', pedidoId);
+      await supabase
+        .from('pedidos')
+        .update({ anexos: desidratarAnexosParaBanco(ped.anexos || []) })
+        .eq('id', pedidoId);
     } catch (err) {
       console.warn('Supabase attachments update warning:', err);
     }
@@ -196,7 +242,7 @@ export async function registrarPagamentoNotaPedido(
         ? dados.quem_pagou_outro.trim()
         : 'Outro terceiro';
 
-  const novoPagamento: PagamentoNota = {
+  const novoPagamentoBase: PagamentoNota = {
     id: pagamentoId,
     valor: valorNum,
     data: dados.data || agora.split('T')[0],
@@ -212,6 +258,10 @@ export async function registrarPagamentoNotaPedido(
     registrado_por_nome: autorNome,
     registrado_por_login: autorLogin
   };
+
+  const novoPagamento = isSupabaseConfigured()
+    ? (await prepararPagamentoParaStorage(supabase, pedidoId, novoPagamentoBase)).paraMemoria
+    : novoPagamentoBase;
 
   const listaPagamentos = Array.isArray(anexo.pagamentos) ? [...anexo.pagamentos] : [];
   listaPagamentos.push(novoPagamento);
@@ -246,7 +296,10 @@ export async function registrarPagamentoNotaPedido(
 
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('pedidos').update({ anexos: ped.anexos }).eq('id', pedidoId);
+      await supabase
+        .from('pedidos')
+        .update({ anexos: desidratarAnexosParaBanco(ped.anexos || []) })
+        .eq('id', pedidoId);
     } catch (err) {
       console.warn('Supabase attachments update warning:', err);
     }

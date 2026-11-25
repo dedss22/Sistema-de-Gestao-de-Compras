@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import {
-  isSupabaseConfigured,
   loginEquipe,
   logoutEquipe,
   getSessaoAtual,
@@ -19,7 +18,6 @@ import {
   Estadia,
   PedidoBanco,
   LogAuditoria,
-  UsuarioEquipe,
   StatusPedido
 } from '../services/db';
 import {
@@ -69,19 +67,13 @@ import {
   Filter,
   History,
   Activity,
-  CheckCheck,
   Send,
-  Package,
   RotateCcw,
   XCircle,
   Paperclip,
   Eye,
   CreditCard,
-  DollarSign,
-  Wallet,
-  Lightbulb,
-  ThumbsUp,
-  Tag
+  Lightbulb
 } from 'lucide-react';
 
 const EMOJI_FORNECEDORES: Record<string, string> = {
@@ -121,14 +113,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         const parsed = JSON.parse(raw);
         if (parsed?.user) return parsed;
       }
-    } catch (e) {}
+    } catch {}
     return null;
   });
   const [loadingAuth, setLoadingAuth] = useState<boolean>(() => {
     try {
       const raw = localStorage.getItem('lista_compras_supabase_session');
       if (raw) return false;
-    } catch (e) {}
+    } catch {}
     return true;
   });
   const [lembrarSenha, setLembrarSenha] = useState<boolean>(() => {
@@ -268,7 +260,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   }, []);
 
   // 2. Carregar estadias
-  const carregarDadosEstadias = async () => {
+  const carregarDadosEstadias = useCallback(async () => {
     if (!session) return;
     setLoadingEstadias(true);
     try {
@@ -280,10 +272,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     } finally {
       setLoadingEstadias(false);
     }
-  };
+  }, [session]);
 
   // 3. Carregar todos os pedidos
-  const carregarPedidosGlobais = async () => {
+  const carregarPedidosGlobais = useCallback(async () => {
     if (!session) return;
     setLoadingPedidosGlobais(true);
     try {
@@ -295,10 +287,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     } finally {
       setLoadingPedidosGlobais(false);
     }
-  };
+  }, [session]);
 
   // 4. Carregar histórico de auditoria
-  const carregarLogsAuditoria = async () => {
+  const carregarLogsAuditoria = useCallback(async () => {
     if (!session) return;
     setLoadingLogs(true);
     try {
@@ -314,7 +306,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     } finally {
       setLoadingLogs(false);
     }
-  };
+  }, [session, filtroTipoLog, buscaLogs]);
 
   // Feedback e animação explícita no clique do botão de recarregar
   const [recarregandoManual, setRecarregandoManual] = useState(false);
@@ -347,18 +339,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   };
 
   useEffect(() => {
-    if (session && isOpen) {
+    if (!session || !isOpen) return;
+    const timer = setTimeout(() => {
       if (abaPrincipal === 'estadias') {
         carregarDadosEstadias();
-      } else if (abaPrincipal === 'pedidos') {
+      } else if (abaPrincipal === 'pedidos' || abaPrincipal === 'sugestoes') {
         carregarPedidosGlobais();
       } else if (abaPrincipal === 'historico') {
         carregarLogsAuditoria();
-      } else if (abaPrincipal === 'sugestoes') {
-        carregarPedidosGlobais();
       }
-    }
-  }, [session, isOpen, abaPrincipal, filtroTipoLog, buscaLogs]);
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [session, isOpen, abaPrincipal, carregarDadosEstadias, carregarPedidosGlobais, carregarLogsAuditoria]);
 
   // Contadores por status para as abas de estadias (sempre calculados sobre o total real)
   const contadores = useMemo(() => {
@@ -442,6 +434,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
   // Extrai todas as sugestões de produtos fora do menu a partir de pedidos
   const todasSugestoes = useMemo(() => {
+    void catalogoVersao;
     return extrairSugestoesItensCustomizados(pedidosGlobais);
   }, [pedidosGlobais, catalogoVersao]);
 

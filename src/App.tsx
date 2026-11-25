@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import catalogoData from './data/catalogo.json';
+import React, { Suspense, useState, useEffect, useMemo } from 'react';
 import { ItemCatalogo, ItemPedido, FornecedorId, Pedido, KitPronto } from './types';
 import { FORNECEDORES } from './data/fornecedores';
 import { SupplierTabs } from './components/SupplierTabs';
@@ -9,7 +8,6 @@ import { KitsSelector } from './components/KitsSelector';
 import { BottomSummaryBar } from './components/BottomSummaryBar';
 import { ReviewModal } from './components/ReviewModal';
 import { ConfirmationScreen } from './components/ConfirmationScreen';
-import { AdminDashboard } from './components/AdminDashboard';
 import { ClientApprovalView } from './components/ClientApprovalView';
 import { saveDraft, loadDraft, saveOrder, getOrderById } from './services/storage';
 import { obterEstadiaPorCodigo, criarPedido } from './services/db';
@@ -18,9 +16,88 @@ import { CozinheiraBoasVindasModal } from './components/CozinheiraBoasVindasModa
 import { PedidoSucessoModal } from './components/PedidoSucessoModal';
 import { AlertaItemEssencial } from './utils/validation';
 import { obterCatalogoCompleto, onCatalogoAtualizado } from './services/catalogoService';
-import { Search, Sparkles, WifiOff, X, AlertTriangle, Lock, RefreshCw, ChefHat } from 'lucide-react';
+import { Search, Sparkles, WifiOff, X, AlertTriangle, Lock, RefreshCw } from 'lucide-react';
+
+const AdminDashboard = React.lazy(() =>
+  import('./components/AdminDashboard').then((m) => ({ default: m.AdminDashboard }))
+);
+
+function obterEstadoInicialCardapio(): {
+  slugCasa: string;
+  casaNome: string;
+  dataChegada: string;
+  dataSaida: string;
+  numHospedes: number;
+  itensPedido: Record<string, ItemPedido>;
+  draftSavedAt: string;
+} {
+  const defaults = {
+    slugCasa: 'villa-trancoso',
+    casaNome: 'Villa Trancoso',
+    dataChegada: '',
+    dataSaida: '',
+    numHospedes: 8,
+    itensPedido: {} as Record<string, ItemPedido>,
+    draftSavedAt: ''
+  };
+
+  if (typeof window === 'undefined') return defaults;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const path = window.location.pathname;
+  if (urlParams.get('aprovar') || /^\/e\/([a-zA-Z0-9_-]+)/.test(path)) {
+    return defaults;
+  }
+
+  let detectedSlug = 'villa-trancoso';
+  if (path.startsWith('/casa/')) {
+    detectedSlug = path.replace('/casa/', '').split('/')[0];
+  } else if (urlParams.get('casa')) {
+    detectedSlug = urlParams.get('casa')!;
+  }
+
+  const formatName = detectedSlug
+    .split('-')
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+
+  // Definir datas iniciais sugestivas (próxima semana)
+  const hoje = new Date();
+  const chegada = new Date(hoje);
+  chegada.setDate(hoje.getDate() + 7);
+  const saida = new Date(chegada);
+  saida.setDate(chegada.getDate() + 4);
+
+  const defaultChegada = chegada.toISOString().split('T')[0];
+  const defaultSaida = saida.toISOString().split('T')[0];
+
+  // Carregar Rascunho salvo se existir
+  const rascunho = loadDraft(detectedSlug);
+  if (rascunho) {
+    return {
+      slugCasa: detectedSlug,
+      casaNome: rascunho.casa || formatName,
+      dataChegada: rascunho.dataChegada || '',
+      dataSaida: rascunho.dataSaida || '',
+      numHospedes: rascunho.numHospedes || 8,
+      itensPedido: rascunho.itens || {},
+      draftSavedAt: 'Rascunho recuperado automaticamente'
+    };
+  }
+
+  return {
+    slugCasa: detectedSlug,
+    casaNome: formatName,
+    dataChegada: defaultChegada,
+    dataSaida: defaultSaida,
+    numHospedes: 8,
+    itensPedido: {},
+    draftSavedAt: ''
+  };
+}
 
 export const App: React.FC = () => {
+  const [estadoInicial] = useState(obterEstadoInicialCardapio);
   // Catálogo oficial reativo (base JSON + novos itens adicionados pelo admin)
   const [catalogo, setCatalogo] = useState<ItemCatalogo[]>(() => obterCatalogoCompleto());
 
@@ -31,14 +108,14 @@ export const App: React.FC = () => {
     return unsub;
   }, []);
   // 1. Identificar Casa e Modo pela URL
-  const [slugCasa, setSlugCasa] = useState<string>('villa-trancoso');
-  const [casaNome, setCasaNome] = useState<string>('Villa Trancoso');
-  const [dataChegada, setDataChegada] = useState<string>('');
-  const [dataSaida, setDataSaida] = useState<string>('');
-  const [numHospedes, setNumHospedes] = useState<number>(8);
+  const [slugCasa, setSlugCasa] = useState<string>(estadoInicial.slugCasa);
+  const [casaNome, setCasaNome] = useState<string>(estadoInicial.casaNome);
+  const [dataChegada, setDataChegada] = useState<string>(estadoInicial.dataChegada);
+  const [dataSaida, setDataSaida] = useState<string>(estadoInicial.dataSaida);
+  const [numHospedes, setNumHospedes] = useState<number>(estadoInicial.numHospedes);
 
   // Itens Selecionados no Pedido Atual
-  const [itensPedido, setItensPedido] = useState<Record<string, ItemPedido>>({});
+  const [itensPedido, setItensPedido] = useState<Record<string, ItemPedido>>(estadoInicial.itensPedido);
   
   // Controle de Navegação e Modais
   const [activeTab, setActiveTab] = useState<FornecedorId>('peixaria');
@@ -57,17 +134,31 @@ export const App: React.FC = () => {
     return true;
   });
   const [submittedOrder, setSubmittedOrder] = useState<Pedido | null>(null);
-  const [approvalOrderId, setApprovalOrderId] = useState<string | null>(null);
+  const [approvalOrderId, setApprovalOrderId] = useState<string | null>(() => {
+    if (typeof window !== 'undefined') {
+      return new URLSearchParams(window.location.search).get('aprovar');
+    }
+    return null;
+  });
   
   // Feedback visual de salvamento e rede
-  const [draftSavedAt, setDraftSavedAt] = useState<string>('');
+  const [draftSavedAt, setDraftSavedAt] = useState<string>(estadoInicial.draftSavedAt);
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // 1.1 Estado do Fluxo da Cozinheira (/e/:codigo)
-  const [codigoEstadia, setCodigoEstadia] = useState<string | null>(null);
+  const [codigoEstadia] = useState<string | null>(() => {
+    if (typeof window === 'undefined') return null;
+    if (new URLSearchParams(window.location.search).get('aprovar')) return null;
+    const match = window.location.pathname.match(/^\/e\/([a-zA-Z0-9_-]+)/);
+    return match ? match[1] : null;
+  });
   const [totalPedidosEstadia, setTotalPedidosEstadia] = useState<number>(0);
-  const [carregandoEstadia, setCarregandoEstadia] = useState<boolean>(false);
+  const [carregandoEstadia, setCarregandoEstadia] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    if (new URLSearchParams(window.location.search).get('aprovar')) return false;
+    return /^\/e\/([a-zA-Z0-9_-]+)/.test(window.location.pathname);
+  });
   const [erroEstadia, setErroEstadia] = useState<'invalido' | 'encerrada' | null>(null);
   const [cozinheiraNome, setCozinheiraNome] = useState<string>(() => {
     return localStorage.getItem('cozinheira_nome') || '';
@@ -116,19 +207,13 @@ export const App: React.FC = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const aprovarParam = urlParams.get('aprovar');
     if (aprovarParam) {
-      setApprovalOrderId(aprovarParam);
-      setIsAdminOpen(false);
-      return;
+      return () => {
+        window.removeEventListener('online', handleOnline);
+        window.removeEventListener('offline', handleOffline);
+      };
     }
 
     const path = window.location.pathname;
-    // Se a rota for explicitamente cardapio ou estadia da cozinheira (/e/:codigo)
-    if (path.startsWith('/e/') || path.startsWith('/cardapio') || urlParams.get('modo') === 'cardapio') {
-      setIsAdminOpen(false);
-    } else {
-      // Para todas as outras rotas (incluindo a raiz / e /admin), o Admin é a aba principal!
-      setIsAdminOpen(true);
-    }
 
     const handlePopState = () => {
       const currentPath = window.location.pathname;
@@ -146,10 +231,6 @@ export const App: React.FC = () => {
     const codigoUrl = matchEstadia ? matchEstadia[1] : null;
 
     if (codigoUrl) {
-      setCodigoEstadia(codigoUrl);
-      setCarregandoEstadia(true);
-      setErroEstadia(null);
-
       obterEstadiaPorCodigo(codigoUrl)
         .then((res: any) => {
           if (!res) {
@@ -189,45 +270,6 @@ export const App: React.FC = () => {
         window.removeEventListener('offline', handleOffline);
         window.removeEventListener('popstate', handlePopState);
       };
-    }
-
-    let detectedSlug = 'villa-trancoso';
-    if (path.startsWith('/casa/')) {
-      detectedSlug = path.replace('/casa/', '').split('/')[0];
-    } else if (urlParams.get('casa')) {
-      detectedSlug = urlParams.get('casa')!;
-    }
-
-    const formatName = detectedSlug
-      .split('-')
-      .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-      .join(' ');
-
-    setSlugCasa(detectedSlug);
-    setCasaNome(formatName);
-
-    // Definir datas iniciais sugestivas (próxima semana)
-    const hoje = new Date();
-    const chegada = new Date(hoje);
-    chegada.setDate(hoje.getDate() + 7);
-    const saida = new Date(chegada);
-    saida.setDate(chegada.getDate() + 4);
-
-    const defaultChegada = chegada.toISOString().split('T')[0];
-    const defaultSaida = saida.toISOString().split('T')[0];
-
-    // Carregar Rascunho salvo se existir
-    const rascunho = loadDraft(detectedSlug);
-    if (rascunho) {
-      if (rascunho.casa) setCasaNome(rascunho.casa);
-      if (rascunho.dataChegada) setDataChegada(rascunho.dataChegada);
-      if (rascunho.dataSaida) setDataSaida(rascunho.dataSaida);
-      if (rascunho.numHospedes) setNumHospedes(rascunho.numHospedes);
-      if (rascunho.itens) setItensPedido(rascunho.itens);
-      setDraftSavedAt('Rascunho recuperado automaticamente');
-    } else {
-      setDataChegada(defaultChegada);
-      setDataSaida(defaultSaida);
     }
 
     return () => {
@@ -363,7 +405,6 @@ export const App: React.FC = () => {
 
         // Arredondar para número amigável
         const isDecimal = catalogoItem.unidade === 'kg' || catalogoItem.unidade.toLowerCase().includes('litro');
-        const step = isDecimal ? 0.5 : 1;
         const finalQtd = isDecimal 
           ? Number((Math.ceil(qtdCalculada * 2) / 2).toFixed(1))
           : Math.max(1, Math.round(qtdCalculada));
@@ -544,7 +585,7 @@ export const App: React.FC = () => {
         (item.descricaoBreve && item.descricaoBreve.toLowerCase().includes(q))
       );
     });
-  }, [activeTab, searchQuery]);
+  }, [catalogo, activeTab, searchQuery]);
 
   // Itens agrupados por subcategoria, com favoritos no topo
   const gruposSubcategorias = useMemo(() => {
@@ -602,7 +643,18 @@ export const App: React.FC = () => {
 
   // Rota Administrativa: agora é a ABA PRINCIPAL (padrão ao acessar a raiz / ou /admin)
   if (isAdminOpen && !codigoEstadia && !approvalOrderId) {
-    return <AdminDashboard onAbrirCardapio={handleCloseAdmin} />;
+    return (
+      <Suspense
+        fallback={
+          <div className="min-h-screen bg-[#faf7f2] flex flex-col items-center justify-center p-6 text-center">
+            <RefreshCw className="animate-spin text-amber-600 mb-3" size={32} />
+            <p className="text-sm font-bold text-stone-700">Carregando painel administrativo...</p>
+          </div>
+        }
+      >
+        <AdminDashboard onAbrirCardapio={handleCloseAdmin} />
+      </Suspense>
+    );
   }
 
   // Se estiver carregando dados da estadia via link da cozinheira (/e/:codigo)

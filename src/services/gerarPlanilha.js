@@ -1,5 +1,3 @@
-import ExcelJS from 'exceljs';
-
 // Mapeamento amigável de nomes de fornecedores
 const NOMES_FORNECEDORES = {
   peixaria: 'Peixaria',
@@ -415,6 +413,7 @@ function preencherLinhasItens(ws, itens) {
  * contendo a aba "Geral" e abas separadas por fornecedor com cores correspondentes.
  */
 export async function gerarWorkbookPedido(pedido, estadia) {
+  const { default: ExcelJS } = await import('exceljs');
   const wb = new ExcelJS.Workbook();
   wb.creator = 'Sistema de Compras • Concierge';
   wb.created = new Date();

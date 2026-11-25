@@ -12,7 +12,7 @@ export interface AlertaItemEssencial {
 export function verificarItensEssenciais(
   itens: Record<string, ItemPedido>,
   numHospedes: number,
-  numDias: number
+  _numDias: number
 ): AlertaItemEssencial[] {
   const alertas: AlertaItemEssencial[] = [];
   const listaItens = Object.values(itens).filter(i => i.quantidade > 0);

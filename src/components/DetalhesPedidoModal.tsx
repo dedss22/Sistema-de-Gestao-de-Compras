@@ -47,7 +47,6 @@ import {
   ShoppingBag,
   ExternalLink,
   Filter,
-  DollarSign,
   Edit3,
   CreditCard,
   Building2,
@@ -101,15 +100,31 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
   onAtualizarPedido
 }) => {
   const [pedido, setPedido] = useState<PedidoBanco>(pedidoInicial);
+  const [prevPedidoInicial, setPrevPedidoInicial] = useState<PedidoBanco>(pedidoInicial);
+  const [emitidoEm] = useState(() => {
+    const agora = new Date();
+    return {
+      data: agora.toLocaleDateString('pt-BR'),
+      hora: agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+    };
+  });
 
-  // Mantém sincronizado com as props e hidrata fotos do IndexedDB
-  useEffect(() => {
+  if (pedidoInicial !== prevPedidoInicial) {
+    setPrevPedidoInicial(pedidoInicial);
     setPedido(pedidoInicial);
+  }
+
+  // Hidrata fotos do IndexedDB quando o pedido muda
+  useEffect(() => {
+    let ativo = true;
     if (pedidoInicial && Array.isArray(pedidoInicial.anexos)) {
       hidratarPedidoComMidia(pedidoInicial).then((hidratado) => {
-        if (hidratado) setPedido(hidratado);
+        if (ativo && hidratado) setPedido(hidratado);
       });
     }
+    return () => {
+      ativo = false;
+    };
   }, [pedidoInicial]);
   const [abaModal, setAbaModal] = useState<'itens' | 'anexos' | 'estadia'>('itens');
   const [filtroFornecedor, setFiltroFornecedor] = useState<string>('todos');
@@ -211,7 +226,7 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
 
   const totalItens = Array.isArray(pedido.itens) ? pedido.itens.length : 0;
   const statusAtual: StatusPedido = pedido.status || 'em_aprovacao';
-  const anexosLista: AnexoPedido[] = pedido.anexos || [];
+  const anexosLista = useMemo<AnexoPedido[]>(() => pedido.anexos || [], [pedido.anexos]);
 
   // Cálculos financeiros dos comprovantes anexados
   const totaisComprovantes = useMemo(() => {
@@ -2766,7 +2781,7 @@ export const DetalhesPedidoModal: React.FC<DetalhesPedidoModalProps> = ({
                 <p><strong>Cozinheira:</strong> {pedido.cozinheira}</p>
                 <p><strong>Período:</strong> {formatarDataBr(estadia.entrada || '')} a {formatarDataBr(estadia.saida || '')}</p>
                 <p className="text-[11px] text-stone-500 mt-0.5">
-                  Emitido em {new Date().toLocaleDateString('pt-BR')} às {new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
+                  Emitido em {emitidoEm.data} às {emitidoEm.hora}
                 </p>
               </div>
             </div>
